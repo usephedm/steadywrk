@@ -1,0 +1,340 @@
+{
+  "common": {
+    "bookDemo": "Book Demo",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "loading": "Loading...",
+    "back": "Back",
+    "next": "Next",
+    "save": "Save",
+    "close": "Close",
+    "learnMore": "Learn More",
+    "getStarted": "Get Started",
+    "contactUs": "Contact Us",
+    "yes": "Yes",
+    "no": "No",
+    "required": "Required",
+    "optional": "Optional",
+    "error": "Error",
+    "success": "Success",
+    "retry": "Try Again",
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "signOut": "Sign Out",
+    "dashboard": "Dashboard",
+    "admin": "Admin",
+    "home": "Home"
+  },
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "bookDemo": "Book Demo",
+    "login": "Login",
+    "signup": "Sign Up",
+    "myBookings": "My Bookings",
+    "adminDashboard": "Admin Dashboard",
+    "adminSignIn": "Admin Sign In"
+  },
+  "hero": {
+    "badge": "Jordan-first growth operations",
+    "title": "Digital growth systems for physical businesses in Jordan",
+    "subtitle": "Book a real 30-minute demo, choose the package you want, and let the backend store every request in a way the owner can actually review.",
+    "cta": "Book Your Free Demo",
+    "offerLabel": "First 2 approved clients get month 1 free.",
+    "offerDisclaimer": "This stays visible only while real approved awards remain available."
+  },
+  "trustPoints": {
+    "realBookingFlow": {
+      "title": "Real booking flow",
+      "body": "The CTA opens a real booking form that stores the request instead of a fake success modal."
+    },
+    "adminVisibleRequests": {
+      "title": "Admin-visible requests",
+      "body": "Every submission is designed to land in the admin queue with slot, package, and follow-up state."
+    },
+    "safeBackendFallbacks": {
+      "title": "Safe backend fallbacks",
+      "body": "If email or calendar providers are not configured yet, the app still stores the request and flags manual follow-up."
+    }
+  },
+  "whyThisBuild": {
+    "badge": "Why this build",
+    "title": "This version is designed to behave like a product, not a pretty prototype.",
+    "packagesBadge": "Packages",
+    "packagesTitle": "Choose a path, then book the meeting.",
+    "packagesBody": "The demo request stays grounded in the backend: package choice, preferred language, slot, contact details, and launch-offer interest."
+  },
+  "booking": {
+    "title": "Schedule Your Demo",
+    "subtitle": "Pick a package and time that works for you",
+    "bookNow": "Book Now",
+    "fields": {
+      "fullName": "Full Name",
+      "businessName": "Business Name",
+      "email": "Email Address",
+      "phone": "Phone Number",
+      "preferredLanguage": "Preferred Language for Meeting",
+      "notes": "Notes (optional)",
+      "date": "Select Date",
+      "time": "Select Time",
+      "package": "Select Package",
+      "launchOffer": "Apply for launch offer (Month 1 Free)"
+    },
+    "validation": {
+      "fullNameRequired": "Full name is required",
+      "businessNameRequired": "Business name is required",
+      "emailRequired": "Email is required",
+      "emailInvalid": "Please enter a valid email",
+      "phoneRequired": "Phone number is required",
+      "dateRequired": "Please select a date",
+      "timeRequired": "Please select a time slot",
+      "packageRequired": "Please select a package"
+    },
+    "status": {
+      "pending": "Pending",
+      "confirmed": "Confirmed",
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "rescheduled": "Rescheduled",
+      "cancelled": "Cancelled",
+      "completed": "Completed",
+      "noShow": "No Show"
+    },
+    "confirmation": {
+      "title": "Booking Confirmed!",
+      "message": "Your demo has been scheduled. Check your email for details.",
+      "manualMessage": "Your request was saved. Our team will confirm the meeting time shortly.",
+      "downloadCalendar": "Download Calendar Invite"
+    },
+    "slotUnavailable": "This time slot is no longer available",
+    "noSlotsAvailable": "No available slots for this date",
+    "businessHours": "Available Sun–Thu, 9:00 AM – 5:00 PM (Jordan time)",
+    "initializeArchitecture": "Initialize Architecture",
+    "requestQueueDesc": "Your request enters the Numuw Hub operations queue. An architect will review your parameters prior to onboarding.",
+    "operationalLanguage": "Operational language",
+    "english": "English",
+    "arabic": "Arabic",
+    "targetArchitecture": "Target architecture",
+    "selectDeploymentDate": "Select deployment date",
+    "selectSyncWindow": "Select synchronization window",
+    "operationalContext": "Operational context",
+    "contextPlaceholder": "Define the business problem, target metric, or integration requirement.",
+    "growthSubsidyExhausted": "Growth subsidy exhausted",
+    "subsidizeGrowthNode": "Subsidize growth node",
+    "requiresManualApproval": "Requires manual operational approval post-intake.",
+    "supportFollowup": "Numuw Hub operations will follow up from {supportEmail}.",
+    "abort": "Abort",
+    "initializeRequest": "Initialize Request",
+    "checkingSlots": "Checking available slots...",
+    "noSlots": "No available slots for this day.",
+    "engagementProtocol": "Engagement Protocol",
+    "ammanTime": "Sunday to Thursday, 9:00 to 17:00 Amman time",
+    "realSession": "Real 30-minute scheduled session"
+  },
+  "packages": {
+    "demo": {
+      "name": "Free Demo",
+      "description": "A real 30-minute discovery call to review your current growth bottlenecks, answer questions, and confirm the right package.",
+      "price": "Free 30-minute meeting",
+      "duration": "30 minutes"
+    },
+    "starter": {
+      "name": "Starter Setup",
+      "description": "For businesses that need a clean launch plan, booking flow setup, and clear next actions without a heavy ongoing commitment.",
+      "price": "Custom quote after demo",
+      "duration": "30 minutes"
+    },
+    "growth": {
+      "name": "Growth Engine",
+      "description": "For teams that want recurring growth support, better lead handling, and a tighter execution loop across channels and operations.",
+      "price": "Custom quote after demo",
+      "duration": "30 minutes"
+    },
+    "scale": {
+      "name": "Scale Partner",
+      "description": "For businesses ready for deeper implementation support, tighter reporting, and a more hands-on operating model.",
+      "price": "Custom quote after demo",
+      "duration": "30 minutes"
+    }
+  },
+  "offer": {
+    "bannerAvailable": "Launch Special: First {remaining} approved client(s) get Month 1 Free",
+    "bannerClaimed": "Launch offer fully claimed",
+    "disclaimer": "This stays visible only while real approved awards remain available.",
+    "honest": "{claimed} of {max} claimed",
+    "applyLabel": "Apply for launch offer",
+    "applied": "Launch offer applied",
+    "notEligible": "Launch offer is no longer available"
+  },
+  "admin": {
+    "title": "Admin Dashboard",
+    "badge": "Admin queue",
+    "subtitle": "Owner visibility for every booking request",
+    "description": "This is the operational surface for demo requests. The point is not vanity metrics. The point is: where do requests land, what needs manual follow-up, and what still depends on env configuration.",
+    "signedInAs": "Signed in as {email}",
+    "bookings": "Bookings",
+    "offers": "Launch Offers",
+    "settings": "Settings",
+    "overview": "Overview",
+    "todayBookings": "Today's Bookings",
+    "pendingApprovals": "Pending Approvals",
+    "totalBookings": "Total Bookings",
+    "totalRequests": "Total requests",
+    "pendingFollowUp": "Pending follow-up",
+    "launchOfferAwarded": "Launch offer awarded",
+    "manualFollowUp": "Manual calendar follow-up",
+    "offerStatus": "Launch Offer Status",
+    "approve": "Approve",
+    "reject": "Reject",
+    "reschedule": "Reschedule",
+    "markNoShow": "Mark No-Show",
+    "emailNotConfigured": "Email provider not configured",
+    "calendarNotConfigured": "Calendar integration not configured",
+    "configWarning": "Some features require backend configuration",
+    "backendStatus": "Backend status",
+    "whereSubmissionsGo": "Where submissions go",
+    "currentOwnerWorkflow": "Current owner workflow",
+    "bookingRequests": "Booking requests",
+    "noRequestsYet": "No requests yet. Submit one from the public booking flow to populate this queue.",
+    "openPublicBooking": "Open public booking page",
+    "viewPersonalDashboard": "View personal dashboard",
+    "tableHeaders": {
+      "business": "Business",
+      "package": "Package",
+      "slot": "Slot",
+      "status": "Status",
+      "providerState": "Provider state"
+    },
+    "language": "Language",
+    "launchOfferRequested": "Launch offer requested"
+  },
+  "footer": {
+    "description": "Backend-first booking flows for physical businesses that need a real demo process instead of dead CTAs.",
+    "navigate": "Navigate",
+    "support": "Support",
+    "timezone": "Timezone",
+    "copyright": "© {year} numuw.hub. Built for a real launch path on Vercel and Supabase.",
+    "supportEmail": "support@numuwhub.biz",
+    "supportPhone": "+962 79 118 7567",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
+  },
+  "errors": {
+    "generic": "Something went wrong. Please try again.",
+    "network": "Network error. Please check your connection.",
+    "supabaseNotConfigured": "Booking system temporarily unavailable. Please email support@numuwhub.biz",
+    "unauthorized": "Please sign in to continue",
+    "notFound": "Page not found",
+    "slotTaken": "This time slot has been booked by someone else. Please pick another.",
+    "noServicesAvailable": "No services available at the moment.",
+    "checkBackLater": "Please check back later."
+  },
+  "language": {
+    "en": "English",
+    "ar": "العربية",
+    "switchToArabic": "Switch to Arabic",
+    "switchToEnglish": "Switch to English"
+  },
+  "support": {
+    "desk": "Support desk",
+    "readyForRealLaunch": "Ready for a real launch workflow",
+    "supportEmail": "Support email",
+    "supportPhone": "Support phone",
+    "degradeNotCrash": "Requests default to manual follow-up if external providers are still missing. The site should degrade, not crash."
+  },
+  "auth": {
+    "loginTitle": "Sign In to Admin",
+    "loginSubtitle": "Enter your credentials to access the admin dashboard",
+    "signupTitle": "Create Account",
+    "signupSubtitle": "Sign up to access your dashboard",
+    "emailLabel": "Email Address",
+    "passwordLabel": "Password",
+    "fullNameLabel": "Full Name",
+    "loginButton": "Sign In",
+    "signupButton": "Sign Up",
+    "forgotPassword": "Forgot password?",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "signUpLink": "Sign up",
+    "signInLink": "Sign in",
+    "logout": "Sign Out",
+    "dashboard": "Dashboard",
+    "loginSuccess": "Successfully signed in",
+    "signupSuccess": "Account created successfully",
+    "loginError": "Failed to sign in",
+    "signupError": "Failed to create account",
+    "adminAccess": "Admin Access",
+    "createIdentity": "Create Identity",
+    "adminAccessSubtitle": "Enter your operational credentials to access the internal dashboard.",
+    "createIdentitySubtitle": "Create an identity to access your private architecture.",
+    "initializeSession": "Initialize session",
+    "establishOne": "Establish one",
+    "noIdentity": "Don't have an identity?",
+    "hasIdentity": "Already have an identity?"
+  },
+  "dashboard": {
+    "title": "My Bookings",
+    "subtitle": "View and manage your booking requests",
+    "noBookings": "You haven't made any bookings yet.",
+    "bookNow": "Book a demo",
+    "tableHeaders": {
+      "package": "Package",
+      "date": "Date",
+      "time": "Time",
+      "status": "Status",
+      "actions": "Actions"
+    }
+  },
+  "services": {
+    "badge": "Booking flow",
+    "title": "Book the real demo, then choose how deep the engagement should go.",
+    "subtitle": "Pick the package that best matches the business, then lock in a real 30-minute slot. Every submission lands in the backend queue for review and follow-up.",
+    "requirement": "Requirement",
+    "schedulingFlow": "Real 30-minute scheduling flow",
+    "adminTracking": "Admin-visible request tracking",
+    "initializeCall": "Initialize Call",
+    "selectPipeline": "Select Pipeline",
+    "customQuote": "Custom quote"
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "description": "The page you're looking for doesn't exist or has been moved.",
+    "goHome": "Go Home"
+  },
+  "checkout": {
+    "authRequired": "Authentication Required",
+    "createIdentityToBind": "Create an identity to bind this architecture.",
+    "authenticatedIdentity": "Authenticated Identity",
+    "secureExecutionNode": "Secure Execution Node"
+  },
+  "page": {
+    "heroDigital": "Digital",
+    "heroGrowth": "Growth",
+    "heroOperations": "Operations",
+    "heroSubtitle": "Real booking pipeline. Real admin review. Real follow-up. Built for Jordan.",
+    "heroCta": "Book your demo",
+    "opsLabel": "The Architecture",
+    "opsTitle": "Not a template.",
+    "opsTitleAccent": "A pipeline.",
+    "opsBody": "The scroll stops here because the actual workflow matters. Every step triggers a real database operation.",
+    "step1Title": "Choose Package",
+    "step1Body": "Select depth. Each choice maps to a backend record.",
+    "step2Title": "Live Booking",
+    "step2Body": "API checks conflicts instantly. No simulated availability.",
+    "step3Title": "Admin Review",
+    "step3Body": "Real person reviews notes, status, and offer enforcement.",
+    "landscapeLabel": "Local Focus",
+    "landscapeTitle": "Built strictly for the Jordanian market.",
+    "tiersTitle": "Packages",
+    "tiersSubtitle": "Deep integration. Pick your depth.",
+    "ctaTitle": "INITIATE.",
+    "ctaSubtitle": "Stop planning. Lock in the call. Look at the real admin view.",
+    "ctaButton": "Book the Call",
+    "ctaAdmin": "Admin Login",
+    "marqueeBookings": "Real backend bookings",
+    "marqueeLive": "Live availability",
+    "marqueeAdmin": "Admin queue",
+    "marqueeI18n": "AR/EN support",
+    "marqueeFallbacks": "Safe fallbacks"
+  }
+}

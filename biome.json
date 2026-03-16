@@ -28,6 +28,14 @@
 		}
 	},
 	"files": {
-		"ignore": ["node_modules", ".next", "dist", ".turbo", "*.min.js"]
+		"ignore": [
+			"node_modules",
+			".next",
+			"dist",
+			".turbo",
+			"*.min.js",
+			"docs/condomx-archive",
+			"docs/numuwhub-archive"
+		]
 	}
 }
