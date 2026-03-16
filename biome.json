@@ -35,7 +35,8 @@
 			".turbo",
 			"*.min.js",
 			"docs/condomx-archive",
-			"docs/numuwhub-archive"
+			"docs/numuwhub-archive",
+			".wrangler"
 		]
 	}
 }
