@@ -1,0 +1,20 @@
+{
+	"name": "@steadywrk/mcp-dispatch-oracle",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "wrangler dev",
+		"deploy": "wrangler deploy",
+		"lint": "biome check src/",
+		"typecheck": "tsc --noEmit",
+		"build": "tsc"
+	},
+	"dependencies": {
+		"@steadywrk/shared": "*"
+	},
+	"devDependencies": {
+		"@cloudflare/workers-types": "^4.20250313.0",
+		"wrangler": "^4.8.0",
+		"typescript": "^5.8.0"
+	}
+}

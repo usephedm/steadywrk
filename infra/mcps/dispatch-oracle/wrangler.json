@@ -1,0 +1,5 @@
+{
+	"name": "dispatch-oracle",
+	"main": "src/index.ts",
+	"compatibility_date": "2025-03-14"
+}

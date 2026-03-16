@@ -1,0 +1,24 @@
+{
+	"name": "steadywrk",
+	"version": "0.1.0",
+	"private": true,
+	"workspaces": ["apps/*", "packages/*", "infra/mcps/*"],
+	"scripts": {
+		"build": "turbo run build",
+		"dev": "turbo run dev",
+		"lint": "turbo run lint",
+		"typecheck": "turbo run typecheck",
+		"test": "turbo run test",
+		"format": "biome format --write .",
+		"check": "biome check ."
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.9.0",
+		"turbo": "^2.4.0",
+		"typescript": "^5.8.0"
+	},
+	"packageManager": "npm@11.9.0",
+	"engines": {
+		"node": ">=22.0.0"
+	}
+}
