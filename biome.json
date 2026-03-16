@@ -36,7 +36,8 @@
 			"*.min.js",
 			"docs/condomx-archive",
 			"docs/numuwhub-archive",
-			".wrangler"
+			".wrangler",
+			".vercel"
 		]
 	}
 }
