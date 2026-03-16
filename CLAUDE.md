@@ -51,21 +51,39 @@ Stripe, Vercel, Notion, Figma, Canva, Linear, Gmail, Supabase, Cloudflare, Huggi
 - Voice: Direct, technical authority, zero fluff
 - Never: corporate buzzwords, "leverage synergies", "empower", "unlock potential"
 
+## Domain Architecture
+- **steadywrk.app** → Public funnel. Company showcase + talent honeypot. Client acquisition.
+- **steadywrk.dev** → Operations portal. Workflow, dispatch, agent orchestration dashboard.
+
+## Deployed Services
+- Web App: https://steadywrk-app.vercel.app (steadywrk.app pending DNS)
+- Dispatch Oracle: https://dispatch-oracle.steadywrk.workers.dev
+- Hawkeye: https://hawkeye.steadywrk.workers.dev
+- LeadForge: https://leadforge.steadywrk.workers.dev
+
+## Command Center (Orchestration)
+Claude Code (Opus 4.6) is the orchestrator. Dispatches to:
+- `codex exec "task"` → GPT-5.4 (code review, bulk ops)
+- `gemini -p "task"` → Ultra (research, web grounding, large context)
+- Agent tool with subagent_type → parallel Claude agents
+Use /orchestrate skill for multi-agent task routing.
+
 ## File Structure
 ```
 SteadyWrk/
 ├── CLAUDE.md
-├── .claude/skills/
-├── apps/web/          (steadywrk.app - Next.js)
-├── apps/marketing/    (landing pages, lead capture)
-├── packages/ui/       (shared components)
-├── packages/dispatch/ (dispatch matching engine)
-├── packages/workflows/ (subcontracting engine)
-├── packages/shared/   (types, utils)
-├── infra/mcps/        (custom MCP servers)
-├── infra/supabase/    (migrations, seeds)
-├── infra/cloudflare/  (wrangler configs)
-├── docs/content/      (marketing copy, blog)
-├── docs/ops/          (runbooks)
-└── research/          (market analysis)
+├── .claude/skills/       (8 skills: orchestrate, content, deploy, design, lead-gen, model-routing, research, review)
+├── apps/web/             (steadywrk.app — Next.js)
+├── apps/marketing/       (steadywrk.dev — landing pages, lead capture)
+├── packages/ui/          (shared components)
+├── packages/dispatch/    (dispatch matching engine)
+├── packages/workflows/   (subcontracting engine)
+├── packages/shared/      (types, utils)
+├── packages/scraper/     (Crawlee + Playwright + AI extraction)
+├── infra/mcps/           (3 custom MCP servers on Cloudflare Workers)
+├── docs/condomx-archive/ (75 files — dispatch brain, research, ADRs from predecessor)
+├── docs/numuwhub-archive/ (31 files — Supabase, auth, i18n, booking patterns)
+├── docs/content/         (marketing copy, blog)
+├── docs/ops/             (runbooks)
+└── research/             (market analysis)
 ```
