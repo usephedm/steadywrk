@@ -37,7 +37,8 @@
 			"docs/condomx-archive",
 			"docs/numuwhub-archive",
 			".wrangler",
-			".vercel"
+			".vercel",
+			".claude/settings.json"
 		]
 	}
 }
