@@ -17,18 +17,18 @@
 	--color-amber-800: #6b3900;
 	--color-amber-900: #3d2100;
 
-	/* Surfaces */
-	--color-dark: #0a0a0a;
-	--color-dark-50: #171717;
-	--color-dark-100: #141414;
-	--color-dark-200: #111111;
-	--color-dark-300: #1a1a1a;
-	--color-dark-400: #222222;
-	--color-dark-500: #333333;
-	--color-dark-600: #555555;
-	--color-dark-700: #888888;
-	--color-dark-800: #aaaaaa;
-	--color-dark-900: #cccccc;
+	/* Surfaces — slate-undertone dark palette */
+	--color-dark: #09090b;
+	--color-dark-50: #16161a;
+	--color-dark-100: #131316;
+	--color-dark-200: #101013;
+	--color-dark-300: #1c1c22;
+	--color-dark-400: #232329;
+	--color-dark-500: #33333c;
+	--color-dark-600: #555560;
+	--color-dark-700: #888893;
+	--color-dark-800: #aaaab3;
+	--color-dark-900: #d1d1d8;
 
 	/* Typography */
 	--font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
@@ -131,6 +131,28 @@ html {
 
 	::-webkit-scrollbar-thumb:hover {
 		background: var(--color-amber);
+	}
+}
+
+/* Surface elevation system */
+@layer utilities {
+	.surface-1 {
+		background-color: var(--color-dark-200);
+		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.02);
+	}
+	.surface-2 {
+		background-color: var(--color-dark-100);
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+	}
+	.surface-3 {
+		background-color: var(--color-dark-50);
+		box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+	}
+	.glow-amber-sm {
+		box-shadow: 0 0 20px rgba(224, 120, 0, 0.08);
+	}
+	.glow-amber-md {
+		box-shadow: 0 0 40px rgba(224, 120, 0, 0.12);
 	}
 }
 

@@ -27,11 +27,12 @@ export function PricingSection() {
 					scale: 1,
 					stagger: 0.12,
 					ease: "power2.out",
+					duration: 0.6,
 					scrollTrigger: {
 						trigger: cardsRef.current,
 						start: "top 80%",
 						end: "top 40%",
-						scrub: 1,
+						toggleActions: "play none none none",
 					},
 				},
 			);
@@ -63,7 +64,9 @@ export function PricingSection() {
 								<Card
 									hover
 									className={`relative h-full p-8 ${
-										plan.highlighted ? "border-amber/50 shadow-[0_0_40px_rgba(224,120,0,0.08)]" : ""
+										plan.highlighted
+											? "border-amber/40 shadow-[0_0_60px_rgba(224,120,0,0.1),0_0_20px_rgba(224,120,0,0.05)]"
+											: ""
 									}`}
 								>
 									{/* Animated border for Pro card */}

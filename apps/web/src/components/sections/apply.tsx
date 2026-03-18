@@ -33,12 +33,12 @@ export function Apply() {
 						<h2 className="text-3xl font-bold md:text-5xl">
 							Ready to{" "}
 							<span className="bg-gradient-to-r from-amber-400 to-amber bg-clip-text text-transparent">
-								work steady?
+								build something real?
 							</span>
 						</h2>
 						<p className="mt-4 text-dark-700">
-							Drop your info. We'll reach out if there's a fit. No fluff, no 12-step application.
-							Just you and the work.
+							Drop your info. If there's a fit, we move fast. No 12-step application. Just you and
+							the work.
 						</p>
 					</div>
 				</FadeIn>
@@ -87,13 +87,24 @@ export function Apply() {
 								onBlur={() => setFocusedField(null)}
 							/>
 						</div>
-						<Select name="role" required>
-							<option value="">What role fits you?</option>
-							<option value="technician">Field Technician</option>
-							<option value="dispatch">Dispatch Operator</option>
-							<option value="growth">Growth Partner</option>
-							<option value="other">Something Else</option>
-						</Select>
+						<div className="grid gap-4 sm:grid-cols-2">
+							<Select name="role" required>
+								<option value="">What role fits you?</option>
+								<option value="ai-engineer">AI Engineer</option>
+								<option value="prompt-engineer">Prompt Engineer</option>
+								<option value="dispatch-operator">Dispatch Operator</option>
+								<option value="executive-assistant">Executive Assistant</option>
+								<option value="operations-manager">Operations Manager</option>
+								<option value="cold-caller-sales-dev">Cold Caller / Sales Dev</option>
+								<option value="trainee">Trainee — Teach Me Everything</option>
+							</Select>
+							<Select name="location" required>
+								<option value="">Where are you based?</option>
+								<option value="amman-onsite">Amman On-site</option>
+								<option value="remote-jordan">Remote from Jordan</option>
+								<option value="hybrid">Hybrid</option>
+							</Select>
+						</div>
 						<div
 							className={`transition-shadow duration-300 rounded-lg ${focusedField === "message" ? "shadow-[0_0_16px_rgba(224,120,0,0.15)]" : ""}`}
 						>
@@ -136,6 +147,10 @@ export function Apply() {
 							)}
 						</Button>
 					</form>
+
+					<p className="mt-6 text-center text-sm text-dark-600">
+						Based in Jordan? Even better. We're building our core team in Amman.
+					</p>
 				</FadeIn>
 			</div>
 		</section>

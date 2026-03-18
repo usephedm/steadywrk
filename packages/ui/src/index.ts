@@ -15,5 +15,6 @@ export {
 	TiltCard,
 	ParallaxLayer,
 	MagneticButton,
+	useScrollInView,
 } from "./motion";
 export { cn } from "./lib/utils";

@@ -45,11 +45,12 @@ export function Features() {
 						opacity: 1,
 						stagger: 0.08,
 						ease: "power2.out",
+						duration: 0.5,
 						scrollTrigger: {
 							trigger: cardsRef.current,
 							start: "top 80%",
 							end: "top 30%",
-							scrub: 1,
+							toggleActions: "play none none none",
 						},
 					},
 				);

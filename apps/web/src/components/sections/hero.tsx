@@ -106,7 +106,7 @@ export function Hero() {
 
 				{/* Status badge */}
 				<div
-					className="hero-badge mb-8 inline-flex items-center gap-2 rounded-full border border-dark-300 bg-dark-200/80 px-4 py-2 text-xs backdrop-blur-sm"
+					className="hero-badge mb-8 inline-flex items-center gap-2 rounded-full border border-dark-300 bg-dark-200/80 px-4 py-2 text-xs backdrop-blur-sm shadow-[0_2px_8px_rgba(0,0,0,0.3)]"
 					style={{ opacity: 0 }}
 				>
 					<span className="relative flex h-2 w-2">

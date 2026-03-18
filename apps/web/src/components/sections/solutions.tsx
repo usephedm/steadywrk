@@ -44,12 +44,13 @@ export function Solutions() {
 
 			gsap.to(path, {
 				strokeDashoffset: 0,
-				ease: "none",
+				duration: 1.5,
+				ease: "power2.out",
 				scrollTrigger: {
 					trigger: sectionRef.current,
 					start: "top 60%",
 					end: "bottom 40%",
-					scrub: 1,
+					toggleActions: "play none none none",
 				},
 			});
 
@@ -64,11 +65,12 @@ export function Solutions() {
 						opacity: 1,
 						stagger: 0.15,
 						ease: "power2.out",
+						duration: 0.6,
 						scrollTrigger: {
 							trigger: cardsRef.current,
 							start: "top 80%",
 							end: "top 30%",
-							scrub: 1,
+							toggleActions: "play none none none",
 						},
 					},
 				);

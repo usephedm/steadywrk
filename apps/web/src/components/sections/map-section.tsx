@@ -1,8 +1,7 @@
 "use client";
 
-import { Badge, FadeIn } from "@steadywrk/ui";
+import { Badge, FadeIn, useScrollInView } from "@steadywrk/ui";
 import gsap from "gsap";
-import { useInView } from "motion/react";
 import { useEffect, useRef } from "react";
 
 const CITIES = [
@@ -30,7 +29,7 @@ const ROUTES = [
 export function MapSection() {
 	const ref = useRef<HTMLDivElement>(null);
 	const svgRef = useRef<SVGSVGElement>(null);
-	const isInView = useInView(ref, { once: true, margin: "-100px" });
+	const isInView = useScrollInView(ref, { once: true });
 
 	useEffect(() => {
 		if (!isInView || !svgRef.current) return;
@@ -94,7 +93,7 @@ export function MapSection() {
 				</FadeIn>
 
 				<FadeIn delay={0.2} className="mt-12">
-					<div className="relative mx-auto max-w-4xl overflow-hidden rounded-2xl border border-dark-300 bg-dark-200 p-8">
+					<div className="relative mx-auto max-w-4xl overflow-hidden rounded-2xl border border-dark-300 bg-dark-200 p-8 shadow-[0_2px_8px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.03)]">
 						<svg
 							ref={svgRef}
 							viewBox="0 0 100 70"

@@ -1,6 +1,6 @@
 "use client";
 
-import { useInView } from "motion/react";
+import { useScrollInView } from "@steadywrk/ui";
 import { useEffect, useRef, useState } from "react";
 
 const LINES = [
@@ -24,7 +24,7 @@ function colorize(text: string) {
 
 export function TerminalTyping() {
 	const ref = useRef<HTMLDivElement>(null);
-	const isInView = useInView(ref, { once: true, margin: "-100px" });
+	const isInView = useScrollInView(ref, { once: true });
 	const [visibleChars, setVisibleChars] = useState<number[]>(LINES.map(() => 0));
 	const [activeLine, setActiveLine] = useState(-1);
 
@@ -61,7 +61,7 @@ export function TerminalTyping() {
 	return (
 		<div
 			ref={ref}
-			className="mx-auto max-w-3xl overflow-hidden rounded-xl border border-dark-300 bg-dark-200"
+			className="mx-auto max-w-3xl overflow-hidden rounded-xl border border-dark-300 bg-dark-200 shadow-[0_2px_8px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.03)]"
 		>
 			<div className="flex items-center gap-2 border-b border-dark-300 px-4 py-3">
 				<span className="h-3 w-3 rounded-full bg-red-500/60" />

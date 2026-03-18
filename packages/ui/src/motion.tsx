@@ -3,12 +3,46 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { SplitText } from "gsap/SplitText";
-import { type Variants, motion, useInView, useScroll, useTransform } from "motion/react";
-import { type ReactNode, useRef, useState } from "react";
+import { type Variants, motion, useScroll, useTransform } from "motion/react";
+import { type ReactNode, useEffect, useRef, useState } from "react";
 import { cn } from "./lib/utils";
 
-gsap.registerPlugin(SplitText, ScrollTrigger, useGSAP);
+gsap.registerPlugin(ScrollTrigger, useGSAP);
+
+/* ─── useScrollInView (Lenis-compatible replacement for motion/react useInView) ── */
+
+export function useScrollInView(
+	ref: React.RefObject<HTMLElement | null>,
+	options?: { once?: boolean },
+) {
+	const [isInView, setIsInView] = useState(false);
+
+	useEffect(() => {
+		if (!ref.current) return;
+
+		const trigger = ScrollTrigger.create({
+			trigger: ref.current,
+			start: "top 95%",
+			end: "bottom 5%",
+			onEnter: () => setIsInView(true),
+			onEnterBack: () => {
+				if (!options?.once) setIsInView(true);
+			},
+			onLeave: () => {
+				if (!options?.once) setIsInView(false);
+			},
+			onLeaveBack: () => {
+				if (!options?.once) setIsInView(false);
+			},
+		});
+
+		return () => {
+			trigger.kill();
+		};
+	}, [ref, options?.once]);
+
+	return isInView;
+}
 
 /* ─── FadeIn ─────────────────────────────────────────── */
 
@@ -32,7 +66,7 @@ export function FadeIn({
 	className,
 }: FadeInProps) {
 	const ref = useRef<HTMLDivElement>(null);
-	const isInView = useInView(ref, { once, margin: "-50px" });
+	const isInView = useScrollInView(ref, { once });
 
 	const directionMap = {
 		up: { y: distance },
@@ -85,7 +119,7 @@ const itemVariants: Variants = {
 
 export function Stagger({ children, className, staggerDelay = 0.1, delay = 0 }: StaggerProps) {
 	const ref = useRef<HTMLDivElement>(null);
-	const isInView = useInView(ref, { once: true, margin: "-50px" });
+	const isInView = useScrollInView(ref, { once: true });
 
 	return (
 		<motion.div
@@ -137,12 +171,15 @@ export function CountUp({
 	value: string;
 	className?: string;
 }) {
+	const countRef = useRef<HTMLSpanElement>(null);
+	const isInView = useScrollInView(countRef as React.RefObject<HTMLElement | null>, { once: true });
+
 	return (
 		<motion.span
+			ref={countRef}
 			className={className}
 			initial={{ opacity: 0, scale: 0.5 }}
-			whileInView={{ opacity: 1, scale: 1 }}
-			viewport={{ once: true }}
+			animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.5 }}
 			transition={{ type: "spring", stiffness: 200, damping: 15 }}
 		>
 			{value}
@@ -160,36 +197,29 @@ interface TextRevealProps {
 	type?: "chars" | "words" | "lines";
 }
 
-export function TextReveal({
-	children,
-	className,
-	delay = 0,
-	stagger = 0.03,
-	type = "chars",
-}: TextRevealProps) {
+export function TextReveal({ children, className, delay = 0 }: TextRevealProps) {
 	const ref = useRef<HTMLDivElement>(null);
 
 	useGSAP(
 		() => {
 			if (!ref.current) return;
 
-			const split = SplitText.create(ref.current, { type });
-			const targets = split.chars ?? split.words ?? split.lines ?? [];
-
-			gsap.from(targets, {
-				opacity: 0,
-				y: 30,
-				rotateX: -90,
-				stagger,
-				delay,
-				duration: 0.6,
-				ease: "back.out(2)",
-				scrollTrigger: {
-					trigger: ref.current,
-					start: "top 85%",
-					toggleActions: "play none none none",
+			gsap.fromTo(
+				ref.current,
+				{ opacity: 0, y: 20 },
+				{
+					opacity: 1,
+					y: 0,
+					delay,
+					duration: 0.6,
+					ease: "power2.out",
+					scrollTrigger: {
+						trigger: ref.current,
+						start: "top 85%",
+						toggleActions: "play none none none",
+					},
 				},
-			});
+			);
 		},
 		{ scope: ref },
 	);
