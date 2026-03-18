@@ -3,34 +3,63 @@
 export const SITE_CONFIG = {
 	name: "SteadyWrk",
 	description:
-		"AI-orchestrated field service dispatch. We connect businesses to independent technicians through an autonomous matching engine.",
-	url: "https://steadywrk.com",
+		"Learn to work with AI. Get trained. Get deployed. SteadyWrk is Jordan's first AI coworking company — we train talent to work alongside AI, then put them on real projects.",
+	url: "https://steadywrk.app",
 	ogImage: "/api/og",
 	company: "Kayan Ventures Jordan LLC",
 	location: "Amman, Jordan",
-	email: "careers@steadywrk.com",
+	email: "apply@steadywrk.app",
 };
 
-/* ─── How It Works ─── */
+/* ─── How The Program Works ─── */
 
-export const STEPS = [
+export const PROGRAM_STEPS = [
 	{
 		num: "01",
-		title: "Work order hits the engine",
-		desc: "A business submits a service request via API, dashboard, or phone call. Our AI classifies trade, urgency, SLA tier, and H3 hex-cell in under 200ms.",
-		icon: "M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5",
+		title: "Apply in 60 seconds",
+		desc: "No CV needed. No wasta required. Tell us who you are, what drives you, and why you want to work with AI. We review every application within 48 hours.",
+		icon: "M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z",
 	},
 	{
 		num: "02",
-		title: "Multi-agent dispatch fires",
-		desc: "Three MCP servers score every available technician — proximity, skill match, margin impact, and real-time availability. The best fit gets auto-dispatched.",
+		title: "1-month AI bootcamp",
+		desc: "Intensive hands-on training. You'll learn Claude, ChatGPT, Cursor, prompt engineering, AI-assisted workflows, and how to 10x your output using AI as your coworker. No fluff — just real skills.",
 		icon: "M13 2L3 14h9l-1 8 10-12h-9l1-8z",
 	},
 	{
 		num: "03",
-		title: "Job done, payment instant",
-		desc: "Tech confirms via SMS, completes the work, uploads proof. Stripe handles invoicing and payout automatically. Zero phone tag, zero paperwork.",
+		title: "Get deployed on real projects",
+		desc: "Graduate the bootcamp and join the SteadyWrk team. You'll work on real client projects — AI-assisted dispatch, digital marketing, operations — earning while you build your career.",
 		icon: "M22 11.08V12a10 10 0 11-5.93-9.14M22 4L12 14.01l-3-3",
+	},
+];
+
+/* ─── What You'll Learn ─── */
+
+export const CURRICULUM = [
+	{
+		title: "Prompt Engineering",
+		desc: "Master the art of communicating with AI. Write system prompts, chain-of-thought reasoning, and structured outputs that produce professional-grade results.",
+	},
+	{
+		title: "AI-Assisted Coding",
+		desc: "Build software with Claude Code, Cursor, and Copilot. You don't need to be a programmer — you need to direct AI to build what you imagine.",
+	},
+	{
+		title: "AI Operations & Workflows",
+		desc: "Design end-to-end business workflows powered by AI. Automate repetitive tasks, build pipelines, and learn to orchestrate multiple AI agents.",
+	},
+	{
+		title: "Digital Marketing with AI",
+		desc: "Create content, run campaigns, and analyze data using AI tools. SEO, copywriting, social media — all supercharged with AI assistance.",
+	},
+	{
+		title: "Client Communication",
+		desc: "Learn to work with international clients. Professional communication, project management, and delivering results on time — the skills that get you paid.",
+	},
+	{
+		title: "AI Tools Mastery",
+		desc: "Claude, ChatGPT, Gemini, Midjourney, Cursor, v0, Notion AI, and 15+ more tools. You'll graduate knowing which tool to use for every task.",
 	},
 ];
 
@@ -38,51 +67,51 @@ export const STEPS = [
 
 export const ROLES = [
 	{
-		title: "AI Engineer",
-		badge: "Remote · Amman",
+		title: "AI Operations Specialist",
+		badge: "Remote · Jordan",
+		trade: "Operations",
+		desc: "Run AI-powered workflows for international clients. Monitor live systems, handle edge cases, and train AI agents to get smarter with every task. Perfect entry point for ambitious operators.",
+		salary: "JOD 600–1,500/mo",
+		href: "#apply",
+	},
+	{
+		title: "AI-Assisted Developer",
+		badge: "Remote · Jordan",
 		trade: "Engineering",
-		desc: "Build the autonomous dispatch engine that replaces call centers. You'll work with Claude, GPT, and Gemini to orchestrate multi-agent systems that make real decisions in real-time.",
-		salary: "JOD 1,500–3,000/mo",
+		desc: "Build software using AI coding tools. You'll work with Claude Code, Cursor, and modern frameworks to ship features for real products. Prior coding experience is a plus, not a requirement.",
+		salary: "JOD 800–2,000/mo",
 		href: "#apply",
 	},
 	{
-		title: "Prompt Engineer",
-		badge: "Remote · Amman",
-		trade: "AI Operations",
-		desc: "Design the intelligence layer. Craft system prompts, build MCP tool schemas, and optimize AI decision-making for dispatch, pricing, and technician matching.",
-		salary: "JOD 1,000–2,500/mo",
+		title: "AI Content & Growth",
+		badge: "Remote · Jordan",
+		trade: "Marketing",
+		desc: "Create high-impact content using AI. Write copy, design campaigns, manage social presence, and drive growth for SteadyWrk and client brands. Creativity + AI tools = unstoppable.",
+		salary: "JOD 500–1,200/mo",
 		href: "#apply",
 	},
 	{
-		title: "Dispatch Operator",
-		badge: "Remote-first",
-		trade: "Operations",
-		desc: "Run the AI-assisted war room. Monitor live dispatches across US markets, handle edge cases, and train the system to get smarter with every job.",
-		salary: "JOD 600–1,200/mo",
-		href: "#apply",
-	},
-	{
-		title: "Executive Assistant",
-		badge: "Amman · On-site",
-		trade: "Leadership Support",
-		desc: "Be the force multiplier for the founder. Manage communications, coordinate across teams, and keep the machine running while we scale from 0 to 100.",
-		salary: "JOD 500–1,000/mo",
-		href: "#apply",
-	},
-	{
-		title: "Operations Manager",
+		title: "Client Success Manager",
 		badge: "Amman · Hybrid",
-		trade: "Operations",
-		desc: "Own the operational backbone. Build processes, manage vendor relationships, handle logistics, and ensure every dispatch flows like clockwork.",
-		salary: "JOD 1,200–2,500/mo",
+		trade: "Client Relations",
+		desc: "Be the bridge between our AI-powered team and international clients. Manage projects, ensure delivery quality, and build relationships that generate repeat business.",
+		salary: "JOD 800–1,800/mo",
 		href: "#apply",
 	},
 	{
-		title: "Cold Caller / Sales Dev",
+		title: "Sales Development Rep",
 		badge: "Remote · Commission",
 		trade: "Growth",
-		desc: "Open doors in the US market. You'll call property managers, HVAC companies, and service businesses to bring them onto the SteadyWrk platform. Base + uncapped commission.",
+		desc: "Open doors in international markets. Cold outreach to businesses that need AI-powered services. Base salary + uncapped commission. Hustle rewarded.",
 		salary: "JOD 400–800/mo + commission",
+		href: "#apply",
+	},
+	{
+		title: "Bootcamp Trainee",
+		badge: "Remote · Jordan/MENA",
+		trade: "Training Program",
+		desc: "No experience needed. Just hunger. Apply for our 1-month AI bootcamp. Learn to work with AI tools, get certified, and earn a spot on the team. This is your entry point.",
+		salary: "Stipend during training",
 		href: "#apply",
 	},
 ];
@@ -90,96 +119,42 @@ export const ROLES = [
 /* ─── Stats Bar ─── */
 
 export const STATS = [
-	{ value: "3", label: "Custom MCPs", detail: "Dispatch Oracle, Hawkeye, LeadForge" },
-	{ value: "AI", label: "Multi-Agent", detail: "Claude, Codex, Gemini orchestrated" },
-	{ value: "0", label: "Middlemen", detail: "Direct tech-to-client dispatch" },
-	{ value: "24/7", label: "Autonomous", detail: "AI never sleeps" },
-];
-
-/* ─── Features ─── */
-
-export const FEATURES = [
-	{
-		title: "AI Dispatch Engine",
-		desc: "H3 geospatial indexing, reputation scoring, and margin-optimized routing. Every dispatch decision is autonomous and auditable.",
-	},
-	{
-		title: "MCP-Native Architecture",
-		desc: "Three custom Model Context Protocol servers on Cloudflare Workers. The AI doesn't just assist — it operates the entire dispatch pipeline.",
-	},
-	{
-		title: "Voice AI + SMS Dispatch",
-		desc: "Inbound calls handled by AI, outbound confirmations via SMS. Technicians get dispatched before the customer hangs up.",
-	},
-	{
-		title: "Multi-Agent Orchestration",
-		desc: "Claude for strategy, Codex for execution, Gemini for research. Each agent owns its lane — no single point of failure.",
-	},
-	{
-		title: "Real-Time Command Center",
-		desc: "Live job tracking, technician GPS, completion velocity, revenue per hex-cell. Operational intelligence at a glance.",
-	},
-	{
-		title: "Instant Stripe Payments",
-		desc: "Automated invoicing on job completion, contractor payouts on net-terms, and margin tracking per dispatch. No chasing checks.",
-	},
-];
-
-/* ─── Pricing ─── */
-
-export const PRICING = [
-	{
-		name: "Starter",
-		price: "$0",
-		period: "forever",
-		desc: "For independent techs getting started",
-		features: ["Up to 10 jobs/month", "Basic AI matching", "SMS notifications", "Mobile access"],
-		cta: "Start Free",
-		highlighted: false,
-	},
-	{
-		name: "Pro",
-		price: "$79",
-		period: "/month",
-		desc: "For growing service businesses",
-		features: [
-			"Unlimited jobs",
-			"Advanced AI dispatch",
-			"Voice AI scheduling",
-			"Priority support",
-			"Custom workflows",
-			"Analytics dashboard",
-		],
-		cta: "Start Trial",
-		highlighted: true,
-	},
-	{
-		name: "Enterprise",
-		price: "Custom",
-		period: "",
-		desc: "For multi-location operations",
-		features: [
-			"Everything in Pro",
-			"Dedicated MCP instance",
-			"Custom integrations",
-			"White-label option",
-			"SLA guarantee",
-			"Onboarding concierge",
-		],
-		cta: "Contact Us",
-		highlighted: false,
-	},
+	{ value: "1", label: "Month Bootcamp", detail: "Intensive AI training program" },
+	{ value: "20+", label: "AI Tools", detail: "Claude, ChatGPT, Cursor, and more" },
+	{ value: "0", label: "Experience Required", detail: "We train from scratch" },
+	{ value: "100%", label: "Remote-Friendly", detail: "Work from anywhere in Jordan" },
 ];
 
 /* ─── Trust Badges ─── */
 
 export const TRUST_BADGES = [
-	"MCP-Native",
-	"AI-Orchestrated",
-	"Zero Middlemen",
-	"24/7 Autonomous",
-	"Cloudflare Workers",
-	"Multi-Agent",
-	"H3 Geospatial",
-	"Stripe Payments",
+	"AI-Powered",
+	"Jordan-Based",
+	"Remote-First",
+	"No Degree Required",
+	"Paid Training",
+	"International Clients",
+	"Real Projects",
+	"Career Growth",
+];
+
+/* ─── Why SteadyWrk ─── */
+
+export const WHY_US = [
+	{
+		title: "No wasta. No degree. Just you.",
+		desc: "We don't care about your family name or your university. We care about your hunger, your work ethic, and your willingness to learn.",
+	},
+	{
+		title: "AI is the great equalizer",
+		desc: "A person with AI tools can outperform a team of 10 without them. We teach you to be that person.",
+	},
+	{
+		title: "Real work, real pay, day one",
+		desc: 'No unpaid internships. No "exposure". You train, you perform, you earn. International rates, paid in Jordan.',
+	},
+	{
+		title: "The future belongs to AI workers",
+		desc: "Every company will need AI-skilled operators within 2 years. Get ahead of the curve now, not when everyone else catches up.",
+	},
 ];

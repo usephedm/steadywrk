@@ -1,0 +1,13 @@
+node_modules
+.next
+dist
+.turbo
+.wrangler
+.git
+coverage
+playwright-report
+test-results
+*.tsbuildinfo
+docs/condomx-archive
+docs/numuwhub-archive
+research

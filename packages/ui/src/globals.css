@@ -3,13 +3,13 @@
 
 @theme inline {
 	/* Brand: Signal Amber */
-	--color-amber: #e07800;
-	--color-amber-50: #fff7ed;
-	--color-amber-100: #ffedd5;
-	--color-amber-200: #fed7aa;
-	--color-amber-300: #fdba74;
-	--color-amber-400: #fb923c;
-	--color-amber-500: #e07800;
+	--color-amber: #f59e0b;
+	--color-amber-50: #fffbeb;
+	--color-amber-100: #fef3c7;
+	--color-amber-200: #fde68a;
+	--color-amber-300: #fcd34d;
+	--color-amber-400: #fbbf24;
+	--color-amber-500: #f59e0b;
 	--color-amber-600: #c96a00;
 	--color-amber-700: #9a5200;
 	--color-amber-800: #6b3900;
@@ -80,10 +80,10 @@
 @keyframes glow {
 	0%,
 	100% {
-		box-shadow: 0 0 20px rgba(224, 120, 0, 0.15);
+		box-shadow: 0 0 20px rgba(245, 158, 11, 0.15);
 	}
 	50% {
-		box-shadow: 0 0 40px rgba(224, 120, 0, 0.3);
+		box-shadow: 0 0 40px rgba(245, 158, 11, 0.3);
 	}
 }
 

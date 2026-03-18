@@ -41,14 +41,12 @@ export function Hero() {
 
 			const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
 
-			// Logo scales in
 			tl.fromTo(
 				".hero-logo",
 				{ scale: 2.5, opacity: 0 },
 				{ scale: 1, opacity: 1, duration: 0.6, ease: "cubic-bezier(0.25,0.4,0.25,1)" },
 			);
 
-			// Badge slides down
 			tl.fromTo(
 				".hero-badge",
 				{ y: -20, opacity: 0 },
@@ -56,10 +54,8 @@ export function Hero() {
 				"+=0.1",
 			);
 
-			// Headline fades in (TextReveal handles char split internally)
 			tl.fromTo(".hero-headline", { opacity: 0 }, { opacity: 1, duration: 0.4 }, "+=0.1");
 
-			// Subheadline fades
 			tl.fromTo(
 				".hero-subheadline",
 				{ y: 15, opacity: 0 },
@@ -67,10 +63,8 @@ export function Hero() {
 				"+=0.2",
 			);
 
-			// CTAs slide up
 			tl.fromTo(".hero-ctas", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3 }, "-=0.1");
 
-			// Trust indicators
 			tl.fromTo(".hero-trust", { y: 15, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3 }, "-=0.1");
 		},
 		{ scope: contentRef },
@@ -81,14 +75,11 @@ export function Hero() {
 			ref={ref}
 			className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden px-6 pt-16"
 		>
-			{/* 3D scene or particle fallback */}
 			{isDesktop ? <HeroScene /> : <ParticleField />}
 
-			{/* Background glow */}
 			<GlowOrb className="h-[600px] w-[600px] -top-40 left-1/2 -translate-x-1/2" />
 			<GlowOrb className="h-[300px] w-[300px] top-1/2 -left-20" />
 
-			{/* Grid pattern */}
 			<div
 				className="pointer-events-none absolute inset-0 opacity-[0.03]"
 				style={{
@@ -99,12 +90,10 @@ export function Hero() {
 			/>
 
 			<motion.div ref={contentRef} style={{ y, opacity }} className="relative z-10 text-center">
-				{/* Logo reveal */}
 				<div className="hero-logo mb-6 flex justify-center" style={{ opacity: 0 }}>
 					<LogoMark className="h-16 w-auto md:h-20" />
 				</div>
 
-				{/* Status badge */}
 				<div
 					className="hero-badge mb-8 inline-flex items-center gap-2 rounded-full border border-dark-300 bg-dark-200/80 px-4 py-2 text-xs backdrop-blur-sm shadow-[0_2px_8px_rgba(0,0,0,0.3)]"
 					style={{ opacity: 0 }}
@@ -113,39 +102,38 @@ export function Hero() {
 						<span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber opacity-75" />
 						<span className="relative inline-flex h-2 w-2 rounded-full bg-amber" />
 					</span>
-					<span className="text-dark-700">Now recruiting in all US markets</span>
+					<span className="text-dark-700">Now accepting applications — Jordan & MENA</span>
 				</div>
 
-				{/* Headline */}
 				<div className="hero-headline" style={{ opacity: 0 }}>
 					<h1 className="mx-auto max-w-5xl text-5xl font-black leading-[1.05] tracking-tight sm:text-6xl md:text-7xl lg:text-8xl">
 						<TextReveal delay={0.9} stagger={0.025}>
-							The dispatch protocol
+							Learn AI. Work with AI.
 						</TextReveal>
 						<br />
 						<span className="bg-gradient-to-r from-amber-400 via-amber to-amber-600 bg-clip-text text-transparent">
 							<TextReveal delay={1.4} stagger={0.03}>
-								that never sleeps.
+								Get hired.
 							</TextReveal>
 						</span>
 					</h1>
 				</div>
 
-				{/* Subheadline */}
 				<div className="hero-subheadline" style={{ opacity: 0 }}>
 					<p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-dark-700 sm:text-lg md:text-xl">
-						AI-orchestrated field service dispatch. We connect businesses to independent technicians
-						through an autonomous matching engine.{" "}
-						<span className="text-dark-800">No call centers. No middlemen. Just work.</span>
+						SteadyWrk is Jordan's first AI coworking company. We train you to work alongside AI
+						tools, then deploy you on real international projects.{" "}
+						<span className="text-dark-800">
+							No degree required. No experience needed. Just hunger.
+						</span>
 					</p>
 				</div>
 
-				{/* CTAs */}
 				<div className="hero-ctas" style={{ opacity: 0 }}>
 					<div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
 						<a href="#apply">
 							<Button size="lg">
-								Join the Network
+								Apply for the Bootcamp
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
 									viewBox="0 0 20 20"
@@ -162,21 +150,20 @@ export function Hero() {
 								</svg>
 							</Button>
 						</a>
-						<a href="#solutions">
+						<a href="#program">
 							<Button variant="outline" size="lg">
-								See How It Works
+								How It Works
 							</Button>
 						</a>
 					</div>
 				</div>
 
-				{/* Trust indicators */}
 				<ParallaxLayer speed={0.2}>
 					<div
 						className="hero-trust mt-16 flex flex-wrap items-center justify-center gap-6 text-xs text-dark-600"
 						style={{ opacity: 0 }}
 					>
-						{["MCP-Native", "Multi-Agent AI", "Zero Franchise Fees"].map((label) => (
+						{["No Degree Required", "Paid Training", "Remote-Friendly"].map((label) => (
 							<span key={label} className="flex items-center gap-1.5">
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
@@ -199,7 +186,6 @@ export function Hero() {
 				</ParallaxLayer>
 			</motion.div>
 
-			{/* Scroll indicator */}
 			<motion.div
 				className="absolute bottom-8 left-1/2 -translate-x-1/2"
 				animate={{ y: [0, 8, 0] }}

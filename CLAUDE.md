@@ -47,7 +47,7 @@ Stripe, Vercel, Notion, Figma, Canva, Linear, Gmail, Supabase, Cloudflare, Huggi
 
 ## Brand
 - Name: SteadyWrk (capital S, capital W, no vowel in Wrk)
-- Colors: Signal Amber #EB7C00 (primary), #0A0A0A (dark), #FFFFFF (light)
+- Colors: Signal Amber #F59E0B (primary), #0A0A0A (dark), #FFFFFF (light)
 - Voice: Direct, technical authority, zero fluff
 - Never: corporate buzzwords, "leverage synergies", "empower", "unlock potential"
 

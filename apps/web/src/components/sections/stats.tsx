@@ -5,7 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion } from "motion/react";
 import { useRef } from "react";
-import { STATS } from "../../lib/data";
+import { STATS, TRUST_BADGES } from "../../lib/data";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -88,7 +88,6 @@ export function StatsSection() {
 				))}
 			</div>
 
-			{/* Trust badge marquee */}
 			<div className="mt-12 overflow-hidden">
 				<motion.div
 					className="flex gap-8 whitespace-nowrap text-xs text-dark-600"
@@ -97,16 +96,7 @@ export function StatsSection() {
 				>
 					{["set-a", "set-b"].map((setId) => (
 						<div key={setId} className="flex gap-8">
-							{[
-								"MCP-Native",
-								"AI-Orchestrated",
-								"Zero Middlemen",
-								"24/7 Autonomous",
-								"Cloudflare Workers",
-								"Multi-Agent",
-								"H3 Geospatial",
-								"Stripe Payments",
-							].map((badge) => (
+							{TRUST_BADGES.map((badge) => (
 								<span
 									key={badge}
 									className="flex items-center gap-2 px-4 py-2 rounded-full border border-dark-300/50 bg-dark-200/50"

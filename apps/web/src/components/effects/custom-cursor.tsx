@@ -4,7 +4,9 @@ import { useEffect, useRef, useState } from "react";
 
 export function CustomCursor() {
 	const cursorRef = useRef<HTMLDivElement>(null);
+	const trailRef = useRef<HTMLDivElement>(null);
 	const pos = useRef({ x: 0, y: 0 });
+	const trailPos = useRef({ x: 0, y: 0 });
 	const target = useRef({ x: 0, y: 0 });
 	const [hovering, setHovering] = useState(false);
 	const [visible, setVisible] = useState(false);
@@ -43,9 +45,14 @@ export function CustomCursor() {
 		const animate = () => {
 			pos.current.x = lerp(pos.current.x, target.current.x, 0.15);
 			pos.current.y = lerp(pos.current.y, target.current.y, 0.15);
+			trailPos.current.x = lerp(trailPos.current.x, target.current.x, 0.08);
+			trailPos.current.y = lerp(trailPos.current.y, target.current.y, 0.08);
 
 			if (cursorRef.current) {
 				cursorRef.current.style.transform = `translate(${pos.current.x}px, ${pos.current.y}px) translate(-50%, -50%)`;
+			}
+			if (trailRef.current) {
+				trailRef.current.style.transform = `translate(${trailPos.current.x}px, ${trailPos.current.y}px) translate(-50%, -50%)`;
 			}
 			raf = requestAnimationFrame(animate);
 		};
@@ -64,19 +71,36 @@ export function CustomCursor() {
 	if (!isDesktop) return null;
 
 	return (
-		<div
-			ref={cursorRef}
-			className="pointer-events-none fixed top-0 left-0 z-[10000]"
-			style={{
-				width: hovering ? 40 : 20,
-				height: hovering ? 40 : 20,
-				opacity: visible ? 1 : 0,
-				borderRadius: "50%",
-				background: "radial-gradient(circle, rgba(224,120,0,0.6) 0%, rgba(224,120,0,0) 70%)",
-				filter: "blur(1px)",
-				transition: "width 0.2s ease-out, height 0.2s ease-out, opacity 0.2s ease-out",
-			}}
-			aria-hidden="true"
-		/>
+		<>
+			{/* Trail (larger, slower, softer) */}
+			<div
+				ref={trailRef}
+				className="pointer-events-none fixed top-0 left-0 z-[10000]"
+				style={{
+					width: hovering ? 56 : 32,
+					height: hovering ? 56 : 32,
+					opacity: visible ? 0.4 : 0,
+					borderRadius: "50%",
+					border: "1px solid rgba(235, 124, 0, 0.3)",
+					transition: "width 0.3s ease-out, height 0.3s ease-out, opacity 0.3s ease-out",
+				}}
+				aria-hidden="true"
+			/>
+			{/* Core cursor */}
+			<div
+				ref={cursorRef}
+				className="pointer-events-none fixed top-0 left-0 z-[10000]"
+				style={{
+					width: hovering ? 40 : 20,
+					height: hovering ? 40 : 20,
+					opacity: visible ? 1 : 0,
+					borderRadius: "50%",
+					background: "radial-gradient(circle, rgba(235,124,0,0.6) 0%, rgba(235,124,0,0) 70%)",
+					filter: "blur(1px)",
+					transition: "width 0.2s ease-out, height 0.2s ease-out, opacity 0.2s ease-out",
+				}}
+				aria-hidden="true"
+			/>
+		</>
 	);
 }

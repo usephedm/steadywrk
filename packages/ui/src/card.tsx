@@ -13,7 +13,7 @@ export function Card({ className, hover, glow, ...props }: CardProps) {
 			className={cn(
 				"rounded-xl border border-dark-300 bg-dark-200 p-6 shadow-[0_1px_2px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.02)]",
 				hover &&
-					"transition-all duration-300 hover:border-amber/30 hover:shadow-[0_4px_24px_rgba(0,0,0,0.4),0_0_40px_rgba(224,120,0,0.06)]",
+					"transition-all duration-300 hover:border-amber/30 hover:shadow-[0_4px_24px_rgba(0,0,0,0.4),0_0_40px_rgba(245,158,11,0.06)]",
 				glow && "animate-glow",
 				className,
 			)}

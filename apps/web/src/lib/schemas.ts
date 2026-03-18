@@ -3,27 +3,35 @@ export const organizationSchema = {
 	"@type": "Organization",
 	name: "SteadyWrk",
 	legalName: "Kayan Ventures Jordan LLC",
-	url: "https://steadywrk.com",
-	logo: "https://steadywrk.com/icon",
+	url: "https://steadywrk.app",
+	logo: "https://steadywrk.app/icon",
+	description:
+		"Jordan's first AI coworking company. We train talent to work alongside AI, then deploy them on real international projects.",
 	contactPoint: {
 		"@type": "ContactPoint",
-		email: "careers@steadywrk.com",
+		email: "apply@steadywrk.app",
 		contactType: "recruiting",
 		availableLanguage: ["English", "Arabic"],
 	},
 	address: { "@type": "PostalAddress", addressLocality: "Amman", addressCountry: "JO" },
+	areaServed: [
+		{ "@type": "Country", name: "Jordan" },
+		{ "@type": "Place", name: "MENA Region" },
+	],
 };
 
-export const softwareSchema = {
+export const trainingProgramSchema = {
 	"@context": "https://schema.org",
-	"@type": "SoftwareApplication",
-	name: "SteadyWrk",
-	applicationCategory: "BusinessApplication",
-	operatingSystem: "Web",
+	"@type": "EducationalOrganization",
+	name: "SteadyWrk AI Bootcamp",
 	description:
-		"AI-powered field service dispatch platform with multi-agent orchestration, H3 geospatial matching, and autonomous technician scheduling.",
-	url: "https://steadywrk.com",
-	offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+		"1-month intensive AI training bootcamp. Learn prompt engineering, AI-assisted coding, digital marketing with AI, and AI operations. No experience required.",
+	url: "https://steadywrk.app",
+	address: { "@type": "PostalAddress", addressLocality: "Amman", addressCountry: "JO" },
+	areaServed: [
+		{ "@type": "Country", name: "Jordan" },
+		{ "@type": "Place", name: "MENA Region" },
+	],
 };
 
 export function jobPostingSchema(job: {
@@ -42,8 +50,8 @@ export function jobPostingSchema(job: {
 		hiringOrganization: {
 			"@type": "Organization",
 			name: "SteadyWrk",
-			sameAs: "https://steadywrk.com",
-			logo: "https://steadywrk.com/icon",
+			sameAs: "https://steadywrk.app",
+			logo: "https://steadywrk.app/icon",
 		},
 		jobLocation: {
 			"@type": "Place",

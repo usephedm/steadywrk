@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { useInView } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 
-/* ─── Mock Data ────────────────────────────────────────── */
+/* â”€â”€â”€ Mock Data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 const STATS = [
 	{
@@ -74,7 +74,7 @@ const JOBS = [
 		tech: "Unassigned",
 		status: "pending",
 		urgency: "medium",
-		eta: "—",
+		eta: "â€”",
 	},
 	{
 		id: "SW-1038",
@@ -95,7 +95,7 @@ const ACTIVITY = [
 	{ time: "31 min ago", text: "Hawkeye flagged low tech coverage in Zone 4", type: "alert" },
 ];
 
-/* ─── Helpers ──────────────────────────────────────────── */
+/* â”€â”€â”€ Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 function StIcon({ d }: { d: string }) {
 	return (
@@ -142,7 +142,7 @@ const activityIcons: Record<string, string> = {
 	alert: "text-red-400",
 };
 
-/* ─── CountUp Card ────────────────────────────────────── */
+/* â”€â”€â”€ CountUp Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 function StatCountUp({ value, display }: { value: number; display: string }) {
 	const ref = useRef<HTMLDivElement>(null);
@@ -179,7 +179,7 @@ function StatCountUp({ value, display }: { value: number; display: string }) {
 	);
 }
 
-/* ─── Map Dots with GSAP ──────────────────────────────── */
+/* â”€â”€â”€ Map Dots with GSAP â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 function DashboardMap() {
 	const svgRef = useRef<SVGSVGElement>(null);
@@ -230,10 +230,10 @@ function DashboardMap() {
 
 	const techDots = [
 		{ x: 120, y: 80, color: "#22c55e", label: "Marcus T." },
-		{ x: 280, y: 140, color: "#E07800", label: "Jake R." },
+		{ x: 280, y: 140, color: "#F59E0B", label: "Jake R." },
 		{ x: 420, y: 70, color: "#3b82f6", label: "Sarah K." },
 		{ x: 200, y: 180, color: "#22c55e", label: "Mike D." },
-		{ x: 360, y: 120, color: "#E07800", label: "En Route" },
+		{ x: 360, y: 120, color: "#F59E0B", label: "En Route" },
 		{ x: 480, y: 170, color: "#22c55e", label: "Online" },
 		{ x: 100, y: 150, color: "#3b82f6", label: "On Site" },
 	];
@@ -269,7 +269,7 @@ function DashboardMap() {
 						y1={r.y1}
 						x2={r.x2}
 						y2={r.y2}
-						stroke="#E07800"
+						stroke="#F59E0B"
 						strokeWidth="1"
 						opacity="0.3"
 					/>
@@ -292,13 +292,13 @@ function DashboardMap() {
 				))}
 			</svg>
 			<span className="absolute bottom-4 right-4 text-xs text-dark-600">
-				Live · Mapbox GL coming soon
+				Live Â· Mapbox GL coming soon
 			</span>
 		</div>
 	);
 }
 
-/* ─── Page ─────────────────────────────────────────────── */
+/* â”€â”€â”€ Page â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 export default function DashboardPage() {
 	return (

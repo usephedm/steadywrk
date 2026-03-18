@@ -5,7 +5,7 @@ import { Badge, Card, CardDescription, CardTitle, FadeIn, TiltCard } from "@stea
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
-import { STEPS } from "../../lib/data";
+import { PROGRAM_STEPS } from "../../lib/data";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -28,7 +28,7 @@ function Icon({ d, className }: { d: string; className?: string }) {
 	);
 }
 
-export function Solutions() {
+export function Program() {
 	const lineRef = useRef<SVGPathElement>(null);
 	const sectionRef = useRef<HTMLDivElement>(null);
 	const cardsRef = useRef<HTMLDivElement>(null);
@@ -37,7 +37,6 @@ export function Solutions() {
 		() => {
 			if (!lineRef.current || !sectionRef.current) return;
 
-			// Connecting line draw
 			const path = lineRef.current;
 			const length = path.getTotalLength();
 			gsap.set(path, { strokeDasharray: length, strokeDashoffset: length });
@@ -54,7 +53,6 @@ export function Solutions() {
 				},
 			});
 
-			// Stagger reveal on step cards
 			if (cardsRef.current) {
 				const cards = cardsRef.current.querySelectorAll(".step-card");
 				gsap.fromTo(
@@ -81,7 +79,7 @@ export function Solutions() {
 
 	return (
 		<section
-			id="solutions"
+			id="program"
 			ref={sectionRef}
 			className="relative border-t border-dark-300/50 py-24 md:py-32"
 		>
@@ -92,15 +90,18 @@ export function Solutions() {
 							How It Works
 						</Badge>
 						<h2 className="text-3xl font-bold md:text-5xl">
-							Three steps.{" "}
+							Three steps to your{" "}
 							<span className="bg-gradient-to-r from-amber-400 to-amber bg-clip-text text-transparent">
-								Zero friction.
+								AI career.
 							</span>
 						</h2>
+						<p className="mx-auto mt-4 max-w-xl text-dark-700">
+							No gatekeeping. No prerequisites. Apply, train, and start working — all within your
+							first month.
+						</p>
 					</div>
 				</FadeIn>
 
-				{/* Connecting line (desktop only) */}
 				<svg
 					className="pointer-events-none absolute left-0 right-0 top-1/2 hidden h-0.5 w-full md:block"
 					aria-hidden="true"
@@ -108,7 +109,7 @@ export function Solutions() {
 					<path
 						ref={lineRef}
 						d="M 200 1 L 600 1 L 1000 1"
-						stroke="#E07800"
+						stroke="#F59E0B"
 						strokeWidth="2"
 						fill="none"
 						opacity="0.3"
@@ -116,7 +117,7 @@ export function Solutions() {
 				</svg>
 
 				<div ref={cardsRef} className="mt-16 grid gap-6 md:grid-cols-3">
-					{STEPS.map((step) => (
+					{PROGRAM_STEPS.map((step) => (
 						<div key={step.num} className="step-card" style={{ opacity: 0 }}>
 							<TiltCard>
 								<Card hover className="group relative h-full overflow-hidden p-8">

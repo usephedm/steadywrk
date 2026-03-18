@@ -3,13 +3,15 @@
 import dynamic from "next/dynamic";
 import { Apply } from "../components/sections/apply";
 import { Careers } from "../components/sections/careers";
-import { Features } from "../components/sections/features";
+import { Countdown } from "../components/sections/countdown";
+import { Curriculum } from "../components/sections/curriculum";
 import { Footer } from "../components/sections/footer";
-import { MapSection } from "../components/sections/map-section";
 import { Nav } from "../components/sections/nav";
-import { PricingSection } from "../components/sections/pricing";
-import { Solutions } from "../components/sections/solutions";
+import { Program } from "../components/sections/program";
+import { SocialProof } from "../components/sections/social-proof";
 import { StatsSection } from "../components/sections/stats";
+import { TerminalTyping } from "../components/sections/terminal-typing";
+import { WhySection } from "../components/sections/why-section";
 
 const Hero = dynamic(
 	() => import("../components/sections/hero").then((m) => ({ default: m.Hero })),
@@ -21,13 +23,15 @@ export default function Home() {
 		<>
 			<Nav />
 			<Hero />
-			<Solutions />
 			<StatsSection />
-			<Features />
-			<MapSection />
-			<PricingSection />
+			<Program />
+			<TerminalTyping />
+			<Curriculum />
+			<SocialProof />
+			<WhySection />
 			<Careers />
 			<Apply />
+			<Countdown />
 			<Footer />
 		</>
 	);

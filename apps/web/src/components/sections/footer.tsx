@@ -22,7 +22,7 @@ export function Footer() {
 						<span className="text-lg font-extrabold tracking-[0.08em] text-white">STEADYWRK</span>
 					</div>
 					<div className="flex items-center gap-6 text-sm text-dark-600">
-						{["Solutions", "Features", "Pricing", "Careers"].map((item) => (
+						{["Program", "Curriculum", "Careers"].map((item) => (
 							<MagneticButton key={item} strength={0.15}>
 								<a href={`#${item.toLowerCase()}`} className="transition hover:text-white">
 									{item}
@@ -32,7 +32,10 @@ export function Footer() {
 					</div>
 				</div>
 				<div className="mt-8 flex flex-col items-center gap-2 text-center text-xs text-dark-600 md:flex-row md:justify-between">
-					<p>AI-orchestrated dispatch. Built by Kayan Ventures.</p>
+					<p>
+						Jordan's first AI coworking company. Built by{" "}
+						<span className="text-dark-700">Kayan Ventures</span>.
+					</p>
 					<div className="flex items-center gap-4">
 						<p>&copy; {new Date().getFullYear()} SteadyWrk. All rights reserved.</p>
 						<button

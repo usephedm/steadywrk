@@ -1,6 +1,6 @@
 import { cn } from "./lib/utils";
 
-const AMBER = "#E07800";
+const AMBER = "#F59E0B";
 
 interface LogoProps {
 	className?: string;

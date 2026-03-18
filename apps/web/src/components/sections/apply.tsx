@@ -33,12 +33,12 @@ export function Apply() {
 						<h2 className="text-3xl font-bold md:text-5xl">
 							Ready to{" "}
 							<span className="bg-gradient-to-r from-amber-400 to-amber bg-clip-text text-transparent">
-								build something real?
+								start your AI career?
 							</span>
 						</h2>
 						<p className="mt-4 text-dark-700">
-							Drop your info. If there's a fit, we move fast. No 12-step application. Just you and
-							the work.
+							60 seconds. No CV required. Tell us who you are and why you want to work with AI. We
+							review every application within 48 hours.
 						</p>
 					</div>
 				</FadeIn>
@@ -52,7 +52,7 @@ export function Apply() {
 					>
 						<div className="grid gap-4 sm:grid-cols-2">
 							<div
-								className={`transition-shadow duration-300 rounded-lg ${focusedField === "name" ? "shadow-[0_0_16px_rgba(224,120,0,0.15)]" : ""}`}
+								className={`transition-shadow duration-300 rounded-lg ${focusedField === "name" ? "shadow-[0_0_16px_rgba(245,158,11,0.15)]" : ""}`}
 							>
 								<Input
 									type="text"
@@ -64,7 +64,7 @@ export function Apply() {
 								/>
 							</div>
 							<div
-								className={`transition-shadow duration-300 rounded-lg ${focusedField === "email" ? "shadow-[0_0_16px_rgba(224,120,0,0.15)]" : ""}`}
+								className={`transition-shadow duration-300 rounded-lg ${focusedField === "email" ? "shadow-[0_0_16px_rgba(245,158,11,0.15)]" : ""}`}
 							>
 								<Input
 									type="email"
@@ -77,41 +77,41 @@ export function Apply() {
 							</div>
 						</div>
 						<div
-							className={`transition-shadow duration-300 rounded-lg ${focusedField === "phone" ? "shadow-[0_0_16px_rgba(224,120,0,0.15)]" : ""}`}
+							className={`transition-shadow duration-300 rounded-lg ${focusedField === "phone" ? "shadow-[0_0_16px_rgba(245,158,11,0.15)]" : ""}`}
 						>
 							<Input
 								type="tel"
 								name="phone"
-								placeholder="Phone number"
+								placeholder="Phone number (WhatsApp preferred)"
 								onFocus={() => setFocusedField("phone")}
 								onBlur={() => setFocusedField(null)}
 							/>
 						</div>
 						<div className="grid gap-4 sm:grid-cols-2">
-							<Select name="role" required>
-								<option value="">What role fits you?</option>
-								<option value="ai-engineer">AI Engineer</option>
-								<option value="prompt-engineer">Prompt Engineer</option>
-								<option value="dispatch-operator">Dispatch Operator</option>
-								<option value="executive-assistant">Executive Assistant</option>
-								<option value="operations-manager">Operations Manager</option>
-								<option value="cold-caller-sales-dev">Cold Caller / Sales Dev</option>
-								<option value="trainee">Trainee — Teach Me Everything</option>
+							<Select name="track" required>
+								<option value="">What track interests you?</option>
+								<option value="bootcamp-trainee">Bootcamp Trainee (No experience)</option>
+								<option value="ai-operations">AI Operations Specialist</option>
+								<option value="ai-developer">AI-Assisted Developer</option>
+								<option value="ai-content-growth">AI Content & Growth</option>
+								<option value="client-success">Client Success Manager</option>
+								<option value="sales-dev">Sales Development Rep</option>
 							</Select>
 							<Select name="location" required>
 								<option value="">Where are you based?</option>
-								<option value="amman-onsite">Amman On-site</option>
-								<option value="remote-jordan">Remote from Jordan</option>
-								<option value="hybrid">Hybrid</option>
+								<option value="amman">Amman, Jordan</option>
+								<option value="jordan-other">Other city in Jordan</option>
+								<option value="mena">MENA region</option>
+								<option value="international">International</option>
 							</Select>
 						</div>
 						<div
-							className={`transition-shadow duration-300 rounded-lg ${focusedField === "message" ? "shadow-[0_0_16px_rgba(224,120,0,0.15)]" : ""}`}
+							className={`transition-shadow duration-300 rounded-lg ${focusedField === "message" ? "shadow-[0_0_16px_rgba(245,158,11,0.15)]" : ""}`}
 						>
 							<Textarea
 								name="message"
 								rows={3}
-								placeholder="Tell us about yourself in 2-3 sentences (optional)"
+								placeholder="Why do you want to work with AI? (2-3 sentences)"
 								onFocus={() => setFocusedField("message")}
 								onBlur={() => setFocusedField(null)}
 							/>
@@ -149,7 +149,8 @@ export function Apply() {
 					</form>
 
 					<p className="mt-6 text-center text-sm text-dark-600">
-						Based in Jordan? Even better. We're building our core team in Amman.
+						Based in Jordan? Even better. We're building our core team in Amman. All applications
+						reviewed within 48 hours.
 					</p>
 				</FadeIn>
 			</div>

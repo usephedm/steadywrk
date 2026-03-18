@@ -4,7 +4,7 @@ import { Button, LogoMark, MagneticButton } from "@steadywrk/ui";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 
-const NAV_ITEMS = ["Solutions", "Features", "Pricing", "Careers"];
+const NAV_ITEMS = ["Program", "Curriculum", "Careers"];
 
 export function Nav() {
 	const [open, setOpen] = useState(false);
@@ -17,7 +17,6 @@ export function Nav() {
 		const handleScroll = () => {
 			const y = window.scrollY;
 			setScrolled(y > 50);
-			// Smooth blur ramp: 0px at scroll 0, 20px at scroll 100+
 			setBlurAmount(Math.min(y / 100, 1) * 20);
 		};
 		window.addEventListener("scroll", handleScroll, { passive: true });

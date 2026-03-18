@@ -5,12 +5,11 @@ import { Badge, Card, FadeIn, GlowOrb } from "@steadywrk/ui";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
-import { FEATURES } from "../../lib/data";
-import { TerminalTyping } from "./terminal-typing";
+import { CURRICULUM } from "../../lib/data";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
-export function Features() {
+export function Curriculum() {
 	const sectionRef = useRef<HTMLDivElement>(null);
 	const cardsRef = useRef<HTMLDivElement>(null);
 
@@ -18,7 +17,6 @@ export function Features() {
 		() => {
 			if (!sectionRef.current) return;
 
-			// Background gradient shift: move radial gradient from left to right as user scrolls
 			gsap.fromTo(
 				sectionRef.current,
 				{ "--gradient-x": "0%" },
@@ -34,7 +32,6 @@ export function Features() {
 				},
 			);
 
-			// Stagger reveal on feature cards
 			if (cardsRef.current) {
 				const cards = cardsRef.current.querySelectorAll(".feature-card");
 				gsap.fromTo(
@@ -61,13 +58,13 @@ export function Features() {
 
 	return (
 		<section
-			id="features"
+			id="curriculum"
 			ref={sectionRef}
 			className="relative border-t border-dark-300/50 py-24 md:py-32"
 			style={
 				{
 					background:
-						"radial-gradient(ellipse 600px 400px at var(--gradient-x, 0%) 50%, rgba(224,120,0,0.04), transparent)",
+						"radial-gradient(ellipse 600px 400px at var(--gradient-x, 0%) 50%, rgba(245,158,11,0.04), transparent)",
 				} as React.CSSProperties
 			}
 		>
@@ -77,36 +74,32 @@ export function Features() {
 				<FadeIn>
 					<div className="text-center">
 						<Badge variant="amber" className="mb-4">
-							Platform
+							What You'll Learn
 						</Badge>
 						<h2 className="text-3xl font-bold md:text-5xl">
-							Built different.{" "}
+							Skills that{" "}
 							<span className="bg-gradient-to-r from-amber-400 to-amber bg-clip-text text-transparent">
-								Literally.
+								actually pay.
 							</span>
 						</h2>
 						<p className="mx-auto mt-4 max-w-xl text-dark-700">
-							MCP-native architecture. Multi-agent AI orchestration. Every dispatch decision is made
-							by an autonomous system that learns and improves.
+							Our bootcamp covers the full AI toolkit — from prompt engineering to client delivery.
+							Everything you need to become an AI-powered professional.
 						</p>
 					</div>
 				</FadeIn>
 
 				<div ref={cardsRef} className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-					{FEATURES.map((f) => (
+					{CURRICULUM.map((f) => (
 						<div key={f.title} className="feature-card" style={{ opacity: 0 }}>
 							<Card hover className="group h-full p-6">
-								<div className="mb-3 h-1 w-8 rounded-full bg-amber/40 transition-all duration-300 group-hover:w-12 group-hover:bg-amber group-hover:shadow-[0_0_12px_rgba(224,120,0,0.3)]" />
+								<div className="mb-3 h-1 w-8 rounded-full bg-amber/40 transition-all duration-300 group-hover:w-12 group-hover:bg-amber group-hover:shadow-[0_0_12px_rgba(245,158,11,0.3)]" />
 								<h3 className="text-base font-bold">{f.title}</h3>
 								<p className="mt-2 text-sm leading-relaxed text-dark-700">{f.desc}</p>
 							</Card>
 						</div>
 					))}
 				</div>
-
-				<FadeIn delay={0.3} className="mt-12">
-					<TerminalTyping />
-				</FadeIn>
 			</div>
 		</section>
 	);

@@ -319,7 +319,7 @@ export function TiltCard({ children, className, tiltAmount = 8 }: TiltCardProps)
 			`perspective(800px) rotateY(${x * tiltAmount}deg) rotateX(${-y * tiltAmount}deg) scale3d(1.02, 1.02, 1.02)`,
 		);
 		setHighlight(
-			`radial-gradient(circle at ${(x + 0.5) * 100}% ${(y + 0.5) * 100}%, rgba(224,120,0,0.06), transparent 60%)`,
+			`radial-gradient(circle at ${(x + 0.5) * 100}% ${(y + 0.5) * 100}%, rgba(245,158,11,0.06), transparent 60%)`,
 		);
 	};
 
