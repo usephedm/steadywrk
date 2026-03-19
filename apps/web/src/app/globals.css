@@ -84,16 +84,7 @@ html {
 	scroll-behavior: auto; /* Lenis handles smooth scroll */
 }
 
-@media (hover: hover) {
-	body {
-		cursor: none;
-	}
-	a,
-	button,
-	[role="button"] {
-		cursor: none;
-	}
-}
+/* Custom cursor removed — use native cursor for accessibility and mobile performance */
 
 @media (prefers-reduced-motion: reduce) {
 	*,

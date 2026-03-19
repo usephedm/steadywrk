@@ -1,17 +1,15 @@
 "use client";
 
-import { Button, LogoMark, MagneticButton } from "@steadywrk/ui";
+import { Button, LogoMark } from "@steadywrk/ui";
 import { AnimatePresence, motion } from "motion/react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
-const NAV_ITEMS = ["Program", "Curriculum", "Careers"];
+const NAV_ITEMS = ["Program", "Curriculum"];
 
 export function Nav() {
 	const [open, setOpen] = useState(false);
 	const [scrolled, setScrolled] = useState(false);
-	const [active, setActive] = useState("");
 	const [blurAmount, setBlurAmount] = useState(0);
-	const navRef = useRef<HTMLElement>(null);
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -23,29 +21,8 @@ export function Nav() {
 		return () => window.removeEventListener("scroll", handleScroll);
 	}, []);
 
-	useEffect(() => {
-		const observer = new IntersectionObserver(
-			(entries) => {
-				for (const entry of entries) {
-					if (entry.isIntersecting) {
-						setActive(entry.target.id);
-					}
-				}
-			},
-			{ threshold: 0.3, rootMargin: "-80px 0px -50% 0px" },
-		);
-
-		for (const item of NAV_ITEMS) {
-			const el = document.getElementById(item.toLowerCase());
-			if (el) observer.observe(el);
-		}
-
-		return () => observer.disconnect();
-	}, []);
-
 	return (
 		<motion.nav
-			ref={navRef}
 			initial={{ y: -20, opacity: 0 }}
 			animate={{ y: 0, opacity: 1 }}
 			transition={{ duration: 0.5, ease: "easeOut" }}
@@ -65,32 +42,20 @@ export function Nav() {
 
 				<div className="hidden items-center gap-8 text-sm text-dark-700 md:flex">
 					{NAV_ITEMS.map((item) => (
-						<MagneticButton key={item} strength={0.2}>
-							<a
-								href={`#${item.toLowerCase()}`}
-								className={`relative transition-colors duration-200 hover:text-white ${
-									active === item.toLowerCase() ? "text-white" : ""
-								}`}
-							>
-								{item}
-								{active === item.toLowerCase() && (
-									<motion.span
-										layoutId="nav-indicator"
-										className="absolute -bottom-1 left-0 right-0 h-0.5 bg-amber"
-										transition={{ type: "spring", stiffness: 300, damping: 30 }}
-									/>
-								)}
-							</a>
-						</MagneticButton>
+						<a
+							key={item}
+							href={`#${item.toLowerCase()}`}
+							className="transition-colors duration-200 hover:text-white"
+						>
+							{item}
+						</a>
 					))}
 				</div>
 
 				<div className="flex items-center gap-3">
-					<MagneticButton className="hidden sm:block">
-						<a href="#apply">
-							<Button size="sm">Apply Now</Button>
-						</a>
-					</MagneticButton>
+					<a href="#apply" className="hidden sm:block">
+						<Button size="sm">Apply Now</Button>
+					</a>
 					<button
 						type="button"
 						onClick={() => setOpen(!open)}
@@ -132,7 +97,6 @@ export function Nav() {
 									{item}
 								</a>
 							))}
-							{/* biome-ignore lint/a11y/useValidAnchor: anchor wraps a button for navigation */}
 							<a href="#apply" onClick={() => setOpen(false)}>
 								<Button className="mt-2 w-full">Apply Now</Button>
 							</a>

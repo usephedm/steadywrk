@@ -1,72 +1,39 @@
 "use client";
 
-import { useGSAP } from "@gsap/react";
 import { Badge, Card, FadeIn, GlowOrb } from "@steadywrk/ui";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useRef } from "react";
-import { CURRICULUM } from "../../lib/data";
 
-gsap.registerPlugin(ScrollTrigger, useGSAP);
+const CURRICULUM = [
+	{
+		title: "Prompt Engineering",
+		desc: "Master the art of communicating with AI. Write system prompts, chain-of-thought reasoning, and structured outputs that produce professional-grade results.",
+	},
+	{
+		title: "AI-Assisted Coding",
+		desc: "Build software with Claude Code, Cursor, and Copilot. You don't need to be a programmer — you need to direct AI to build what you imagine.",
+	},
+	{
+		title: "AI Operations & Workflows",
+		desc: "Design end-to-end business workflows powered by AI. Automate repetitive tasks, build pipelines, and learn to orchestrate multiple AI agents.",
+	},
+	{
+		title: "Digital Marketing with AI",
+		desc: "Create content, run campaigns, and analyze data using AI tools. SEO, copywriting, social media — all supercharged with AI assistance.",
+	},
+	{
+		title: "Client Communication",
+		desc: "Work with international clients. Professional communication, project management, and delivering results on time — the skills that get you paid.",
+	},
+	{
+		title: "AI Tools Mastery",
+		desc: "Claude, ChatGPT, Gemini, Cursor, v0, Notion AI, and 15+ more tools. You'll graduate knowing which tool to use for every task.",
+	},
+];
 
 export function Curriculum() {
-	const sectionRef = useRef<HTMLDivElement>(null);
-	const cardsRef = useRef<HTMLDivElement>(null);
-
-	useGSAP(
-		() => {
-			if (!sectionRef.current) return;
-
-			gsap.fromTo(
-				sectionRef.current,
-				{ "--gradient-x": "0%" },
-				{
-					"--gradient-x": "100%",
-					ease: "none",
-					scrollTrigger: {
-						trigger: sectionRef.current,
-						start: "top bottom",
-						end: "bottom top",
-						scrub: 1,
-					},
-				},
-			);
-
-			if (cardsRef.current) {
-				const cards = cardsRef.current.querySelectorAll(".feature-card");
-				gsap.fromTo(
-					cards,
-					{ y: 40, opacity: 0 },
-					{
-						y: 0,
-						opacity: 1,
-						stagger: 0.08,
-						ease: "power2.out",
-						duration: 0.5,
-						scrollTrigger: {
-							trigger: cardsRef.current,
-							start: "top 80%",
-							end: "top 30%",
-							toggleActions: "play none none none",
-						},
-					},
-				);
-			}
-		},
-		{ scope: sectionRef },
-	);
-
 	return (
 		<section
 			id="curriculum"
-			ref={sectionRef}
 			className="relative border-t border-dark-300/50 py-24 md:py-32"
-			style={
-				{
-					background:
-						"radial-gradient(ellipse 600px 400px at var(--gradient-x, 0%) 50%, rgba(245,158,11,0.04), transparent)",
-				} as React.CSSProperties
-			}
 		>
 			<GlowOrb className="h-[400px] w-[400px] top-1/2 right-0 translate-x-1/2 -translate-y-1/2" />
 
@@ -74,7 +41,7 @@ export function Curriculum() {
 				<FadeIn>
 					<div className="text-center">
 						<Badge variant="amber" className="mb-4">
-							What You'll Learn
+							What You&apos;ll Learn
 						</Badge>
 						<h2 className="text-3xl font-bold md:text-5xl">
 							Skills that{" "}
@@ -89,15 +56,15 @@ export function Curriculum() {
 					</div>
 				</FadeIn>
 
-				<div ref={cardsRef} className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-					{CURRICULUM.map((f) => (
-						<div key={f.title} className="feature-card" style={{ opacity: 0 }}>
+				<div className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+					{CURRICULUM.map((f, i) => (
+						<FadeIn key={f.title} delay={i * 0.08}>
 							<Card hover className="group h-full p-6">
 								<div className="mb-3 h-1 w-8 rounded-full bg-amber/40 transition-all duration-300 group-hover:w-12 group-hover:bg-amber group-hover:shadow-[0_0_12px_rgba(245,158,11,0.3)]" />
 								<h3 className="text-base font-bold">{f.title}</h3>
 								<p className="mt-2 text-sm leading-relaxed text-dark-700">{f.desc}</p>
 							</Card>
-						</div>
+						</FadeIn>
 					))}
 				</div>
 			</div>

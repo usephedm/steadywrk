@@ -1,10 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import { CustomCursor } from "../components/effects/custom-cursor";
-import { GrainOverlay } from "../components/effects/grain-overlay";
 import { JsonLd } from "../components/json-ld";
-import { LenisProvider } from "../components/providers/lenis-provider";
 import { organizationSchema, trainingProgramSchema } from "../lib/schemas";
 
 const inter = Inter({
@@ -21,9 +18,9 @@ const jetbrains = JetBrains_Mono({
 
 export const metadata: Metadata = {
 	metadataBase: new URL("https://steadywrk.app"),
-	title: "SteadyWrk — Learn AI. Work with AI. Get Hired.",
+	title: "SteadyWrk — We Train You. We Hire You.",
 	description:
-		"Jordan's first AI coworking company. 1-month bootcamp to learn AI tools, then get deployed on real international projects. No experience required. No degree needed. Apply now.",
+		"Jordan's first AI workforce company. 1-month paid bootcamp to master AI tools, then join the team and work on real international projects. No experience required. Apply now.",
 	keywords: [
 		"AI jobs Jordan",
 		"AI training Amman",
@@ -46,9 +43,9 @@ export const metadata: Metadata = {
 		"max-image-preview": "large",
 	},
 	openGraph: {
-		title: "SteadyWrk — Learn AI. Work with AI. Get Hired.",
+		title: "SteadyWrk — We Train You. We Hire You.",
 		description:
-			"Jordan's first AI coworking company. Free bootcamp. Real projects. No degree required.",
+			"Jordan's first AI workforce company. Paid bootcamp. Real projects. No degree required.",
 		siteName: "SteadyWrk",
 		type: "website",
 		locale: "en_US",
@@ -57,9 +54,9 @@ export const metadata: Metadata = {
 	},
 	twitter: {
 		card: "summary_large_image",
-		title: "SteadyWrk — Learn AI. Work with AI. Get Hired.",
+		title: "SteadyWrk — We Train You. We Hire You.",
 		description:
-			"1-month AI bootcamp in Jordan. No experience needed. Train with 20+ AI tools, then get deployed on real projects.",
+			"1-month paid AI bootcamp in Jordan. No experience needed. Master 20+ AI tools, then join the team and work on real projects.",
 		images: ["/api/og"],
 	},
 	alternates: {
@@ -78,9 +75,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 			<body className="bg-dark text-white antialiased font-sans">
 				<JsonLd data={organizationSchema} />
 				<JsonLd data={trainingProgramSchema} />
-				<LenisProvider>{children}</LenisProvider>
-				<GrainOverlay />
-				<CustomCursor />
+				{children}
 			</body>
 		</html>
 	);

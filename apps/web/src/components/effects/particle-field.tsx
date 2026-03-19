@@ -60,7 +60,7 @@ export function ParticleField({ className }: { className?: string }) {
 						ctx.beginPath();
 						ctx.moveTo(p1.x, p1.y);
 						ctx.lineTo(p2.x, p2.y);
-						ctx.strokeStyle = `rgba(235, 124, 0, ${0.06 * (1 - dist / 120)})`;
+						ctx.strokeStyle = `rgba(245, 158, 11, ${0.06 * (1 - dist / 120)})`;
 						ctx.stroke();
 					}
 				}
@@ -77,7 +77,7 @@ export function ParticleField({ className }: { className?: string }) {
 
 				ctx.beginPath();
 				ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-				ctx.fillStyle = `rgba(235, 124, 0, ${p.alpha})`;
+				ctx.fillStyle = `rgba(245, 158, 11, ${p.alpha})`;
 				ctx.fill();
 			}
 

@@ -1,7 +1,6 @@
 "use client";
 
-import { LogoMark, MagneticButton } from "@steadywrk/ui";
-import { motion } from "motion/react";
+import { LogoMark } from "@steadywrk/ui";
 
 export function Footer() {
 	const scrollToTop = () => {
@@ -13,28 +12,27 @@ export function Footer() {
 			<div className="mx-auto max-w-7xl px-6">
 				<div className="flex flex-col items-center gap-6 md:flex-row md:justify-between">
 					<div className="flex items-center gap-2.5">
-						<motion.div
-							animate={{ scale: [1, 1.05, 1] }}
-							transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-						>
-							<LogoMark className="h-7 w-auto" />
-						</motion.div>
+						<LogoMark className="h-7 w-auto" />
 						<span className="text-lg font-extrabold tracking-[0.08em] text-white">STEADYWRK</span>
 					</div>
 					<div className="flex items-center gap-6 text-sm text-dark-600">
-						{["Program", "Curriculum", "Careers"].map((item) => (
-							<MagneticButton key={item} strength={0.15}>
-								<a href={`#${item.toLowerCase()}`} className="transition hover:text-white">
-									{item}
-								</a>
-							</MagneticButton>
-						))}
+						<a href="#program" className="transition hover:text-white">Program</a>
+						<a href="#curriculum" className="transition hover:text-white">Curriculum</a>
+						<a href="#apply" className="transition hover:text-white">Apply</a>
+						<a
+							href="https://wa.me/962776085874"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="transition hover:text-green-400"
+						>
+							WhatsApp
+						</a>
 					</div>
 				</div>
 				<div className="mt-8 flex flex-col items-center gap-2 text-center text-xs text-dark-600 md:flex-row md:justify-between">
 					<p>
-						Jordan's first AI coworking company. Built by{" "}
-						<span className="text-dark-700">Kayan Ventures</span>.
+						Built in Amman, Jordan by{" "}
+						<span className="text-dark-700">Kayan Ventures Jordan LLC</span>.
 					</p>
 					<div className="flex items-center gap-4">
 						<p>&copy; {new Date().getFullYear()} SteadyWrk. All rights reserved.</p>
