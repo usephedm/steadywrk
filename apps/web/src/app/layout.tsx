@@ -59,7 +59,6 @@ export default function RootLayout({
         <Analytics />
         <SpeedInsights />
         {/* JSON-LD Organization structured data */}
-        {/* biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD requires dangerouslySetInnerHTML */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

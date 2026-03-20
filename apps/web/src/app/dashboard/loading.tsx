@@ -26,7 +26,6 @@ export default function DashboardLoading() {
       {/* Card grid skeleton */}
       <div className="w-full max-w-5xl">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4 auto-rows-[20rem]">
-          {/* biome-ignore lint/suspicious/noArrayIndexKey: static skeleton list */}
           {[4, 2, 2, 2, 2].map((span, i) => (
             <div
               key={i}
