@@ -42,3 +42,18 @@ test-results/
 .wrangler/
 
 .vercel
+
+# Agent/tool config (local only)
+.agents/
+.gemini/
+.playwright-mcp/
+.serena/
+.claude/agents/
+.claude/settings.local.json
+GEMINI.md
+AGENTS.md
+
+# Large media (keep in cloud, not repo)
+*.pdf
+*.zip
+Steadywrk_logo/

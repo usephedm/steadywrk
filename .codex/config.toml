@@ -1,6 +1,0 @@
-[shell_environment_policy]
-inherit = "core"
-
-[shell_environment_policy.set]
-BIOME_LOG_LEVEL = "warn"
-FORCE_COLOR = "1"

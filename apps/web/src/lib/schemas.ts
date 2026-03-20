@@ -1,35 +1,51 @@
-export const organizationSchema = {
-	"@context": "https://schema.org",
-	"@type": "Organization",
-	name: "SteadyWrk",
-	legalName: "Kayan Ventures Jordan LLC",
-	url: "https://steadywrk.app",
-	logo: "https://steadywrk.app/icon",
-	description:
-		"Jordan's first AI workforce company. We train talent to work alongside AI, then deploy them on real international projects.",
-	contactPoint: {
-		"@type": "ContactPoint",
-		email: "apply@steadywrk.app",
-		contactType: "recruiting",
-		availableLanguage: ["English", "Arabic"],
-	},
-	address: { "@type": "PostalAddress", addressLocality: "Amman", addressCountry: "JO" },
-	areaServed: [
-		{ "@type": "Country", name: "Jordan" },
-		{ "@type": "Place", name: "MENA Region" },
-	],
-};
+// Validation helpers — no Zod dependency, pure runtime checks
 
-export const trainingProgramSchema = {
-	"@context": "https://schema.org",
-	"@type": "EducationalOrganization",
-	name: "SteadyWrk AI Bootcamp",
-	description:
-		"1-month intensive paid AI training bootcamp. Learn prompt engineering, AI-assisted coding, digital marketing with AI, and AI operations. No experience required. Graduates join the SteadyWrk team.",
-	url: "https://steadywrk.app",
-	address: { "@type": "PostalAddress", addressLocality: "Amman", addressCountry: "JO" },
-	areaServed: [
-		{ "@type": "Country", name: "Jordan" },
-		{ "@type": "Place", name: "MENA Region" },
-	],
-};
+export function validateEmail(email: unknown): string | null {
+  if (!email || typeof email !== 'string') return null;
+  const trimmed = email.trim().toLowerCase();
+  if (!trimmed.includes('@') || trimmed.length < 5) return null;
+  return trimmed;
+}
+
+export function validateRequired(value: unknown, field: string): string {
+  if (!value || typeof value !== 'string' || value.trim().length === 0) {
+    throw new Error(`${field} is required`);
+  }
+  return value.trim();
+}
+
+export interface ApplyPayload {
+  name: string;
+  email: string;
+  position: string;
+  resumeUrl: string;
+  message: string;
+}
+
+export function validateApplyPayload(body: Record<string, unknown>): ApplyPayload {
+  const name = validateRequired(body.name, 'Name');
+  const email = validateEmail(body.email);
+  if (!email) throw new Error('Invalid email');
+  const position = validateRequired(body.position, 'Position');
+  const resumeUrl = typeof body.resumeUrl === 'string' ? body.resumeUrl.trim() : '';
+  const message = typeof body.message === 'string' ? body.message.trim() : '';
+  return { name, email, position, resumeUrl, message };
+}
+
+export interface ContactPayload {
+  company: string;
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+}
+
+export function validateContactPayload(body: Record<string, unknown>): ContactPayload {
+  const name = validateRequired(body.name, 'Name');
+  const email = validateEmail(body.email);
+  if (!email) throw new Error('Invalid email');
+  const subject = validateRequired(body.subject, 'Subject');
+  const message = validateRequired(body.message, 'Message');
+  const company = typeof body.company === 'string' ? body.company.trim() : '';
+  return { company, name, email, subject, message };
+}

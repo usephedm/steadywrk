@@ -1,11 +1,10 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-	transpilePackages: ["@steadywrk/ui", "@steadywrk/shared"],
-	serverExternalPackages: ["three"],
-	experimental: {
-		viewTransition: true,
-	},
+  poweredByHeader: false,
+  images: {
+    qualities: [100, 75],
+  },
 };
 
 export default nextConfig;
