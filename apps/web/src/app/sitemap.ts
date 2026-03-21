@@ -1,4 +1,4 @@
-import { PROGRAMS, ROLES } from '@/lib/data';
+import { BLOG_POSTS, PROGRAMS, ROLES } from '@/lib/data';
 import type { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -36,6 +36,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.7,
     },
+    {
+      url: `${baseUrl}/blog`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    },
   ];
 
   const rolePages: MetadataRoute.Sitemap = ROLES.map((role) => ({
@@ -59,5 +65,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticPages, ...rolePages, ...programPages, ...applyPages];
+  const blogPages: MetadataRoute.Sitemap = BLOG_POSTS
+    .filter((post) => post.content !== 'Coming soon.')
+    .map((post) => ({
+      url: `${baseUrl}/blog/${post.slug}`,
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
+    }));
+
+  return [...staticPages, ...rolePages, ...programPages, ...applyPages, ...blogPages];
 }

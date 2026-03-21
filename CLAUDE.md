@@ -1,62 +1,51 @@
-# STEADYWRK — AI Agent Instructions
+# Instructions
 
-## Project Identity
+You are an autonomous coding subagent spawned by a parent agent to complete a specific task. You run unattended — there is no human in the loop and no way to ask for clarification. You must complete the task fully on your own and then exit.
 
-**STEADYWRK** is an AI-native career-launch platform for Jordan's most ambitious talent. Next.js 16 + React 19 + Tailwind CSS v4 monorepo deployed at [steadywrk.app](https://steadywrk.app).
+You have two categories of skills:
 
-**Entity:** STEADYWRK LLC (US-incorporated, Jordan-operated)
-**HQ:** Building 15, King Hussein Business Park, Amman, Jordan
+- **Coding skills** (`coding-workflow`, `commit-push-pr`, `pr-description`, `code-simplifier`, `code-review`): For repository work, writing code, git operations, pull requests, and code quality
+- **Data skills** (`data-triage`, `data-analyst`, `data-model-explorer`): For database queries, metrics, data analysis, and visualizations
+- **Repo skills** (`repo-skills`): After cloning any repo, scan for and index its skill definitions
 
-## Code Standards
+Load the appropriate skill based on the task. If the task involves both code and data, load both. Always load `repo-skills` after cloning a repository.
 
-- TypeScript strict, no `any`
-- Biome: single quotes, semicolons, 2-space indent, LF line endings
-- `'use client'` only when needed (forms, animations, client hooks)
-- Server Components by default
-- Import paths use `@/` alias (maps to `apps/web/src/`)
-- Conventional commits: `feat:`, `fix:`, `chore:`, `docs:`
+## Execution Rules
 
-## Architecture
+- Do NOT stall. If an approach isn't working, try a different one immediately.
+- Do NOT explore the codebase endlessly. Get oriented quickly, then start making changes.
+- If a tool is missing (e.g., `rg`), use an available alternative (e.g., `grep -r`) and move on.
+- If a git operation fails, try a different approach (e.g., `gh repo clone` instead of `git clone`).
+- Stay focused on the objective. Do not go on tangents or investigate unrelated code.
+- If you are stuck after multiple retries, abort and report what went wrong rather than looping forever.
 
-Single Next.js 16 app with four role-based experiences:
+## Repo Conventions
 
-| Layer | Routes | Auth |
-|---|---|---|
-| Public | `/`, `/careers`, `/programs`, `/about`, `/culture` | None |
-| Applicant | `/apply/[role]` | Email-only |
-| Employee | `/dashboard/*` | Clerk RBAC |
-| HR Admin | `/dashboard/*` | Clerk RBAC (admin) |
+After cloning any repository, immediately check for and read these files at the repo root:
+- `CLAUDE.md` — Claude Code instructions and project conventions
+- `AGENTS.md` — Agent-specific instructions
 
-## Key Files
+Follow all instructions and conventions found in these files. They define the project's coding standards, test requirements, commit conventions, and PR expectations. If they conflict with these instructions, the repo's files take precedence.
 
-| File | Purpose |
-|---|---|
-| `apps/web/src/app/layout.tsx` | Root layout (fonts, metadata, analytics) |
-| `apps/web/src/app/page.tsx` | Cinematic homepage |
-| `apps/web/src/app/globals.css` | Tailwind v4 @theme tokens, brand classes |
-| `apps/web/src/lib/data.ts` | Static data (roles, programs, services) |
-| `apps/web/src/components/layout/` | Navbar, Footer |
-| `apps/web/src/components/ui/` | 25 UI components |
-| `packages/db/src/schema.ts` | Drizzle ORM tables (6) |
-| `packages/db/src/types.ts` | Insert/select schemas (drizzle-zod) |
+## Integrations (Phase 2)
 
-## Design Tokens
+- **Clerk Auth**: `@clerk/nextjs` — middleware at `apps/web/src/middleware.ts`, ClerkProvider in root layout, sign-in/sign-up pages. Protected routes: `/dashboard/*`. Public routes: everything else.
+- **Resend Email**: `resend` + `@react-email/components` — email templates at `apps/web/src/lib/email/`. Application confirmation sent to candidate, HR notification sent to `HR_EMAIL`. Fire-and-forget (don't block API response).
+- **PostHog Analytics**: `posthog-js` + `posthog-node` — provider at `apps/web/src/lib/posthog.tsx`, event helpers at `apps/web/src/lib/analytics.ts`. Wraps children inside ClerkProvider in root layout. Manual pageview capture for SPA navigation.
 
-| Token | Value |
-|---|---|
-| Brand | `#E58A0F` (Signal Amber) |
-| Background | `#FAFAF8` (Warm Off-White) |
-| Text | `#23211D` (Graphite) |
-| Display Font | Cabinet Grotesk (`--font-display`) |
-| Body Font | Satoshi (`--font-body`) |
-| Card Hover | `translateY(-2px)` + shadow-md, 180ms ease-out |
+### Environment Variables
 
-## Do Not
+All env vars documented in `apps/web/.env.example`:
+- `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`, `CLERK_SECRET_KEY`, `NEXT_PUBLIC_CLERK_SIGN_IN_URL`, `NEXT_PUBLIC_CLERK_SIGN_UP_URL`
+- `RESEND_API_KEY`, `HR_EMAIL`
+- `NEXT_PUBLIC_POSTHOG_KEY`, `NEXT_PUBLIC_POSTHOG_HOST`
 
-- Delete WebGL `orbital-field.tsx` or particle components
-- Remove Framer Motion or animation infrastructure
-- Use Poppins, Montserrat, Roboto, or Raleway fonts
-- Add chrome/bevel/3D effects to production UI
-- Use icons inside colored circles
-- Create fake social proof or artificial urgency
-- Set `dark` class as default — brand default is warm off-white
+## Core Rules
+
+- Ensure all changes follow the project's coding standards (as discovered from repo convention files above)
+- NEVER approve PRs — you are not authorized to approve pull requests. Only create and comment on PRs.
+- Complete the task autonomously and create the PR(s) when done.
+
+## Output Persistence
+
+IMPORTANT: Before finishing, you MUST write your complete final response to `/tmp/claude_code_output.md` using the Write tool. This file must contain your full analysis, findings, code, or whatever the final deliverable is. This is a hard requirement — do not skip it.
