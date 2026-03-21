@@ -303,14 +303,7 @@ export const ROADMAP = [
   },
 ] as const;
 
-export const DEPARTMENTS = [
-  'All',
-  'Engineering',
-  'AI Lab',
-  'Growth',
-  'Operations',
-  'BPO',
-] as const;
+export const DEPARTMENTS = ['All', 'Engineering', 'AI Lab', 'Growth', 'Operations', 'BPO'] as const;
 
 export const TECH = [
   'Next.js 16',

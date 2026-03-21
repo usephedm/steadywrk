@@ -1,9 +1,9 @@
-import { Navbar } from '@/components/layout/navbar';
 import { Footer } from '@/components/layout/footer';
-import { ROLES, COMPANY } from '@/lib/data';
-import { ArrowRight, MapPin, Clock, Briefcase } from 'lucide-react';
-import Link from 'next/link';
+import { Navbar } from '@/components/layout/navbar';
+import { COMPANY, ROLES } from '@/lib/data';
+import { ArrowRight, Briefcase, Clock, MapPin } from 'lucide-react';
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 interface PageProps {
@@ -71,9 +71,13 @@ export default async function CareerDetailPage({ params }: PageProps) {
           <div className="max-w-3xl mx-auto">
             {/* Breadcrumb */}
             <nav className="text-[13px] text-[#B0B0AB] mb-8">
-              <Link href="/" className="hover:text-[#6E695F] transition-colors">Home</Link>
+              <Link href="/" className="hover:text-[#6E695F] transition-colors">
+                Home
+              </Link>
               <span className="mx-2">/</span>
-              <Link href="/careers" className="hover:text-[#6E695F] transition-colors">Careers</Link>
+              <Link href="/careers" className="hover:text-[#6E695F] transition-colors">
+                Careers
+              </Link>
               <span className="mx-2">/</span>
               <span className="text-[#23211D]">{role.title}</span>
             </nav>
@@ -81,14 +85,19 @@ export default async function CareerDetailPage({ params }: PageProps) {
             {/* Header */}
             <div className="mb-12">
               <div className="flex items-center gap-3 mb-4">
-                <span className="text-[11px] uppercase tracking-[0.1em] font-semibold text-[#6B6B66]">{role.dept}</span>
+                <span className="text-[11px] uppercase tracking-[0.1em] font-semibold text-[#6B6B66]">
+                  {role.dept}
+                </span>
                 {role.featured && (
                   <span className="text-[10px] uppercase tracking-[0.1em] font-bold text-[#E58A0F] bg-[#E58A0F]/8 px-2 py-0.5 rounded-full">
                     Hiring Now
                   </span>
                 )}
               </div>
-              <h1 className="text-[clamp(2rem,1.2rem+2.5vw,3.5rem)] font-bold text-[#23211D] leading-[1.08] tracking-[-0.02em] mb-6" style={{ fontFamily: 'var(--font-display)' }}>
+              <h1
+                className="text-[clamp(2rem,1.2rem+2.5vw,3.5rem)] font-bold text-[#23211D] leading-[1.08] tracking-[-0.02em] mb-6"
+                style={{ fontFamily: 'var(--font-display)' }}
+              >
                 {role.title}
               </h1>
 
@@ -110,20 +119,38 @@ export default async function CareerDetailPage({ params }: PageProps) {
 
             {/* Description */}
             <div className="prose-steady mb-12">
-              <h2 className="text-[20px] font-bold text-[#23211D] mb-4" style={{ fontFamily: 'var(--font-display)' }}>About the Role</h2>
+              <h2
+                className="text-[20px] font-bold text-[#23211D] mb-4"
+                style={{ fontFamily: 'var(--font-display)' }}
+              >
+                About the Role
+              </h2>
               <p className="text-[#6E695F] text-[16px] leading-relaxed mb-8">{role.description}</p>
 
-              <h2 className="text-[20px] font-bold text-[#23211D] mb-4" style={{ fontFamily: 'var(--font-display)' }}>Requirements</h2>
+              <h2
+                className="text-[20px] font-bold text-[#23211D] mb-4"
+                style={{ fontFamily: 'var(--font-display)' }}
+              >
+                Requirements
+              </h2>
               <ul className="space-y-2 mb-8">
                 {role.requirements.map((req) => (
-                  <li key={req} className="flex items-start gap-3 text-[#6E695F] text-[15px] leading-relaxed">
+                  <li
+                    key={req}
+                    className="flex items-start gap-3 text-[#6E695F] text-[15px] leading-relaxed"
+                  >
                     <span className="w-1.5 h-1.5 rounded-full bg-[#E58A0F] mt-2 shrink-0" />
                     {req}
                   </li>
                 ))}
               </ul>
 
-              <h2 className="text-[20px] font-bold text-[#23211D] mb-4" style={{ fontFamily: 'var(--font-display)' }}>Our Hiring Process</h2>
+              <h2
+                className="text-[20px] font-bold text-[#23211D] mb-4"
+                style={{ fontFamily: 'var(--font-display)' }}
+              >
+                Our Hiring Process
+              </h2>
               <p className="text-[#6E695F] text-[16px] leading-relaxed mb-4">
                 We believe in speed and transparency. Our process takes 14 days or fewer:
               </p>
@@ -135,7 +162,10 @@ export default async function CareerDetailPage({ params }: PageProps) {
                   'Live interview with the team lead',
                   'Offer with growth plan',
                 ].map((step, i) => (
-                  <li key={step} className="flex items-start gap-3 text-[#6E695F] text-[15px] leading-relaxed">
+                  <li
+                    key={step}
+                    className="flex items-start gap-3 text-[#6E695F] text-[15px] leading-relaxed"
+                  >
                     <span className="w-6 h-6 rounded-full bg-[#E58A0F]/10 text-[#E58A0F] text-[12px] font-bold flex items-center justify-center shrink-0 mt-0.5">
                       {i + 1}
                     </span>
@@ -147,7 +177,10 @@ export default async function CareerDetailPage({ params }: PageProps) {
 
             {/* CTA */}
             <div className="p-8 bg-white rounded-xl border border-[rgba(0,0,0,0.06)] shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
-              <h3 className="text-[20px] font-bold text-[#23211D] mb-2" style={{ fontFamily: 'var(--font-display)' }}>
+              <h3
+                className="text-[20px] font-bold text-[#23211D] mb-2"
+                style={{ fontFamily: 'var(--font-display)' }}
+              >
                 Ready to apply?
               </h3>
               <p className="text-[#6E695F] text-[15px] mb-6">

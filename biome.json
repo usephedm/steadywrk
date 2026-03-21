@@ -25,6 +25,9 @@
         "useKeyWithClickEvents": "warn",
         "noNoninteractiveTabindex": "warn"
       },
+      "style": {
+        "noParameterAssign": "warn"
+      },
       "complexity": {
         "noForEach": "warn"
       },

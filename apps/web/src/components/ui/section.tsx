@@ -1,5 +1,5 @@
-import type { ReactNode } from 'react';
 import { cn } from '@/lib/utils';
+import type { ReactNode } from 'react';
 
 type SectionVariant = 'light' | 'ivory' | 'dark' | 'deep';
 
@@ -19,10 +19,7 @@ interface SectionProps {
 
 export function Section({ variant = 'light', id, className, children }: SectionProps) {
   return (
-    <section
-      id={id}
-      className={cn('py-20 md:py-32 px-6', variantClasses[variant], className)}
-    >
+    <section id={id} className={cn('py-20 md:py-32 px-6', variantClasses[variant], className)}>
       <div className="max-w-6xl mx-auto">{children}</div>
     </section>
   );

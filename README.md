@@ -60,7 +60,7 @@ Routed silently via Clerk `publicMetadata` middleware. One Neon Postgres databas
 git clone https://github.com/karimalsalah/steadywrk.git
 cd steadywrk
 npm install
-cp apps/web/.env.example apps/web/.env.local
+cp .env.example .env.local
 npm run dev
 ```
 

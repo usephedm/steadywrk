@@ -1,9 +1,9 @@
-import { Navbar } from '@/components/layout/navbar';
 import { Footer } from '@/components/layout/footer';
+import { Navbar } from '@/components/layout/navbar';
 import { PROGRAMS } from '@/lib/data';
 import { ArrowRight } from 'lucide-react';
-import Link from 'next/link';
 import type { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Career Programs — IGNITE, ORBIT, APEX',
@@ -20,16 +20,24 @@ export default function ProgramsPage() {
         <section className="py-20 md:py-28 px-6 bg-[#FAFAF8]">
           <div className="max-w-5xl mx-auto">
             <nav className="text-[13px] text-[#B0B0AB] mb-8">
-              <Link href="/" className="hover:text-[#6E695F] transition-colors">Home</Link>
+              <Link href="/" className="hover:text-[#6E695F] transition-colors">
+                Home
+              </Link>
               <span className="mx-2">/</span>
               <span className="text-[#23211D]">Programs</span>
             </nav>
-            <p className="text-[13px] uppercase tracking-[0.12em] text-[#E58A0F] font-semibold mb-4">Career Programs</p>
-            <h1 className="text-[clamp(2.5rem,1rem+4vw,4rem)] font-bold text-[#23211D] leading-[1.08] tracking-[-0.03em] mb-5" style={{ fontFamily: 'var(--font-display)' }}>
+            <p className="text-[13px] uppercase tracking-[0.12em] text-[#E58A0F] font-semibold mb-4">
+              Career Programs
+            </p>
+            <h1
+              className="text-[clamp(2.5rem,1rem+4vw,4rem)] font-bold text-[#23211D] leading-[1.08] tracking-[-0.03em] mb-5"
+              style={{ fontFamily: 'var(--font-display)' }}
+            >
               Three tracks. One trajectory.
             </h1>
             <p className="text-[#6E695F] text-[17px] leading-relaxed max-w-xl">
-              Every program builds real skills with real projects. No simulations. You ship production work serving US clients.
+              Every program builds real skills with real projects. No simulations. You ship
+              production work serving US clients.
             </p>
           </div>
         </section>
@@ -47,10 +55,15 @@ export default function ProgramsPage() {
                     <div className="text-[11px] uppercase tracking-[0.12em] text-[#E58A0F] font-semibold mb-3">
                       {program.type} · {program.duration}
                     </div>
-                    <h2 className="text-[clamp(1.5rem,1.2rem+1.5vw,2.5rem)] font-extrabold text-[#23211D] mb-3 tracking-[-0.02em] group-hover:text-[#E58A0F] transition-colors duration-[180ms]" style={{ fontFamily: 'var(--font-display)' }}>
+                    <h2
+                      className="text-[clamp(1.5rem,1.2rem+1.5vw,2.5rem)] font-extrabold text-[#23211D] mb-3 tracking-[-0.02em] group-hover:text-[#E58A0F] transition-colors duration-[180ms]"
+                      style={{ fontFamily: 'var(--font-display)' }}
+                    >
                       {program.name}
                     </h2>
-                    <p className="text-[#6E695F] text-[16px] leading-relaxed max-w-xl">{program.longDesc}</p>
+                    <p className="text-[#6E695F] text-[16px] leading-relaxed max-w-xl">
+                      {program.longDesc}
+                    </p>
                   </div>
                   <div className="flex items-center gap-2 text-[#E58A0F] shrink-0">
                     <span className="text-[14px] font-medium">Learn more</span>

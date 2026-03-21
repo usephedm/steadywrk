@@ -49,9 +49,12 @@ export function validateApplyPayload(body: Record<string, unknown>): ApplyPayloa
   const portfolioUrl = typeof body.portfolioUrl === 'string' ? body.portfolioUrl.trim() : '';
   const githubUrl = typeof body.githubUrl === 'string' ? body.githubUrl.trim() : '';
   const behanceUrl = typeof body.behanceUrl === 'string' ? body.behanceUrl.trim() : '';
-  const skills = (typeof body.skills === 'object' && body.skills !== null ? body.skills : {}) as Record<string, number>;
+  const skills = (
+    typeof body.skills === 'object' && body.skills !== null ? body.skills : {}
+  ) as Record<string, number>;
   const availability = typeof body.availability === 'string' ? body.availability.trim() : '';
-  const challengeResponse = typeof body.challengeResponse === 'string' ? body.challengeResponse.trim() : '';
+  const challengeResponse =
+    typeof body.challengeResponse === 'string' ? body.challengeResponse.trim() : '';
 
   return {
     name,

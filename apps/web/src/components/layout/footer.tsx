@@ -1,5 +1,5 @@
-import Link from 'next/link';
 import { COMPANY } from '@/lib/data';
+import Link from 'next/link';
 
 const FOOTER_LINKS = [
   { href: '/careers', label: 'Careers' },
@@ -15,10 +15,25 @@ export function Footer() {
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 mb-8">
           <div className="flex items-center gap-2">
             <svg width="20" height="20" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-              <path d="M6 22L16 12L26 22" stroke="#E58A0F" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" />
-              <path d="M6 15L16 5L26 15" stroke="#E58A0F" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" />
+              <path
+                d="M6 22L16 12L26 22"
+                stroke="#E58A0F"
+                strokeWidth="3.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M6 15L16 5L26 15"
+                stroke="#E58A0F"
+                strokeWidth="3.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
-            <span className="text-white/60 text-[14px] font-bold tracking-tight" style={{ fontFamily: 'var(--font-display)' }}>
+            <span
+              className="text-white/60 text-[14px] font-bold tracking-tight"
+              style={{ fontFamily: 'var(--font-display)' }}
+            >
               STEADYWRK
             </span>
           </div>
@@ -46,9 +61,7 @@ export function Footer() {
           <p className="text-[11px] text-white/15">
             &copy; {new Date().getFullYear()} {COMPANY.legal}. All rights reserved.
           </p>
-          <p className="text-[11px] text-white/15">
-            {COMPANY.address}
-          </p>
+          <p className="text-[11px] text-white/15">{COMPANY.address}</p>
         </div>
       </div>
     </footer>

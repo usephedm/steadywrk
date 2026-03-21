@@ -21,8 +21,7 @@ export default function HiringPage() {
   });
   const formRef = useRef<HTMLDivElement>(null);
 
-  const filtered =
-    activeDept === 'All' ? ROLES : ROLES.filter((p) => p.dept === activeDept);
+  const filtered = activeDept === 'All' ? ROLES : ROLES.filter((p) => p.dept === activeDept);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -81,6 +80,7 @@ export default function HiringPage() {
       >
         {DEPARTMENTS.map((dept) => (
           <button
+            type="button"
             key={dept}
             onClick={() => setActiveDept(dept)}
             className={`px-4 py-1.5 rounded-full text-xs font-mono tracking-wider uppercase transition-all duration-300 border ${
@@ -125,6 +125,7 @@ export default function HiringPage() {
               </div>
               <p className="text-white/35 text-sm leading-relaxed">{position.description}</p>
               <button
+                type="button"
                 onClick={() => scrollToForm(position.title)}
                 className="text-amber-500/70 text-xs font-mono tracking-wider uppercase hover:text-amber-500 transition-colors min-h-[44px] flex items-center"
                 data-interactive

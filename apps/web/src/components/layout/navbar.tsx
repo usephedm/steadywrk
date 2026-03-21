@@ -1,9 +1,9 @@
 'use client';
 
 import { ShimmerButton } from '@/components/ui/shimmer-button';
+import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
-import { Menu, X } from 'lucide-react';
 
 const NAV_LINKS = [
   { href: '/careers', label: 'Careers' },
@@ -20,10 +20,25 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2.5">
           <svg width="24" height="24" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-            <path d="M6 22L16 12L26 22" stroke="#E58A0F" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" />
-            <path d="M6 15L16 5L26 15" stroke="#E58A0F" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" />
+            <path
+              d="M6 22L16 12L26 22"
+              stroke="#E58A0F"
+              strokeWidth="3.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M6 15L16 5L26 15"
+              stroke="#E58A0F"
+              strokeWidth="3.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
-          <span className="font-extrabold text-[#23211D] text-[16px] tracking-[-0.02em]" style={{ fontFamily: 'var(--font-display)' }}>
+          <span
+            className="font-extrabold text-[#23211D] text-[16px] tracking-[-0.02em]"
+            style={{ fontFamily: 'var(--font-display)' }}
+          >
             STEADYWRK
           </span>
         </Link>

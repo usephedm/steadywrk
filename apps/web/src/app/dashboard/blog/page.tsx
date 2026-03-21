@@ -54,6 +54,7 @@ export default function BlogPage() {
               tiltAmount={2}
             >
               <button
+                type="button"
                 onClick={() => setExpanded(expanded === post.slug ? null : post.slug)}
                 className="w-full text-left p-6 flex items-start justify-between gap-4"
                 data-interactive

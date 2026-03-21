@@ -95,10 +95,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${cabinetGrotesk.variable} ${satoshi.variable} h-full antialiased`}
-    >
+    <html lang="en" className={`${cabinetGrotesk.variable} ${satoshi.variable} h-full antialiased`}>
       <head>
         {/* Ahrefs Web Analytics */}
         <script
@@ -138,10 +135,7 @@ export default function RootLayout({
               description:
                 'AI-native career-launch platform for Jordan\u2019s most ambitious talent. We bridge the gap between education and elite work through structured hiring, real AI projects, and mentorship.',
               foundingDate: '2026',
-              sameAs: [
-                'https://www.linkedin.com/company/steadywrk',
-                'https://x.com/steadywrk',
-              ],
+              sameAs: ['https://www.linkedin.com/company/steadywrk', 'https://x.com/steadywrk'],
               address: [
                 {
                   '@type': 'PostalAddress',

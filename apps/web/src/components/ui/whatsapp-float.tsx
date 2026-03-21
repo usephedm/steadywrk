@@ -31,6 +31,7 @@ export function WhatsAppFloat() {
       style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
     >
       <button
+        type="button"
         onClick={handleDismiss}
         className="p-1.5 rounded-full bg-black/60 text-white/40 hover:text-white/60 transition-colors"
         aria-label="Dismiss WhatsApp button"

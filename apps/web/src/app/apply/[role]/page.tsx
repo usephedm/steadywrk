@@ -1,20 +1,12 @@
 'use client';
 
-import { Navbar } from '@/components/layout/navbar';
 import { Footer } from '@/components/layout/footer';
+import { Navbar } from '@/components/layout/navbar';
 import { ROLES } from '@/lib/data';
-import { useParams, useRouter, notFound } from 'next/navigation';
-import { useState, useCallback, useEffect, useRef } from 'react';
-import {
-  ArrowLeft,
-  ArrowRight,
-  Upload,
-  Clock,
-  CheckCircle2,
-  Save,
-  Sparkles,
-} from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { ArrowLeft, ArrowRight, CheckCircle2, Clock, Save, Sparkles, Upload } from 'lucide-react';
+import { useParams } from 'next/navigation';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 /* ─── Types ─── */
 interface FormData {
@@ -82,7 +74,6 @@ const STORAGE_KEY = 'steadywrk-apply-draft';
 
 export default function ApplyPage() {
   const params = useParams();
-  const router = useRouter();
   const roleSlug = params.role as string;
   const role = ROLES.find((r) => r.slug === roleSlug);
 
@@ -200,11 +191,18 @@ export default function ApplyPage() {
         <Navbar />
         <main className="pt-16 min-h-[60vh] flex items-center justify-center px-6">
           <div className="text-center">
-            <h1 className="text-2xl font-bold text-[#23211D] mb-4" style={{ fontFamily: 'var(--font-display)' }}>
+            <h1
+              className="text-2xl font-bold text-[#23211D] mb-4"
+              style={{ fontFamily: 'var(--font-display)' }}
+            >
               Role not found
             </h1>
-            <p className="text-[#6E695F] mb-6">The position you&rsquo;re looking for doesn&rsquo;t exist.</p>
-            <a href="/careers" className="text-[#E58A0F] font-medium hover:underline">View all open positions</a>
+            <p className="text-[#6E695F] mb-6">
+              The position you&rsquo;re looking for doesn&rsquo;t exist.
+            </p>
+            <a href="/careers" className="text-[#E58A0F] font-medium hover:underline">
+              View all open positions
+            </a>
           </div>
         </main>
         <Footer />
@@ -225,7 +223,8 @@ export default function ApplyPage() {
             <div className="mb-10">
               <div className="flex items-center justify-between mb-3">
                 <span className="text-[14px] font-medium text-[#23211D]">
-                  Step {step} of 5 — {step <= 4 && <span className="text-[#6E695F]">you&apos;re doing great.</span>}
+                  Step {step} of 5 —{' '}
+                  {step <= 4 && <span className="text-[#6E695F]">you&apos;re doing great.</span>}
                 </span>
                 <div className="flex items-center gap-1.5 text-[13px] text-[#B0B0AB]">
                   <Clock className="w-3.5 h-3.5" />
@@ -259,7 +258,10 @@ export default function ApplyPage() {
               <span className="text-[11px] uppercase tracking-[0.1em] font-semibold text-[#E58A0F]">
                 Applying for
               </span>
-              <h1 className="text-[24px] font-bold text-[#23211D] tracking-[-0.01em]" style={{ fontFamily: 'var(--font-display)' }}>
+              <h1
+                className="text-[24px] font-bold text-[#23211D] tracking-[-0.01em]"
+                style={{ fontFamily: 'var(--font-display)' }}
+              >
                 {role.title}
               </h1>
             </div>
@@ -269,7 +271,12 @@ export default function ApplyPage() {
           {step === 1 && (
             <div className="space-y-6">
               <div>
-                <label htmlFor="name" className="block text-[14px] font-medium text-[#23211D] mb-1.5">Full name *</label>
+                <label
+                  htmlFor="name"
+                  className="block text-[14px] font-medium text-[#23211D] mb-1.5"
+                >
+                  Full name *
+                </label>
                 <input
                   id="name"
                   type="text"
@@ -281,7 +288,12 @@ export default function ApplyPage() {
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-[14px] font-medium text-[#23211D] mb-1.5">Email address *</label>
+                <label
+                  htmlFor="email"
+                  className="block text-[14px] font-medium text-[#23211D] mb-1.5"
+                >
+                  Email address *
+                </label>
                 <input
                   id="email"
                   type="email"
@@ -293,7 +305,12 @@ export default function ApplyPage() {
               </div>
 
               <div>
-                <label htmlFor="phone" className="block text-[14px] font-medium text-[#23211D] mb-1.5">Phone number *</label>
+                <label
+                  htmlFor="phone"
+                  className="block text-[14px] font-medium text-[#23211D] mb-1.5"
+                >
+                  Phone number *
+                </label>
                 <input
                   id="phone"
                   type="tel"
@@ -304,8 +321,10 @@ export default function ApplyPage() {
                 />
               </div>
 
-              <div>
-                <label className="block text-[14px] font-medium text-[#23211D] mb-3">Which team excites you? *</label>
+              <fieldset>
+                <legend className="block text-[14px] font-medium text-[#23211D] mb-3">
+                  Which team excites you? *
+                </legend>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                   {TEAMS.map((t) => (
                     <button
@@ -323,7 +342,7 @@ export default function ApplyPage() {
                     </button>
                   ))}
                 </div>
-              </div>
+              </fieldset>
 
               <label className="flex items-start gap-3 cursor-pointer">
                 <input
@@ -333,7 +352,8 @@ export default function ApplyPage() {
                   className="mt-1 w-4 h-4 rounded border-[#E5E7EB] text-[#E58A0F] focus:ring-[#E58A0F]"
                 />
                 <span className="text-[13px] text-[#6E695F] leading-relaxed">
-                  I consent to STEADYWRK processing my personal data for recruitment purposes in accordance with Jordan&rsquo;s Personal Data Protection Law (PDPL). *
+                  I consent to STEADYWRK processing my personal data for recruitment purposes in
+                  accordance with Jordan&rsquo;s Personal Data Protection Law (PDPL). *
                 </span>
               </label>
             </div>
@@ -343,9 +363,9 @@ export default function ApplyPage() {
           {step === 2 && (
             <div className="space-y-6">
               <div>
-                <label className="block text-[14px] font-medium text-[#23211D] mb-1.5">
+                <p className="block text-[14px] font-medium text-[#23211D] mb-1.5">
                   Upload your CV <span className="text-[#B0B0AB]">(optional)</span>
-                </label>
+                </p>
                 <div className="border-2 border-dashed border-[#E5E7EB] rounded-xl p-8 text-center hover:border-[#E58A0F]/30 transition-colors duration-[180ms] cursor-pointer">
                   <Upload className="w-6 h-6 text-[#B0B0AB] mx-auto mb-3" />
                   <p className="text-[14px] text-[#6E695F] mb-1">
@@ -422,7 +442,10 @@ export default function ApplyPage() {
           {step === 3 && (
             <div className="space-y-6">
               <div>
-                <label htmlFor="portfolio" className="block text-[14px] font-medium text-[#23211D] mb-1.5">
+                <label
+                  htmlFor="portfolio"
+                  className="block text-[14px] font-medium text-[#23211D] mb-1.5"
+                >
                   Portfolio URL <span className="text-[#B0B0AB]">(optional)</span>
                 </label>
                 <input
@@ -436,7 +459,10 @@ export default function ApplyPage() {
               </div>
 
               <div>
-                <label htmlFor="github" className="block text-[14px] font-medium text-[#23211D] mb-1.5">
+                <label
+                  htmlFor="github"
+                  className="block text-[14px] font-medium text-[#23211D] mb-1.5"
+                >
                   GitHub URL <span className="text-[#B0B0AB]">(optional)</span>
                 </label>
                 <input
@@ -450,7 +476,10 @@ export default function ApplyPage() {
               </div>
 
               <div>
-                <label htmlFor="behance" className="block text-[14px] font-medium text-[#23211D] mb-1.5">
+                <label
+                  htmlFor="behance"
+                  className="block text-[14px] font-medium text-[#23211D] mb-1.5"
+                >
                   Behance / Dribbble <span className="text-[#B0B0AB]">(optional)</span>
                 </label>
                 <input
@@ -464,10 +493,10 @@ export default function ApplyPage() {
               </div>
 
               {/* Skill sliders */}
-              <div>
-                <label className="block text-[14px] font-medium text-[#23211D] mb-3">
+              <fieldset>
+                <legend className="block text-[14px] font-medium text-[#23211D] mb-3">
                   Self-assess your skills <span className="text-[#B0B0AB]">(drag to rate)</span>
-                </label>
+                </legend>
                 <div className="space-y-4">
                   {SKILL_OPTIONS.map((skill) => (
                     <div key={skill}>
@@ -493,27 +522,31 @@ export default function ApplyPage() {
                     </div>
                   ))}
                 </div>
-              </div>
+              </fieldset>
 
               {/* Availability */}
-              <div>
-                <label className="block text-[14px] font-medium text-[#23211D] mb-3">Availability *</label>
+              <fieldset>
+                <legend className="block text-[14px] font-medium text-[#23211D] mb-3">
+                  Availability *
+                </legend>
                 <div className="space-y-2">
-                  {['Immediately', 'Within 2 weeks', 'Within 1 month', 'More than 1 month'].map((opt) => (
-                    <label key={opt} className="flex items-center gap-3 cursor-pointer">
-                      <input
-                        type="radio"
-                        name="availability"
-                        value={opt}
-                        checked={form.availability === opt}
-                        onChange={(e) => update('availability', e.target.value)}
-                        className="w-4 h-4 text-[#E58A0F] border-[#E5E7EB] focus:ring-[#E58A0F]"
-                      />
-                      <span className="text-[14px] text-[#23211D]">{opt}</span>
-                    </label>
-                  ))}
+                  {['Immediately', 'Within 2 weeks', 'Within 1 month', 'More than 1 month'].map(
+                    (opt) => (
+                      <label key={opt} className="flex items-center gap-3 cursor-pointer">
+                        <input
+                          type="radio"
+                          name="availability"
+                          value={opt}
+                          checked={form.availability === opt}
+                          onChange={(e) => update('availability', e.target.value)}
+                          className="w-4 h-4 text-[#E58A0F] border-[#E5E7EB] focus:ring-[#E58A0F]"
+                        />
+                        <span className="text-[14px] text-[#23211D]">{opt}</span>
+                      </label>
+                    ),
+                  )}
                 </div>
-              </div>
+              </fieldset>
             </div>
           )}
 
@@ -521,22 +554,29 @@ export default function ApplyPage() {
           {step === 4 && (
             <div className="space-y-6">
               <div className="bg-[#FFF4E6] rounded-xl p-6 border border-[#E58A0F]/10">
-                <h3 className="text-[16px] font-bold text-[#23211D] mb-2" style={{ fontFamily: 'var(--font-display)' }}>
+                <h3
+                  className="text-[16px] font-bold text-[#23211D] mb-2"
+                  style={{ fontFamily: 'var(--font-display)' }}
+                >
                   The Challenge
                 </h3>
                 <p className="text-[14px] text-[#6E695F] leading-relaxed">
-                  This is our first filter. We use assessments to find the best mutual fit — not to trick you.
-                  Take your time and show us how you think.
+                  This is our first filter. We use assessments to find the best mutual fit — not to
+                  trick you. Take your time and show us how you think.
                 </p>
               </div>
 
               <div>
-                <label htmlFor="challenge" className="block text-[14px] font-medium text-[#23211D] mb-1.5">
+                <label
+                  htmlFor="challenge"
+                  className="block text-[14px] font-medium text-[#23211D] mb-1.5"
+                >
                   Scenario Response *
                 </label>
                 <p className="text-[14px] text-[#6E695F] mb-3 leading-relaxed">
-                  A property manager calls at 11 PM furious that their HVAC system is down in a 200-unit building.
-                  Write your response to the property manager and your next 3 action steps.
+                  A property manager calls at 11 PM furious that their HVAC system is down in a
+                  200-unit building. Write your response to the property manager and your next 3
+                  action steps.
                 </p>
                 <textarea
                   id="challenge"
@@ -556,7 +596,10 @@ export default function ApplyPage() {
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#4D7A3A]/10 mb-6">
                 <CheckCircle2 className="w-8 h-8 text-[#4D7A3A]" strokeWidth={1.5} />
               </div>
-              <h1 className="text-[clamp(2rem,1.2rem+2.5vw,3rem)] font-bold text-[#23211D] mb-4" style={{ fontFamily: 'var(--font-display)' }}>
+              <h1
+                className="text-[clamp(2rem,1.2rem+2.5vw,3rem)] font-bold text-[#23211D] mb-4"
+                style={{ fontFamily: 'var(--font-display)' }}
+              >
                 Application submitted!
               </h1>
               <p className="text-[#6E695F] text-[17px] leading-relaxed max-w-md mx-auto mb-10">
@@ -574,11 +617,11 @@ export default function ApplyPage() {
                 ].map((s, i) => (
                   <div key={s.step} className="flex items-start gap-4">
                     <div className="flex flex-col items-center">
-                      <div className={`w-8 h-8 rounded-full flex items-center justify-center text-[12px] font-bold ${
-                        s.active
-                          ? 'bg-[#E58A0F] text-white'
-                          : 'bg-[#E5E5E2] text-[#6E695F]'
-                      }`}>
+                      <div
+                        className={`w-8 h-8 rounded-full flex items-center justify-center text-[12px] font-bold ${
+                          s.active ? 'bg-[#E58A0F] text-white' : 'bg-[#E5E5E2] text-[#6E695F]'
+                        }`}
+                      >
                         {i + 1}
                       </div>
                       {i < 4 && <div className="w-px h-6 bg-[#E5E5E2] mt-1" />}
@@ -626,7 +669,10 @@ export default function ApplyPage() {
                   onClick={() => {
                     try {
                       const { cvFile, ...saveable } = form;
-                      localStorage.setItem(STORAGE_KEY, JSON.stringify({ ...saveable, _step: step }));
+                      localStorage.setItem(
+                        STORAGE_KEY,
+                        JSON.stringify({ ...saveable, _step: step }),
+                      );
                     } catch {
                       // ignore
                     }

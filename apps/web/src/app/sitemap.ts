@@ -1,5 +1,5 @@
+import { PROGRAMS, ROLES } from '@/lib/data';
 import type { MetadataRoute } from 'next';
-import { ROLES, PROGRAMS } from '@/lib/data';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://steadywrk.app';
