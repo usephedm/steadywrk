@@ -1,9 +1,11 @@
+import { db } from '@/lib/db';
 import { ApplicationConfirmation } from '@/lib/email/application-confirmation';
 import { HRNotification } from '@/lib/email/hr-notification';
 import { getClientIP, rateLimit } from '@/lib/rate-limit';
 import { validateApplyPayload } from '@/lib/schemas';
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
+import { applicants } from '../../../../../../packages/db/src/schema';
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
@@ -21,11 +23,38 @@ export async function POST(request: Request) {
     const body = await request.json();
     const data = validateApplyPayload(body);
 
-    // Log application for processing
-    // When DATABASE_URL is configured, this will insert into Neon via Drizzle
+    // Insert into database
+    let applicantId: string | undefined;
+    try {
+      const [inserted] = await db
+        .insert(applicants)
+        .values({
+          email: data.email,
+          name: data.name,
+          phone: data.phone || null,
+          roleSlug: data.position,
+          teamInterest: data.team || null,
+          cvUrl: null,
+          linkedinUrl: null,
+          portfolioUrl: data.portfolioUrl || null,
+          githubUrl: data.githubUrl || null,
+          answers: data.answers,
+          skills: data.skills,
+          availability: data.availability || null,
+          challengeResponse: data.challengeResponse || null,
+          pdplConsent: true,
+        })
+        .returning({ id: applicants.id });
+      applicantId = inserted.id;
+    } catch (dbError) {
+      console.error('Database insert failed:', dbError);
+      // Continue — don't fail the application if DB is down
+    }
+
     console.info(
       JSON.stringify({
         event: 'application_submitted',
+        applicantId,
         name: data.name,
         email: data.email,
         position: data.position,
@@ -77,7 +106,7 @@ export async function POST(request: Request) {
       });
     }
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true, applicantId });
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Something went wrong';
     return NextResponse.json({ error: message }, { status: 400 });
