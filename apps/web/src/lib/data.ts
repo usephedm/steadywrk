@@ -266,6 +266,86 @@ export const BLOG_POSTS = [
     content:
       'Traditional BPO is a volume game \u2014 more agents, more hours, more seats. AI BPO flips this model. Instead of scaling headcount, you scale intelligence.\n\nAt STEADYWRK, our BPO agents work alongside AI systems that handle document processing, data extraction, and routine customer inquiries. The human agent focuses on judgment calls, escalations, and relationship management.\n\nThe result: higher quality output, faster turnaround, and lower cost per transaction. We\u2019re not replacing people \u2014 we\u2019re giving them superpowers.',
   },
+  {
+    slug: 'how-we-hire-at-steadywrk',
+    title: 'How We Hire at STEADYWRK: No Black Boxes, No Guessing Games',
+    date: '2026-04-01',
+    excerpt:
+      'STEADYWRK\u2019s hiring process is built for human beings, not ATS filters. Here\u2019s exactly what to expect \u2014 every stage, every timeline, every decision point.',
+    content: 'Coming soon.',
+  },
+  {
+    slug: 'women-building-ai-jordan',
+    title: 'Women Building AI in Jordan: 12 Voices You Should Know',
+    date: '2026-04-08',
+    excerpt:
+      'Meet 12 women building AI products, research, and infrastructure from Amman \u2014 and what they say about working in tech in Jordan in 2026.',
+    content: 'Coming soon.',
+  },
+  {
+    slug: 'first-90-days-ai-company-jordan',
+    title: 'Your First 90 Days at an AI Company: What No One Tells Jordanian Graduates',
+    date: '2026-04-15',
+    excerpt:
+      'The first 90 days make or break a tech career. Here\u2019s a week-by-week playbook built for Jordanian graduates joining AI companies \u2014 locally or remotely.',
+    content: 'Coming soon.',
+  },
+  {
+    slug: 'ai-careers-guide-jordan-graduates-2026',
+    title: 'AI Careers Guide for Jordanian Graduates \u2014 Every Role, Every Salary, Every Path (2026)',
+    date: '2026-04-22',
+    excerpt:
+      'The definitive AI career guide for graduates from Jordan\u2019s universities. Every role explained, salary ranges benchmarked, companies named.',
+    content: 'Coming soon.',
+  },
+  {
+    slug: 'jordan-ict-sector-graduate-employment-gap',
+    title: 'Jordan\u2019s $3 Billion ICT Sector Is Growing Fast \u2014 So Why Can\u2019t Graduates Get Hired?',
+    date: '2026-04-29',
+    excerpt:
+      'Jordan\u2019s ICT market is growing at 16% CAGR toward $6.5B by 2031. Yet 41.72% of young people are unemployed. Here\u2019s the data behind the paradox.',
+    content: 'Coming soon.',
+  },
+  {
+    slug: 'remote-work-jordan-tech-professionals-guide',
+    title: 'Working Remotely from Jordan for International Tech Companies: The 2026 Guide',
+    date: '2026-05-06',
+    excerpt:
+      'Jordan\u2019s 95.6% internet penetration and 160 Mbps broadband make it one of the best remote-work bases in MENA. Here\u2019s how to find, land, and succeed in international remote tech roles from Amman.',
+    content: 'Coming soon.',
+  },
+  {
+    slug: 'jordan-digital-economy-reach2025-ai-strategy',
+    title: 'Jordan\u2019s Digital Economy at a Crossroads: From REACH2025 to the AI Strategy Era',
+    date: '2026-05-13',
+    excerpt:
+      'Jordan\u2019s REACH2025 plan set bold targets for the digital economy. Now, the National AI Strategy 2023\u20132027 carries the torch. Here\u2019s where Jordan stands.',
+    content: 'Coming soon.',
+  },
+  {
+    slug: 'ai-salary-jordan-gulf-global-benchmark-2026',
+    title: 'Jordan AI Salaries vs. the Gulf vs. Global Remote: The 2026 Benchmark Guide',
+    date: '2026-05-20',
+    excerpt:
+      'A Jordanian ML engineer earns ~$14K/year locally. The same role at a US remote company pays $97\u2013155K. Here\u2019s the full salary benchmark \u2014 and a realistic path to closing the gap.',
+    content: 'Coming soon.',
+  },
+  {
+    slug: 'jordan-startup-ecosystem-ai-ipark-oasis500',
+    title: 'Inside Jordan\u2019s Startup Ecosystem: iPARK, Oasis500, KHBP, and Where AI Is Growing',
+    date: '2026-05-27',
+    excerpt:
+      'Jordan\u2019s startup ecosystem ranks 5th in the Middle East. Here\u2019s a complete map of incubators, accelerators, funding sources, and where the AI opportunities are in 2026.',
+    content: 'Coming soon.',
+  },
+  {
+    slug: 'building-steadywrk-why-amman-ai-career-platform',
+    title: 'Why We Built STEADYWRK: An AI-Native Career Platform, Born in Amman, Built for the World',
+    date: '2026-06-03',
+    excerpt:
+      '66% female youth unemployment. 7,000 tech graduates per year without a clear path. Jordan has the talent \u2014 what it needed was a platform. Here\u2019s why we built STEADYWRK in Amman.',
+    content: 'Coming soon.',
+  },
 ] as const;
 
 export const ROADMAP = [

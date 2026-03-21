@@ -223,10 +223,10 @@ export default function HomePage() {
         <section className="py-16 md:py-20 px-6 bg-[#FAFAF8]">
           <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-14">
             {[
-              { val: 46, suf: '%', label: 'Youth unemployment in Jordan' },
-              { val: 7, suf: 'K+', label: 'ICT graduates per year' },
-              { val: 14, suf: ' days', label: 'Our hiring target' },
-              { val: 48, suf: 'h', label: 'Application response' },
+              { val: 41.72, suf: '%', label: 'Youth unemployment in Jordan', dec: 2 },
+              { val: 7, suf: 'K+', label: 'ICT graduates per year', dec: 0 },
+              { val: 14, suf: ' days', label: 'Our hiring target', dec: 0 },
+              { val: 48, suf: 'h', label: 'Application response', dec: 0 },
             ].map((s, i) => (
               <BlurFade key={s.label} delay={0.1 + i * 0.08} inView>
                 <div className="text-left">
@@ -236,6 +236,7 @@ export default function HomePage() {
                   >
                     <NumberTicker
                       value={s.val}
+                      decimalPlaces={s.dec}
                       className="text-[2.5rem] md:text-[3rem] font-extrabold text-[#23211D] tracking-tighter"
                     />
                     <span className="text-[1.2rem] md:text-[1.5rem] font-bold text-[#E58A0F] ml-0.5">
