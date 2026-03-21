@@ -4,13 +4,10 @@ export const metadata: Metadata = {
   title: 'Services — AI Lab, Facility Management, Marketing & BPO',
   description:
     'SteadyWrk delivers AI Lab & Studio, Facility Management, Digital Marketing, and AI BPO services. US company operating in Amman, Jordan.',
-  alternates: {
-    canonical: 'https://steadywrk.app/dashboard/services',
-  },
+  robots: { index: false, follow: false },
   openGraph: {
     title: 'Our Services | SteadyWrk',
     description: 'AI Lab, Facility Management, Digital Marketing, and AI BPO. What we build.',
-    url: 'https://steadywrk.app/dashboard/services',
   },
 };
 

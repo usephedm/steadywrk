@@ -1,9 +1,10 @@
 'use client';
 
+import { COMPANY } from '@/lib/constants';
 import { X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
-const WHATSAPP_NUMBER = '962790000000';
+const WHATSAPP_NUMBER = COMPANY.social.whatsapp;
 const PREFILLED_MESSAGE = "Hi SteadyWrk, I'm interested in learning more about your services.";
 
 export function WhatsAppFloat() {

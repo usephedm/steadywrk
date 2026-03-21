@@ -90,9 +90,6 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  verification: {
-    google: 'PENDING_VERIFICATION_CODE',
-  },
   category: 'technology',
 };
 

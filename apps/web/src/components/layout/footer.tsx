@@ -1,4 +1,5 @@
-import { COMPANY } from '@/lib/data';
+import { COMPANY } from '@/lib/constants';
+import { COMPANY as COMPANY_DATA } from '@/lib/data';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -35,17 +36,17 @@ export function Footer() {
               </Link>
             ))}
             <a
-              href={`mailto:${COMPANY.email}`}
+              href={`mailto:${COMPANY.emails.public}`}
               className="hover:text-white/60 transition-colors duration-[180ms] min-h-[44px] inline-flex items-center"
             >
-              Contact
+              {COMPANY.emails.public}
             </a>
           </div>
         </div>
 
         <div className="border-t border-[rgba(255,255,255,0.04)] pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-[11px] text-white/15">
-            &copy; {new Date().getFullYear()} {COMPANY.legal}. All rights reserved.
+            &copy; {new Date().getFullYear()} {COMPANY_DATA.legal}. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
             <Link
@@ -60,8 +61,32 @@ export function Footer() {
             >
               Terms of Service
             </Link>
+            <a
+              href={COMPANY.social.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[11px] text-white/15 hover:text-white/30 transition-colors duration-[180ms]"
+            >
+              LinkedIn
+            </a>
+            <a
+              href={COMPANY.social.twitter}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[11px] text-white/15 hover:text-white/30 transition-colors duration-[180ms]"
+            >
+              X
+            </a>
+            <a
+              href={COMPANY.social.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[11px] text-white/15 hover:text-white/30 transition-colors duration-[180ms]"
+            >
+              Instagram
+            </a>
           </div>
-          <p className="text-[11px] text-white/15">{COMPANY.address}</p>
+          <p className="text-[11px] text-white/15">{COMPANY_DATA.address}</p>
         </div>
       </div>
     </footer>

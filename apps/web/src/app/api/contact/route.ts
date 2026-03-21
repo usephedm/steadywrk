@@ -1,6 +1,10 @@
+import { COMPANY } from '@/lib/constants';
 import { getClientIP, rateLimit } from '@/lib/rate-limit';
 import { validateContactPayload } from '@/lib/schemas';
 import { NextResponse } from 'next/server';
+import { Resend } from 'resend';
+
+const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
 export async function POST(request: Request) {
   try {
@@ -17,31 +21,23 @@ export async function POST(request: Request) {
     const body = await request.json();
     const data = validateContactPayload(body);
 
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-
-    if (supabaseUrl && supabaseKey) {
-      const res = await fetch(`${supabaseUrl}/rest/v1/inquiries`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          apikey: supabaseKey,
-          Authorization: `Bearer ${supabaseKey}`,
-          Prefer: 'return=minimal',
-        },
-        body: JSON.stringify({
-          company: data.company,
-          name: data.name,
-          email: data.email,
-          subject: data.subject,
-          message: data.message,
-          created_at: new Date().toISOString(),
-        }),
+    // Send contact inquiry via email
+    if (resend) {
+      await resend.emails.send({
+        from: `STEADYWRK <${COMPANY.emails.noreply}>`,
+        to: COMPANY.emails.public,
+        subject: `Contact inquiry: ${data.subject}`,
+        text: [
+          `Name: ${data.name}`,
+          `Email: ${data.email}`,
+          `Company: ${data.company}`,
+          `Subject: ${data.subject}`,
+          '',
+          data.message,
+        ].join('\n'),
+      }).catch((err) => {
+        console.error('Contact email send failed:', err);
       });
-
-      if (!res.ok && res.status !== 409) {
-        console.error('Supabase inquiry insert failed:', res.status);
-      }
     }
 
     // Structured log for Vercel Log Drain

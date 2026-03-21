@@ -21,29 +21,6 @@ export async function POST(request: Request) {
 
     const normalized = email.trim().toLowerCase();
 
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-
-    if (supabaseUrl && supabaseKey) {
-      const res = await fetch(`${supabaseUrl}/rest/v1/waitlist`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          apikey: supabaseKey,
-          Authorization: `Bearer ${supabaseKey}`,
-          Prefer: 'return=minimal',
-        },
-        body: JSON.stringify({
-          email: normalized,
-          created_at: new Date().toISOString(),
-        }),
-      });
-
-      if (!res.ok && res.status !== 409) {
-        console.error('Supabase waitlist insert failed:', res.status);
-      }
-    }
-
     // Structured log for Vercel Log Drain
     console.info(
       JSON.stringify({
