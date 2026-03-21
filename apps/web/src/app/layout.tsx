@@ -1,7 +1,9 @@
+import { ClerkProvider } from '@clerk/nextjs';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
+import { PostHogProvider } from '@/lib/posthog';
 import './globals.css';
 
 const cabinetGrotesk = localFont({
@@ -110,6 +112,7 @@ export default function RootLayout({
         {/* DNS prefetch + preconnect for third-party speed */}
         <link rel="dns-prefetch" href="https://analytics.ahrefs.com" />
         <link rel="dns-prefetch" href="https://va.vercel-scripts.com" />
+        <link rel="dns-prefetch" href="https://us.i.posthog.com" />
 
         {/* PWA manifest */}
         <link rel="manifest" href="/manifest.webmanifest" />
@@ -118,7 +121,18 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
       </head>
       <body className="min-h-full flex flex-col bg-[#FAFAF8]">
-        {children}
+        <ClerkProvider
+          appearance={{
+            variables: {
+              colorPrimary: '#E58A0F',
+              fontFamily: 'Satoshi, system-ui, sans-serif',
+            },
+          }}
+        >
+          <PostHogProvider>
+            {children}
+          </PostHogProvider>
+        </ClerkProvider>
         <Analytics />
         <SpeedInsights />
         {/* JSON-LD Organization */}
