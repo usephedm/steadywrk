@@ -1,22 +1,26 @@
-# CLAUDE.md — SteadyWrk
+# CLAUDE.md — STEADYWRK
 
 ## Identity
-SteadyWrk is an AI-human bridge platform for field service dispatch and subcontracting. Operated by V (solo founder). The product is the protocol layer — MCP-native, dispatch-aware, AI-orchestrated. It connects businesses to subcontracted field services, digital marketing execution, and AI-powered operational tooling.
+STEADYWRK is an AI-native career platform. Jordan's sharpest minds, one mission. US-incorporated (STEADYWRK LLC), Jordan-operated. Building 15, King Hussein Business Park, Amman. Operated by V (solo founder). Every agent in this system IS the team.
 
-Solo operator. No team. Every agent in this system IS the team.
+Tagline: "Where ambition compounds."
+Core promise: "If you are disciplined, bright, and hungry, this is where your curve bends upward."
 
 ## Priority Stack (strict order)
-1. Client acquisition — landing pages, lead gen, outreach, demo flows, onboarding
-2. MCP platform layer — custom MCP servers on Cloudflare Workers (the differentiator)
-3. QN8.app — autonomous website monitoring SaaS
+1. Client acquisition — landing page, lead gen, WhatsApp-first outreach, demo flows
+2. Hiring pipeline — application UX, multi-step form, structured scorecards
+3. MCP platform layer — custom MCP servers on Cloudflare Workers (the differentiator)
+4. Blog + GEO — content that makes AI models cite us
 
 ## Tech Stack
 - Runtime: Node.js / TypeScript (preferred), Python when necessary
-- Framework: Next.js App Router
+- Framework: Next.js 16 App Router
+- UI: React 19, Tailwind CSS v4, Framer Motion 12, 17 MagicUI components
+- Fonts: Cabinet Grotesk (display) + Satoshi (body) via Fontshare — NEVER Poppins/Montserrat/Roboto
 - Database: Supabase (Postgres + Auth + Edge Functions + Realtime)
 - Payments: Stripe
 - Deploy: Cloudflare Workers (MCPs), Vercel (web apps)
-- Styling: Tailwind CSS. Signal Amber (#F59E0B) + #0A0A0A + #FFFFFF
+- Colors: Signal Amber #E58A0F (primary), #FAFAF8 (bg), #23211D (text)
 
 ## Code Standards
 - TypeScript strict. No `any`. No implicit returns on complex functions.
@@ -26,6 +30,20 @@ Solo operator. No team. Every agent in this system IS the team.
 - No console.log in production. Structured logging only.
 - Supabase RLS on every table. No exceptions.
 - No secrets in code. Environment variables only.
+- Biome: single quotes, semicolons, 2-space indent, 100 line width.
+
+## Brand Rules (from Brand Guidelines v2)
+- Name: STEADYWRK (all caps in logo, "Steadywrk" in body text, no vowel in Wrk)
+- Legal: STEADYWRK LLC — NO Kayan Ventures anywhere
+- Colors: #E58A0F primary, #CC7408 hover, #FAFAF8 bg, #23211D text, #6E695F secondary text
+- Max 3 amber elements per viewport. 90% neutral. Orange is the reward.
+- Logo: Orange mark + dark wordmark in production. Chrome variant is presentation ONLY.
+- Cards: border rgba(0,0,0,0.06), radius 12px, shadow-xs, hover translateY(-2px) + shadow-md
+- All transitions: 180ms ease-out. Motion tokens: 150-200ms micro, 400-600ms scroll reveals
+- Icons: Lucide, 1.5px stroke. Never icons inside colored circles.
+- Voice: Direct, specific, peer-to-peer. Like a brilliant 27-year-old founder.
+- Anti-copy: Never "empowering", "unlock potential", "family", "rockstars", "leveraging synergies"
+- Mobile-first. 92.5% of Jordan is online on phones. If it fails on phone, it fails.
 
 ## Model Routing
 - Architecture + complex reasoning → Claude Opus 4.6
@@ -38,33 +56,31 @@ Solo operator. No team. Every agent in this system IS the team.
 - Ship: apps/web/ — frontend, backend, deployment
 - QA: **/*.test.*, .github/ — tests, security, code review
 
-## Connected MCPs (22)
-Stripe, Vercel, Notion, Figma, Canva, Linear, Gmail, Supabase, Cloudflare, HuggingFace, Monday, Webflow, HubSpot, Netlify, Google Drive, Intercom, Context7, Claude Preview, Claude in Chrome, MCP Registry, Scheduled Tasks, Cloudinary
-
-## Brand
-- Name: SteadyWrk (capital S, capital W, no vowel in Wrk)
-- Colors: Signal Amber #F59E0B (primary), #0A0A0A (dark), #FFFFFF (light)
-- Voice: Direct, technical authority, zero fluff
-- Never: corporate buzzwords, "leverage synergies", "empower", "unlock potential"
-
 ## Domain Architecture
-- **steadywrk.app** → Public funnel. Company showcase + talent honeypot. Client acquisition.
-- **steadywrk.dev** → Operations portal. Workflow, dispatch, agent orchestration dashboard.
+- **steadywrk.app** → Public funnel. Careers + brand + roles + proof. Talent honeypot.
+- **steadywrk.dev** → Operations portal. Employee dashboard, dispatch, agent orchestration.
 
 ## Deployed Services
-- Web App: https://steadywrk-app.vercel.app (steadywrk.app pending DNS)
+- Web App: https://steadywrk.app (Vercel)
+- GEO: /llms.txt, schema.org/Organization, sitemap.xml, robots.txt
 
-## Command Center (Orchestration)
-Claude Code (Opus 4.6) is the orchestrator. Dispatches to:
-- `codex exec "task"` → GPT-5.4 (code review, bulk ops)
-- `gemini -p "task"` → Ultra (research, web grounding, large context)
-- Agent tool with subagent_type → parallel Claude agents
+## Reference Knowledge
+- `.reference/docs/STEADYWRK_Brand_Guidelines_v2.pdf` — primary brand system (27 pages)
+- `.reference/docs/STEADYWRK_Platform_Blueprint_v4.pdf` — council research synthesis
+- `.reference/brand-assets/` — 3D logo renders, mockups, icons
 
 ## File Structure
 ```
-SteadyWrk/
+STEADYWRK/
 ├── CLAUDE.md
-├── .claude/skills/       (agent skills)
-├── apps/web/             (steadywrk.app — Next.js)
+├── README.md
+├── .reference/              (brand docs, assets, research)
+├── .claude/skills/          (agent skills)
+├── apps/web/                (steadywrk.app — Next.js 16)
+│   ├── src/app/             (pages, API, SEO)
+│   ├── src/components/ui/   (17 MagicUI + custom)
+│   ├── src/lib/             (data, hooks, utils)
+│   └── public/brand/        (production images)
+├── biome.json
 └── turbo.json
 ```
