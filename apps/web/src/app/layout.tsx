@@ -1,8 +1,4 @@
 import { ClerkProvider } from '@clerk/nextjs';
-
-const hasClerkKeys =
-  process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY &&
-  process.env.CLERK_SECRET_KEY;
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata, Viewport } from 'next';
@@ -132,24 +128,18 @@ export default function RootLayout({
         >
           Skip to content
         </a>
-        {hasClerkKeys ? (
-          <ClerkProvider
-            appearance={{
-              variables: {
-                colorPrimary: '#E58A0F',
-                fontFamily: 'Satoshi, system-ui, sans-serif',
-              },
-            }}
-          >
-            <PostHogProvider>
-              {children}
-            </PostHogProvider>
-          </ClerkProvider>
-        ) : (
+        <ClerkProvider
+          appearance={{
+            variables: {
+              colorPrimary: '#E58A0F',
+              fontFamily: 'Satoshi, system-ui, sans-serif',
+            },
+          }}
+        >
           <PostHogProvider>
             {children}
           </PostHogProvider>
-        )}
+        </ClerkProvider>
         <ClientGlobals />
         <Analytics />
         <SpeedInsights />
