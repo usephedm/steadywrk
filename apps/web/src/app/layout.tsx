@@ -1,4 +1,8 @@
 import { ClerkProvider } from '@clerk/nextjs';
+
+const hasClerkKeys =
+  process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY &&
+  process.env.CLERK_SECRET_KEY;
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata, Viewport } from 'next';
@@ -121,18 +125,24 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
       </head>
       <body className="min-h-full flex flex-col bg-[#FAFAF8]">
-        <ClerkProvider
-          appearance={{
-            variables: {
-              colorPrimary: '#E58A0F',
-              fontFamily: 'Satoshi, system-ui, sans-serif',
-            },
-          }}
-        >
+        {hasClerkKeys ? (
+          <ClerkProvider
+            appearance={{
+              variables: {
+                colorPrimary: '#E58A0F',
+                fontFamily: 'Satoshi, system-ui, sans-serif',
+              },
+            }}
+          >
+            <PostHogProvider>
+              {children}
+            </PostHogProvider>
+          </ClerkProvider>
+        ) : (
           <PostHogProvider>
             {children}
           </PostHogProvider>
-        </ClerkProvider>
+        )}
         <Analytics />
         <SpeedInsights />
         {/* JSON-LD Organization */}
