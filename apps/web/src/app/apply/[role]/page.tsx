@@ -2,6 +2,7 @@
 
 import { Footer } from '@/components/layout/footer';
 import { Navbar } from '@/components/layout/navbar';
+import { Breadcrumbs } from '@/components/ui/breadcrumbs';
 import { ROLES } from '@/lib/data';
 import confetti from 'canvas-confetti';
 import { ArrowLeft, ArrowRight, CheckCircle2, Clock, Save, Sparkles, Upload } from 'lucide-react';
@@ -218,6 +219,8 @@ export default function ApplyPage() {
 
       <main className="pt-16 bg-[#FAFAF8] min-h-screen">
         <div ref={formRef} className="max-w-2xl mx-auto px-6 py-10 md:py-16">
+          <Breadcrumbs />
+
           {/* Progress bar */}
           {step < 5 && (
             <div className="mb-10">

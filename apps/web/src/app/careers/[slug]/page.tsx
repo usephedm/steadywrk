@@ -1,5 +1,6 @@
 import { Footer } from '@/components/layout/footer';
 import { Navbar } from '@/components/layout/navbar';
+import { Breadcrumbs } from '@/components/ui/breadcrumbs';
 import { COMPANY, ROLES } from '@/lib/data';
 import { ArrowRight, Briefcase, Clock, MapPin } from 'lucide-react';
 import type { Metadata } from 'next';
@@ -72,18 +73,7 @@ export default async function CareerDetailPage({ params }: PageProps) {
       <main id="main-content" className="pt-16">
         <section className="py-20 md:py-28 px-6 bg-[#FAFAF8]">
           <div className="max-w-3xl mx-auto">
-            {/* Breadcrumb */}
-            <nav className="text-[13px] text-[#B0B0AB] mb-8">
-              <Link href="/" className="hover:text-[#6E695F] transition-colors">
-                Home
-              </Link>
-              <span className="mx-2">/</span>
-              <Link href="/careers" className="hover:text-[#6E695F] transition-colors">
-                Careers
-              </Link>
-              <span className="mx-2">/</span>
-              <span className="text-[#23211D]">{role.title}</span>
-            </nav>
+            <Breadcrumbs />
 
             {/* Header */}
             <div className="mb-12">

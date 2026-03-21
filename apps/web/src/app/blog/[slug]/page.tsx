@@ -1,5 +1,6 @@
 import { Footer } from '@/components/layout/footer';
 import { Navbar } from '@/components/layout/navbar';
+import { Breadcrumbs } from '@/components/ui/breadcrumbs';
 import { BLOG_POSTS } from '@/lib/data';
 import { ArrowLeft, Calendar, Clock, Link2, Share2 } from 'lucide-react';
 import type { Metadata } from 'next';
@@ -52,14 +53,7 @@ export default async function PublicBlogPostPage({ params }: BlogPostPageProps) 
       <Navbar />
       <main id="main-content" className="min-h-dvh bg-[#FAFAF8] pt-16">
         <article className="max-w-3xl mx-auto px-6 py-12">
-          {/* Back link */}
-          <Link
-            href="/blog"
-            className="inline-flex items-center gap-2 text-[#6B6B66] hover:text-[#E58A0F] transition-colors text-sm mb-8 min-h-[44px]"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Back to Blog
-          </Link>
+          <Breadcrumbs />
 
           {/* Header */}
           <header className="mb-10">
