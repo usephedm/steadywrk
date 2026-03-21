@@ -1,21 +1,18 @@
-import { db } from '@/lib/db';
-import { eq } from 'drizzle-orm';
+import { sql } from '@/lib/db';
 import { NextResponse } from 'next/server';
-import { jobListings } from '../../../../../../packages/db/src/schema';
 
 export async function GET() {
   try {
-    if (!db) {
+    if (!sql) {
       return NextResponse.json(
         { error: 'Database not configured' },
         { status: 503 },
       );
     }
 
-    const jobs = await db
-      .select()
-      .from(jobListings)
-      .where(eq(jobListings.status, 'open'));
+    const jobs = await sql`
+      SELECT * FROM job_listings WHERE status = 'open' ORDER BY featured DESC, created_at DESC
+    `;
 
     return NextResponse.json(jobs);
   } catch (err) {

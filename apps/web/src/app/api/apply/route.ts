@@ -1,11 +1,10 @@
-import { db } from '@/lib/db';
+import { sql } from '@/lib/db';
 import { ApplicationConfirmation } from '@/lib/email/application-confirmation';
 import { HRNotification } from '@/lib/email/hr-notification';
 import { getClientIP, rateLimit } from '@/lib/rate-limit';
 import { validateApplyPayload } from '@/lib/schemas';
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
-import { applicants } from '../../../../../../packages/db/src/schema';
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
@@ -26,27 +25,13 @@ export async function POST(request: Request) {
     // Insert into database
     let applicantId: string | undefined;
     try {
-      if (!db) throw new Error('Database not configured');
-      const [inserted] = await db
-        .insert(applicants)
-        .values({
-          email: data.email,
-          name: data.name,
-          phone: data.phone || null,
-          roleSlug: data.position,
-          teamInterest: data.team || null,
-          cvUrl: null,
-          linkedinUrl: null,
-          portfolioUrl: data.portfolioUrl || null,
-          githubUrl: data.githubUrl || null,
-          answers: data.answers,
-          skills: data.skills,
-          availability: data.availability || null,
-          challengeResponse: data.challengeResponse || null,
-          pdplConsent: true,
-        })
-        .returning({ id: applicants.id });
-      applicantId = inserted.id;
+      if (!sql) throw new Error('Database not configured');
+      const result = await sql`
+        INSERT INTO applicants (email, name, phone, role_slug, team_interest, portfolio_url, github_url, answers, skills, availability, challenge_response, pdpl_consent)
+        VALUES (${data.email}, ${data.name}, ${data.phone || null}, ${data.position}, ${data.team || null}, ${data.portfolioUrl || null}, ${data.githubUrl || null}, ${JSON.stringify(data.answers || {})}, ${JSON.stringify(data.skills || {})}, ${data.availability || null}, ${data.challengeResponse || null}, ${true})
+        RETURNING id
+      `;
+      applicantId = result?.[0]?.id;
     } catch (dbError) {
       console.error('Database insert failed:', dbError);
       // Continue — don't fail the application if DB is down

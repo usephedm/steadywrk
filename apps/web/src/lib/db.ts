@@ -2,13 +2,13 @@ import { neon } from '@neondatabase/serverless';
 import { drizzle } from 'drizzle-orm/neon-http';
 import * as schema from '../../../../packages/db/src/schema';
 
-function getDb() {
+function createDb() {
   const url = process.env.DATABASE_URL;
-  if (!url) {
-    return null;
-  }
+  if (!url) return { db: null, sql: null };
   const sql = neon(url);
-  return drizzle(sql, { schema });
+  const db = drizzle(sql, { schema });
+  return { db, sql };
 }
 
-export const db = getDb();
+const { db, sql } = createDb();
+export { db, sql };
