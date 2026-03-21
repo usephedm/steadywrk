@@ -18,7 +18,7 @@ export default function CareersPage() {
     <>
       <Navbar />
 
-      <main className="pt-16">
+      <main id="main-content" className="pt-16">
         {/* Header */}
         <section className="py-20 md:py-28 px-6 bg-[#FAFAF8]">
           <div className="max-w-5xl mx-auto">
@@ -57,7 +57,7 @@ export default function CareersPage() {
                   key={dept}
                   type="button"
                   onClick={() => setActiveFilter(dept)}
-                  className={`px-4 py-2 rounded-full text-[13px] font-medium transition-all duration-[180ms] ${
+                  className={`px-4 py-2 min-h-[44px] rounded-full text-[13px] font-medium transition-all duration-[180ms] ${
                     activeFilter === dept
                       ? 'bg-[#E58A0F] text-white'
                       : 'bg-white text-[#6E695F] border border-[rgba(0,0,0,0.06)] hover:border-[#E58A0F]/30 hover:text-[#23211D]'

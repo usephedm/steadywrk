@@ -22,6 +22,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: `${role.title} — Careers`,
     description: role.description,
+    alternates: {
+      canonical: `https://steadywrk.app/careers/${slug}`,
+    },
     openGraph: {
       title: `${role.title} at STEADYWRK`,
       description: role.description,
@@ -66,7 +69,7 @@ export default async function CareerDetailPage({ params }: PageProps) {
     <>
       <Navbar />
 
-      <main className="pt-16">
+      <main id="main-content" className="pt-16">
         <section className="py-20 md:py-28 px-6 bg-[#FAFAF8]">
           <div className="max-w-3xl mx-auto">
             {/* Breadcrumb */}

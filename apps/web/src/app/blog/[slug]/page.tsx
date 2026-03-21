@@ -22,6 +22,9 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   return {
     title: `${post.title} | STEADYWRK Blog`,
     description: post.excerpt,
+    alternates: {
+      canonical: `https://steadywrk.app/blog/${slug}`,
+    },
     openGraph: {
       title: post.title,
       description: post.excerpt,
@@ -47,7 +50,7 @@ export default async function PublicBlogPostPage({ params }: BlogPostPageProps) 
   return (
     <>
       <Navbar />
-      <main className="min-h-dvh bg-[#FAFAF8] pt-16">
+      <main id="main-content" className="min-h-dvh bg-[#FAFAF8] pt-16">
         <article className="max-w-3xl mx-auto px-6 py-12">
           {/* Back link */}
           <Link

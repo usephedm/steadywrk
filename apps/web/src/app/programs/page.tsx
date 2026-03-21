@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   title: 'Career Programs — IGNITE, ORBIT, APEX',
   description:
     'Three career tracks for ambitious talent. IGNITE internships, ORBIT fellowships, and APEX leadership. Ship production work from week one.',
+  alternates: {
+    canonical: 'https://steadywrk.app/programs',
+  },
 };
 
 export default function ProgramsPage() {
@@ -17,7 +20,7 @@ export default function ProgramsPage() {
     <>
       <Navbar />
 
-      <main className="pt-16">
+      <main id="main-content" className="pt-16">
         <section className="py-20 md:py-28 px-6 bg-[#FAFAF8]">
           <div className="max-w-5xl mx-auto">
             <nav className="text-[13px] text-[#B0B0AB] mb-8">
@@ -47,10 +50,11 @@ export default function ProgramsPage() {
           <div className="absolute inset-0 z-0">
             <Image
               src="/brand/steadywrk-workspace.webp"
-              alt=""
+              alt="STEADYWRK workspace background"
               fill
               className="object-cover opacity-[0.06] blur-sm"
               sizes="100vw"
+              loading="lazy"
             />
           </div>
           <div className="relative z-10 max-w-5xl mx-auto space-y-8">

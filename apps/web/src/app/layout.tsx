@@ -114,17 +114,26 @@ export default function RootLayout({
         <link rel="preload" href="/logo.webp" as="image" type="image/webp" />
 
         {/* DNS prefetch + preconnect for third-party speed */}
+        <link rel="preconnect" href="https://analytics.ahrefs.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://analytics.ahrefs.com" />
+        <link rel="preconnect" href="https://va.vercel-scripts.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://va.vercel-scripts.com" />
+        <link rel="preconnect" href="https://us.i.posthog.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://us.i.posthog.com" />
 
         {/* PWA manifest */}
         <link rel="manifest" href="/manifest.webmanifest" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="apple-touch-icon" href="/logo.webp" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
       </head>
       <body className="min-h-full flex flex-col bg-[#FAFAF8]">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-[#E58A0F] focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-medium"
+        >
+          Skip to content
+        </a>
         {hasClerkKeys ? (
           <ClerkProvider
             appearance={{

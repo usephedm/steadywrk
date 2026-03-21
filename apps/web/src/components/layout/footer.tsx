@@ -47,6 +47,20 @@ export function Footer() {
           <p className="text-[11px] text-white/15">
             &copy; {new Date().getFullYear()} {COMPANY.legal}. All rights reserved.
           </p>
+          <div className="flex items-center gap-4">
+            <Link
+              href="/privacy"
+              className="text-[11px] text-white/15 hover:text-white/30 transition-colors duration-[180ms]"
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              href="/terms"
+              className="text-[11px] text-white/15 hover:text-white/30 transition-colors duration-[180ms]"
+            >
+              Terms of Service
+            </Link>
+          </div>
           <p className="text-[11px] text-white/15">{COMPANY.address}</p>
         </div>
       </div>

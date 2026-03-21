@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   title: 'About STEADYWRK',
   description:
     'AI-native career-launch platform. US-incorporated, Jordan-operated. Building the bridge between education and elite work for Jordan\u2019s most ambitious talent.',
+  alternates: {
+    canonical: 'https://steadywrk.app/about',
+  },
 };
 
 export default function AboutPage() {
@@ -17,7 +20,7 @@ export default function AboutPage() {
     <>
       <Navbar />
 
-      <main className="pt-16">
+      <main id="main-content" className="pt-16">
         {/* Header */}
         <section className="py-20 md:py-28 px-6 bg-[#FAFAF8]">
           <div className="max-w-3xl mx-auto">

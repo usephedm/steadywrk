@@ -134,7 +134,7 @@ export default function HomePage() {
           <motion.div className="absolute inset-0 z-0" style={{ y: heroY, scale: heroScale }}>
             <Image
               src="/brand/steadywrk-ai-work.webp"
-              alt=""
+              alt="STEADYWRK team working on AI systems in the Amman office"
               fill
               priority
               className="object-cover object-center"
@@ -511,7 +511,7 @@ export default function HomePage() {
           <div className="absolute inset-0 z-0">
             <Image
               src="/brand/steadywrk-workspace.webp"
-              alt=""
+              alt="STEADYWRK workspace background"
               fill
               className="object-cover opacity-[0.07] blur-sm"
               sizes="100vw"

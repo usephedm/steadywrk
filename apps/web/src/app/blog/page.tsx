@@ -29,7 +29,7 @@ export default function PublicBlogPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-dvh bg-[#FAFAF8] pt-16">
+      <main id="main-content" className="min-h-dvh bg-[#FAFAF8] pt-16">
         <div className="max-w-4xl mx-auto px-6 py-12">
           {/* Header */}
           <div className="mb-10 text-center">
@@ -44,8 +44,10 @@ export default function PublicBlogPage() {
           {/* Search + Category filters */}
           <div className="flex flex-col gap-4 mb-10">
             <div className="relative max-w-md mx-auto w-full">
+              <label htmlFor="blog-search" className="sr-only">Search articles</label>
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#B0B0AB]" />
               <input
+                id="blog-search"
                 type="text"
                 placeholder="Search articles..."
                 value={searchQuery}

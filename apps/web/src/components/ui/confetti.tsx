@@ -68,8 +68,8 @@ const ConfettiComponent = forwardRef<ConfettiRef, Props>((props, ref) => {
     async (opts = {}) => {
       try {
         await instanceRef.current?.({ ...options, ...opts });
-      } catch (error) {
-        console.error('Confetti error:', error);
+      } catch {
+        // Silently ignore confetti rendering errors
       }
     },
     [options],
@@ -89,8 +89,8 @@ const ConfettiComponent = forwardRef<ConfettiRef, Props>((props, ref) => {
       (async () => {
         try {
           await fire();
-        } catch (error) {
-          console.error('Confetti effect error:', error);
+        } catch {
+          // Silently ignore confetti effect errors
         }
       })();
     }
@@ -127,8 +127,8 @@ const ConfettiButtonComponent = ({ options, children, ...props }: ConfettiButton
           y: y / window.innerHeight,
         },
       });
-    } catch (error) {
-      console.error('Confetti button error:', error);
+    } catch {
+      // Silently ignore confetti button errors
     }
   };
 

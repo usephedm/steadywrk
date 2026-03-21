@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   title: 'Culture',
   description:
     'Built for women who build. Elite standards, visible growth, real fairness, and speed as brand. Discover the values that drive STEADYWRK.',
+  alternates: {
+    canonical: 'https://steadywrk.app/culture',
+  },
 };
 
 const VALUES = [
@@ -49,7 +52,7 @@ export default function CulturePage() {
     <>
       <Navbar />
 
-      <main className="pt-16">
+      <main id="main-content" className="pt-16">
         <section className="py-20 md:py-28 px-6 bg-[#FAFAF8]">
           <div className="max-w-3xl mx-auto">
             <nav className="text-[13px] text-[#B0B0AB] mb-8">

@@ -22,6 +22,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: `${program.name} ${program.type} — Programs`,
     description: program.longDesc,
+    alternates: {
+      canonical: `https://steadywrk.app/programs/${slug}`,
+    },
     openGraph: {
       title: `${program.name} — ${program.type} at STEADYWRK`,
       description: program.desc,
@@ -38,7 +41,7 @@ export default async function ProgramDetailPage({ params }: PageProps) {
     <>
       <Navbar />
 
-      <main className="pt-16">
+      <main id="main-content" className="pt-16">
         <section className="py-20 md:py-28 px-6 bg-[#FAFAF8]">
           <div className="max-w-3xl mx-auto">
             <nav className="text-[13px] text-[#B0B0AB] mb-8">
