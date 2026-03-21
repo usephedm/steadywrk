@@ -7,6 +7,7 @@ import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
+import { ClientGlobals } from '@/components/ui/client-globals';
 import { PostHogProvider } from '@/lib/posthog';
 import './globals.css';
 
@@ -152,6 +153,7 @@ export default function RootLayout({
             {children}
           </PostHogProvider>
         )}
+        <ClientGlobals />
         <Analytics />
         <SpeedInsights />
         {/* JSON-LD Organization */}

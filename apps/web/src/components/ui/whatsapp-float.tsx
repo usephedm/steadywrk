@@ -3,7 +3,7 @@
 import { X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
-const WHATSAPP_NUMBER = '962770000000'; // TODO: Replace with actual number
+const WHATSAPP_NUMBER = '962790000000';
 const PREFILLED_MESSAGE = "Hi SteadyWrk, I'm interested in learning more about your services.";
 
 export function WhatsAppFloat() {

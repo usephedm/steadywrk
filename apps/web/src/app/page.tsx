@@ -4,13 +4,18 @@ import { Footer } from '@/components/layout/footer';
 import { Navbar } from '@/components/layout/navbar';
 import { AnimatedShinyText } from '@/components/ui/animated-shiny-text';
 import { BlurFade } from '@/components/ui/blur-fade';
+import { BorderBeam } from '@/components/ui/border-beam';
 import { HyperText } from '@/components/ui/hyper-text';
+import { InteractiveGridPattern } from '@/components/ui/interactive-grid-pattern';
+import { MagicCard } from '@/components/ui/magic-card';
 import { Marquee } from '@/components/ui/marquee';
 import { NumberTicker } from '@/components/ui/number-ticker';
 import { Particles } from '@/components/ui/particles';
 import { ScrollReveal, StaggerContainer, staggerItem } from '@/components/ui/scroll-reveal';
 import { ShimmerButton } from '@/components/ui/shimmer-button';
 import { TextAnimate } from '@/components/ui/text-animate';
+import { TextReveal } from '@/components/ui/text-reveal';
+import { TiltCard } from '@/components/ui/tilt-card';
 import { WordRotate } from '@/components/ui/word-rotate';
 import { PROGRAMS, ROLES, TECH } from '@/lib/data';
 import { motion, useScroll, useTransform } from 'framer-motion';
@@ -310,73 +315,42 @@ export default function HomePage() {
             <div className="grid md:grid-cols-3 gap-4">
               {/* Left column: 2 stacked cards */}
               <div className="md:col-span-2 grid sm:grid-cols-2 gap-4">
-                {VALUES.slice(0, 2).map((v, i) => (
-                  <ScrollReveal key={v.title} delay={0.1 + i * 0.08}>
-                    <motion.div
-                      className="bg-white dark:bg-[#222220] rounded-xl p-6 border border-[rgba(0,0,0,0.06)] dark:border-[rgba(255,255,255,0.06)] shadow-[0_1px_2px_rgba(0,0,0,0.04)] group cursor-default h-full"
-                      whileHover={{ y: -2, boxShadow: '0 4px 12px rgba(0,0,0,0.08)' }}
-                      transition={{ duration: 0.18 }}
+                {VALUES.map((v, i) => (
+                  <ScrollReveal key={v.title} delay={0.1 + i * 0.06}>
+                    <MagicCard
+                      className="rounded-xl h-full"
+                      gradientSize={180}
+                      gradientColor="rgba(229,138,15,0.08)"
+                      gradientFrom="#E58A0F"
+                      gradientTo="#F5C563"
                     >
-                      <v.icon
-                        className="w-5 h-5 text-[#6B6B66] dark:text-[#8A8A86] group-hover:text-[#E58A0F] transition-colors duration-[180ms] mb-4"
-                        strokeWidth={1.5}
-                      />
-                      <h3
-                        className="text-[17px] font-bold text-[#23211D] dark:text-[#E8E8E6] mb-2"
-                        style={{ fontFamily: 'var(--font-display)' }}
-                      >
-                        {v.title}
-                      </h3>
-                      <p className="text-[#6E695F] dark:text-[#8A8A86] text-[14px] leading-relaxed mb-4">
-                        {v.desc}
-                      </p>
-                      <div className="flex items-baseline gap-1.5">
-                        <span
-                          className="text-[1.5rem] font-extrabold text-[#E58A0F]"
+                      <div className="p-6 group cursor-default h-full">
+                        <v.icon
+                          className="w-5 h-5 text-[#6B6B66] dark:text-[#8A8A86] group-hover:text-[#E58A0F] transition-colors duration-[180ms] mb-4"
+                          strokeWidth={1.5}
+                        />
+                        <h3
+                          className="text-[17px] font-bold text-[#23211D] dark:text-[#E8E8E6] mb-2"
                           style={{ fontFamily: 'var(--font-display)' }}
                         >
-                          {v.stat}
-                        </span>
-                        <span className="text-[12px] text-[#6B6B66] dark:text-[#8A8A86]">
-                          {v.statLabel}
-                        </span>
+                          {v.title}
+                        </h3>
+                        <p className="text-[#6E695F] dark:text-[#8A8A86] text-[14px] leading-relaxed mb-4">
+                          {v.desc}
+                        </p>
+                        <div className="flex items-baseline gap-1.5">
+                          <span
+                            className="text-[1.5rem] font-extrabold text-[#E58A0F]"
+                            style={{ fontFamily: 'var(--font-display)' }}
+                          >
+                            {v.stat}
+                          </span>
+                          <span className="text-[12px] text-[#6B6B66] dark:text-[#8A8A86]">
+                            {v.statLabel}
+                          </span>
+                        </div>
                       </div>
-                    </motion.div>
-                  </ScrollReveal>
-                ))}
-                {/* Bottom row: speed & fairness */}
-                {VALUES.slice(2).map((v, i) => (
-                  <ScrollReveal key={v.title} delay={0.2 + i * 0.08}>
-                    <motion.div
-                      className="bg-white dark:bg-[#222220] rounded-xl p-6 border border-[rgba(0,0,0,0.06)] dark:border-[rgba(255,255,255,0.06)] shadow-[0_1px_2px_rgba(0,0,0,0.04)] group cursor-default h-full"
-                      whileHover={{ y: -2, boxShadow: '0 4px 12px rgba(0,0,0,0.08)' }}
-                      transition={{ duration: 0.18 }}
-                    >
-                      <v.icon
-                        className="w-5 h-5 text-[#6B6B66] dark:text-[#8A8A86] group-hover:text-[#E58A0F] transition-colors duration-[180ms] mb-4"
-                        strokeWidth={1.5}
-                      />
-                      <h3
-                        className="text-[17px] font-bold text-[#23211D] dark:text-[#E8E8E6] mb-2"
-                        style={{ fontFamily: 'var(--font-display)' }}
-                      >
-                        {v.title}
-                      </h3>
-                      <p className="text-[#6E695F] dark:text-[#8A8A86] text-[14px] leading-relaxed mb-4">
-                        {v.desc}
-                      </p>
-                      <div className="flex items-baseline gap-1.5">
-                        <span
-                          className="text-[1.5rem] font-extrabold text-[#E58A0F]"
-                          style={{ fontFamily: 'var(--font-display)' }}
-                        >
-                          {v.stat}
-                        </span>
-                        <span className="text-[12px] text-[#6B6B66] dark:text-[#8A8A86]">
-                          {v.statLabel}
-                        </span>
-                      </div>
-                    </motion.div>
+                    </MagicCard>
                   </ScrollReveal>
                 ))}
               </div>
@@ -442,49 +416,52 @@ export default function HomePage() {
             <StaggerContainer className="space-y-2">
               {ROLES.map((role) => (
                 <motion.div key={role.title} variants={staggerItem}>
-                  <Link
-                    href={`/careers/${role.slug}`}
-                    className={`group flex items-center justify-between p-5 md:px-7 md:py-6 bg-white dark:bg-[#1A1A18] rounded-xl border shadow-[0_1px_2px_rgba(0,0,0,0.04)] hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] transition-all duration-[180ms] ${
-                      role.featured
-                        ? 'border-[#E58A0F]/20 ring-1 ring-[#E58A0F]/10'
-                        : 'border-[rgba(0,0,0,0.06)] dark:border-[rgba(255,255,255,0.06)]'
-                    }`}
-                  >
-                    <div>
-                      <div className="flex items-center gap-2.5 flex-wrap">
-                        <h3
-                          className="text-[17px] font-bold text-[#23211D] dark:text-[#E8E8E6] group-hover:text-[#E58A0F] transition-colors duration-[180ms]"
-                          style={{ fontFamily: 'var(--font-display)' }}
-                        >
-                          {role.title}
-                        </h3>
-                        {role.featured && (
-                          <span className="text-[10px] uppercase tracking-[0.1em] font-bold text-[#E58A0F] bg-[#E58A0F]/8 px-2 py-0.5 rounded-full">
-                            Hiring Now
+                  <div className="relative rounded-xl">
+                    <Link
+                      href={`/careers/${role.slug}`}
+                      className={`relative group flex items-center justify-between p-5 md:px-7 md:py-6 bg-white dark:bg-[#1A1A18] rounded-xl border shadow-[0_1px_2px_rgba(0,0,0,0.04)] hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] transition-all duration-[180ms] ${
+                        role.featured
+                          ? 'border-[#E58A0F]/20 ring-1 ring-[#E58A0F]/10'
+                          : 'border-[rgba(0,0,0,0.06)] dark:border-[rgba(255,255,255,0.06)]'
+                      }`}
+                    >
+                      <div>
+                        <div className="flex items-center gap-2.5 flex-wrap">
+                          <h3
+                            className="text-[17px] font-bold text-[#23211D] dark:text-[#E8E8E6] group-hover:text-[#E58A0F] transition-colors duration-[180ms]"
+                            style={{ fontFamily: 'var(--font-display)' }}
+                          >
+                            {role.title}
+                          </h3>
+                          {role.featured && (
+                            <span className="text-[10px] uppercase tracking-[0.1em] font-bold text-[#E58A0F] bg-[#E58A0F]/8 px-2 py-0.5 rounded-full">
+                              Hiring Now
+                            </span>
+                          )}
+                        </div>
+                        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1.5">
+                          <span className="text-[11px] uppercase tracking-[0.08em] font-semibold text-[#6B6B66] dark:text-[#8A8A86]">
+                            {role.dept}
                           </span>
-                        )}
+                          <span className="w-0.5 h-0.5 rounded-full bg-[#B0B0AB]" />
+                          <span className="text-[13px] text-[#6E695F] dark:text-[#8A8A86]">
+                            {role.type}
+                          </span>
+                          <span className="w-0.5 h-0.5 rounded-full bg-[#B0B0AB]" />
+                          <span className="text-[13px] text-[#6E695F] dark:text-[#8A8A86]">
+                            {role.location}
+                          </span>
+                        </div>
                       </div>
-                      <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1.5">
-                        <span className="text-[11px] uppercase tracking-[0.08em] font-semibold text-[#6B6B66] dark:text-[#8A8A86]">
-                          {role.dept}
+                      <div className="hidden md:flex items-center gap-4">
+                        <span className="text-[14px] text-[#E58A0F] font-medium opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-[250ms]">
+                          {role.salary}
                         </span>
-                        <span className="w-0.5 h-0.5 rounded-full bg-[#B0B0AB]" />
-                        <span className="text-[13px] text-[#6E695F] dark:text-[#8A8A86]">
-                          {role.type}
-                        </span>
-                        <span className="w-0.5 h-0.5 rounded-full bg-[#B0B0AB]" />
-                        <span className="text-[13px] text-[#6E695F] dark:text-[#8A8A86]">
-                          {role.location}
-                        </span>
+                        <ArrowRight className="w-4 h-4 text-[#B0B0AB] group-hover:text-[#E58A0F] group-hover:translate-x-1 transition-all duration-[180ms]" />
                       </div>
-                    </div>
-                    <div className="hidden md:flex items-center gap-4">
-                      <span className="text-[14px] text-[#E58A0F] font-medium opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-[250ms]">
-                        {role.salary}
-                      </span>
-                      <ArrowRight className="w-4 h-4 text-[#B0B0AB] group-hover:text-[#E58A0F] group-hover:translate-x-1 transition-all duration-[180ms]" />
-                    </div>
-                  </Link>
+                    </Link>
+                    {role.featured && <BorderBeam size={150} duration={10} color="#E58A0F" />}
+                  </div>
                 </motion.div>
               ))}
             </StaggerContainer>
@@ -547,42 +524,39 @@ export default function HomePage() {
             <StaggerContainer className="grid md:grid-cols-3 gap-5" stagger={0.1}>
               {PROGRAMS.map((p) => (
                 <motion.div key={p.name} variants={staggerItem}>
-                  <motion.div
-                    className="bg-[#1A1A18]/80 backdrop-blur-sm rounded-xl p-7 border border-white/[0.05] group h-full"
-                    style={{
-                      borderTopWidth: '3px',
-                      borderTopColor: PROGRAM_COLORS[p.name] ?? '#E58A0F',
-                    }}
-                    whileHover={{
-                      scale: 1.02,
-                      boxShadow: '0 8px 30px rgba(0,0,0,0.4)',
-                    }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <div className="text-[11px] uppercase tracking-[0.12em] text-[#F5A623] font-semibold mb-3">
-                      {p.type} · {p.duration}
-                    </div>
-                    <h3
-                      className="text-[28px] font-extrabold text-white mb-3 tracking-[-0.02em]"
-                      style={{ fontFamily: 'var(--font-display)' }}
+                  <TiltCard className="h-full" tiltAmount={5}>
+                    <motion.div
+                      className="bg-[#1A1A18]/80 backdrop-blur-sm rounded-xl p-7 border border-white/[0.05] group h-full"
+                      style={{
+                        borderTopWidth: '3px',
+                        borderTopColor: PROGRAM_COLORS[p.name] ?? '#E58A0F',
+                      }}
                     >
-                      <HyperText
-                        startOnView
-                        animateOnHover
-                        duration={600}
-                        className="text-[28px] font-extrabold text-white"
+                      <div className="text-[11px] uppercase tracking-[0.12em] text-[#F5A623] font-semibold mb-3">
+                        {p.type} · {p.duration}
+                      </div>
+                      <h3
+                        className="text-[28px] font-extrabold text-white mb-3 tracking-[-0.02em]"
+                        style={{ fontFamily: 'var(--font-display)' }}
                       >
-                        {p.name}
-                      </HyperText>
-                    </h3>
-                    <p className="text-white/35 text-[15px] leading-relaxed mb-6">{p.desc}</p>
-                    <Link
-                      href={`/programs/${p.slug}`}
-                      className="inline-flex items-center gap-1.5 text-[14px] font-medium text-[#F5A623] hover:text-white transition-colors duration-[180ms]"
-                    >
-                      Learn about {p.name} <ChevronRight className="w-3.5 h-3.5" />
-                    </Link>
-                  </motion.div>
+                        <HyperText
+                          startOnView
+                          animateOnHover
+                          duration={600}
+                          className="text-[28px] font-extrabold text-white"
+                        >
+                          {p.name}
+                        </HyperText>
+                      </h3>
+                      <p className="text-white/35 text-[15px] leading-relaxed mb-6">{p.desc}</p>
+                      <Link
+                        href={`/programs/${p.slug}`}
+                        className="inline-flex items-center gap-1.5 text-[14px] font-medium text-[#F5A623] hover:text-white transition-colors duration-[180ms]"
+                      >
+                        Learn about {p.name} <ChevronRight className="w-3.5 h-3.5" />
+                      </Link>
+                    </motion.div>
+                  </TiltCard>
                 </motion.div>
               ))}
             </StaggerContainer>
@@ -636,8 +610,17 @@ export default function HomePage() {
         </section>
 
         {/* ━━━ 7. GROWTH METRICS — Big numbers ━━━ */}
-        <section className="py-20 md:py-28 px-6 bg-[#FAFAF8] dark:bg-[#111110]">
-          <div className="max-w-5xl mx-auto">
+        <section className="relative py-20 md:py-28 px-6 bg-[#FAFAF8] dark:bg-[#111110] overflow-hidden">
+          <div className="absolute inset-0 z-0 flex items-center justify-center opacity-[0.35] dark:opacity-[0.15] pointer-events-none">
+            <InteractiveGridPattern
+              width={50}
+              height={50}
+              squares={[30, 16]}
+              className="border-none stroke-[#E5E5E2] dark:stroke-[#2A2A28] [&_rect]:stroke-[#E5E5E2] dark:[&_rect]:stroke-[#2A2A28]"
+              squaresClassName="hover:fill-[#E58A0F]/10"
+            />
+          </div>
+          <div className="relative z-10 max-w-5xl mx-auto">
             <ScrollReveal>
               <p className="text-[13px] uppercase tracking-[0.12em] text-[#E58A0F] font-semibold mb-4 text-center">
                 The Numbers
@@ -687,27 +670,14 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* ━━━ 8. TESTIMONIAL / QUOTE + Tech Marquee ━━━ */}
-        <section className="py-20 md:py-28 px-6 bg-[#F7F4EE] dark:bg-[#1A1A18]">
-          <div className="max-w-3xl mx-auto text-center">
-            <ScrollReveal>
-              <blockquote>
-                <p
-                  className="text-[clamp(1.5rem,1.2rem+1.5vw,2.5rem)] font-bold text-[#23211D] dark:text-[#E8E8E6] leading-[1.2] tracking-[-0.02em]"
-                  style={{ fontFamily: 'var(--font-display)' }}
-                >
-                  &ldquo;Built for people who want their{' '}
-                  <span className="text-[#E58A0F]">growth to compound.</span>&rdquo;
-                </p>
-                <footer className="mt-6 text-[14px] text-[#6B6B66] dark:text-[#8A8A86] font-medium">
-                  — STEADYWRK
-                </footer>
-              </blockquote>
-            </ScrollReveal>
-          </div>
+        {/* ━━━ 8. TESTIMONIAL / QUOTE — Text Reveal + Tech Marquee ━━━ */}
+        <section className="bg-[#F7F4EE] dark:bg-[#1A1A18]">
+          <TextReveal className="[&>div]:max-w-3xl [&>div]:mx-auto">
+            Built for people who want their growth to compound — STEADYWRK
+          </TextReveal>
 
           {/* Tech stack marquee */}
-          <div className="mt-16 py-5 border-y border-[#E5E5E2] dark:border-[#2A2A28] overflow-hidden">
+          <div className="py-5 border-y border-[#E5E5E2] dark:border-[#2A2A28] overflow-hidden">
             <Marquee pauseOnHover className="[--duration:35s] [--gap:3rem]">
               {TECH.map((t) => (
                 <span
