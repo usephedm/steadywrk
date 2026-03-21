@@ -1,86 +1,78 @@
 import { ImageResponse } from 'next/og';
 
 export const runtime = 'edge';
-export const alt = 'SteadyWrk — Apply. Train. Work.';
+export const alt = 'STEADYWRK — Where Ambition Compounds';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
 export default async function Image() {
   return new ImageResponse(
-    <div
-      style={{
-        background: '#000',
-        width: '100%',
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        position: 'relative',
-      }}
-    >
-      {/* Ambient amber glow */}
+    (
       <div
         style={{
-          position: 'absolute',
-          width: '700px',
-          height: '350px',
-          borderRadius: '50%',
-          background: 'radial-gradient(ellipse, rgba(245, 158, 11, 0.12) 0%, transparent 70%)',
-          filter: 'blur(80px)',
-        }}
-      />
-
-      {/* Vignette */}
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          background: 'radial-gradient(ellipse, transparent 30%, rgba(0,0,0,0.8) 100%)',
-        }}
-      />
-
-      {/* Title */}
-      <div
-        style={{
-          fontSize: 88,
-          fontWeight: 800,
-          color: '#ffffff',
-          letterSpacing: '-0.03em',
-          fontFamily: 'system-ui, -apple-system, sans-serif',
-          position: 'relative',
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          background: '#FAFAF8',
+          fontFamily: 'sans-serif',
         }}
       >
-        SteadyWrk
-      </div>
+        {/* Brand amber accent bar */}
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            height: 6,
+            background: 'linear-gradient(90deg, #E58A0F, #F5C563)',
+          }}
+        />
 
-      {/* Amber accent line */}
-      <div
-        style={{
-          width: 100,
-          height: 2,
-          background: '#F59E0B',
-          marginTop: 28,
-          borderRadius: 1,
-          position: 'relative',
-        }}
-      />
+        {/* Double chevron mark */}
+        <svg width="64" height="64" viewBox="0 0 32 32" fill="none">
+          <path d="M8 20L16 12L24 20" stroke="#E58A0F" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M8 14L16 6L24 14" stroke="#E58A0F" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
 
-      {/* Subtitle */}
-      <div
-        style={{
-          fontSize: 20,
-          color: 'rgba(255, 255, 255, 0.45)',
-          marginTop: 24,
-          letterSpacing: '0.15em',
-          textTransform: 'uppercase' as const,
-          fontFamily: 'system-ui, -apple-system, sans-serif',
-          position: 'relative',
-        }}
-      >
-        Apply. Train. Work.
+        <div
+          style={{
+            marginTop: 24,
+            fontSize: 56,
+            fontWeight: 800,
+            color: '#23211D',
+            letterSpacing: '-0.03em',
+          }}
+        >
+          STEADYWRK
+        </div>
+        <div
+          style={{
+            marginTop: 12,
+            fontSize: 22,
+            color: '#6E695F',
+            letterSpacing: '0.05em',
+          }}
+        >
+          Where ambition compounds.
+        </div>
+        <div
+          style={{
+            marginTop: 32,
+            fontSize: 16,
+            color: '#E58A0F',
+            fontWeight: 600,
+            textTransform: 'uppercase' as const,
+            letterSpacing: '0.1em',
+          }}
+        >
+          steadywrk.app
+        </div>
       </div>
-    </div>,
+    ),
     { ...size },
   );
 }

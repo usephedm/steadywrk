@@ -1,0 +1,43 @@
+# STEADYWRK
+> Jordan's AI-native career platform. Where ambition compounds.
+
+## Company
+- Name: STEADYWRK (Kayan Ventures Jordan LLC)
+- Domain: steadywrk.app
+- Location: Building 15, King Hussein Business Park, Amman, Jordan
+- Founded: 2026
+- Industry: AI career platform, BPO, digital marketing, facility management
+
+## What We Do
+STEADYWRK is an AI-native startup platform that connects ambitious Jordanian talent — especially women 18-30 — with elite training, rapid professional development, and meaningful work serving US clients. We operate four verticals: AI Lab & Studio, Facility Management, Digital Marketing, and AI BPO.
+
+## Programs
+- IGNITE (3-month internship): Immersive AI-native internship. Ship production work from week one.
+- ORBIT (6-month fellowship): Deep technical fellowship. Lead projects, mentor juniors, build systems.
+- APEX (12-month leadership track): Strategic leadership. Architect solutions, drive teams, shape direction.
+
+## Hiring
+We are actively hiring in Amman, Jordan for:
+- AI Engineer (AI Lab, Full-time)
+- Frontend Developer (Engineering, Full-time)
+- Digital Marketing Lead (Growth, Full-time)
+- BPO Operations Manager (Operations, Full-time)
+- AI BPO Agent (BPO, Contract)
+
+Apply via WhatsApp or email hello@steadywrk.app.
+
+## Technology
+Next.js, React, TypeScript, Tailwind CSS, Supabase, Vercel, Cloudflare Workers.
+
+## Key Facts
+- Jordan produces ~7,000 technology graduates annually
+- 46% youth unemployment (15-24), 66% for young women
+- Jordan ranks 3rd in Arab world for AI adoption in public sector
+- 92.5% internet penetration, primarily mobile
+- KHBP is at 100% occupancy with Phase Two expansion underway
+
+## Contact
+- Website: https://steadywrk.app
+- Email: hello@steadywrk.app
+- Instagram: @steadywrk
+- LinkedIn: /company/steadywrk
