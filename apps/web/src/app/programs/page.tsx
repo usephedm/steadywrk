@@ -83,7 +83,6 @@ export default function ProgramsPage() {
               </Link>
             ))}
           </div>
-          </div>
         </section>
       </main>
 
