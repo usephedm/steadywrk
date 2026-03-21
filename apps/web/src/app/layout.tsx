@@ -103,7 +103,7 @@ export default function RootLayout({
               '@context': 'https://schema.org',
               '@type': 'Organization',
               name: 'STEADYWRK',
-              legalName: 'Kayan Ventures Jordan LLC',
+              legalName: 'STEADYWRK LLC',
               url: 'https://steadywrk.app',
               logo: 'https://steadywrk.app/logo-orange.svg',
               description:
