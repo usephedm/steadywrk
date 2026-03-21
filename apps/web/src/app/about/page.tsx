@@ -3,6 +3,7 @@ import { Navbar } from '@/components/layout/navbar';
 import { COMPANY } from '@/lib/data';
 import { Globe, MapPin, Users, Zap } from 'lucide-react';
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
@@ -42,6 +43,19 @@ export default function AboutPage() {
               work.
             </p>
           </div>
+        </section>
+
+        {/* Workspace photo */}
+        <section className="relative h-[320px] md:h-[420px] overflow-hidden">
+          <Image
+            src="/brand/steadywrk-workspace.webp"
+            alt="STEADYWRK modern workspace in Amman"
+            fill
+            className="object-cover"
+            sizes="100vw"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#F7F4EE] via-transparent to-[#FAFAF8]/30" />
         </section>
 
         {/* Story */}

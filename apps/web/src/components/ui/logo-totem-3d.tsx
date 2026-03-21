@@ -7,50 +7,69 @@ import type * as THREE from 'three';
 
 /* ────────────────────────────────────────────────
    STEADYWRK Logo Totem — Double-chevron 3D mark
-   Two interlocking chevron shapes in warm gold
+   Two interlocking zigzag chevrons in warm gold
+   Each chevron: ↗↘↗ (Z-like shape)
    Slow ambient rotation + mouse parallax
    ──────────────────────────────────────────────── */
 
-function ChevronShape({ yOffset, scale: s }: { yOffset: number; scale: number }) {
-  const angle = Math.PI / 5;
-  const armLen = 1.1 * s;
+const GOLD_MATERIAL_PROPS = {
+  color: '#E58A0F',
+  metalness: 0.7,
+  roughness: 0.3,
+  envMapIntensity: 0.9,
+} as const;
+
+function ZigzagSegment({
+  start,
+  end,
+  thickness,
+  depth,
+}: {
+  start: [number, number];
+  end: [number, number];
+  thickness: number;
+  depth: number;
+}) {
+  const dx = end[0] - start[0];
+  const dy = end[1] - start[1];
+  const len = Math.sqrt(dx * dx + dy * dy);
+  const angle = Math.atan2(dy, dx);
+  const cx = (start[0] + end[0]) / 2;
+  const cy = (start[1] + end[1]) / 2;
+
+  return (
+    <mesh position={[cx, cy, 0]} rotation={[0, 0, angle]}>
+      <boxGeometry args={[len, thickness, depth]} />
+      <meshStandardMaterial {...GOLD_MATERIAL_PROPS} />
+    </mesh>
+  );
+}
+
+function ZigzagChevron({ yOffset, scale: s }: { yOffset: number; scale: number }) {
+  const t = 0.16 * s;
+  const d = 0.22 * s;
+  // Zigzag path: ↗↘↗ — three segments making a Z-like shape
+  const w = 0.7 * s; // half-width of each leg
+  const h = 0.45 * s; // height of each leg
+
+  const points: [number, number][] = [
+    [-w * 1.4, -h],     // bottom-left start
+    [-w * 0.4, h],      // up-right
+    [w * 0.4, -h],      // down-right (middle valley)
+    [w * 1.4, h],       // up-right (end)
+  ];
 
   return (
     <group position={[0, yOffset, 0]}>
-      {/* Left arm */}
-      <mesh
-        position={[
-          -armLen * 0.5 * Math.cos(angle),
-          armLen * 0.5 * Math.sin(angle),
-          0,
-        ]}
-        rotation={[0, 0, angle]}
-      >
-        <boxGeometry args={[armLen, 0.18 * s, 0.25 * s]} />
-        <meshStandardMaterial
-          color="#E58A0F"
-          metalness={0.6}
-          roughness={0.35}
-          envMapIntensity={0.8}
+      {points.slice(0, -1).map((start, i) => (
+        <ZigzagSegment
+          key={`seg-${i}-${start[0]}`}
+          start={start}
+          end={points[i + 1]}
+          thickness={t}
+          depth={d}
         />
-      </mesh>
-      {/* Right arm */}
-      <mesh
-        position={[
-          armLen * 0.5 * Math.cos(angle),
-          armLen * 0.5 * Math.sin(angle),
-          0,
-        ]}
-        rotation={[0, 0, -angle]}
-      >
-        <boxGeometry args={[armLen, 0.18 * s, 0.25 * s]} />
-        <meshStandardMaterial
-          color="#E58A0F"
-          metalness={0.6}
-          roughness={0.35}
-          envMapIntensity={0.8}
-        />
-      </mesh>
+      ))}
     </group>
   );
 }
@@ -93,10 +112,10 @@ function TotemMesh({ scrollProgress }: { scrollProgress: number }) {
 
   return (
     <group ref={groupRef} scale={scale}>
-      {/* Upper chevron */}
-      <ChevronShape yOffset={0.35} scale={1} />
-      {/* Lower chevron */}
-      <ChevronShape yOffset={-0.35} scale={1} />
+      {/* Upper zigzag chevron */}
+      <ZigzagChevron yOffset={0.3} scale={1} />
+      {/* Lower zigzag chevron — offset to interlock */}
+      <ZigzagChevron yOffset={-0.3} scale={1} />
     </group>
   );
 }

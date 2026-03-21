@@ -3,6 +3,7 @@ import { Navbar } from '@/components/layout/navbar';
 import { PROGRAMS } from '@/lib/data';
 import { ArrowRight } from 'lucide-react';
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
@@ -42,8 +43,17 @@ export default function ProgramsPage() {
           </div>
         </section>
 
-        <section className="py-12 md:py-20 px-6 bg-[#F7F4EE]">
-          <div className="max-w-5xl mx-auto space-y-8">
+        <section className="relative py-12 md:py-20 px-6 bg-[#F7F4EE] overflow-hidden">
+          <div className="absolute inset-0 z-0">
+            <Image
+              src="/brand/steadywrk-workspace.webp"
+              alt=""
+              fill
+              className="object-cover opacity-[0.06] blur-sm"
+              sizes="100vw"
+            />
+          </div>
+          <div className="relative z-10 max-w-5xl mx-auto space-y-8">
             {PROGRAMS.map((program, i) => (
               <Link
                 key={program.slug}
@@ -72,6 +82,7 @@ export default function ProgramsPage() {
                 </div>
               </Link>
             ))}
+          </div>
           </div>
         </section>
       </main>

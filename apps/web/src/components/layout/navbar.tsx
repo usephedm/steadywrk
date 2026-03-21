@@ -4,6 +4,7 @@ import { ShimmerButton } from '@/components/ui/shimmer-button';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useCallback, useState } from 'react';
 
@@ -22,28 +23,24 @@ export function Navbar() {
     <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-2xl bg-[#FAFAF8]/70 dark:bg-[#111110]/80 border-b border-[rgba(0,0,0,0.04)] dark:border-[rgba(255,255,255,0.04)]">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2.5">
-          <svg width="24" height="24" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-            <path
-              d="M6 22L16 12L26 22"
-              stroke="#E58A0F"
-              strokeWidth="3.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M6 15L16 5L26 15"
-              stroke="#E58A0F"
-              strokeWidth="3.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-          <span
-            className="font-extrabold text-[#23211D] dark:text-[#E8E8E6] text-[16px] tracking-[-0.02em]"
-            style={{ fontFamily: 'var(--font-display)' }}
-          >
-            STEADYWRK
-          </span>
+          {/* Light mode: orange mark + dark wordmark on white bg */}
+          <Image
+            src="/brand/logo-gold-chrome-white.webp"
+            alt="STEADYWRK"
+            width={140}
+            height={32}
+            className="h-7 w-auto dark:hidden"
+            priority
+          />
+          {/* Dark mode: orange mark + white wordmark on dark bg */}
+          <Image
+            src="/brand/logo-orange-white-dark.webp"
+            alt="STEADYWRK"
+            width={140}
+            height={32}
+            className="h-7 w-auto hidden dark:block"
+            priority
+          />
         </Link>
 
         {/* Desktop nav */}

@@ -2,6 +2,7 @@ import { Footer } from '@/components/layout/footer';
 import { Navbar } from '@/components/layout/navbar';
 import { Heart, Lightbulb, Shield, Target, TrendingUp, Zap } from 'lucide-react';
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
@@ -103,8 +104,40 @@ export default function CulturePage() {
           </div>
         </section>
 
-        {/* Onboarding */}
+        {/* Culture photography */}
         <section className="py-16 md:py-24 px-6 bg-[#FAFAF8]">
+          <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-5">
+            <div className="relative rounded-xl overflow-hidden aspect-[4/3]">
+              <Image
+                src="/brand/steadywrk-team-collab.webp"
+                alt="Team collaboration at STEADYWRK"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+              <p className="absolute bottom-4 left-4 text-white/80 text-[14px] font-medium">
+                Collaboration is how we build
+              </p>
+            </div>
+            <div className="relative rounded-xl overflow-hidden aspect-[4/3]">
+              <Image
+                src="/brand/steadywrk-workspace.webp"
+                alt="Modern STEADYWRK workspace in Amman"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+              <p className="absolute bottom-4 left-4 text-white/80 text-[14px] font-medium">
+                Our Amman workspace
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Onboarding */}
+        <section className="py-16 md:py-24 px-6 bg-[#F7F4EE]">
           <div className="max-w-3xl mx-auto">
             <h2
               className="text-[clamp(1.5rem,1.2rem+1.25vw,2.25rem)] font-bold text-[#23211D] mb-5"

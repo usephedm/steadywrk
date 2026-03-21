@@ -1,4 +1,5 @@
 import { COMPANY } from '@/lib/data';
+import Image from 'next/image';
 import Link from 'next/link';
 
 const FOOTER_LINKS = [
@@ -14,28 +15,13 @@ export function Footer() {
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 mb-8">
           <div className="flex items-center gap-2">
-            <svg width="20" height="20" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-              <path
-                d="M6 22L16 12L26 22"
-                stroke="#E58A0F"
-                strokeWidth="3.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M6 15L16 5L26 15"
-                stroke="#E58A0F"
-                strokeWidth="3.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-            <span
-              className="text-white/60 text-[14px] font-bold tracking-tight"
-              style={{ fontFamily: 'var(--font-display)' }}
-            >
-              STEADYWRK
-            </span>
+            <Image
+              src="/brand/logo-orange-white-dark.webp"
+              alt="STEADYWRK"
+              width={120}
+              height={28}
+              className="h-6 w-auto opacity-60"
+            />
           </div>
 
           <div className="flex flex-wrap items-center gap-6 text-[13px] text-white/30">

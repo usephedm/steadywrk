@@ -6,6 +6,12 @@ export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
 export default async function Image() {
+  const logoData = await fetch(
+    new URL('../../public/brand/logo-mark-3d-tile.webp', import.meta.url),
+  ).then((res) => res.arrayBuffer());
+
+  const logoSrc = `data:image/webp;base64,${Buffer.from(logoData).toString('base64')}`;
+
   return new ImageResponse(
     <div
       style={{
@@ -15,7 +21,7 @@ export default async function Image() {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        background: '#FAFAF8',
+        background: '#0A0A0A',
         fontFamily: 'sans-serif',
       }}
     >
@@ -31,30 +37,20 @@ export default async function Image() {
         }}
       />
 
-      {/* Double chevron mark */}
-      <svg width="64" height="64" viewBox="0 0 32 32" fill="none">
-        <path
-          d="M8 20L16 12L24 20"
-          stroke="#E58A0F"
-          strokeWidth="3.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M8 14L16 6L24 14"
-          stroke="#E58A0F"
-          strokeWidth="3.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
+      {/* Official 3D logo mark */}
+      <img
+        src={logoSrc}
+        width={160}
+        height={160}
+        style={{ borderRadius: 24 }}
+      />
 
       <div
         style={{
-          marginTop: 24,
+          marginTop: 32,
           fontSize: 56,
           fontWeight: 800,
-          color: '#23211D',
+          color: '#FFFFFF',
           letterSpacing: '-0.03em',
         }}
       >
@@ -64,7 +60,7 @@ export default async function Image() {
         style={{
           marginTop: 12,
           fontSize: 22,
-          color: '#6E695F',
+          color: 'rgba(255,255,255,0.5)',
           letterSpacing: '0.05em',
         }}
       >

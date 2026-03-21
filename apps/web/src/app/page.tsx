@@ -98,9 +98,9 @@ const SERVICES_INLINE = [
 ];
 
 const CULTURE_PHOTOS = [
-  { src: '/brand/office-warm.webp', caption: 'Our Amman HQ — King Hussein Business Park' },
-  { src: '/brand/hero-tech.webp', caption: 'Building AI systems, day one' },
-  { src: '/brand/office-amber.webp', caption: 'Where ambition compounds' },
+  { src: '/brand/steadywrk-team-collab.webp', caption: 'Collaboration is how we build' },
+  { src: '/brand/steadywrk-workspace.webp', caption: 'Our Amman HQ — modern workspace with a city view' },
+  { src: '/brand/steadywrk-hero-engineer.webp', caption: 'Engineering excellence, day one' },
 ];
 
 const PROGRAM_COLORS: Record<string, string> = {
@@ -133,7 +133,7 @@ export default function HomePage() {
           {/* Background: brand photography */}
           <motion.div className="absolute inset-0 z-0" style={{ y: heroY, scale: heroScale }}>
             <Image
-              src="/brand/hero-slate.webp"
+              src="/brand/steadywrk-ai-work.webp"
               alt=""
               fill
               priority
@@ -389,8 +389,8 @@ export default function HomePage() {
                   transition={{ duration: 0.18 }}
                 >
                   <Image
-                    src="/brand/office-warm.webp"
-                    alt="STEADYWRK Amman office"
+                    src="/brand/steadywrk-team-collab.webp"
+                    alt="STEADYWRK team collaboration"
                     fill
                     className="object-cover"
                     sizes="(max-width: 768px) 100vw, 33vw"
@@ -510,7 +510,7 @@ export default function HomePage() {
           {/* Blurred background photo */}
           <div className="absolute inset-0 z-0">
             <Image
-              src="/brand/office-amber.webp"
+              src="/brand/steadywrk-workspace.webp"
               alt=""
               fill
               className="object-cover opacity-[0.07] blur-sm"
