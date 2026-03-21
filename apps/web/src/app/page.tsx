@@ -39,7 +39,14 @@ import {
 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { useRef, useCallback } from 'react';
+
+// Heavy WebGL — out of critical path
+const OrbitalField = dynamic(
+  () => import('@/components/ui/orbital-field').then((m) => m.OrbitalField),
+  { ssr: false },
+);
 
 /* ─────────────────────────────────────────────
    BRAND MOTION TOKENS — Guidelines v2 §09
@@ -170,12 +177,15 @@ export default function HomePage() {
             ease={60}
           />
 
+          {/* Orbital Field shader — career paths, growth curves, AI signal */}
+          <OrbitalField className="z-[2] opacity-40 mix-blend-screen" />
+
           {/* Gradient overlays */}
-          <div className="absolute inset-0 z-[2] bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/30 to-transparent" />
-          <div className="absolute inset-0 z-[2] bg-gradient-to-r from-[#0A0A0A]/60 to-transparent" />
+          <div className="absolute inset-0 z-[3] bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/30 to-transparent" />
+          <div className="absolute inset-0 z-[3] bg-gradient-to-r from-[#0A0A0A]/60 to-transparent" />
 
           {/* Noise */}
-          <div className="absolute inset-0 z-[3] pointer-events-none opacity-[0.025] mix-blend-overlay"
+          <div className="absolute inset-0 z-[4] pointer-events-none opacity-[0.025] mix-blend-overlay"
             style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`, backgroundSize: '256px 256px' }}
           />
 
