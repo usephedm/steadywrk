@@ -4,40 +4,44 @@
 ## Company
 - Name: STEADYWRK LLC
 - Domain: steadywrk.app
-- Location: Building 15, King Hussein Business Park, Amman, Jordan
+- Location: Building 15, King Hussein Business Park, King Abdullah II Street, Amman, Jordan
 - Founded: 2026
-- Industry: AI career platform, BPO, digital marketing, facility management
+- Industry: AI-native talent platform, US commercial operations, BPO, digital marketing, facility management
 
 ## What We Do
-STEADYWRK is an AI-native startup platform that connects ambitious Jordanian talent — especially women 18-30 — with elite training, rapid professional development, and meaningful work serving US clients. We operate four verticals: AI Lab & Studio, Facility Management, Digital Marketing, and AI BPO.
+STEADYWRK connects ambitious Jordanian talent — especially women 18-30 — with US commercial operations. We train operators with real AI tools, deploy them on real client work, and build careers that compound. Four verticals: AI Lab & Studio, Facility Management, Digital Marketing, AI BPO.
 
 ## Programs
-- IGNITE (3-month internship): Immersive AI-native internship. Ship production work from week one.
-- ORBIT (6-month fellowship): Deep technical fellowship. Lead projects, mentor juniors, build systems.
-- APEX (12-month leadership track): Strategic leadership. Architect solutions, drive teams, shape direction.
+- IGNITE (3-month internship): Ship production work from week one. Real projects, real deadlines, real mentorship.
+- ORBIT (6-month fellowship): Lead projects. Mentor juniors. Build the systems that power operations.
+- APEX (12-month leadership track): Architect solutions. Drive teams. Shape company direction.
 
-## Hiring
-We are actively hiring in Amman, Jordan for:
-- AI Engineer (AI Lab, Full-time)
-- Frontend Developer (Engineering, Full-time)
-- Digital Marketing Lead (Growth, Full-time)
-- BPO Operations Manager (Operations, Full-time)
-- AI BPO Agent (BPO, Contract)
+## Open Positions
+- Operations Dispatcher (Operations, Full-time, Amman) — Coordinate US commercial service operations. Cold-call, negotiate, manage workflows. Strong English and persuasion skills required. 400-700 JOD/month.
+- AI Engineer (AI Lab, Full-time, Amman/Remote) — Design AI agent systems, LLM integrations, autonomous workflows. 800-1,500 JOD/month.
+- Frontend Developer (Engineering, Full-time, Amman/Remote) — Build performant web interfaces with Next.js 16, React 19, TypeScript. 700-1,200 JOD/month.
+- Digital Marketing Lead (Growth, Full-time, Amman) — SEO, content strategy, paid media, GEO optimization. 600-1,000 JOD/month.
+- AI BPO Agent (BPO, Full-time, Amman) — AI-enhanced customer support and document processing. Training provided. 350-500 JOD/month.
 
-Apply via WhatsApp or email hello@steadywrk.app.
+Apply via WhatsApp or email hello@steadywrk.app. We respond within 48 hours.
 
 ## Technology
-Next.js, React, TypeScript, Tailwind CSS, Supabase, Vercel, Cloudflare Workers.
+Next.js 16, React 19, TypeScript, Tailwind CSS v4, Clerk Auth, Neon Postgres, Drizzle ORM, Resend, PostHog, Cal.com, Vercel, Cloudflare Workers.
 
 ## Key Facts
 - Jordan produces ~7,000 technology graduates annually
 - 46% youth unemployment (15-24), 66% for young women
 - Jordan ranks 3rd in Arab world for AI adoption in public sector
 - 92.5% internet penetration, primarily mobile
-- KHBP is at 100% occupancy with Phase Two expansion underway
+- KHBP is at 100% occupancy with Phase Two expansion underway (266,000 sqm)
+- Jordan's ICT sector: 46,000+ employees, targeting 100,000 by 2033
+
+## Hiring Process
+7-stage funnel: Application (6-8 min) → AI Screening → Skills Assessment → Async Video → Live Interview (45 min) → Team Meet (30 min) → Offer. Total: ≤14 days. Response within 48 hours. Constructive feedback for Stage 3+ rejections.
 
 ## Contact
 - Website: https://steadywrk.app
 - Email: hello@steadywrk.app
 - Instagram: @steadywrk
 - LinkedIn: /company/steadywrk
+- TikTok: @steadywrk

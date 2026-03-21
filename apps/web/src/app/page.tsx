@@ -57,11 +57,11 @@ const ease = [0.22, 1, 0.36, 1] as const;
    DATA
    ───────────────────────────────────────────── */
 const ROLES = [
-  { title: 'AI Engineer', dept: 'AI Lab', type: 'Full-time', location: 'Amman / Remote', salary: '800–1,500 JOD' },
-  { title: 'Frontend Developer', dept: 'Engineering', type: 'Full-time', location: 'Amman / Remote', salary: '700–1,200 JOD' },
-  { title: 'Digital Marketing Lead', dept: 'Growth', type: 'Full-time', location: 'Amman', salary: '600–1,000 JOD' },
-  { title: 'BPO Operations Manager', dept: 'Operations', type: 'Full-time', location: 'Amman', salary: '500–900 JOD' },
-  { title: 'AI BPO Agent', dept: 'BPO', type: 'Full-time', location: 'Amman', salary: '350–500 JOD' },
+  { title: 'Operations Dispatcher', dept: 'Operations', type: 'Full-time', location: 'Amman', salary: '400–700 JOD', featured: true },
+  { title: 'AI Engineer', dept: 'AI Lab', type: 'Full-time', location: 'Amman / Remote', salary: '800–1,500 JOD', featured: false },
+  { title: 'Frontend Developer', dept: 'Engineering', type: 'Full-time', location: 'Amman / Remote', salary: '700–1,200 JOD', featured: false },
+  { title: 'Digital Marketing Lead', dept: 'Growth', type: 'Full-time', location: 'Amman', salary: '600–1,000 JOD', featured: false },
+  { title: 'AI BPO Agent', dept: 'BPO', type: 'Full-time', location: 'Amman', salary: '350–500 JOD', featured: false },
 ];
 
 const PROGRAMS = [
@@ -337,12 +337,19 @@ export default function HomePage() {
                 <BlurFade key={role.title} delay={0.05 + i * 0.06} inView>
                   <a
                     href="#apply"
-                    className="flex items-center justify-between p-5 md:px-7 md:py-6 bg-white rounded-xl border border-[rgba(0,0,0,0.06)] shadow-[0_1px_2px_rgba(0,0,0,0.04)] group hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] transition-all duration-[180ms]"
+                    className={`flex items-center justify-between p-5 md:px-7 md:py-6 bg-white rounded-xl border shadow-[0_1px_2px_rgba(0,0,0,0.04)] group hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] transition-all duration-[180ms] ${role.featured ? 'border-[#E58A0F]/20 ring-1 ring-[#E58A0F]/10' : 'border-[rgba(0,0,0,0.06)]'}`}
                   >
                     <div>
-                      <h3 className="text-[17px] font-bold text-[#23211D] group-hover:text-[#E58A0F] transition-colors duration-[180ms]" style={{ fontFamily: 'var(--font-display)' }}>
-                        {role.title}
-                      </h3>
+                      <div className="flex items-center gap-2.5">
+                        <h3 className="text-[17px] font-bold text-[#23211D] group-hover:text-[#E58A0F] transition-colors duration-[180ms]" style={{ fontFamily: 'var(--font-display)' }}>
+                          {role.title}
+                        </h3>
+                        {role.featured && (
+                          <span className="text-[10px] uppercase tracking-[0.1em] font-bold text-[#E58A0F] bg-[#E58A0F]/8 px-2 py-0.5 rounded-full">
+                            Hiring Now
+                          </span>
+                        )}
+                      </div>
                       <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1.5">
                         <span className="text-[11px] uppercase tracking-[0.08em] font-semibold text-[#6B6B66]">{role.dept}</span>
                         <span className="w-0.5 h-0.5 rounded-full bg-[#B0B0AB]" />
