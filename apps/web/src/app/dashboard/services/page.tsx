@@ -116,9 +116,7 @@ export default function ServicesPage() {
             US company. Now in Jordan. Building the future of work.
           </p>
         </div>
-        <p className="text-white/15 text-xs">
-          {COMPANY.legal} · {COMPANY.parent}
-        </p>
+        <p className="text-white/15 text-xs">{COMPANY.legal}</p>
         <Link
           href="/dashboard/contact"
           className="inline-flex items-center gap-2 text-amber-500/70 text-sm font-mono tracking-wider uppercase hover:text-amber-500 transition-colors mt-4 group"

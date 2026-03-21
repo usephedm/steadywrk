@@ -30,6 +30,9 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   compress: true,
+  turbopack: {
+    root: '../..',
+  },
   images: {
     qualities: [100, 75],
     formats: ['image/avif', 'image/webp'],
@@ -73,17 +76,7 @@ const nextConfig: NextConfig = {
       },
       {
         source: '/jobs',
-        destination: '/dashboard/hiring',
-        permanent: true,
-      },
-      {
-        source: '/careers',
-        destination: '/dashboard/hiring',
-        permanent: true,
-      },
-      {
-        source: '/about',
-        destination: '/dashboard/services',
+        destination: '/careers',
         permanent: true,
       },
     ];

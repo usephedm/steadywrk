@@ -17,9 +17,15 @@ export default function Error({
   }, [error]);
 
   return (
-    <main className="min-h-dvh flex items-center justify-center px-6" style={{ background: 'var(--color-bg)' }}>
+    <main
+      className="min-h-dvh flex items-center justify-center px-6"
+      style={{ background: 'var(--color-bg)' }}
+    >
       <div className="text-center max-w-md">
-        <div className="text-4xl font-extrabold text-[var(--color-error)] mb-4" style={{ fontFamily: 'var(--font-display)' }}>
+        <div
+          className="text-4xl font-extrabold text-[var(--color-error)] mb-4"
+          style={{ fontFamily: 'var(--font-display)' }}
+        >
           Something went wrong
         </div>
         <p className="text-[var(--color-fog)] mb-8">

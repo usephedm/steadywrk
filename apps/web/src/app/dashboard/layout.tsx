@@ -24,8 +24,6 @@ export default function DashboardLayout({
 
   return (
     <div className="relative min-h-dvh bg-[#0A0A0A] text-white">
-
-
       {/* Ambient glow */}
       <div
         className="fixed inset-0 pointer-events-none z-0"

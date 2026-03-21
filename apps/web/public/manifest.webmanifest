@@ -1,13 +1,13 @@
 {
-  "name": "SteadyWrk",
-  "short_name": "SteadyWrk",
-  "description": "AI-powered field services, digital marketing, and BPO platform",
-  "start_url": "/dashboard",
+  "name": "STEADYWRK",
+  "short_name": "STEADYWRK",
+  "description": "AI-native career-launch platform for Jordan's most ambitious talent. Where ambition compounds.",
+  "start_url": "/",
   "display": "standalone",
-  "background_color": "#0A0A0A",
-  "theme_color": "#F59E0B",
+  "background_color": "#FAFAF8",
+  "theme_color": "#E58A0F",
   "orientation": "portrait-primary",
-  "categories": ["business", "productivity"],
+  "categories": ["business", "productivity", "education"],
   "icons": [
     {
       "src": "/logo.webp",

@@ -1,10 +1,11 @@
+import { PROGRAMS, ROLES } from '@/lib/data';
 import type { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://steadywrk.app';
   const now = new Date();
 
-  return [
+  const staticPages: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
       lastModified: now,
@@ -12,40 +13,51 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1.0,
     },
     {
-      url: `${baseUrl}/dashboard`,
+      url: `${baseUrl}/careers`,
       lastModified: now,
       changeFrequency: 'weekly',
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/dashboard/services`,
+      url: `${baseUrl}/programs`,
       lastModified: now,
       changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/dashboard/hiring`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/dashboard/blog`,
-      lastModified: now,
-      changeFrequency: 'daily',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/dashboard/roadmap`,
+      url: `${baseUrl}/about`,
       lastModified: now,
       changeFrequency: 'monthly',
-      priority: 0.6,
+      priority: 0.7,
     },
     {
-      url: `${baseUrl}/dashboard/contact`,
+      url: `${baseUrl}/culture`,
       lastModified: now,
       changeFrequency: 'monthly',
       priority: 0.7,
     },
   ];
+
+  const rolePages: MetadataRoute.Sitemap = ROLES.map((role) => ({
+    url: `${baseUrl}/careers/${role.slug}`,
+    lastModified: now,
+    changeFrequency: 'weekly' as const,
+    priority: 0.8,
+  }));
+
+  const programPages: MetadataRoute.Sitemap = PROGRAMS.map((program) => ({
+    url: `${baseUrl}/programs/${program.slug}`,
+    lastModified: now,
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }));
+
+  const applyPages: MetadataRoute.Sitemap = ROLES.map((role) => ({
+    url: `${baseUrl}/apply/${role.slug}`,
+    lastModified: now,
+    changeFrequency: 'monthly' as const,
+    priority: 0.6,
+  }));
+
+  return [...staticPages, ...rolePages, ...programPages, ...applyPages];
 }
