@@ -117,7 +117,7 @@ export default function ServicesPage() {
           </p>
         </div>
         <p className="text-white/15 text-xs">
-          {COMPANY.legal} · {COMPANY.parent}
+          {COMPANY.legal}
         </p>
         <Link
           href="/dashboard/contact"

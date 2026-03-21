@@ -2,7 +2,7 @@
 
 import { AnimatedTitle } from '@/components/ui/animated-title';
 import { TiltCard } from '@/components/ui/tilt-card';
-import { DEPARTMENTS, POSITIONS } from '@/lib/data';
+import { DEPARTMENTS, ROLES } from '@/lib/data';
 import { motion } from 'framer-motion';
 import { Building2, Clock, MapPin } from 'lucide-react';
 import { useRef, useState } from 'react';
@@ -22,7 +22,7 @@ export default function HiringPage() {
   const formRef = useRef<HTMLDivElement>(null);
 
   const filtered =
-    activeDept === 'All' ? POSITIONS : POSITIONS.filter((p) => p.department === activeDept);
+    activeDept === 'All' ? ROLES : ROLES.filter((p) => p.dept === activeDept);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -99,7 +99,7 @@ export default function HiringPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-16">
         {filtered.map((position, i) => (
           <motion.div
-            key={position.id}
+            key={position.slug}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 + i * 0.08, ease }}
@@ -112,7 +112,7 @@ export default function HiringPage() {
               <div className="flex flex-wrap gap-3 text-xs text-white/40">
                 <span className="flex items-center gap-1">
                   <Building2 className="h-3 w-3" />
-                  {position.department}
+                  {position.dept}
                 </span>
                 <span className="flex items-center gap-1">
                   <Clock className="h-3 w-3" />
@@ -216,8 +216,8 @@ export default function HiringPage() {
                   <option value="" className="bg-black text-white/40">
                     Select Position *
                   </option>
-                  {POSITIONS.map((p) => (
-                    <option key={p.id} value={p.title} className="bg-black">
+                  {ROLES.map((p) => (
+                    <option key={p.slug} value={p.title} className="bg-black">
                       {p.title}
                     </option>
                   ))}
@@ -275,9 +275,9 @@ export default function HiringPage() {
       </motion.div>
 
       {/* JSON-LD JobPosting structured data */}
-      {POSITIONS.map((pos) => (
+      {ROLES.map((pos) => (
         <script
-          key={pos.id}
+          key={pos.slug}
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({

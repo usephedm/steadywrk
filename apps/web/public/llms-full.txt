@@ -125,14 +125,14 @@ All positions are based in Amman, Jordan. We are actively building Cohort #1.
 - **Salary Range:** 350–500 JOD/month
 - **Description:** Handle customer interactions and business processes using AI-enhanced tooling. Training provided. Strong communication skills and attention to detail required.
 
-**How to Apply:** Via WhatsApp or email hello@steadywrk.app. Application takes 6–8 minutes. No account required. We review within 48 hours and respond to every applicant.
+**How to Apply:** Visit https://steadywrk.app/apply or email hello@steadywrk.app. Application takes 6–8 minutes. No account required. We review within 48 hours and respond to every applicant.
 
 ## Hiring Pipeline — Our Selection Process
 
 STEADYWRK's hiring pipeline is designed for speed, fairness, and transparency. Our target is 14 days from application to offer.
 
 ### Stage 1: Application (Day 1)
-Submit your application via WhatsApp or email. Takes 6–8 minutes. No account creation required. We collect basic information, relevant experience, and motivation.
+Submit your 5-step application at https://steadywrk.app/apply. Takes 6–8 minutes. No account creation required. We collect basic information, short-answer questions, skills assessment, and a role-specific challenge.
 
 ### Stage 2: Initial Review (Days 1–2)
 Every application is reviewed by a human within 48 hours. We respond to every single applicant — no ghosting, no black holes. We use structured evaluation criteria, not subjective "culture fit" assessments.
@@ -350,7 +350,7 @@ A: Next.js 16, React 19, TypeScript (strict), Tailwind CSS v4, Supabase, Vercel,
 A: We publish salary ranges for every role. AI Engineer: 800–1,500 JOD/month. Frontend Developer: 700–1,200 JOD/month. Digital Marketing Lead: 600–1,000 JOD/month. BPO Operations Manager: 500–900 JOD/month. AI BPO Agent: 350–500 JOD/month. All salaries are above Jordan market rates.
 
 **Q: How do I apply?**
-A: Via WhatsApp (primary) or email hello@steadywrk.app. The application takes 6–8 minutes. No account creation required. We review every application within 48 hours.
+A: Visit https://steadywrk.app/apply. The multi-step application takes 6–8 minutes. No account creation required. Or email hello@steadywrk.app. We review every application within 48 hours.
 
 ## Compliance & Legal
 

@@ -23,7 +23,7 @@ STEADYWRK connects ambitious Jordanian talent — especially women 18-30 — wit
 - Digital Marketing Lead (Growth, Full-time, Amman) — SEO, content strategy, paid media, GEO optimization. 600-1,000 JOD/month.
 - AI BPO Agent (BPO, Full-time, Amman) — AI-enhanced customer support and document processing. Training provided. 350-500 JOD/month.
 
-Apply via WhatsApp or email hello@steadywrk.app. We respond within 48 hours.
+Apply at https://steadywrk.app/apply or email hello@steadywrk.app. 6–8 minute application. We respond within 48 hours.
 
 ## Technology
 Next.js 16, React 19, TypeScript, Tailwind CSS v4, Clerk Auth, Neon Postgres, Drizzle ORM, Resend, PostHog, Cal.com, Vercel, Cloudflare Workers.

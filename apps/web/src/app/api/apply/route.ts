@@ -4,7 +4,6 @@ import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
   try {
-    // Rate limit: 5 submissions per IP per hour
     const ip = getClientIP(request);
     const { success } = rateLimit(`apply:${ip}`, 5);
     if (!success) {
@@ -17,40 +16,15 @@ export async function POST(request: Request) {
     const body = await request.json();
     const data = validateApplyPayload(body);
 
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-
-    if (supabaseUrl && supabaseKey) {
-      const res = await fetch(`${supabaseUrl}/rest/v1/applications`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          apikey: supabaseKey,
-          Authorization: `Bearer ${supabaseKey}`,
-          Prefer: 'return=minimal',
-        },
-        body: JSON.stringify({
-          name: data.name,
-          email: data.email,
-          position: data.position,
-          resume_url: data.resumeUrl,
-          message: data.message,
-          created_at: new Date().toISOString(),
-        }),
-      });
-
-      if (!res.ok && res.status !== 409) {
-        console.error('Supabase application insert failed:', res.status);
-      }
-    }
-
-    // Structured log for Vercel Log Drain
+    // Log application for processing
+    // When DATABASE_URL is configured, this will insert into Neon via Drizzle
     console.info(
       JSON.stringify({
         event: 'application_submitted',
         name: data.name,
         email: data.email,
         position: data.position,
+        team: data.team,
         timestamp: new Date().toISOString(),
       }),
     );

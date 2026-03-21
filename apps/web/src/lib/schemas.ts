@@ -1,5 +1,3 @@
-// Validation helpers — no Zod dependency, pure runtime checks
-
 export function validateEmail(email: unknown): string | null {
   if (!email || typeof email !== 'string') return null;
   const trimmed = email.trim().toLowerCase();
@@ -17,19 +15,58 @@ export function validateRequired(value: unknown, field: string): string {
 export interface ApplyPayload {
   name: string;
   email: string;
+  phone: string;
   position: string;
-  resumeUrl: string;
-  message: string;
+  team: string;
+  answers: {
+    q1: string;
+    q2: string;
+    q3: string;
+  };
+  portfolioUrl: string;
+  githubUrl: string;
+  behanceUrl: string;
+  skills: Record<string, number>;
+  availability: string;
+  challengeResponse: string;
 }
 
 export function validateApplyPayload(body: Record<string, unknown>): ApplyPayload {
   const name = validateRequired(body.name, 'Name');
   const email = validateEmail(body.email);
   if (!email) throw new Error('Invalid email');
+  const phone = typeof body.phone === 'string' ? body.phone.trim() : '';
   const position = validateRequired(body.position, 'Position');
-  const resumeUrl = typeof body.resumeUrl === 'string' ? body.resumeUrl.trim() : '';
-  const message = typeof body.message === 'string' ? body.message.trim() : '';
-  return { name, email, position, resumeUrl, message };
+  const team = typeof body.team === 'string' ? body.team.trim() : '';
+
+  const rawAnswers = body.answers as Record<string, unknown> | undefined;
+  const answers = {
+    q1: typeof rawAnswers?.q1 === 'string' ? rawAnswers.q1.trim() : '',
+    q2: typeof rawAnswers?.q2 === 'string' ? rawAnswers.q2.trim() : '',
+    q3: typeof rawAnswers?.q3 === 'string' ? rawAnswers.q3.trim() : '',
+  };
+
+  const portfolioUrl = typeof body.portfolioUrl === 'string' ? body.portfolioUrl.trim() : '';
+  const githubUrl = typeof body.githubUrl === 'string' ? body.githubUrl.trim() : '';
+  const behanceUrl = typeof body.behanceUrl === 'string' ? body.behanceUrl.trim() : '';
+  const skills = (typeof body.skills === 'object' && body.skills !== null ? body.skills : {}) as Record<string, number>;
+  const availability = typeof body.availability === 'string' ? body.availability.trim() : '';
+  const challengeResponse = typeof body.challengeResponse === 'string' ? body.challengeResponse.trim() : '';
+
+  return {
+    name,
+    email,
+    phone,
+    position,
+    team,
+    answers,
+    portfolioUrl,
+    githubUrl,
+    behanceUrl,
+    skills,
+    availability,
+    challengeResponse,
+  };
 }
 
 export interface ContactPayload {

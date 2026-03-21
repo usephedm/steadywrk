@@ -7,9 +7,9 @@
 
 ### Where ambition compounds.
 
-AI-native talent platform for Jordan's most ambitious operators.
+AI-native career-launch platform for Jordan's most ambitious talent.
 
-**Next.js 16 · Tailwind v4 · Clerk · Neon · Vercel**
+**Next.js 16 · React 19 · Tailwind v4 · Drizzle ORM · Neon · Vercel**
 
 [![Deploy](https://img.shields.io/badge/deploy-vercel-black?logo=vercel)](https://steadywrk.app)
 [![License](https://img.shields.io/badge/license-private-red)]()
@@ -22,7 +22,7 @@ AI-native talent platform for Jordan's most ambitious operators.
 
 STEADYWRK is an AI-native career platform that connects ambitious Jordanian talent with US commercial operations. We train, deploy, and develop operators who serve US clients across facility management, digital marketing, AI development, and business process operations.
 
-**Headquartered:** Building 15, King Hussein Business Park, King Abdullah II Street, Amman, Jordan
+**Headquartered:** Building 15, King Hussein Business Park, Amman, Jordan
 
 **Entity:** STEADYWRK LLC (US/JO)
 
@@ -30,12 +30,12 @@ STEADYWRK is an AI-native career platform that connects ambitious Jordanian tale
 
 Single Next.js 16 application serving four role-based experiences from one codebase:
 
-| Layer | Experience | Auth |
-|---|---|---|
-| **Public** | Brand, careers, programs, blog, culture | None |
-| **Applicant** | Multi-step application, status tracker | Email-only |
-| **Employee** | Dashboard, training, tools, leaderboard | Clerk RBAC |
-| **HR Admin** | Pipeline, team management, analytics | Clerk RBAC (admin) |
+| Layer | Experience | Auth | Routes |
+|---|---|---|---|
+| **Public** | Brand, careers, programs, culture | None | `/`, `/careers`, `/programs`, `/about`, `/culture` |
+| **Applicant** | 5-step application, status tracker | Email-only | `/apply/[role]` |
+| **Employee** | Dashboard, training, tools, leaderboard | Clerk RBAC | `/dashboard/*` |
+| **HR Admin** | Pipeline, team management, analytics | Clerk RBAC (admin) | `/dashboard/*` |
 
 Routed silently via Clerk `publicMetadata` middleware. One Neon Postgres database. One Vercel deployment.
 
@@ -44,16 +44,15 @@ Routed silently via Clerk `publicMetadata` middleware. One Neon Postgres databas
 | Layer | Technology |
 |---|---|
 | Framework | Next.js 16 (App Router, React 19) |
-| Styling | Tailwind CSS v4, Framer Motion 12, 17 MagicUI components |
+| Styling | Tailwind CSS v4, Framer Motion 12 |
 | Typography | Cabinet Grotesk (display) + Satoshi (body) via Fontshare |
 | Auth | Clerk (RBAC, passwordless, OAuth) |
 | Database | Neon (Serverless Postgres) |
-| ORM | Drizzle ORM |
+| ORM | Drizzle ORM with drizzle-zod |
 | Email | Resend + React Email |
 | Analytics | PostHog (funnels, drop-off) |
 | Scheduling | Cal.com (WhatsApp workflows) |
 | Deploy | Vercel (web), Cloudflare Workers (MCPs) |
-| CMS | Sanity v3 (blog, jobs, programs) |
 
 ## Getting Started
 
@@ -67,7 +66,7 @@ npm run dev
 
 ## Design System
 
-Built on Brand Guidelines v2.0 (see `.reference/docs/`):
+Built on Brand Guidelines v2.0:
 
 | Token | Value | Role |
 |---|---|---|
@@ -83,45 +82,74 @@ Built on Brand Guidelines v2.0 (see `.reference/docs/`):
 ## GEO (Generative Engine Optimization)
 
 - [`/llms.txt`](apps/web/public/llms.txt) — Company summary for LLM extraction
-- [`/llms-full.txt`](apps/web/public/llms-full.txt) — Full flattened content (24KB)
+- [`/llms-full.txt`](apps/web/public/llms-full.txt) — Full flattened content
 - `schema.org/Organization` — JSON-LD with KHBP address
 - `schema.org/JobPosting` — Structured data for all open roles
 - Sitemap, robots.txt, OpenGraph images configured
-
-## Content Pillars
-
-| Pillar | Keywords | Format |
-|---|---|---|
-| AI Careers Jordan | ai jobs jordan, ML career amman | Long-form guides |
-| Women in Tech MENA | women tech jordan, female engineer | Interview series |
-| Operations Careers | US operations jobs Jordan, remote BPO | Career guides |
-| Growth Guides | how to get hired at US company from Jordan | Tutorials |
-| Behind the Build | startup culture, day in life | Video + blog |
 
 ## Project Structure
 
 ```
 steadywrk/
 ├── CLAUDE.md                        # AI agent instructions
-├── .reference/                      # Brand docs, assets, research
-│   ├── docs/                        # Guidelines v1/v2, Blueprint v4
-│   └── brand-assets/                # 3D renders, mockups
-├── apps/web/                        # steadywrk.app
-│   ├── src/app/                     # Pages, API routes, SEO
+├── README.md                        # This file
+├── biome.json                       # Linting + formatting
+├── turbo.json                       # Monorepo config
+├── apps/web/
+│   ├── src/app/
 │   │   ├── page.tsx                 # Homepage (cinematic hero)
-│   │   ├── api/                     # apply, contact, waitlist, health
-│   │   └── dashboard/              # Employee + admin (behind auth)
-│   ├── src/components/ui/           # 24 components (MagicUI + custom)
-│   ├── src/lib/                     # Data, hooks, utils, schemas
-│   └── public/                      # Images, llms.txt, llms-full.txt
-├── biome.json                       # Linter config
-└── turbo.json                       # Monorepo config
+│   │   ├── layout.tsx               # Root layout (fonts, metadata)
+│   │   ├── globals.css              # Tailwind v4 @theme tokens
+│   │   ├── careers/                 # Filterable job listing
+│   │   │   └── [slug]/             # Individual job pages (JobPosting schema)
+│   │   ├── programs/                # IGNITE, ORBIT, APEX overview
+│   │   │   └── [slug]/             # Individual program pages
+│   │   ├── apply/
+│   │   │   └── [role]/             # 5-step multi-step application form
+│   │   ├── about/                   # Company story, mission
+│   │   ├── culture/                 # Values, onboarding quest line
+│   │   ├── api/                     # API routes (apply, contact, health)
+│   │   ├── dashboard/              # Employee + admin (behind Clerk)
+│   │   ├── sitemap.ts              # Auto-generated sitemap
+│   │   └── robots.ts               # SEO crawl directives
+│   ├── src/components/
+│   │   ├── layout/                  # Navbar, Footer
+│   │   └── ui/                      # 25 components (MagicUI + custom)
+│   ├── src/lib/
+│   │   ├── data.ts                  # Roles, programs, services, tech
+│   │   ├── schemas.ts               # Zod validation schemas
+│   │   └── utils.ts                 # cn() and helpers
+│   ├── src/fonts/                   # Cabinet Grotesk + Satoshi .woff2
+│   └── public/
+│       ├── brand/                   # WebP brand images
+│       ├── llms.txt                 # GEO for AI models
+│       ├── llms-full.txt            # Extended GEO
+│       └── manifest.webmanifest     # PWA manifest
+└── packages/db/
+    ├── src/
+    │   ├── schema.ts                # Drizzle ORM tables (6)
+    │   ├── types.ts                 # Insert/select schemas (drizzle-zod)
+    │   └── index.ts                 # Neon driver + exports
+    └── drizzle.config.ts            # Migration config
 ```
+
+## Database Schema
+
+Six tables in `packages/db/`:
+
+| Table | Purpose |
+|---|---|
+| `applicants` | Full application data, status pipeline, scores |
+| `job_listings` | Positions with department, salary, requirements |
+| `blog_posts` | Content with SEO fields, publish workflow |
+| `employees` | Clerk-linked, gamification (badges, points, streaks) |
+| `interview_slots` | Cal.com scheduling integration |
+| `email_events` | ADVANCE/REJECT pipeline event tracking |
 
 ---
 
 <div align="center">
 
-© 2026 STEADYWRK LLC · Building 15, KHBP, Amman, Jordan · [steadywrk.app](https://steadywrk.app)
+&copy; 2026 STEADYWRK LLC &middot; Building 15, KHBP, Amman, Jordan &middot; [steadywrk.app](https://steadywrk.app)
 
 </div>
