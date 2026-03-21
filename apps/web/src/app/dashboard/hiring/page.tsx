@@ -1,310 +1,254 @@
 'use client';
 
-import { AnimatedTitle } from '@/components/ui/animated-title';
-import { TiltCard } from '@/components/ui/tilt-card';
-import { DEPARTMENTS, ROLES } from '@/lib/data';
-import { motion } from 'framer-motion';
-import { Building2, Clock, MapPin } from 'lucide-react';
-import { useRef, useState } from 'react';
+import { PIPELINE_CANDIDATES, ROLES } from '@/lib/data';
+import type { CandidateStatus } from '@/lib/data';
+import {
+  ArrowRight,
+  Calendar,
+  ChevronRight,
+  Filter,
+  Search,
+  Star,
+  User,
+  X,
+} from 'lucide-react';
+import { useMemo, useState } from 'react';
 
-const ease = [0.16, 1, 0.3, 1] as const;
+const PIPELINE_COLUMNS: { status: CandidateStatus; label: string; color: string }[] = [
+  { status: 'applied', label: 'Applied', color: '#6B6B66' },
+  { status: 'screening', label: 'Screening', color: '#E58A0F' },
+  { status: 'assessment', label: 'Assessment', color: '#0F6B6F' },
+  { status: 'interview', label: 'Interview', color: '#4D7A3A' },
+  { status: 'offer', label: 'Offer', color: '#E58A0F' },
+  { status: 'rejected', label: 'Rejected', color: '#A03D4A' },
+];
+
+const SCORECARD_DIMENSIONS = [
+  { name: 'Technical', weight: 30, key: 'technical' as const },
+  { name: 'Organizational', weight: 20, key: 'organizational' as const },
+  { name: 'Communication', weight: 15, key: 'communication' as const },
+  { name: 'Growth', weight: 15, key: 'growth' as const },
+  { name: 'Cultural', weight: 10, key: 'cultural' as const },
+  { name: 'Initiative', weight: 10, key: 'initiative' as const },
+];
+
+type ScoreKey = 'technical' | 'organizational' | 'communication' | 'growth' | 'cultural' | 'initiative';
 
 export default function HiringPage() {
-  const [activeDept, setActiveDept] = useState('All');
-  const [formStatus, setFormStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    position: '',
-    resumeUrl: '',
-    message: '',
-  });
-  const formRef = useRef<HTMLDivElement>(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [roleFilter, setRoleFilter] = useState('All');
+  const [selectedCandidate, setSelectedCandidate] = useState<string | null>(null);
 
-  const filtered = activeDept === 'All' ? ROLES : ROLES.filter((p) => p.dept === activeDept);
+  const roleOptions = ['All', ...ROLES.map((r) => r.title)] as const;
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (formStatus === 'loading') return;
-    setFormStatus('loading');
-    try {
-      const res = await fetch('/api/apply', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
-      setFormStatus(res.ok ? 'success' : 'error');
-    } catch {
-      setFormStatus('error');
-    }
-  };
+  const filteredCandidates = useMemo(() => {
+    return PIPELINE_CANDIDATES.filter((c) => {
+      const matchesSearch =
+        !searchQuery ||
+        c.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        c.role.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchesRole = roleFilter === 'All' || c.role === roleFilter;
+      return matchesSearch && matchesRole;
+    });
+  }, [searchQuery, roleFilter]);
 
-  const scrollToForm = (positionTitle: string) => {
-    setFormData((f) => ({ ...f, position: positionTitle }));
-    formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  };
+  const selected = PIPELINE_CANDIDATES.find((c) => c.id === selectedCandidate);
 
   return (
-    <div className="max-w-4xl mx-auto px-6 py-16">
-      {/* Header */}
-      <div className="mb-12">
-        <AnimatedTitle
-          text="Yes, We are hiring"
-          className="text-4xl sm:text-5xl font-bold tracking-tighter text-white"
-        />
-        <motion.p
-          className="text-white/40 text-sm tracking-[0.2em] uppercase font-mono mt-3"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
-        >
-          Join the team
-        </motion.p>
-        <motion.div
-          className="w-20 h-px mt-6"
-          style={{
-            background: 'linear-gradient(90deg, rgba(245,158,11,0.5), transparent)',
-          }}
-          initial={{ scaleX: 0, originX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{ duration: 1, delay: 0.5 }}
-        />
-      </div>
+    <div className="min-h-dvh bg-[#FAFAF8]">
+      <div className="max-w-7xl mx-auto px-6 py-10">
+        {/* Header */}
+        <div className="mb-8">
+          <div className="flex items-center gap-2 mb-1">
+            <h1 className="font-[var(--font-display)] text-3xl sm:text-4xl font-extrabold text-[#23211D] tracking-tight">
+              Hiring Pipeline
+            </h1>
+            <span className="text-[10px] font-mono uppercase tracking-wider text-white bg-[#E58A0F] px-2 py-0.5 rounded-full">
+              Admin
+            </span>
+          </div>
+          <p className="text-[#6B6B66] mt-2 text-sm">
+            Manage candidates across the hiring pipeline. Click a card to view details.
+          </p>
+        </div>
 
-      {/* Department filter */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.3 }}
-        className="flex flex-wrap gap-2 mb-8"
-      >
-        {DEPARTMENTS.map((dept) => (
-          <button
-            type="button"
-            key={dept}
-            onClick={() => setActiveDept(dept)}
-            className={`px-4 py-1.5 rounded-full text-xs font-mono tracking-wider uppercase transition-all duration-300 border ${
-              activeDept === dept
-                ? 'bg-amber-500/20 border-amber-500/40 text-amber-500 shadow-[0_0_15px_rgba(245,158,11,0.15)]'
-                : 'bg-white/[0.03] border-white/[0.08] text-white/40 hover:text-white/60 hover:border-white/[0.15]'
-            }`}
-            data-interactive
-          >
-            {dept}
-          </button>
-        ))}
-      </motion.div>
-
-      {/* Job cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-16">
-        {filtered.map((position, i) => (
-          <motion.div
-            key={position.slug}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 + i * 0.08, ease }}
-          >
-            <TiltCard
-              className="rounded-xl border border-white/[0.08] bg-white/[0.02] p-6 space-y-3 hover:border-amber-500/15 transition-colors h-full"
-              tiltAmount={3}
+        {/* Filter bar */}
+        <div className="flex flex-col sm:flex-row gap-3 mb-8">
+          <div className="relative flex-1">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#B0B0AB]" />
+            <input
+              type="text"
+              placeholder="Search by name or role..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-10 pr-4 py-2.5 min-h-[44px] rounded-lg border border-[#E5E5E2] bg-white text-sm text-[#23211D] placeholder:text-[#B0B0AB] focus:outline-none focus:border-[#E58A0F] focus:ring-2 focus:ring-[#E58A0F]/10 transition-all"
+            />
+          </div>
+          <div className="relative">
+            <Filter className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#B0B0AB]" />
+            <select
+              value={roleFilter}
+              onChange={(e) => setRoleFilter(e.target.value)}
+              className="pl-10 pr-8 py-2.5 min-h-[44px] rounded-lg border border-[#E5E5E2] bg-white text-sm text-[#23211D] focus:outline-none focus:border-[#E58A0F] focus:ring-2 focus:ring-[#E58A0F]/10 transition-all appearance-none"
             >
-              <h3 className="text-lg font-semibold text-white">{position.title}</h3>
-              <div className="flex flex-wrap gap-3 text-xs text-white/40">
-                <span className="flex items-center gap-1">
-                  <Building2 className="h-3 w-3" />
-                  {position.dept}
-                </span>
-                <span className="flex items-center gap-1">
-                  <Clock className="h-3 w-3" />
-                  {position.type}
-                </span>
-                <span className="flex items-center gap-1">
-                  <MapPin className="h-3 w-3" />
-                  {position.location}
-                </span>
-              </div>
-              <p className="text-white/35 text-sm leading-relaxed">{position.description}</p>
-              <button
-                type="button"
-                onClick={() => scrollToForm(position.title)}
-                className="text-amber-500/70 text-xs font-mono tracking-wider uppercase hover:text-amber-500 transition-colors min-h-[44px] flex items-center"
-                data-interactive
-              >
-                Apply →
-              </button>
-            </TiltCard>
-          </motion.div>
-        ))}
-      </div>
+              {roleOptions.map((role) => (
+                <option key={role} value={role}>
+                  {role}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
 
-      {/* Application form */}
-      <motion.div
-        ref={formRef}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.6, ease }}
-        id="apply"
-        className="rounded-2xl border border-white/[0.08] bg-white/[0.02] p-8 relative overflow-hidden"
-      >
-        {/* Subtle glow behind form */}
-        <div
-          className="absolute -top-20 left-1/2 -translate-x-1/2 w-[400px] h-[200px] pointer-events-none"
-          style={{
-            background: 'radial-gradient(ellipse, rgba(245,158,11,0.06), transparent 70%)',
-            filter: 'blur(40px)',
-          }}
-        />
+        {/* Kanban board */}
+        <div className="flex gap-4 overflow-x-auto pb-4 -mx-6 px-6" style={{ scrollbarWidth: 'thin' }}>
+          {PIPELINE_COLUMNS.map((col) => {
+            const colCandidates = filteredCandidates.filter((c) => c.status === col.status);
+            return (
+              <div key={col.status} className="shrink-0 w-[260px]">
+                {/* Column header */}
+                <div className="flex items-center gap-2 mb-3 px-1">
+                  <div
+                    className="w-2 h-2 rounded-full"
+                    style={{ backgroundColor: col.color }}
+                  />
+                  <h3 className="text-sm font-bold text-[#23211D]">{col.label}</h3>
+                  <span className="text-[10px] font-mono text-[#6B6B66] bg-[#F5F5F3] px-1.5 py-0.5 rounded-full">
+                    {colCandidates.length}
+                  </span>
+                </div>
 
-        <h2 className="text-2xl font-bold text-white mb-6 relative">Apply</h2>
-
-        {formStatus === 'success' ? (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="text-center py-12 space-y-3 relative"
-          >
-            <div className="text-amber-500 text-4xl">&#10003;</div>
-            <p className="text-white/50 text-sm">Application received. We&apos;ll be in touch.</p>
-          </motion.div>
-        ) : (
-          <form onSubmit={handleSubmit} className="space-y-5 relative">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label htmlFor="apply-name" className="sr-only">
-                  Full Name
-                </label>
-                <input
-                  id="apply-name"
-                  type="text"
-                  placeholder="Full Name *"
-                  required
-                  inputMode="text"
-                  autoComplete="name"
-                  value={formData.name}
-                  onChange={(e) => setFormData((f) => ({ ...f, name: e.target.value }))}
-                  className="glow-input w-full bg-white/[0.04] border border-white/[0.08] rounded-lg px-4 py-3 min-h-[44px] text-sm text-white placeholder:text-white/20 focus:outline-none transition-all duration-300 font-mono"
-                />
-              </div>
-              <div>
-                <label htmlFor="apply-email" className="sr-only">
-                  Email
-                </label>
-                <input
-                  id="apply-email"
-                  type="email"
-                  placeholder="Email *"
-                  required
-                  inputMode="email"
-                  autoComplete="email"
-                  value={formData.email}
-                  onChange={(e) => setFormData((f) => ({ ...f, email: e.target.value }))}
-                  className="glow-input w-full bg-white/[0.04] border border-white/[0.08] rounded-lg px-4 py-3 min-h-[44px] text-sm text-white placeholder:text-white/20 focus:outline-none transition-all duration-300 font-mono"
-                />
-              </div>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label htmlFor="apply-position" className="sr-only">
-                  Position
-                </label>
-                <select
-                  id="apply-position"
-                  required
-                  value={formData.position}
-                  onChange={(e) => setFormData((f) => ({ ...f, position: e.target.value }))}
-                  className="glow-input w-full bg-white/[0.04] border border-white/[0.08] rounded-lg px-4 py-3 min-h-[44px] text-sm text-white placeholder:text-white/20 focus:outline-none transition-all duration-300 font-mono"
-                >
-                  <option value="" className="bg-black text-white/40">
-                    Select Position *
-                  </option>
-                  {ROLES.map((p) => (
-                    <option key={p.slug} value={p.title} className="bg-black">
-                      {p.title}
-                    </option>
+                {/* Cards */}
+                <div className="space-y-3">
+                  {colCandidates.map((candidate) => (
+                    <button
+                      key={candidate.id}
+                      type="button"
+                      onClick={() => setSelectedCandidate(candidate.id)}
+                      className={`w-full text-left rounded-xl border p-4 transition-all duration-[180ms] ease-out hover:-translate-y-[2px] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] ${
+                        selectedCandidate === candidate.id
+                          ? 'border-[#E58A0F]/30 bg-[#FFF4E6] shadow-[0_4px_12px_rgba(0,0,0,0.08)]'
+                          : 'border-[rgba(0,0,0,0.06)] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04)]'
+                      }`}
+                    >
+                      <div className="flex items-start justify-between gap-2 mb-2">
+                        <p className="text-sm font-medium text-[#23211D]">{candidate.name}</p>
+                        <span
+                          className="shrink-0 text-[10px] font-bold px-1.5 py-0.5 rounded-full text-white"
+                          style={{
+                            background:
+                              candidate.score >= 85
+                                ? '#4D7A3A'
+                                : candidate.score >= 70
+                                  ? '#E58A0F'
+                                  : '#A03D4A',
+                          }}
+                        >
+                          {candidate.score}
+                        </span>
+                      </div>
+                      <p className="text-xs text-[#6B6B66] mb-1.5">{candidate.role}</p>
+                      <div className="flex items-center gap-1 text-[11px] text-[#B0B0AB]">
+                        <Calendar className="h-3 w-3" />
+                        {candidate.appliedDate}
+                      </div>
+                    </button>
                   ))}
-                </select>
+                  {colCandidates.length === 0 && (
+                    <div className="rounded-xl border border-dashed border-[#E5E5E2] p-6 text-center">
+                      <p className="text-xs text-[#B0B0AB]">No candidates</p>
+                    </div>
+                  )}
+                </div>
               </div>
-              <div>
-                <label htmlFor="apply-resume" className="sr-only">
-                  Resume URL
-                </label>
-                <input
-                  id="apply-resume"
-                  type="url"
-                  placeholder="Resume URL (LinkedIn, PDF link)"
-                  inputMode="url"
-                  value={formData.resumeUrl}
-                  onChange={(e) => setFormData((f) => ({ ...f, resumeUrl: e.target.value }))}
-                  className="glow-input w-full bg-white/[0.04] border border-white/[0.08] rounded-lg px-4 py-3 min-h-[44px] text-sm text-white placeholder:text-white/20 focus:outline-none transition-all duration-300 font-mono"
-                />
-              </div>
-            </div>
-            <div>
-              <label htmlFor="apply-message" className="sr-only">
-                Cover message
-              </label>
-              <textarea
-                id="apply-message"
-                placeholder="Cover message"
-                rows={4}
-                value={formData.message}
-                onChange={(e) => setFormData((f) => ({ ...f, message: e.target.value }))}
-                className="glow-input w-full bg-white/[0.04] border border-white/[0.08] rounded-lg px-4 py-3 min-h-[44px] text-sm text-white placeholder:text-white/20 focus:outline-none transition-all duration-300 font-mono resize-none"
-              />
-            </div>
-            <button
-              type="submit"
-              disabled={formStatus === 'loading'}
-              className="bg-amber-500 hover:bg-amber-400 text-black font-bold px-8 py-3 min-h-[44px] rounded-lg text-sm tracking-wider uppercase transition-all duration-300 hover:shadow-[0_0_30px_rgba(245,158,11,0.3)] disabled:opacity-50"
-              data-interactive
-            >
-              {formStatus === 'loading' ? 'Submitting...' : 'Submit Application'}
-            </button>
-            {formStatus === 'error' && (
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="text-red-400/60 text-xs"
-                role="alert"
-                aria-live="polite"
-              >
-                Something went wrong. Try again.
-              </motion.p>
-            )}
-          </form>
-        )}
-      </motion.div>
+            );
+          })}
+        </div>
 
-      {/* JSON-LD JobPosting structured data */}
-      {ROLES.map((pos) => (
-        <script
-          key={pos.slug}
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'JobPosting',
-              title: pos.title,
-              description: pos.description,
-              employmentType: pos.type === 'Full-time' ? 'FULL_TIME' : 'CONTRACTOR',
-              jobLocation: {
-                '@type': 'Place',
-                address: {
-                  '@type': 'PostalAddress',
-                  addressLocality: pos.location.includes('Jordan') ? 'Amman' : undefined,
-                  addressCountry: pos.location.includes('Jordan') ? 'JO' : 'US',
-                },
-              },
-              hiringOrganization: {
-                '@type': 'Organization',
-                name: 'SteadyWrk',
-                sameAs: 'https://steadywrk.app',
-              },
-              datePosted: '2026-03-21',
-            }),
-          }}
-        />
-      ))}
+        {/* Candidate detail panel */}
+        {selected && (
+          <div className="mt-8 rounded-xl border border-[rgba(0,0,0,0.06)] bg-white shadow-[0_1px_3px_rgba(0,0,0,0.06)] overflow-hidden">
+            <div className="flex items-center justify-between p-6 border-b border-[#E5E5E2]">
+              <div>
+                <h2 className="font-[var(--font-display)] text-xl font-bold text-[#23211D]">
+                  {selected.name}
+                </h2>
+                <p className="text-sm text-[#6B6B66] mt-1">
+                  {selected.role} · Applied {selected.appliedDate}
+                </p>
+              </div>
+              <div className="flex items-center gap-3">
+                <button
+                  type="button"
+                  className="px-4 py-2 min-h-[44px] rounded-lg bg-[#E58A0F] text-white text-sm font-medium transition-all duration-[180ms] hover:bg-[#CC7408] flex items-center gap-1.5"
+                >
+                  Advance <ArrowRight className="h-4 w-4" />
+                </button>
+                <button
+                  type="button"
+                  className="px-4 py-2 min-h-[44px] rounded-lg border border-[#E5E5E2] text-[#6B6B66] text-sm font-medium transition-all duration-[180ms] hover:bg-[#F5F5F3]"
+                >
+                  Reject
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setSelectedCandidate(null)}
+                  className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg text-[#B0B0AB] hover:text-[#23211D] hover:bg-[#F5F5F3] transition-all"
+                  aria-label="Close panel"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+            </div>
+
+            {/* Scorecard */}
+            <div className="p-6">
+              <h3 className="font-[var(--font-display)] text-base font-bold text-[#23211D] mb-4">
+                Scorecard
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {SCORECARD_DIMENSIONS.map((dim) => {
+                  const score = selected.scores[dim.key as ScoreKey];
+                  return (
+                    <div key={dim.key} className="flex items-center gap-3">
+                      <div className="flex-1">
+                        <div className="flex items-center justify-between mb-1">
+                          <span className="text-xs text-[#6B6B66]">
+                            {dim.name}{' '}
+                            <span className="text-[#B0B0AB]">({dim.weight}%)</span>
+                          </span>
+                          <span className="text-xs font-medium text-[#23211D]">{score}</span>
+                        </div>
+                        <div className="h-2 rounded-full bg-[#F5F5F3] overflow-hidden">
+                          <div
+                            className="h-full rounded-full transition-all duration-500"
+                            style={{
+                              width: `${score}%`,
+                              background:
+                                score >= 85
+                                  ? '#4D7A3A'
+                                  : score >= 70
+                                    ? '#E58A0F'
+                                    : '#A03D4A',
+                            }}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Overall score */}
+              <div className="mt-6 flex items-center gap-3 p-4 rounded-lg bg-[#F5F5F3]">
+                <Star className="h-5 w-5 text-[#E58A0F]" strokeWidth={1.5} />
+                <span className="text-sm text-[#6B6B66]">Overall Score:</span>
+                <span className="text-lg font-bold text-[#23211D]">{selected.score}/100</span>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
