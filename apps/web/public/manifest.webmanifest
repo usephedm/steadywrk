@@ -1,0 +1,19 @@
+{
+  "name": "SteadyWrk",
+  "short_name": "SteadyWrk",
+  "description": "AI-powered field services, digital marketing, and BPO platform",
+  "start_url": "/dashboard",
+  "display": "standalone",
+  "background_color": "#0A0A0A",
+  "theme_color": "#F59E0B",
+  "orientation": "portrait-primary",
+  "categories": ["business", "productivity"],
+  "icons": [
+    {
+      "src": "/logo.webp",
+      "sizes": "512x512",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    }
+  ]
+}

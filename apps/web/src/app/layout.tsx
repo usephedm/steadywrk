@@ -1,48 +1,72 @@
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata, Viewport } from 'next';
+import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
+
+const geistSans = Geist({
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
+});
+
+const geistMono = Geist_Mono({
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
+});
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   viewportFit: 'cover',
-  themeColor: '#FAFAF8',
+  themeColor: '#0A0A0A',
 };
 
 export const metadata: Metadata = {
   title: {
-    default: 'STEADYWRK | Where Ambition Compounds',
-    template: '%s | STEADYWRK',
+    default: 'SteadyWrk | AI-Powered Field Services & Digital Marketing Platform',
+    template: '%s | SteadyWrk',
   },
   description:
-    'STEADYWRK is Jordan\'s AI-native career platform. We train ambitious talent with real AI tools and ship real work to US clients. Apply in 6 minutes. We respond in 48 hours.',
+    'SteadyWrk is an AI-human bridge platform for field service dispatch, digital marketing, AI BPO, and facility management. US company, now in Amman, Jordan. Apply to join.',
   metadataBase: new URL('https://steadywrk.app'),
+  keywords: [
+    'AI field services',
+    'digital marketing agency Jordan',
+    'AI BPO services',
+    'facility management Amman',
+    'subcontracting platform',
+    'AI dispatch platform',
+    'SteadyWrk',
+    'remote work Jordan',
+    'AI-powered marketing',
+    'field service dispatch software',
+  ],
+  authors: [{ name: 'SteadyWrk', url: 'https://steadywrk.app' }],
+  creator: 'SteadyWrk LLC',
+  publisher: 'SteadyWrk LLC',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   alternates: {
     canonical: 'https://steadywrk.app',
   },
-  keywords: [
-    'AI jobs Jordan', 'women in tech Jordan', 'AI internship Amman',
-    'best startups Jordan', 'remote AI work Jordan', 'career growth startups',
-    'STEADYWRK', 'AI BPO Jordan', 'digital marketing jobs Amman',
-    'prompt engineering career', 'وظائف ذكاء اصطناعي الأردن',
-  ],
-  authors: [{ name: 'STEADYWRK', url: 'https://steadywrk.app' }],
-  creator: 'STEADYWRK',
   openGraph: {
-    title: 'STEADYWRK | Where Ambition Compounds',
+    title: 'SteadyWrk | AI-Powered Field Services & Digital Marketing',
     description:
-      'Jordan\'s AI-native career platform. Elite standards. Rapid development. Structured opportunity. Apply now.',
-    siteName: 'STEADYWRK',
+      'AI Lab, Facility Management, Digital Marketing, and AI BPO. US company, now in Jordan. Apply. Train. Work.',
+    siteName: 'SteadyWrk',
     type: 'website',
     locale: 'en_US',
     url: 'https://steadywrk.app',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'STEADYWRK | Where Ambition Compounds',
+    title: 'SteadyWrk | AI-Powered Field Services & Digital Marketing',
     description:
-      'Jordan\'s AI-native career platform. Elite standards. Rapid development. Structured opportunity.',
+      'AI Lab, Facility Management, Digital Marketing, and AI BPO. US company, now in Jordan.',
+    creator: '@steadywrk',
   },
   robots: {
     index: true,
@@ -55,10 +79,10 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  other: {
-    'geo.region': 'JO-AM',
-    'geo.placename': 'Amman',
+  verification: {
+    google: 'PENDING_VERIFICATION_CODE',
   },
+  category: 'technology',
 };
 
 export default function RootLayout({
@@ -67,84 +91,137 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full antialiased">
+    <html
+      lang="en"
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased dark`}
+    >
       <head>
-        {/* Cabinet Grotesk (display) + Satoshi (body) from Fontshare */}
-        <link
-          rel="preconnect"
-          href="https://api.fontshare.com"
-          crossOrigin="anonymous"
+        {/* #1: Ahrefs Web Analytics */}
+        <script
+          src="https://analytics.ahrefs.com/analytics.js"
+          data-key="xlEN572+HO98vWtLtHolWQ"
+          async
         />
-        <link
-          href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800&f[]=satoshi@400,500,600,700&display=swap"
-          rel="stylesheet"
-        />
-        {/* JetBrains Mono for code/mono */}
-        <link
-          rel="preconnect"
-          href="https://fonts.googleapis.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap"
-          rel="stylesheet"
-        />
+
+        {/* Preload critical assets */}
+        <link rel="preload" href="/logo.webp" as="image" type="image/webp" />
+
+        {/* #2: DNS prefetch + preconnect for third-party speed */}
+        <link rel="dns-prefetch" href="https://analytics.ahrefs.com" />
+        <link rel="dns-prefetch" href="https://va.vercel-scripts.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+
+        {/* #3: PWA manifest */}
+        <link rel="manifest" href="/manifest.webmanifest" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
       </head>
-      <body className="min-h-full flex flex-col">
-        {/* Skip to content — WCAG 2.2 */}
-        <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-[#E58A0F] focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-medium">
-          Skip to main content
-        </a>
+      <body className="min-h-full flex flex-col bg-black">
         {children}
         <Analytics />
         <SpeedInsights />
-
-        {/* JSON-LD Organization — Brand Guidelines v2 */}
+        {/* JSON-LD Organization structured data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               '@context': 'https://schema.org',
               '@type': 'Organization',
-              name: 'STEADYWRK',
-              legalName: 'STEADYWRK LLC',
+              name: 'SteadyWrk',
+              legalName: 'SteadyWrk LLC',
               url: 'https://steadywrk.app',
-              logo: 'https://steadywrk.app/logo-orange.svg',
+              logo: 'https://steadywrk.app/logo.webp',
               description:
-                'Jordan\'s AI-native career platform offering elite training, rapid development, and structured opportunity in AI, BPO, Digital Marketing, and Operations.',
+                'AI-human bridge platform for field service dispatch, digital marketing, AI BPO, and facility management.',
               foundingDate: '2026',
-              slogan: 'Where ambition compounds.',
-              address: {
-                '@type': 'PostalAddress',
-                streetAddress: 'Building 15, King Hussein Business Park',
-                addressLocality: 'Amman',
-                addressCountry: 'JO',
-              },
+              sameAs: ['https://www.linkedin.com/company/steadywrk', 'https://x.com/steadywrk'],
+              address: [
+                {
+                  '@type': 'PostalAddress',
+                  addressLocality: 'Amman',
+                  addressCountry: 'JO',
+                },
+                {
+                  '@type': 'PostalAddress',
+                  addressCountry: 'US',
+                },
+              ],
               contactPoint: {
                 '@type': 'ContactPoint',
                 email: 'hello@steadywrk.app',
-                contactType: 'recruitment',
+                contactType: 'sales',
               },
-              sameAs: [
-                'https://www.instagram.com/steadywrk',
-                'https://www.linkedin.com/company/steadywrk',
-                'https://www.tiktok.com/@steadywrk',
+              knowsAbout: [
+                'Artificial Intelligence',
+                'Field Service Management',
+                'Digital Marketing',
+                'Business Process Outsourcing',
+                'Facility Management',
               ],
             }),
           }}
         />
-
-        {/* JSON-LD JobPosting — GEO + Google for Jobs */}
+        {/* JSON-LD WebSite with SearchAction for sitelinks searchbox */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify([
-              { '@context': 'https://schema.org', '@type': 'JobPosting', title: 'AI Engineer', description: 'Design and implement AI agent systems, LLM integrations, and autonomous workflows. Ship production ML pipelines from week one.', datePosted: '2026-03-21', employmentType: 'FULL_TIME', hiringOrganization: { '@type': 'Organization', name: 'STEADYWRK LLC', sameAs: 'https://steadywrk.app' }, jobLocation: { '@type': 'Place', address: { '@type': 'PostalAddress', addressLocality: 'Amman', addressCountry: 'JO', streetAddress: 'Building 15, King Hussein Business Park' } }, baseSalary: { '@type': 'MonetaryAmount', currency: 'JOD', value: { '@type': 'QuantitativeValue', minValue: 800, maxValue: 1500, unitText: 'MONTH' } } },
-              { '@context': 'https://schema.org', '@type': 'JobPosting', title: 'Frontend Developer', description: 'Build performant, accessible web interfaces using Next.js 16, React 19, and TypeScript. Work on public-facing platforms and internal tooling.', datePosted: '2026-03-21', employmentType: 'FULL_TIME', hiringOrganization: { '@type': 'Organization', name: 'STEADYWRK LLC', sameAs: 'https://steadywrk.app' }, jobLocation: { '@type': 'Place', address: { '@type': 'PostalAddress', addressLocality: 'Amman', addressCountry: 'JO' } }, baseSalary: { '@type': 'MonetaryAmount', currency: 'JOD', value: { '@type': 'QuantitativeValue', minValue: 700, maxValue: 1200, unitText: 'MONTH' } } },
-              { '@context': 'https://schema.org', '@type': 'JobPosting', title: 'Digital Marketing Lead', description: 'Plan and execute SEO, content strategy, and paid media campaigns. Drive organic growth through GEO and content that compounds.', datePosted: '2026-03-21', employmentType: 'FULL_TIME', hiringOrganization: { '@type': 'Organization', name: 'STEADYWRK LLC', sameAs: 'https://steadywrk.app' }, jobLocation: { '@type': 'Place', address: { '@type': 'PostalAddress', addressLocality: 'Amman', addressCountry: 'JO' } }, baseSalary: { '@type': 'MonetaryAmount', currency: 'JOD', value: { '@type': 'QuantitativeValue', minValue: 600, maxValue: 1000, unitText: 'MONTH' } } },
-              { '@context': 'https://schema.org', '@type': 'JobPosting', title: 'BPO Operations Manager', description: 'Coordinate AI-enhanced BPO operations serving US clients. Manage 15+ agent workflows, quality assurance, and performance metrics.', datePosted: '2026-03-21', employmentType: 'FULL_TIME', hiringOrganization: { '@type': 'Organization', name: 'STEADYWRK LLC', sameAs: 'https://steadywrk.app' }, jobLocation: { '@type': 'Place', address: { '@type': 'PostalAddress', addressLocality: 'Amman', addressCountry: 'JO' } }, baseSalary: { '@type': 'MonetaryAmount', currency: 'JOD', value: { '@type': 'QuantitativeValue', minValue: 500, maxValue: 900, unitText: 'MONTH' } } },
-              { '@context': 'https://schema.org', '@type': 'JobPosting', title: 'AI BPO Agent', description: 'Handle customer interactions and business processes using AI-enhanced tooling. Training provided. Strong communication and attention to detail required.', datePosted: '2026-03-21', employmentType: 'FULL_TIME', hiringOrganization: { '@type': 'Organization', name: 'STEADYWRK LLC', sameAs: 'https://steadywrk.app' }, jobLocation: { '@type': 'Place', address: { '@type': 'PostalAddress', addressLocality: 'Amman', addressCountry: 'JO' } }, baseSalary: { '@type': 'MonetaryAmount', currency: 'JOD', value: { '@type': 'QuantitativeValue', minValue: 350, maxValue: 500, unitText: 'MONTH' } } },
-            ]),
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'WebSite',
+              name: 'SteadyWrk',
+              url: 'https://steadywrk.app',
+              potentialAction: {
+                '@type': 'SearchAction',
+                target: {
+                  '@type': 'EntryPoint',
+                  urlTemplate: 'https://steadywrk.app/dashboard?q={search_term_string}',
+                },
+                'query-input': 'required name=search_term_string',
+              },
+            }),
+          }}
+        />
+        {/* JSON-LD BreadcrumbList for rich SERP breadcrumbs */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'BreadcrumbList',
+              itemListElement: [
+                {
+                  '@type': 'ListItem',
+                  position: 1,
+                  name: 'Home',
+                  item: 'https://steadywrk.app',
+                },
+                {
+                  '@type': 'ListItem',
+                  position: 2,
+                  name: 'Hub',
+                  item: 'https://steadywrk.app/dashboard',
+                },
+                {
+                  '@type': 'ListItem',
+                  position: 3,
+                  name: 'Services',
+                  item: 'https://steadywrk.app/dashboard/services',
+                },
+                {
+                  '@type': 'ListItem',
+                  position: 4,
+                  name: 'Careers',
+                  item: 'https://steadywrk.app/dashboard/hiring',
+                },
+                {
+                  '@type': 'ListItem',
+                  position: 5,
+                  name: 'Blog',
+                  item: 'https://steadywrk.app/dashboard/blog',
+                },
+              ],
+            }),
           }}
         />
       </body>

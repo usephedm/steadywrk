@@ -128,6 +128,51 @@ export default function ServicesPage() {
           <span className="group-hover:translate-x-1 transition-transform">→</span>
         </Link>
       </motion.div>
+
+      {/* FAQ Schema for rich snippets */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            mainEntity: [
+              {
+                '@type': 'Question',
+                name: 'What services does SteadyWrk offer?',
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: 'SteadyWrk offers AI Lab & Studio, Facility Management, Digital Marketing, and AI BPO services. We are a US company now operating in Amman, Jordan.',
+                },
+              },
+              {
+                '@type': 'Question',
+                name: 'Where is SteadyWrk located?',
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: 'SteadyWrk is a US-based company with operations in Amman, Jordan. We serve clients globally with both remote and on-site services.',
+                },
+              },
+              {
+                '@type': 'Question',
+                name: 'Is SteadyWrk hiring?',
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: 'Yes! SteadyWrk is actively hiring across Engineering, AI Lab, Marketing, Operations, and BPO departments. Visit our careers page to apply.',
+                },
+              },
+              {
+                '@type': 'Question',
+                name: 'What makes SteadyWrk different?',
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: 'SteadyWrk is an AI-human bridge platform. We combine artificial intelligence with human expertise for field service dispatch, subcontracting, and digital marketing execution.',
+                },
+              },
+            ],
+          }),
+        }}
+      />
     </div>
   );
 }

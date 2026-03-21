@@ -6,9 +6,22 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/api/', '/dashboard/'],
+        disallow: ['/api/', '/_next/'],
+      },
+      {
+        userAgent: 'Googlebot',
+        allow: '/',
+      },
+      {
+        userAgent: 'Bingbot',
+        allow: '/',
+      },
+      {
+        userAgent: 'AhrefsBot',
+        allow: '/',
       },
     ],
     sitemap: 'https://steadywrk.app/sitemap.xml',
+    host: 'https://steadywrk.app',
   };
 }

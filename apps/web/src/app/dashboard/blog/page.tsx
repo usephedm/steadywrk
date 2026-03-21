@@ -115,6 +115,40 @@ export default function BlogPage() {
           </motion.article>
         ))}
       </div>
+
+      {/* Article Schema for each blog post — rich results */}
+      {BLOG_POSTS.map((post) => (
+        <script
+          key={`schema-${post.slug}`}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Article',
+              headline: post.title,
+              description: post.excerpt,
+              datePublished: post.date,
+              author: {
+                '@type': 'Organization',
+                name: 'SteadyWrk',
+                url: 'https://steadywrk.app',
+              },
+              publisher: {
+                '@type': 'Organization',
+                name: 'SteadyWrk',
+                logo: {
+                  '@type': 'ImageObject',
+                  url: 'https://steadywrk.app/logo.webp',
+                },
+              },
+              mainEntityOfPage: {
+                '@type': 'WebPage',
+                '@id': `https://steadywrk.app/dashboard/blog/${post.slug}`,
+              },
+            }),
+          }}
+        />
+      ))}
     </div>
   );
 }
