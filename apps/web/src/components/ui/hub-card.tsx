@@ -5,15 +5,9 @@ import { usePrefersReducedMotion } from '@/lib/hooks/use-prefers-reduced-motion'
 import { useTouchDevice } from '@/lib/hooks/use-touch-device';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Layers, type LucideIcon, Mail, Map, Newspaper, Users } from 'lucide-react';
-import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import type React from 'react';
 import { useCallback, useEffect, useRef, useState } from 'react';
-
-const CanvasRevealEffect = dynamic(
-  () => import('@/components/ui/canvas-reveal-effect').then((m) => m.CanvasRevealEffect),
-  { ssr: false },
-);
 
 const ICON_MAP: Record<string, LucideIcon> = {
   Map,
@@ -122,7 +116,7 @@ export function HubCard({
         <CornerIcon className="absolute h-5 w-5 -bottom-2.5 -left-2.5 text-white/15" />
         <CornerIcon className="absolute h-5 w-5 -bottom-2.5 -right-2.5 text-white/15" />
 
-        {/* Canvas reveal on hover — desktop only */}
+        {/* Ambient hover glow — desktop only */}
         {showEffects && (
           <AnimatePresence>
             {hovered && (
@@ -133,11 +127,11 @@ export function HubCard({
                 transition={{ duration: 0.4 }}
                 className="absolute inset-0 z-[2]"
               >
-                <CanvasRevealEffect
-                  animationSpeed={5}
-                  containerClassName="bg-black"
-                  colors={colors as number[][]}
-                  dotSize={2}
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background: `radial-gradient(ellipse at 50% 60%, rgba(${(colors[0] as number[]).join(',')},0.12), transparent 70%)`,
+                  }}
                 />
                 <div className="absolute inset-0 [mask-image:radial-gradient(400px_at_center,white,transparent)] bg-black/50" />
               </motion.div>

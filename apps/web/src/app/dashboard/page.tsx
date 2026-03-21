@@ -1,6 +1,5 @@
 'use client';
 
-import { GooeyText } from '@/components/ui/gooey-text-morphing';
 import { HubCard } from '@/components/ui/hub-card';
 import { HUB_CARDS } from '@/lib/data';
 import { usePrefersReducedMotion } from '@/lib/hooks/use-prefers-reduced-motion';
@@ -48,13 +47,9 @@ export default function DashboardPage() {
         }
         className="text-center mb-14"
       >
-        <GooeyText
-          texts={['SteadyWrk', 'AI Lab', 'Digital Marketing', 'Facility Mgmt', 'AI BPO']}
-          morphTime={1.5}
-          cooldownTime={0.5}
-          className="h-14 sm:h-16 mb-4"
-          textClassName="text-white font-bold tracking-tighter"
-        />
+        <h1 className="h-14 sm:h-16 mb-4 flex items-center justify-center text-4xl sm:text-5xl text-white font-bold tracking-tighter">
+          SteadyWrk
+        </h1>
 
         {/* Accent line */}
         {!prefersReduced && (

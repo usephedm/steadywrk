@@ -142,7 +142,7 @@ export default function HomePage() {
         </div>
       </nav>
 
-      <main>
+      <main id="main-content">
         {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
             1. HERO — Cinematic parallax
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
@@ -150,7 +150,7 @@ export default function HomePage() {
           {/* Parallax bg */}
           <motion.div className="absolute inset-0 z-0" style={{ y: heroY, scale: heroScale }}>
             <Image
-              src="/brand/hero-slate.png"
+              src="/brand/hero-slate.webp"
               alt=""
               fill
               priority
@@ -475,7 +475,7 @@ export default function HomePage() {
               <BlurFade delay={0.2} inView>
                 <div className="grid sm:grid-cols-2 gap-6 items-start">
                   <div className="relative rounded-xl overflow-hidden aspect-square max-w-[280px]">
-                    <Image src="/brand/icon-gold.jpg" alt="STEADYWRK mark" fill className="object-cover" sizes="280px" />
+                    <Image src="/brand/icon-gold.webp" alt="STEADYWRK mark" fill className="object-cover" sizes="280px" />
                   </div>
                   <div>
                     <p className="text-[13px] uppercase tracking-[0.12em] text-[#E58A0F] font-semibold mb-4">Who We Are</p>

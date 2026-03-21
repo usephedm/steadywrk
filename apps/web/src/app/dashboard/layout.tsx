@@ -1,8 +1,5 @@
 'use client';
 
-import { AudioToggle } from '@/components/ui/audio-toggle';
-import { CustomCursor } from '@/components/ui/custom-cursor';
-import { ScrollProgress } from '@/components/ui/scroll-progress';
 import { usePrefersReducedMotion } from '@/lib/hooks/use-prefers-reduced-motion';
 import { useTouchDevice } from '@/lib/hooks/use-touch-device';
 import { ArrowLeft } from 'lucide-react';
@@ -27,8 +24,7 @@ export default function DashboardLayout({
 
   return (
     <div className="relative min-h-dvh bg-[#0A0A0A] text-white">
-      {!isTouch && <CustomCursor />}
-      <ScrollProgress />
+
 
       {/* Ambient glow */}
       <div
@@ -95,7 +91,6 @@ export default function DashboardLayout({
           </span>
         </Link>
         <div className="flex items-center gap-3">
-          <AudioToggle />
           <div className="flex items-center gap-1">
             <div className="w-1.5 h-1.5 rounded-full bg-amber-500/60 animate-pulse" />
             <span className="text-[10px] font-mono text-white/20 tracking-wider uppercase hidden sm:inline">
