@@ -43,14 +43,14 @@ export function Footer() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="hover:text-white/60 transition-colors duration-[180ms]"
+                className="hover:text-white/60 transition-colors duration-[180ms] min-h-[44px] inline-flex items-center"
               >
                 {link.label}
               </Link>
             ))}
             <a
               href={`mailto:${COMPANY.email}`}
-              className="hover:text-white/60 transition-colors duration-[180ms]"
+              className="hover:text-white/60 transition-colors duration-[180ms] min-h-[44px] inline-flex items-center"
             >
               Contact
             </a>

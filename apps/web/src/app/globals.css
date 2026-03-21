@@ -354,6 +354,29 @@
   }
 }
 
+/* ========== Dark mode overrides ========== */
+
+.dark body {
+  background-color: #111110;
+  color: #e8e8e6;
+}
+
+.dark ::selection {
+  background-color: rgba(245, 166, 35, 0.3);
+  color: #e8e8e6;
+}
+
+/* ========== Scrollbar hide utility ========== */
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 /* ========== Screen reader only ========== */
 
 .sr-only {
