@@ -26,6 +26,7 @@ export async function POST(request: Request) {
     // Insert into database
     let applicantId: string | undefined;
     try {
+      if (!db) throw new Error('Database not configured');
       const [inserted] = await db
         .insert(applicants)
         .values({

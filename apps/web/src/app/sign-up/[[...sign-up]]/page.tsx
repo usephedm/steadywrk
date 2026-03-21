@@ -1,36 +1,38 @@
-import { SignUp } from '@clerk/nextjs';
-import type { Metadata } from 'next';
-import { Navbar } from '@/components/layout/navbar';
+'use client';
 
-export const metadata: Metadata = {
-  title: 'Sign Up',
-  description: 'Create your STEADYWRK account and start your career journey.',
-};
+import { SignUp } from '@clerk/nextjs';
 
 export default function SignUpPage() {
   return (
-    <>
-      <Navbar />
-      <main className="min-h-screen bg-[#FAFAF8] flex items-center justify-center pt-16">
-        <div className="w-full max-w-md px-4 py-12">
-          <SignUp
-            appearance={{
-              elements: {
-                rootBox: 'mx-auto',
-                card: 'shadow-md rounded-xl border border-[rgba(0,0,0,0.06)]',
-              },
-              variables: {
-                colorPrimary: '#E58A0F',
-                colorText: '#23211D',
-                colorTextSecondary: '#6E695F',
-                colorBackground: '#FFFFFF',
-                borderRadius: '0.75rem',
-                fontFamily: 'Satoshi, system-ui, sans-serif',
-              },
-            }}
-          />
+    <main className="min-h-screen bg-[#FAFAF8] flex items-center justify-center">
+      <div className="w-full max-w-md px-4 py-12">
+        <div className="text-center mb-8">
+          <a href="/" className="inline-block">
+            <span
+              className="text-[20px] font-extrabold text-[#23211D] tracking-[-0.02em]"
+              style={{ fontFamily: 'var(--font-display)' }}
+            >
+              STEADYWRK
+            </span>
+          </a>
         </div>
-      </main>
-    </>
+        <SignUp
+          appearance={{
+            elements: {
+              rootBox: 'mx-auto',
+              card: 'shadow-md rounded-xl border border-[rgba(0,0,0,0.06)]',
+            },
+            variables: {
+              colorPrimary: '#E58A0F',
+              colorText: '#23211D',
+              colorTextSecondary: '#6E695F',
+              colorBackground: '#FFFFFF',
+              borderRadius: '0.75rem',
+              fontFamily: 'Satoshi, system-ui, sans-serif',
+            },
+          }}
+        />
+      </div>
+    </main>
   );
 }

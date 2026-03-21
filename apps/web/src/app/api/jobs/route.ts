@@ -5,6 +5,13 @@ import { jobListings } from '../../../../../../packages/db/src/schema';
 
 export async function GET() {
   try {
+    if (!db) {
+      return NextResponse.json(
+        { error: 'Database not configured' },
+        { status: 503 },
+      );
+    }
+
     const jobs = await db
       .select()
       .from(jobListings)
