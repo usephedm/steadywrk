@@ -1,198 +1,160 @@
 'use client';
 
-import { HubCard } from '@/components/ui/hub-card';
-import { HUB_CARDS } from '@/lib/data';
-import { usePrefersReducedMotion } from '@/lib/hooks/use-prefers-reduced-motion';
-import { useTouchDevice } from '@/lib/hooks/use-touch-device';
-import { motion } from 'framer-motion';
+import Link from 'next/link';
+import {
+  Calendar,
+  CheckCircle2,
+  ChevronRight,
+  Clock,
+  Flame,
+  GraduationCap,
+  Play,
+  Star,
+  Trophy,
+  Zap,
+} from 'lucide-react';
 
-// Card-specific preview content
-const CARD_PREVIEWS = [
-  'Q1 2026 · Launch',
-  '5 open positions',
-  'Latest: SteadyWrk Has Landed',
-  'AI Lab · Facility · Marketing · BPO',
-  'hello@steadywrk.app',
+const QUICK_ACTIONS = [
+  { label: 'Start Shift', icon: Play, href: '/dashboard/tools', color: 'bg-[#E58A0F]' },
+  { label: 'View Training', icon: GraduationCap, href: '/dashboard/training', color: 'bg-[#0F6B6F]' },
+  { label: 'Check Schedule', icon: Calendar, href: '/dashboard/tools', color: 'bg-[#4D7A3A]' },
+  { label: 'Leaderboard', icon: Trophy, href: '/dashboard/leaderboard', color: 'bg-[#A03D4A]' },
+] as const;
+
+const RECENT_ACTIVITY = [
+  { text: 'Completed "Welcome Ritual" module', time: '2 hours ago', icon: CheckCircle2 },
+  { text: 'Earned 50 points for first task', time: '4 hours ago', icon: Star },
+  { text: 'Joined the March 2026 cohort', time: '1 day ago', icon: Zap },
+  { text: 'Set up workspace and tools', time: '1 day ago', icon: CheckCircle2 },
+  { text: 'Completed orientation video', time: '2 days ago', icon: GraduationCap },
 ] as const;
 
 export default function DashboardPage() {
-  const prefersReduced = usePrefersReducedMotion();
-  const isTouch = useTouchDevice();
-  const isMobile = isTouch; // Will be refined by CSS breakpoints
+  const hour = new Date().getHours();
+  const greeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
 
   return (
-    <div className="relative min-h-[calc(100dvh-8rem)] flex flex-col items-center justify-center px-6 py-16">
-      {/* Portal entrance flash */}
-      {!prefersReduced && (
-        <motion.div
-          className="fixed inset-0 z-50 pointer-events-none"
-          initial={{ opacity: 0.5 }}
-          animate={{ opacity: 0 }}
-          transition={{ duration: 1.4, ease: [0.4, 0, 0.2, 1] }}
-          style={{
-            background:
-              'radial-gradient(ellipse at 50% 45%, rgba(245,158,11,0.2), rgba(255,255,255,0.06) 40%, transparent 70%)',
-          }}
-        />
-      )}
+    <div className="min-h-dvh bg-[#FAFAF8]">
+      <div className="max-w-5xl mx-auto px-6 py-10">
+        {/* Welcome header */}
+        <div className="mb-10">
+          <h1 className="font-[var(--font-display)] text-3xl sm:text-4xl font-extrabold text-[#23211D] tracking-tight">
+            {greeting}, Team Member
+          </h1>
+          <p className="text-[#6B6B66] mt-2 text-sm">
+            Here&apos;s your daily overview. Keep the streak going!
+          </p>
+        </div>
 
-      {/* Header */}
-      <motion.div
-        initial={prefersReduced ? { opacity: 1 } : { opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={
-          prefersReduced
-            ? { duration: 0.01 }
-            : { duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }
-        }
-        className="text-center mb-14"
-      >
-        <h1 className="h-14 sm:h-16 mb-4 flex items-center justify-center text-4xl sm:text-5xl text-white font-bold tracking-tighter">
-          SteadyWrk
-        </h1>
+        {/* Stats row */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+          <StatCard label="Tasks Completed" value="12" icon={CheckCircle2} accent="#E58A0F" />
+          <StatCard label="Streak Days" value="12" icon={Flame} accent="#A03D4A" />
+          <StatCard label="Points Earned" value="1,950" icon={Star} accent="#E58A0F" />
+          <StatCard label="Level" value="Contributor" icon={Trophy} accent="#0F6B6F" />
+        </div>
 
-        {/* Accent line */}
-        {!prefersReduced && (
-          <motion.div
-            className="mx-auto w-16 h-px mt-8"
-            style={{
-              background: 'linear-gradient(90deg, transparent, rgba(245,158,11,0.4), transparent)',
-            }}
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 1, delay: 0.5 }}
-          />
-        )}
+        {/* Onboarding progress */}
+        <div className="rounded-xl border border-[rgba(0,0,0,0.06)] bg-white p-6 shadow-[0_1px_2px_rgba(0,0,0,0.04)] mb-10">
+          <div className="flex items-center justify-between mb-3">
+            <h2 className="font-[var(--font-display)] text-lg font-bold text-[#23211D]">
+              30-Day Onboarding
+            </h2>
+            <span className="text-sm font-medium text-[#E58A0F]">40% complete</span>
+          </div>
+          <div className="w-full h-3 rounded-full bg-[#F5F5F3] overflow-hidden">
+            <div
+              className="h-full rounded-full transition-all duration-1000 ease-out"
+              style={{
+                width: '40%',
+                background: 'linear-gradient(90deg, #E58A0F, #F5C563)',
+              }}
+            />
+          </div>
+          <p className="text-[#6B6B66] text-xs mt-2">
+            Week 2 of 4 — First Contact phase. Keep building momentum!
+          </p>
+        </div>
 
-        <motion.p
-          className="text-white/25 text-xs tracking-[0.3em] uppercase font-mono mt-4"
-          initial={prefersReduced ? { opacity: 1 } : { opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={prefersReduced ? { duration: 0.01 } : { delay: 0.6 }}
-        >
-          Select your destination
-        </motion.p>
-      </motion.div>
-
-      {/* Mobile: Horizontal swipe carousel */}
-      <div className="w-full max-w-5xl md:hidden">
-        <div
-          className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory -mx-6 px-6"
-          style={{
-            scrollbarWidth: 'none',
-            WebkitOverflowScrolling: 'touch',
-          }}
-        >
-          {HUB_CARDS.map((card, i) => (
-            <div key={card.href} className="snap-center shrink-0 w-[85vw] max-w-[340px]">
-              <HubCard
-                title={card.title}
-                subtitle={card.subtitle}
-                href={card.href}
-                icon={card.icon}
-                colors={card.colors}
-                index={i}
-                preview={CARD_PREVIEWS[i]}
-                className="h-full"
-              />
+        {/* Quick actions + Activity feed */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* Quick actions */}
+          <div>
+            <h2 className="font-[var(--font-display)] text-lg font-bold text-[#23211D] mb-4">
+              Quick Actions
+            </h2>
+            <div className="grid grid-cols-2 gap-3">
+              {QUICK_ACTIONS.map((action) => {
+                const Icon = action.icon;
+                return (
+                  <Link
+                    key={action.label}
+                    href={action.href}
+                    className="group flex flex-col items-center gap-3 rounded-xl border border-[rgba(0,0,0,0.06)] bg-white p-5 shadow-[0_1px_2px_rgba(0,0,0,0.04)] transition-all duration-[180ms] ease-out hover:-translate-y-[2px] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] min-h-[44px]"
+                  >
+                    <div
+                      className={`${action.color} p-3 rounded-xl text-white transition-transform duration-200 group-hover:scale-105`}
+                    >
+                      <Icon className="h-5 w-5" strokeWidth={1.5} />
+                    </div>
+                    <span className="text-sm font-medium text-[#23211D]">{action.label}</span>
+                  </Link>
+                );
+              })}
             </div>
-          ))}
-        </div>
-        {/* Dot indicators */}
-        <div className="flex justify-center gap-2 mt-4">
-          {HUB_CARDS.map((card) => (
-            <div key={card.href} className="w-1.5 h-1.5 rounded-full bg-white/20" />
-          ))}
-        </div>
-      </div>
-
-      {/* Tablet: 2-column grid */}
-      <div className="w-full max-w-5xl hidden md:block lg:hidden">
-        <div className="grid grid-cols-2 gap-4 auto-rows-[20rem]">
-          {HUB_CARDS.map((card, i) => (
-            <HubCard
-              key={card.href}
-              title={card.title}
-              subtitle={card.subtitle}
-              href={card.href}
-              icon={card.icon}
-              colors={card.colors}
-              index={i}
-              preview={CARD_PREVIEWS[i]}
-              className="h-full"
-            />
-          ))}
-        </div>
-      </div>
-
-      {/* Desktop: Bento grid */}
-      <div className="w-full max-w-5xl hidden lg:block">
-        <div className="grid grid-cols-6 gap-4 auto-rows-[20rem]">
-          {/* Row 1: Featured card (4 cols) + Regular card (2 cols) */}
-          <div className="col-span-4">
-            <HubCard
-              title={HUB_CARDS[0].title}
-              subtitle={HUB_CARDS[0].subtitle}
-              href={HUB_CARDS[0].href}
-              icon={HUB_CARDS[0].icon}
-              colors={HUB_CARDS[0].colors}
-              index={0}
-              preview={CARD_PREVIEWS[0]}
-              className="h-full"
-            />
-          </div>
-          <div className="col-span-2">
-            <HubCard
-              title={HUB_CARDS[1].title}
-              subtitle={HUB_CARDS[1].subtitle}
-              href={HUB_CARDS[1].href}
-              icon={HUB_CARDS[1].icon}
-              colors={HUB_CARDS[1].colors}
-              index={1}
-              preview={CARD_PREVIEWS[1]}
-              className="h-full"
-            />
           </div>
 
-          {/* Row 2: Three equal cards */}
-          <div className="col-span-2">
-            <HubCard
-              title={HUB_CARDS[2].title}
-              subtitle={HUB_CARDS[2].subtitle}
-              href={HUB_CARDS[2].href}
-              icon={HUB_CARDS[2].icon}
-              colors={HUB_CARDS[2].colors}
-              index={2}
-              preview={CARD_PREVIEWS[2]}
-              className="h-full"
-            />
-          </div>
-          <div className="col-span-2">
-            <HubCard
-              title={HUB_CARDS[3].title}
-              subtitle={HUB_CARDS[3].subtitle}
-              href={HUB_CARDS[3].href}
-              icon={HUB_CARDS[3].icon}
-              colors={HUB_CARDS[3].colors}
-              index={3}
-              preview={CARD_PREVIEWS[3]}
-              className="h-full"
-            />
-          </div>
-          <div className="col-span-2">
-            <HubCard
-              title={HUB_CARDS[4].title}
-              subtitle={HUB_CARDS[4].subtitle}
-              href={HUB_CARDS[4].href}
-              icon={HUB_CARDS[4].icon}
-              colors={HUB_CARDS[4].colors}
-              index={4}
-              preview={CARD_PREVIEWS[4]}
-              className="h-full"
-            />
+          {/* Recent activity feed */}
+          <div>
+            <h2 className="font-[var(--font-display)] text-lg font-bold text-[#23211D] mb-4">
+              Recent Activity
+            </h2>
+            <div className="rounded-xl border border-[rgba(0,0,0,0.06)] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04)] divide-y divide-[#E5E5E2]">
+              {RECENT_ACTIVITY.map((activity) => {
+                const Icon = activity.icon;
+                return (
+                  <div key={activity.text} className="flex items-start gap-3 p-4">
+                    <div className="mt-0.5 p-1.5 rounded-lg bg-[#FFF4E6]">
+                      <Icon className="h-4 w-4 text-[#E58A0F]" strokeWidth={1.5} />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm text-[#23211D]">{activity.text}</p>
+                      <p className="text-xs text-[#B0B0AB] mt-0.5 flex items-center gap-1">
+                        <Clock className="h-3 w-3" />
+                        {activity.time}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+function StatCard({
+  label,
+  value,
+  icon: Icon,
+  accent,
+}: {
+  label: string;
+  value: string;
+  icon: React.ComponentType<{ className?: string; strokeWidth?: number; color?: string }>;
+  accent: string;
+}) {
+  return (
+    <div className="rounded-xl border border-[rgba(0,0,0,0.06)] bg-white p-5 shadow-[0_1px_2px_rgba(0,0,0,0.04)] transition-all duration-[180ms] ease-out hover:-translate-y-[2px] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]">
+      <div className="flex items-center gap-3 mb-3">
+        <div className="p-2 rounded-lg" style={{ backgroundColor: `${accent}15` }}>
+          <Icon className="h-5 w-5" strokeWidth={1.5} color={accent} />
+        </div>
+      </div>
+      <p className="text-2xl font-bold text-[#23211D] tracking-tight">{value}</p>
+      <p className="text-xs text-[#6B6B66] mt-1">{label}</p>
     </div>
   );
 }

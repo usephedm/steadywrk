@@ -1,15 +1,9 @@
 'use client';
 
-import { AnimatedTitle } from '@/components/ui/animated-title';
-import { BorderBeam } from '@/components/ui/border-beam';
-import { TiltCard } from '@/components/ui/tilt-card';
 import { WhatsAppFloat } from '@/components/ui/whatsapp-float';
 import { COMPANY, SERVICES } from '@/lib/data';
-import { motion } from 'framer-motion';
 import { Bot, Brain, Building2, type LucideIcon, Megaphone } from 'lucide-react';
 import Link from 'next/link';
-
-const ease = [0.16, 1, 0.3, 1] as const;
 
 const ICON_MAP: Record<string, LucideIcon> = {
   Brain,
@@ -20,157 +14,75 @@ const ICON_MAP: Record<string, LucideIcon> = {
 
 export default function ServicesPage() {
   return (
-    <div className="max-w-4xl mx-auto px-6 py-16">
-      <WhatsAppFloat />
+    <div className="min-h-dvh bg-[#FAFAF8]">
+      <div className="max-w-4xl mx-auto px-6 py-10">
+        <WhatsAppFloat />
 
-      {/* Header */}
-      <div className="mb-16">
-        <AnimatedTitle
-          text="Our Services"
-          className="text-4xl sm:text-5xl font-bold tracking-tighter text-white"
-        />
-        <motion.p
-          className="text-white/40 text-sm tracking-[0.2em] uppercase font-mono mt-3"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
-        >
-          What we build
-        </motion.p>
-        <motion.div
-          className="w-20 h-px mt-6"
-          style={{
-            background: 'linear-gradient(90deg, rgba(245,158,11,0.5), transparent)',
-          }}
-          initial={{ scaleX: 0, originX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{ duration: 1, delay: 0.5 }}
-        />
-      </div>
+        {/* Header */}
+        <div className="mb-10">
+          <h1 className="font-[var(--font-display)] text-3xl sm:text-4xl font-extrabold text-[#23211D] tracking-tight">
+            Our Services
+          </h1>
+          <p className="text-[#6B6B66] mt-2 text-sm">
+            What we build. Four verticals, one platform.
+          </p>
+        </div>
 
-      {/* Service sections */}
-      <div className="space-y-8">
-        {SERVICES.map((service, i) => {
-          const IconComponent = ICON_MAP[service.icon];
-          return (
-            <motion.div
-              key={service.id}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 + i * 0.12, ease }}
-            >
-              <TiltCard
-                className="relative rounded-2xl border border-white/[0.08] bg-white/[0.02] p-8 hover:border-amber-500/15 transition-colors duration-300 overflow-hidden"
-                tiltAmount={3}
+        {/* Service sections */}
+        <div className="space-y-6">
+          {SERVICES.map((service) => {
+            const IconComponent = ICON_MAP[service.icon];
+            return (
+              <div
+                key={service.id}
+                className="rounded-xl border border-[rgba(0,0,0,0.06)] bg-white p-8 shadow-[0_1px_2px_rgba(0,0,0,0.04)] transition-all duration-[180ms] ease-out hover:-translate-y-[2px] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]"
               >
-                <BorderBeam
-                  size={120}
-                  duration={10}
-                  delay={i * 2}
-                  color="rgba(245,158,11,0.4)"
-                  colorTo="rgba(245,158,11,0)"
-                />
-                <div className="flex items-start gap-6 relative">
+                <div className="flex items-start gap-6">
                   {IconComponent && (
-                    <div className="shrink-0 p-4 rounded-xl bg-amber-500/10 border border-amber-500/10">
-                      <IconComponent className="h-8 w-8 text-amber-500" />
+                    <div className="shrink-0 p-4 rounded-xl bg-[#FFF4E6]">
+                      <IconComponent className="h-8 w-8 text-[#E58A0F]" strokeWidth={1.5} />
                     </div>
                   )}
                   <div className="space-y-3">
-                    <h2 className="text-2xl font-bold text-white">{service.title}</h2>
-                    <p className="text-white/40 text-sm leading-relaxed">{service.description}</p>
+                    <h2 className="font-[var(--font-display)] text-xl font-bold text-[#23211D]">
+                      {service.title}
+                    </h2>
+                    <p className="text-[#6B6B66] text-sm leading-relaxed">{service.description}</p>
                     <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2">
-                      {service.features.map((feature, j) => (
-                        <motion.li
+                      {service.features.map((feature) => (
+                        <li
                           key={feature}
-                          initial={{ opacity: 0, x: -8 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{
-                            delay: 0.5 + i * 0.12 + j * 0.05,
-                            ease,
-                          }}
-                          className="text-white/30 text-xs flex items-center gap-2"
+                          className="text-[#6B6B66] text-xs flex items-center gap-2"
                         >
-                          <span className="text-amber-500/50 text-[10px]">▸</span>
+                          <span className="text-[#E58A0F] text-[10px]">&#9656;</span>
                           {feature}
-                        </motion.li>
+                        </li>
                       ))}
                     </ul>
                   </div>
                 </div>
-              </TiltCard>
-            </motion.div>
-          );
-        })}
-      </div>
-
-      {/* Company overview */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1 }}
-        className="mt-16 text-center space-y-4"
-      >
-        <div className="inline-block px-6 py-3 rounded-full border border-white/[0.06] bg-white/[0.02]">
-          <p className="text-white/30 text-sm font-mono">
-            US company. Now in Jordan. Building the future of work.
-          </p>
+              </div>
+            );
+          })}
         </div>
-        <p className="text-white/15 text-xs">{COMPANY.legal}</p>
-        <Link
-          href="/dashboard/contact"
-          className="inline-flex items-center gap-2 text-amber-500/70 text-sm font-mono tracking-wider uppercase hover:text-amber-500 transition-colors mt-4 group"
-          data-interactive
-        >
-          Interested? Get in touch
-          <span className="group-hover:translate-x-1 transition-transform">→</span>
-        </Link>
-      </motion.div>
 
-      {/* FAQ Schema for rich snippets */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'FAQPage',
-            mainEntity: [
-              {
-                '@type': 'Question',
-                name: 'What services does SteadyWrk offer?',
-                acceptedAnswer: {
-                  '@type': 'Answer',
-                  text: 'SteadyWrk offers AI Lab & Studio, Facility Management, Digital Marketing, and AI BPO services. We are a US company now operating in Amman, Jordan.',
-                },
-              },
-              {
-                '@type': 'Question',
-                name: 'Where is SteadyWrk located?',
-                acceptedAnswer: {
-                  '@type': 'Answer',
-                  text: 'SteadyWrk is a US-based company with operations in Amman, Jordan. We serve clients globally with both remote and on-site services.',
-                },
-              },
-              {
-                '@type': 'Question',
-                name: 'Is SteadyWrk hiring?',
-                acceptedAnswer: {
-                  '@type': 'Answer',
-                  text: 'Yes! SteadyWrk is actively hiring across Engineering, AI Lab, Marketing, Operations, and BPO departments. Visit our careers page to apply.',
-                },
-              },
-              {
-                '@type': 'Question',
-                name: 'What makes SteadyWrk different?',
-                acceptedAnswer: {
-                  '@type': 'Answer',
-                  text: 'SteadyWrk is an AI-human bridge platform. We combine artificial intelligence with human expertise for field service dispatch, subcontracting, and digital marketing execution.',
-                },
-              },
-            ],
-          }),
-        }}
-      />
+        {/* Company overview */}
+        <div className="mt-12 text-center space-y-4">
+          <div className="inline-block px-6 py-3 rounded-full border border-[#E5E5E2] bg-white">
+            <p className="text-[#6B6B66] text-sm">
+              US company. Now in Jordan. Building the future of work.
+            </p>
+          </div>
+          <p className="text-[#B0B0AB] text-xs">{COMPANY.legal}</p>
+          <Link
+            href="/dashboard/contact"
+            className="inline-flex items-center gap-2 text-[#E58A0F] text-sm font-medium hover:underline mt-4 group min-h-[44px]"
+          >
+            Interested? Get in touch
+            <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }

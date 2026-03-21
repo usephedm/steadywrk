@@ -247,11 +247,24 @@ export const HUB_CARDS = [
   },
 ] as const;
 
+export const BLOG_CATEGORIES = [
+  'All',
+  'AI Careers',
+  'Women in Tech',
+  'Growth Guides',
+  'Behind the Build',
+] as const;
+
+export type BlogCategory = (typeof BLOG_CATEGORIES)[number];
+
 export const BLOG_POSTS = [
   {
     slug: 'hello-world',
     title: 'STEADYWRK Has Landed in Jordan',
     date: '2026-03-21',
+    category: 'Behind the Build' as BlogCategory,
+    readTime: '4 min read',
+    featured: true,
     excerpt:
       'We\u2019re a US company that just opened our Jordan office. Here\u2019s what we\u2019re building and why Amman is the right place to do it.',
     content:
@@ -261,6 +274,9 @@ export const BLOG_POSTS = [
     slug: 'ai-bpo',
     title: 'The Future of AI-Powered BPO',
     date: '2026-03-18',
+    category: 'AI Careers' as BlogCategory,
+    readTime: '5 min read',
+    featured: false,
     excerpt:
       'Business process outsourcing is being transformed by AI. Here\u2019s how we\u2019re combining human judgment with machine efficiency.',
     content:
@@ -270,6 +286,9 @@ export const BLOG_POSTS = [
     slug: 'how-we-hire-at-steadywrk',
     title: 'How We Hire at STEADYWRK: No Black Boxes, No Guessing Games',
     date: '2026-04-01',
+    category: 'Behind the Build' as BlogCategory,
+    readTime: '8 min read',
+    featured: false,
     excerpt:
       'STEADYWRK\u2019s hiring process is built for human beings, not ATS filters. Here\u2019s exactly what to expect \u2014 every stage, every timeline, every decision point.',
     content: 'Coming soon.',
@@ -278,6 +297,9 @@ export const BLOG_POSTS = [
     slug: 'women-building-ai-jordan',
     title: 'Women Building AI in Jordan: 12 Voices You Should Know',
     date: '2026-04-08',
+    category: 'Women in Tech' as BlogCategory,
+    readTime: '12 min read',
+    featured: false,
     excerpt:
       'Meet 12 women building AI products, research, and infrastructure from Amman \u2014 and what they say about working in tech in Jordan in 2026.',
     content: 'Coming soon.',
@@ -286,6 +308,9 @@ export const BLOG_POSTS = [
     slug: 'first-90-days-ai-company-jordan',
     title: 'Your First 90 Days at an AI Company: What No One Tells Jordanian Graduates',
     date: '2026-04-15',
+    category: 'Growth Guides' as BlogCategory,
+    readTime: '10 min read',
+    featured: false,
     excerpt:
       'The first 90 days make or break a tech career. Here\u2019s a week-by-week playbook built for Jordanian graduates joining AI companies \u2014 locally or remotely.',
     content: 'Coming soon.',
@@ -294,6 +319,9 @@ export const BLOG_POSTS = [
     slug: 'ai-careers-guide-jordan-graduates-2026',
     title: 'AI Careers Guide for Jordanian Graduates \u2014 Every Role, Every Salary, Every Path (2026)',
     date: '2026-04-22',
+    category: 'AI Careers' as BlogCategory,
+    readTime: '15 min read',
+    featured: false,
     excerpt:
       'The definitive AI career guide for graduates from Jordan\u2019s universities. Every role explained, salary ranges benchmarked, companies named.',
     content: 'Coming soon.',
@@ -302,6 +330,9 @@ export const BLOG_POSTS = [
     slug: 'jordan-ict-sector-graduate-employment-gap',
     title: 'Jordan\u2019s $3 Billion ICT Sector Is Growing Fast \u2014 So Why Can\u2019t Graduates Get Hired?',
     date: '2026-04-29',
+    category: 'AI Careers' as BlogCategory,
+    readTime: '11 min read',
+    featured: false,
     excerpt:
       'Jordan\u2019s ICT market is growing at 16% CAGR toward $6.5B by 2031. Yet 41.72% of young people are unemployed. Here\u2019s the data behind the paradox.',
     content: 'Coming soon.',
@@ -310,6 +341,9 @@ export const BLOG_POSTS = [
     slug: 'remote-work-jordan-tech-professionals-guide',
     title: 'Working Remotely from Jordan for International Tech Companies: The 2026 Guide',
     date: '2026-05-06',
+    category: 'Growth Guides' as BlogCategory,
+    readTime: '9 min read',
+    featured: false,
     excerpt:
       'Jordan\u2019s 95.6% internet penetration and 160 Mbps broadband make it one of the best remote-work bases in MENA. Here\u2019s how to find, land, and succeed in international remote tech roles from Amman.',
     content: 'Coming soon.',
@@ -318,6 +352,9 @@ export const BLOG_POSTS = [
     slug: 'jordan-digital-economy-reach2025-ai-strategy',
     title: 'Jordan\u2019s Digital Economy at a Crossroads: From REACH2025 to the AI Strategy Era',
     date: '2026-05-13',
+    category: 'AI Careers' as BlogCategory,
+    readTime: '7 min read',
+    featured: false,
     excerpt:
       'Jordan\u2019s REACH2025 plan set bold targets for the digital economy. Now, the National AI Strategy 2023\u20132027 carries the torch. Here\u2019s where Jordan stands.',
     content: 'Coming soon.',
@@ -326,6 +363,9 @@ export const BLOG_POSTS = [
     slug: 'ai-salary-jordan-gulf-global-benchmark-2026',
     title: 'Jordan AI Salaries vs. the Gulf vs. Global Remote: The 2026 Benchmark Guide',
     date: '2026-05-20',
+    category: 'Growth Guides' as BlogCategory,
+    readTime: '13 min read',
+    featured: false,
     excerpt:
       'A Jordanian ML engineer earns ~$14K/year locally. The same role at a US remote company pays $97\u2013155K. Here\u2019s the full salary benchmark \u2014 and a realistic path to closing the gap.',
     content: 'Coming soon.',
@@ -334,6 +374,9 @@ export const BLOG_POSTS = [
     slug: 'jordan-startup-ecosystem-ai-ipark-oasis500',
     title: 'Inside Jordan\u2019s Startup Ecosystem: iPARK, Oasis500, KHBP, and Where AI Is Growing',
     date: '2026-05-27',
+    category: 'Behind the Build' as BlogCategory,
+    readTime: '10 min read',
+    featured: false,
     excerpt:
       'Jordan\u2019s startup ecosystem ranks 5th in the Middle East. Here\u2019s a complete map of incubators, accelerators, funding sources, and where the AI opportunities are in 2026.',
     content: 'Coming soon.',
@@ -342,10 +385,45 @@ export const BLOG_POSTS = [
     slug: 'building-steadywrk-why-amman-ai-career-platform',
     title: 'Why We Built STEADYWRK: An AI-Native Career Platform, Born in Amman, Built for the World',
     date: '2026-06-03',
+    category: 'Behind the Build' as BlogCategory,
+    readTime: '8 min read',
+    featured: false,
     excerpt:
       '66% female youth unemployment. 7,000 tech graduates per year without a clear path. Jordan has the talent \u2014 what it needed was a platform. Here\u2019s why we built STEADYWRK in Amman.',
     content: 'Coming soon.',
   },
+] as const;
+
+export type CandidateStatus = 'applied' | 'screening' | 'assessment' | 'interview' | 'offer' | 'rejected';
+
+export const PIPELINE_CANDIDATES = [
+  { id: '1', name: 'Lina Al-Masri', role: 'AI Engineer', appliedDate: '2026-03-18', status: 'interview' as CandidateStatus, score: 92, scores: { technical: 95, organizational: 88, communication: 90, growth: 94, cultural: 91, initiative: 89 } },
+  { id: '2', name: 'Omar Khalil', role: 'Frontend Developer', appliedDate: '2026-03-19', status: 'assessment' as CandidateStatus, score: 85, scores: { technical: 88, organizational: 82, communication: 86, growth: 80, cultural: 85, initiative: 84 } },
+  { id: '3', name: 'Rania Haddad', role: 'Operations Dispatcher', appliedDate: '2026-03-17', status: 'offer' as CandidateStatus, score: 88, scores: { technical: 78, organizational: 95, communication: 92, growth: 86, cultural: 90, initiative: 88 } },
+  { id: '4', name: 'Tariq Nasser', role: 'Digital Marketing Lead', appliedDate: '2026-03-20', status: 'screening' as CandidateStatus, score: 76, scores: { technical: 72, organizational: 80, communication: 78, growth: 74, cultural: 76, initiative: 73 } },
+  { id: '5', name: 'Sara Mansour', role: 'AI BPO Agent', appliedDate: '2026-03-15', status: 'applied' as CandidateStatus, score: 70, scores: { technical: 65, organizational: 75, communication: 72, growth: 70, cultural: 74, initiative: 68 } },
+  { id: '6', name: 'Yazan Qasim', role: 'AI Engineer', appliedDate: '2026-03-16', status: 'rejected' as CandidateStatus, score: 55, scores: { technical: 50, organizational: 58, communication: 60, growth: 52, cultural: 56, initiative: 54 } },
+  { id: '7', name: 'Nour Abed', role: 'Frontend Developer', appliedDate: '2026-03-14', status: 'interview' as CandidateStatus, score: 90, scores: { technical: 92, organizational: 86, communication: 91, growth: 88, cultural: 92, initiative: 90 } },
+  { id: '8', name: 'Faris Jarrar', role: 'Operations Dispatcher', appliedDate: '2026-03-19', status: 'applied' as CandidateStatus, score: 68, scores: { technical: 62, organizational: 74, communication: 70, growth: 66, cultural: 72, initiative: 64 } },
+  { id: '9', name: 'Dana Khoury', role: 'AI BPO Agent', appliedDate: '2026-03-20', status: 'screening' as CandidateStatus, score: 74, scores: { technical: 68, organizational: 78, communication: 80, growth: 72, cultural: 76, initiative: 70 } },
+  { id: '10', name: 'Kareem Saleh', role: 'Digital Marketing Lead', appliedDate: '2026-03-13', status: 'assessment' as CandidateStatus, score: 82, scores: { technical: 80, organizational: 84, communication: 85, growth: 78, cultural: 82, initiative: 80 } },
+  { id: '11', name: 'Hala Dajani', role: 'AI Engineer', appliedDate: '2026-03-21', status: 'applied' as CandidateStatus, score: 78, scores: { technical: 82, organizational: 76, communication: 74, growth: 80, cultural: 78, initiative: 76 } },
+  { id: '12', name: 'Sami Issa', role: 'Frontend Developer', appliedDate: '2026-03-12', status: 'offer' as CandidateStatus, score: 94, scores: { technical: 96, organizational: 90, communication: 93, growth: 95, cultural: 94, initiative: 92 } },
+] as const;
+
+export type EmployeeLevel = 'Explorer' | 'Contributor' | 'Builder' | 'Leader';
+
+export const LEADERBOARD_DATA = [
+  { id: '1', name: 'Rania Haddad', points: 2450, streak: 18, level: 'Builder' as EmployeeLevel, badges: ['Launched', 'First Build', 'Orbital'], isCurrentUser: false },
+  { id: '2', name: 'Nour Abed', points: 2280, streak: 22, level: 'Builder' as EmployeeLevel, badges: ['Launched', 'First Build', 'Orbital', 'Steady'], isCurrentUser: false },
+  { id: '3', name: 'You', points: 1950, streak: 12, level: 'Contributor' as EmployeeLevel, badges: ['Launched', 'First Build'], isCurrentUser: true },
+  { id: '4', name: 'Lina Al-Masri', points: 1820, streak: 15, level: 'Contributor' as EmployeeLevel, badges: ['Launched', 'First Build', 'Orbital'], isCurrentUser: false },
+  { id: '5', name: 'Omar Khalil', points: 1650, streak: 9, level: 'Contributor' as EmployeeLevel, badges: ['Launched', 'First Build'], isCurrentUser: false },
+  { id: '6', name: 'Sara Mansour', points: 1420, streak: 7, level: 'Explorer' as EmployeeLevel, badges: ['Launched'], isCurrentUser: false },
+  { id: '7', name: 'Tariq Nasser', points: 1180, streak: 5, level: 'Explorer' as EmployeeLevel, badges: ['Launched'], isCurrentUser: false },
+  { id: '8', name: 'Dana Khoury', points: 980, streak: 3, level: 'Explorer' as EmployeeLevel, badges: [], isCurrentUser: false },
+  { id: '9', name: 'Faris Jarrar', points: 850, streak: 4, level: 'Explorer' as EmployeeLevel, badges: ['Launched'], isCurrentUser: false },
+  { id: '10', name: 'Hala Dajani', points: 720, streak: 2, level: 'Explorer' as EmployeeLevel, badges: [], isCurrentUser: false },
 ] as const;
 
 export const ROADMAP = [

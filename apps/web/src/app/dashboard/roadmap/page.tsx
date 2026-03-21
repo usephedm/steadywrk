@@ -1,114 +1,82 @@
 'use client';
 
-import { AnimatedTitle } from '@/components/ui/animated-title';
 import { ROADMAP } from '@/lib/data';
-import { motion } from 'framer-motion';
-
-const ease = [0.16, 1, 0.3, 1] as const;
 
 export default function RoadmapPage() {
   return (
-    <div className="max-w-3xl mx-auto px-6 py-16">
-      {/* Header */}
-      <div className="mb-16">
-        <AnimatedTitle
-          text="Steady...W-hat?"
-          className="text-4xl sm:text-5xl font-bold tracking-tighter text-white"
-        />
-        <motion.p
-          className="text-white/40 text-sm tracking-[0.2em] uppercase font-mono mt-3"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
-        >
-          SteadyWrk 1.0 — 2026 Roadmap
-        </motion.p>
-        <motion.div
-          className="w-20 h-px mt-6"
-          style={{
-            background: 'linear-gradient(90deg, rgba(245,158,11,0.5), transparent)',
-          }}
-          initial={{ scaleX: 0, originX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{ duration: 1, delay: 0.5 }}
-        />
-      </div>
+    <div className="min-h-dvh bg-[#FAFAF8]">
+      <div className="max-w-3xl mx-auto px-6 py-10">
+        {/* Header */}
+        <div className="mb-10">
+          <h1 className="font-[var(--font-display)] text-3xl sm:text-4xl font-extrabold text-[#23211D] tracking-tight">
+            Steady...W-hat?
+          </h1>
+          <p className="text-[#6B6B66] mt-2 text-sm">
+            STEADYWRK 1.0 &mdash; 2026 Roadmap
+          </p>
+        </div>
 
-      {/* Timeline */}
-      <div className="relative">
-        {/* Vertical line */}
-        <motion.div
-          className="absolute left-4 top-0 bottom-0 w-px"
-          style={{
-            background: 'linear-gradient(to bottom, #F59E0B, rgba(245,158,11,0.2), transparent)',
-          }}
-          initial={{ scaleY: 0, originY: 0 }}
-          animate={{ scaleY: 1 }}
-          transition={{ duration: 1.5, delay: 0.5 }}
-        />
+        {/* Timeline */}
+        <div className="relative">
+          {/* Vertical line */}
+          <div
+            className="absolute left-4 top-0 bottom-0 w-px"
+            style={{
+              background: 'linear-gradient(to bottom, #E58A0F, rgba(229,138,15,0.2), #E5E5E2)',
+            }}
+          />
 
-        <div className="space-y-14">
-          {ROADMAP.map((milestone, i) => {
-            const isActive = i === 0;
-            return (
-              <motion.div
-                key={milestone.quarter}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.5 + i * 0.15, ease }}
-                className="relative pl-12"
-              >
-                {/* Dot with pulse for active */}
-                <div
-                  className={`absolute left-[11px] top-1.5 w-2.5 h-2.5 rounded-full ring-4 ${
-                    isActive
-                      ? 'bg-amber-500 ring-amber-500/30'
-                      : 'bg-amber-500/60 ring-amber-500/10'
-                  }`}
-                  style={isActive ? { animation: 'pulse-dot 2s ease-in-out infinite' } : undefined}
-                />
+          <div className="space-y-10">
+            {ROADMAP.map((milestone, i) => {
+              const isActive = i === 0;
+              return (
+                <div key={milestone.quarter} className="relative pl-12">
+                  {/* Dot */}
+                  <div
+                    className={`absolute left-[11px] top-1.5 w-2.5 h-2.5 rounded-full ring-4 ${
+                      isActive
+                        ? 'bg-[#E58A0F] ring-[#E58A0F]/20'
+                        : 'bg-[#E5E5E2] ring-[#E5E5E2]/20'
+                    }`}
+                  />
 
-                <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-6 hover:border-amber-500/15 transition-colors duration-300">
-                  <div className="flex items-baseline gap-3 mb-4">
-                    <span
-                      className={`text-xs font-mono tracking-wider uppercase ${isActive ? 'text-amber-500' : 'text-amber-500/50'}`}
-                    >
-                      {milestone.quarter}
-                    </span>
-                    <h2
-                      className={`text-xl font-bold ${isActive ? 'text-white' : 'text-white/70'}`}
-                    >
-                      {milestone.title}
-                    </h2>
-                    {isActive && (
-                      <span className="text-[10px] font-mono text-amber-500/60 bg-amber-500/10 px-2 py-0.5 rounded-full uppercase tracking-wider">
-                        Current
-                      </span>
-                    )}
-                  </div>
-                  <ul className="space-y-2">
-                    {milestone.items.map((item, j) => (
-                      <motion.li
-                        key={item}
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{
-                          delay: 0.7 + i * 0.15 + j * 0.06,
-                          ease,
-                        }}
-                        className="text-white/45 text-sm flex items-start gap-2.5"
+                  <div className="rounded-xl border border-[rgba(0,0,0,0.06)] bg-white p-6 shadow-[0_1px_2px_rgba(0,0,0,0.04)] transition-all duration-[180ms] ease-out hover:-translate-y-[2px] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]">
+                    <div className="flex items-baseline gap-3 mb-4">
+                      <span
+                        className={`text-xs font-mono tracking-wider uppercase ${
+                          isActive ? 'text-[#E58A0F]' : 'text-[#B0B0AB]'
+                        }`}
                       >
-                        <span className="text-amber-500/50 mt-0.5 shrink-0">
-                          {isActive ? '▸' : '›'}
+                        {milestone.quarter}
+                      </span>
+                      <h2
+                        className={`font-[var(--font-display)] text-xl font-bold ${
+                          isActive ? 'text-[#23211D]' : 'text-[#6B6B66]'
+                        }`}
+                      >
+                        {milestone.title}
+                      </h2>
+                      {isActive && (
+                        <span className="text-[10px] font-mono text-[#E58A0F] bg-[#FFF4E6] px-2 py-0.5 rounded-full uppercase tracking-wider">
+                          Current
                         </span>
-                        {item}
-                      </motion.li>
-                    ))}
-                  </ul>
+                      )}
+                    </div>
+                    <ul className="space-y-2">
+                      {milestone.items.map((item) => (
+                        <li key={item} className="text-[#6B6B66] text-sm flex items-start gap-2.5">
+                          <span className={`mt-0.5 shrink-0 ${isActive ? 'text-[#E58A0F]' : 'text-[#B0B0AB]'}`}>
+                            {isActive ? '▸' : '›'}
+                          </span>
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-              </motion.div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>
