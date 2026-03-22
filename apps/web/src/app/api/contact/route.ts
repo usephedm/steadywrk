@@ -64,7 +64,7 @@ export async function POST(request: Request) {
         event: 'inquiry_submitted',
         company: data.company,
         subject: data.subject,
-        contactId: `${data.email}:${data.subject}`,
+        contactId: contact.id,
         timestamp: new Date().toISOString(),
       }),
     );

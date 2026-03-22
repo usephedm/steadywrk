@@ -1,7 +1,4 @@
-import { db } from '@/lib/db';
-import { eq } from 'drizzle-orm';
 import { NextResponse } from 'next/server';
-import { applicants } from '../../../../../../packages/db/src/schema';
 
 export async function POST(request: Request) {
   try {
