@@ -18,6 +18,10 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
+      env:
+        NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: pk_test_bW9jay1jbGVyay1rZXk=
+        NEXT_PUBLIC_CLERK_SIGN_IN_URL: /sign-in
+        NEXT_PUBLIC_CLERK_SIGN_UP_URL: /sign-up
       run: npx playwright test
     - uses: actions/upload-artifact@v4
       if: always()
