@@ -15,10 +15,10 @@ export const COMPANY = {
     hiring: 'hello@steadywrk.app',
   },
   social: {
-    linkedin: 'https://steadywrk.app', // TODO: Update when LinkedIn page is live
-    twitter: 'https://steadywrk.app', // TODO: Update when Twitter account is live
-    instagram: 'https://instagram.com/swrk.jo', // Updated to match STE-23 Instagram handle
-    whatsapp: '962770000000',
+    linkedin: 'https://linkedin.com/company/steadywrk',
+    twitter: 'https://x.com/steadywrk',
+    instagram: 'https://instagram.com/swrk.jo',
+    whatsapp: '962791187567',
   },
   location: {
     address: 'Building 15, King Hussein Business Park',
