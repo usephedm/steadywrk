@@ -29,11 +29,19 @@
   },
   "workspaces": ["apps/*", "packages/*"],
   "packageManager": "npm@10.8.2",
+  "engines": {
+    "node": "22.x",
+    "npm": "10.x"
+  },
   "dependencies": {
     "cloudinary": "^2.9.0",
     "remotion": "^4.0.438"
   },
   "overrides": {
     "esbuild": "^0.25.0"
+  },
+  "optionalDependencies": {
+    "@tailwindcss/oxide-linux-x64-gnu": "^4.2.2",
+    "lightningcss-linux-x64-gnu": "^1.32.0"
   }
 }

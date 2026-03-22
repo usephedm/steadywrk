@@ -1,3 +1,4 @@
+import { requireDashboardAdmin } from '@/lib/auth/dashboard-access';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function HiringLayout({ children }: { children: React.ReactNode }) {
+export default async function HiringLayout({ children }: { children: React.ReactNode }) {
+  await requireDashboardAdmin();
   return children;
 }

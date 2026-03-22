@@ -18,7 +18,7 @@ export default function SignInPage() {
           </Link>
         </div>
         <SignIn
-          fallbackRedirectUrl="/dashboard"
+          fallbackRedirectUrl="/careers"
           appearance={{
             elements: {
               rootBox: 'mx-auto',

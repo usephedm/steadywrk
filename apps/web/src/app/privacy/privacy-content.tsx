@@ -38,7 +38,7 @@ export function PrivacyContent() {
               <ul className="space-y-2">
                 {[
                   'Application data: name, email address, phone number, CV, portfolio URLs, assessment responses, and other information you provide when applying for roles or programs.',
-                  'Analytics data: anonymized usage data including pages visited, time spent, browser type, device information, and referral source. Collected via PostHog, Vercel Analytics, and Ahrefs.',
+                  'Analytics data: anonymized usage data including pages visited, time spent, browser type, device information, and referral source. Collected via PostHog and Ahrefs.',
                   'Contact data: name and email address when you reach out via our contact form or WhatsApp.',
                   'Authentication data: email address and basic profile information when you create an account via Clerk.',
                 ].map((item) => (

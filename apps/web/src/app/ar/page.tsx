@@ -6,6 +6,17 @@ import Link from 'next/link';
 export const metadata: Metadata = {
   title: 'STEADYWRK | حيث يتضاعف الطموح',
   description: 'منصة الانطلاق المهني بالذكاء الاصطناعي للمواهب الأردنية الأكثر طموحاً.',
+  alternates: {
+    canonical: '/ar',
+    languages: {
+      en: '/',
+      ar: '/ar',
+    },
+  },
+  robots: {
+    index: false,
+    follow: true,
+  },
 };
 
 export default function ArabicHomePage() {

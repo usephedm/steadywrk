@@ -200,6 +200,7 @@ export const contacts = pgTable(
     name: varchar('name', { length: 255 }).notNull(),
     email: varchar('email', { length: 255 }).notNull(),
     company: varchar('company', { length: 255 }),
+    subject: varchar('subject', { length: 500 }).notNull(),
     message: text('message').notNull(),
     createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
   },

@@ -10,6 +10,7 @@ const applySchema = z.object({
   phone: z.string().optional(),
   position: z.string().min(1, 'Position is required'),
   team: z.string().optional(),
+  pdplConsent: z.literal(true),
   answers: z
     .object({
       q1: z.string(),
@@ -19,6 +20,7 @@ const applySchema = z.object({
     .optional(),
   portfolioUrl: z.string().optional(),
   githubUrl: z.string().optional(),
+  behanceUrl: z.string().optional(),
   skills: z.record(z.number()).optional(),
   availability: z.string().optional(),
   challengeResponse: z.string().optional(),
@@ -52,7 +54,7 @@ export async function submitApplication(
         skills: data.skills ?? {},
         availability: data.availability ?? null,
         challengeResponse: data.challengeResponse ?? null,
-        pdplConsent: true,
+        pdplConsent: data.pdplConsent,
       })
       .returning({ id: applicants.id });
 

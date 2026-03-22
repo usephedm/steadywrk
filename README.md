@@ -52,7 +52,7 @@ Routed silently via Clerk `publicMetadata` middleware. One Neon Postgres databas
 | Email | Resend + React Email |
 | Analytics | PostHog (funnels, drop-off) |
 | Scheduling | Cal.com (WhatsApp workflows) |
-| Deploy | Vercel (web), Cloudflare Workers (MCPs) |
+| Deploy | Railway + Nixpacks (web) |
 
 ## Getting Started
 
@@ -151,5 +151,11 @@ Six tables in `packages/db/`:
 <div align="center">
 
 &copy; 2026 STEADYWRK LLC &middot; Building 15, KHBP, Amman, Jordan &middot; [steadywrk.app](https://steadywrk.app)
+
+</div>
+ordan &middot; [steadywrk.app](https://steadywrk.app)
+
+</div>
+26 STEADYWRK LLC &middot; Building 15, KHBP, Amman, Jordan &middot; [steadywrk.app](https://steadywrk.app)
 
 </div>

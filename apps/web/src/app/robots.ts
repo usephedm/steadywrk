@@ -10,15 +10,15 @@ export default function robots(): MetadataRoute.Robots {
       },
       {
         userAgent: 'Googlebot',
-        allow: '/',
+        allow: ['/', '/apply/'],
       },
       {
         userAgent: 'Bingbot',
-        allow: '/',
+        allow: ['/', '/apply/'],
       },
       {
         userAgent: 'AhrefsBot',
-        allow: '/',
+        allow: ['/', '/apply/'],
       },
     ],
     sitemap: 'https://steadywrk.app/sitemap.xml',

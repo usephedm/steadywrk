@@ -1,20 +1,28 @@
 import { db } from '@/lib/db';
+import { verifyScorecardToken } from '@/lib/scorecards';
 import { eq } from 'drizzle-orm';
 import { ImageResponse } from 'next/og';
 import { applicants } from '../../../../../../packages/db/src/schema';
 
-const size = { width: 1200, height: 630 };
+const imageSize = { width: 1200, height: 630 };
 
 // Force dynamic so we don't cache candidate scores globally
 export const dynamic = 'force-dynamic';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const applicantId = searchParams.get('id');
+  const token = searchParams.get('token');
 
-  if (!applicantId) {
-    return new Response('Missing applicant ID', { status: 400 });
+  if (!token) {
+    return new Response('Missing scorecard token', { status: 400 });
   }
+
+  const verified = verifyScorecardToken(token);
+  if (!verified) {
+    return new Response('Invalid or expired scorecard token', { status: 403 });
+  }
+
+  const { applicantId } = verified;
 
   try {
     if (!db) {
@@ -121,7 +129,7 @@ export async function GET(request: Request) {
           </div>
         </div>
       </div>,
-      { ...size },
+      { ...imageSize },
     );
   } catch (error) {
     console.error('Failed to generate scorecard:', error);

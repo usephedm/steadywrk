@@ -1,0 +1,1 @@
+ALTER TABLE "contacts" ADD COLUMN "subject" varchar(500) NOT NULL;

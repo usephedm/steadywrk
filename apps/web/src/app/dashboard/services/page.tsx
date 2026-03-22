@@ -76,7 +76,7 @@ export default function ServicesPage() {
           </div>
           <p className="text-[#B0B0AB] text-xs">{COMPANY.legal}</p>
           <Link
-            href="/dashboard/contact"
+            href="/contact"
             className="inline-flex items-center gap-2 text-[#E58A0F] text-sm font-medium hover:underline mt-4 group min-h-[44px]"
           >
             Interested? Get in touch

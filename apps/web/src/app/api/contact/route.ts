@@ -1,8 +1,10 @@
 import { COMPANY } from '@/lib/constants';
+import { db } from '@/lib/db';
 import { getClientIP, rateLimit } from '@/lib/rate-limit';
 import { validateContactPayload } from '@/lib/schemas';
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
+import { contacts } from '../../../../../../packages/db/src/schema';
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
@@ -21,7 +23,22 @@ export async function POST(request: Request) {
     const body = await request.json();
     const data = validateContactPayload(body);
 
-    // Send contact inquiry via email
+    if (!db) {
+      return NextResponse.json({ error: 'Database not configured' }, { status: 500 });
+    }
+
+    const [contact] = await db
+      .insert(contacts)
+      .values({
+        name: data.name,
+        email: data.email,
+        company: data.company || null,
+        subject: data.subject,
+        message: data.message,
+      })
+      .returning({ id: contacts.id });
+
+    // Send contact inquiry via email after persistence succeeds
     if (resend) {
       await resend.emails
         .send({
@@ -42,14 +59,12 @@ export async function POST(request: Request) {
         });
     }
 
-    // Structured log for Vercel Log Drain
     console.info(
       JSON.stringify({
         event: 'inquiry_submitted',
         company: data.company,
-        name: data.name,
-        email: data.email,
         subject: data.subject,
+        contactId: `${data.email}:${data.subject}`,
         timestamp: new Date().toISOString(),
       }),
     );

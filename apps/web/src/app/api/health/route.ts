@@ -6,15 +6,29 @@ export const dynamic = 'force-dynamic';
 
 export async function GET() {
   try {
-    // Perform a lightweight query to ensure DB connectivity
-    if (db) {
-      await db.execute(sql`SELECT 1`);
+    if (!db) {
+      return NextResponse.json(
+        {
+          status: 'error',
+          database: 'unconfigured',
+          timestamp: new Date().toISOString(),
+        },
+        {
+          status: 503,
+          headers: {
+            'Cache-Control': 'no-store',
+          },
+        },
+      );
     }
+
+    // Perform a lightweight query to ensure DB connectivity
+    await db.execute(sql`SELECT 1`);
 
     return NextResponse.json(
       {
         status: 'ok',
-        database: db ? 'connected' : 'unconfigured',
+        database: 'connected',
         timestamp: new Date().toISOString(),
       },
       {
