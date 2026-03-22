@@ -30,11 +30,11 @@ const securityHeaders = [
     key: 'Content-Security-Policy',
     value: [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://analytics.ahrefs.com https://va.vercel-scripts.com https://us.i.posthog.com",
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://analytics.ahrefs.com https://us.i.posthog.com",
       "style-src 'self' 'unsafe-inline'",
       "img-src 'self' data: blob: https://img.clerk.com https://images.clerk.dev",
       "font-src 'self'",
-      "connect-src 'self' https://us.i.posthog.com https://*.clerk.accounts.dev https://*.neon.tech https://va.vercel-scripts.com https://analytics.ahrefs.com",
+      "connect-src 'self' https://us.i.posthog.com https://*.clerk.accounts.dev https://*.neon.tech https://analytics.ahrefs.com",
       "frame-src 'self' https://*.clerk.accounts.dev",
       "worker-src 'self' blob:",
     ].join('; '),

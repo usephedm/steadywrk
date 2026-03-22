@@ -1,8 +1,6 @@
 import { ClientGlobals } from '@/components/ui/client-globals';
 import { PostHogProvider } from '@/lib/posthog';
 import { ClerkProvider } from '@clerk/nextjs';
-import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
 import Script from 'next/script';
@@ -118,8 +116,6 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://big-jennet-22.clerk.accounts.dev" />
         <link rel="preconnect" href="https://analytics.ahrefs.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://analytics.ahrefs.com" />
-        <link rel="preconnect" href="https://va.vercel-scripts.com" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://va.vercel-scripts.com" />
         <link rel="preconnect" href="https://us.i.posthog.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://us.i.posthog.com" />
 
@@ -152,8 +148,6 @@ export default function RootLayout({
           data-key="xlEN572+HO98vWtLtHolWQ"
           strategy="afterInteractive"
         />
-        <Analytics />
-        <SpeedInsights />
         {/* JSON-LD Organization */}
         <script
           type="application/ld+json"

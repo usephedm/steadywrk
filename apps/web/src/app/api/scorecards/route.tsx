@@ -3,14 +3,12 @@ import { eq } from 'drizzle-orm';
 import { ImageResponse } from 'next/og';
 import { applicants } from '../../../../../../packages/db/src/schema';
 
-export const alt = 'STEADYWRK Assessment Scorecard';
-export const size = { width: 1200, height: 630 };
-export const contentType = 'image/png';
+const size = { width: 1200, height: 630 };
 
 // Force dynamic so we don't cache candidate scores globally
 export const dynamic = 'force-dynamic';
 
-export default async function GET(request: Request) {
+export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const applicantId = searchParams.get('id');
 
