@@ -36,7 +36,7 @@ export const BLOG_POSTS = [
   {
     slug: 'how-we-hire-at-steadywrk',
     title: 'How We Hire at STEADYWRK: No Black Boxes, No Guessing Games',
-    date: '2026-04-01',
+    date: '2026-03-15',
     category: 'Behind the Build' as BlogCategory,
     readTime: '8 min read',
     featured: false,
@@ -48,7 +48,7 @@ export const BLOG_POSTS = [
   {
     slug: 'women-building-ai-jordan',
     title: 'Women Building AI in Jordan: 12 Voices You Should Know',
-    date: '2026-04-08',
+    date: '2026-03-14',
     category: 'Women in Tech' as BlogCategory,
     readTime: '12 min read',
     featured: false,
@@ -60,7 +60,7 @@ export const BLOG_POSTS = [
   {
     slug: 'first-90-days-ai-company-jordan',
     title: 'Your First 90 Days at an AI Company: What No One Tells Jordanian Graduates',
-    date: '2026-04-15',
+    date: '2026-03-13',
     category: 'Growth Guides' as BlogCategory,
     readTime: '10 min read',
     featured: false,
@@ -72,7 +72,7 @@ export const BLOG_POSTS = [
   {
     slug: 'ai-careers-guide-jordan-graduates-2026',
     title: 'AI Careers Guide for Jordanian Graduates \u2014 Every Role, Every Salary, Every Path (2026)',
-    date: '2026-04-22',
+    date: '2026-03-12',
     category: 'AI Careers' as BlogCategory,
     readTime: '15 min read',
     featured: false,
@@ -84,7 +84,7 @@ export const BLOG_POSTS = [
   {
     slug: 'jordan-ict-sector-graduate-employment-gap',
     title: 'Jordan\u2019s $3 Billion ICT Sector Is Growing Fast \u2014 So Why Can\u2019t Graduates Get Hired?',
-    date: '2026-04-29',
+    date: '2026-03-11',
     category: 'AI Careers' as BlogCategory,
     readTime: '11 min read',
     featured: false,
@@ -96,7 +96,7 @@ export const BLOG_POSTS = [
   {
     slug: 'remote-work-jordan-tech-professionals-guide',
     title: 'Working Remotely from Jordan for International Tech Companies: The 2026 Guide',
-    date: '2026-05-06',
+    date: '2026-03-10',
     category: 'Growth Guides' as BlogCategory,
     readTime: '9 min read',
     featured: false,
@@ -108,7 +108,7 @@ export const BLOG_POSTS = [
   {
     slug: 'jordan-digital-economy-reach2025-ai-strategy',
     title: 'Jordan\u2019s Digital Economy at a Crossroads: From REACH2025 to the AI Strategy Era',
-    date: '2026-05-13',
+    date: '2026-03-09',
     category: 'AI Careers' as BlogCategory,
     readTime: '7 min read',
     featured: false,
@@ -120,7 +120,7 @@ export const BLOG_POSTS = [
   {
     slug: 'ai-salary-jordan-gulf-global-benchmark-2026',
     title: 'Jordan AI Salaries vs. the Gulf vs. Global Remote: The 2026 Benchmark Guide',
-    date: '2026-05-20',
+    date: '2026-03-08',
     category: 'Growth Guides' as BlogCategory,
     readTime: '13 min read',
     featured: false,
@@ -132,7 +132,7 @@ export const BLOG_POSTS = [
   {
     slug: 'jordan-startup-ecosystem-ai-ipark-oasis500',
     title: 'Inside Jordan\u2019s Startup Ecosystem: iPARK, Oasis500, KHBP, and Where AI Is Growing',
-    date: '2026-05-27',
+    date: '2026-03-07',
     category: 'Behind the Build' as BlogCategory,
     readTime: '10 min read',
     featured: false,
@@ -144,7 +144,7 @@ export const BLOG_POSTS = [
   {
     slug: 'building-steadywrk-why-amman-ai-career-platform',
     title: 'Why We Built STEADYWRK: An AI-Native Career Platform, Born in Amman, Built for the World',
-    date: '2026-06-03',
+    date: '2026-03-06',
     category: 'Behind the Build' as BlogCategory,
     readTime: '8 min read',
     featured: false,
