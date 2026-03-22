@@ -32,9 +32,10 @@ const authMiddleware = clerkMiddleware(async (auth, request) => {
   }
 });
 
-export default process.env.PLAYWRIGHT_BYPASS_AUTH === '1'
-  ? () => NextResponse.next()
-  : authMiddleware;
+const shouldBypassAuth =
+  process.env.PLAYWRIGHT_BYPASS_AUTH === '1' && process.env.GITHUB_ACTIONS === 'true';
+
+export default shouldBypassAuth ? () => NextResponse.next() : authMiddleware;
 
 export const config = {
   matcher: [
