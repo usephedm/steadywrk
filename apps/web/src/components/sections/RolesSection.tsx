@@ -66,6 +66,10 @@ export function RolesSection() {
                       <span className="text-[13px] text-[#6E695F] dark:text-[#8A8A86]">
                         {role.location}
                       </span>
+                      <span className="w-0.5 h-0.5 rounded-full bg-[#B0B0AB] md:hidden" />
+                      <span className="text-[13px] text-[#E58A0F] font-medium md:hidden">
+                        {role.salary}
+                      </span>
                     </div>
                   </div>
                   <div className="hidden md:flex items-center gap-4">
