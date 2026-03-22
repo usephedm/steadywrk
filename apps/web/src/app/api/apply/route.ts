@@ -85,8 +85,6 @@ export async function POST(request: Request) {
       JSON.stringify({
         event: 'application_submitted',
         applicantId,
-        name: data.name,
-        email: data.email,
         position: data.position,
         team: data.team,
         timestamp: new Date().toISOString(),

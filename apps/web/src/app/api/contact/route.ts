@@ -27,13 +27,16 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Database not configured' }, { status: 500 });
     }
 
-    await db.insert(contacts).values({
-      name: data.name,
-      email: data.email,
-      company: data.company || null,
-      subject: data.subject,
-      message: data.message,
-    });
+    const [contact] = await db
+      .insert(contacts)
+      .values({
+        name: data.name,
+        email: data.email,
+        company: data.company || null,
+        subject: data.subject,
+        message: data.message,
+      })
+      .returning({ id: contacts.id });
 
     // Send contact inquiry via email after persistence succeeds
     if (resend) {
