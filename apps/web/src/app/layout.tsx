@@ -4,6 +4,7 @@ import { ClerkProvider } from '@clerk/nextjs';
 import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
 import Script from 'next/script';
+import type { ReactNode } from 'react';
 import './globals.css';
 
 const cabinetGrotesk = localFont({
@@ -88,6 +89,27 @@ export const metadata: Metadata = {
   category: 'technology',
 };
 
+const shouldBypassClerk = process.env.PLAYWRIGHT_BYPASS_AUTH === '1';
+
+function renderProviders(children: ReactNode) {
+  if (shouldBypassClerk) {
+    return <PostHogProvider>{children}</PostHogProvider>;
+  }
+
+  return (
+    <ClerkProvider
+      appearance={{
+        variables: {
+          colorPrimary: '#E58A0F',
+          fontFamily: 'Satoshi, system-ui, sans-serif',
+        },
+      }}
+    >
+      <PostHogProvider>{children}</PostHogProvider>
+    </ClerkProvider>
+  );
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -127,16 +149,7 @@ export default function RootLayout({
         >
           Skip to content
         </a>
-        <ClerkProvider
-          appearance={{
-            variables: {
-              colorPrimary: '#E58A0F',
-              fontFamily: 'Satoshi, system-ui, sans-serif',
-            },
-          }}
-        >
-          <PostHogProvider>{children}</PostHogProvider>
-        </ClerkProvider>
+        {renderProviders(children)}
         <ClientGlobals />
         <Script
           src="https://analytics.ahrefs.com/analytics.js"

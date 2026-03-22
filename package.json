@@ -11,7 +11,10 @@
     "prepare": "husky",
     "test": "playwright test",
     "test:ui": "playwright test --ui",
-    "test:smoke": "playwright test tests/smoke.spec.ts"
+    "test:smoke": "playwright test tests/smoke.spec.ts",
+    "test:responsive": "playwright test tests/responsive-audit.spec.ts",
+    "qa:responsive": "node scripts/qa/responsive-audit.mjs",
+    "qa:lcp": "node scripts/qa/check-lcp.mjs"
   },
   "lint-staged": {
     "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}": [

@@ -1,15 +1,47 @@
 # STEADYWRK Playwright E2E Tests
 
-This directory contains the critical path End-to-End (E2E) test suites for the steadywrk.app monorepo. 
+This directory contains the **hermetic** Playwright suites for the STEADYWRK monorepo.
 
-We test against the Next.js production build (`npm run build && npm run start`) in CI, and the Next.js dev server locally, automatically handled by `playwright.config.ts`.
+Default test runs should target the **local app** served by `playwright.config.ts`, not the live production site.
 
 ## Test Suites
 
-1. **`smoke.spec.ts`**: The baseline sanity check. Iterates over every single static and dynamic route in the `NAV_LINKS` (including `/ar` translations). Asserts 200 OK network responses, structural `<main>` rendering, and strict absence of React hydration errors or unhandled console exceptions.
-2. **`apply-flow.spec.ts` (STE-27)**: Deep tests the multi-step application form `/apply/[role]`. Validates required inputs, edge-case validations, and successful database mock insertion states.
-3. **`contact-flow.spec.ts`**: Verifies the public `/contact` form routing, state management, and mock API submission flow.
-4. **`responsive-audit.spec.ts` (STE-29)**: Executes structural viewport analysis at `320px`, `375px`, and `414px` specifically asserting zero horizontal overflow (`scrollWidth > innerWidth`) across the DOM tree.
+1. **`smoke.spec.ts`**
+   - Baseline sanity check for key public routes.
+   - Asserts successful rendering, `<main>` visibility, and absence of page errors.
+
+2. **`apply-flow.spec.ts`**
+   - Exercises the `/apply/[role]` flow.
+   - Mocks `/api/apply` responses so the suite stays deterministic and does not write to a live database.
+
+3. **`contact-flow.spec.ts`**
+   - Verifies the public `/contact` flow.
+   - Mocks `/api/contact` so the suite remains local and side-effect free.
+
+4. **`responsive-audit.spec.ts`**
+   - Local responsive regression check for key public routes.
+   - Verifies zero horizontal overflow at `320px`, `375px`, and `414px`.
+   - This is now a **local test**, not a production-site audit.
+
+## Manual QA scripts
+
+These are intentionally **outside** the normal Playwright test lane:
+
+- `npm run qa:responsive`
+  - Runs a live-site responsive audit against `TARGET_URL` (default: `https://steadywrk.app`)
+  - Writes markdown output to `AUDIT_OUTPUT` (default: `STE-29-audit.md`)
+
+- `npm run qa:lcp`
+  - Queries Google PageSpeed for the live target URL
+  - Default target: `https://steadywrk.app`
+
+Examples:
+
+```bash
+npm run qa:responsive
+TARGET_URL=https://steadywrk.app AUDIT_OUTPUT=tmp-responsive-audit.md npm run qa:responsive
+npm run qa:lcp
+```
 
 ## Commands
 
@@ -18,20 +50,28 @@ We test against the Next.js production build (`npm run build && npm run start`) 
 npx playwright test
 ```
 
-**Run a specific test file:**
+**Run smoke only:**
 ```bash
-npx playwright test tests/smoke.spec.ts
+npm run test:smoke
 ```
 
-**Run with UI (headed mode):**
+**Run responsive regression only:**
+```bash
+npm run test:responsive
+```
+
+**Run with UI:**
 ```bash
 npx playwright test --ui
 ```
 
-**Generate and view HTML report:**
+**View HTML report:**
 ```bash
 npx playwright show-report
 ```
 
 ## CI / GitHub Actions
-These tests run automatically on every `push` and `pull_request` to `main` via `.github/workflows/playwright.yml`. A mock `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` is injected at build-time to bypass authentication hard-blocks during the pipeline.
+
+Playwright runs automatically on `push` and `pull_request` to `main` via `.github/workflows/playwright.yml`.
+
+CI uses the local Next.js app defined in `playwright.config.ts`. Live-site audits are **not** part of the default CI path and should be run explicitly as QA/ops scripts when needed.
