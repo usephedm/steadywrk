@@ -6,6 +6,7 @@ const ROUTES = [
   '/programs',
   '/about',
   '/culture',
+  '/salaries',
   '/blog',
   '/contact',
   '/privacy',
