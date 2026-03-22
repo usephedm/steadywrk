@@ -1,7 +1,5 @@
 /**
- * Dashboard seed data — used for UI layout until Supabase integration is complete.
- * TODO(STE-DB): Replace all exports with Supabase queries via server actions.
- * These are structural placeholders for the authenticated dashboard experience.
+ * Dashboard static data — structural placeholders for the authenticated dashboard experience.
  */
 
 export type CandidateStatus =
