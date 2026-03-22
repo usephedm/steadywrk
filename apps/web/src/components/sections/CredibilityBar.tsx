@@ -15,11 +15,11 @@ export function CredibilityBar() {
         <Marquee pauseOnHover className="[--duration:30s] [--gap:4rem]">
           {[
             'King Hussein Business Park',
-            'est. 2026',
+            'Building in 2026',
             'Amman, Jordan',
-            'US-Incorporated',
+            'Jordan & U.S. operations',
             'AI-Native',
-            'Cohort #1 Forming',
+            'Hiring & building',
           ].map((item) => (
             <span
               key={item}
