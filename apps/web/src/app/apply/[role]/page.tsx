@@ -85,6 +85,7 @@ export default function ApplyPage() {
   const [form, setForm] = useState<FormData>(INITIAL_FORM);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const formRef = useRef<HTMLDivElement>(null);
 
   // Restore draft from localStorage + track form start
@@ -151,13 +152,15 @@ export default function ApplyPage() {
 
   const handleSubmit = useCallback(async () => {
     setSubmitting(true);
+    setSubmitError(null);
+
     try {
       const body = {
         name: form.name,
         email: form.email,
         phone: form.phone,
         team: form.team,
-        position: role?.title ?? roleSlug,
+        position: roleSlug,
         answers: {
           q1: form.answer1,
           q2: form.answer2,
@@ -170,17 +173,33 @@ export default function ApplyPage() {
         availability: form.availability,
         challengeResponse: form.challengeResponse,
       };
-      await fetch('/api/apply', {
+
+      const response = await fetch('/api/apply', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
       });
+
+      if (!response.ok) {
+        let errorMessage = 'Failed to submit application. Please try again.';
+
+        try {
+          const payload = (await response.json()) as { error?: string };
+          if (payload.error) {
+            errorMessage = payload.error;
+          }
+        } catch {
+          // ignore malformed error payloads
+        }
+
+        throw new Error(errorMessage);
+      }
+
       setSubmitted(true);
       setStep(5);
       localStorage.removeItem(STORAGE_KEY);
 
       // PostHog: track successful submission
-
       (window as { posthog?: { capture: (e: string, p?: unknown) => void } }).posthog?.capture(
         'apply_form_submitted',
         {
@@ -212,14 +231,17 @@ export default function ApplyPage() {
           colors: ['#E58A0F', '#F5C563'],
         });
       }, 250);
-    } catch {
-      // PostHog: track submission error
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : 'Failed to submit application. Please try again.';
+      setSubmitError(errorMessage);
 
+      // PostHog: track submission error
       (window as { posthog?: { capture: (e: string, p?: unknown) => void } }).posthog?.capture(
         'apply_form_error',
         {
           role: role?.slug,
-          error: 'submission_failed',
+          error: errorMessage,
         },
       );
     } finally {
@@ -696,6 +718,12 @@ export default function ApplyPage() {
           )}
 
           {/* ━━━ Navigation ━━━ */}
+          {step < 5 && submitError && (
+            <div className="mt-8 rounded-lg border border-[#B42318]/15 bg-[#FEF3F2] px-4 py-3 text-[14px] text-[#B42318]">
+              {submitError}
+            </div>
+          )}
+
           {step < 5 && (
             <div className="mt-10 flex items-center justify-between">
               <div className="flex items-center gap-4">
