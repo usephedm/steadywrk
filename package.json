@@ -7,12 +7,20 @@
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "format": "biome format --write .",
-    "clean": "turbo run clean"
+    "clean": "turbo run clean",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}": [
+      "biome check --files-ignore-unknown=true --write --no-errors-on-unmatched"
+    ]
   },
   "devDependencies": {
     "@biomejs/biome": "^1.8.3",
     "@playwright/test": "^1.58.2",
     "@types/node": "^25.5.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
     "turbo": "^2.0.0",
     "typescript": "^5.8.3"
   },
