@@ -194,7 +194,7 @@ export const BLOG_POSTS = [
   {
     slug: 'guide-to-ai-careers-jordan-2026',
     title: 'The Complete Guide to AI Careers in Jordan 2026: Navigating the Future of Tech',
-    date: '2026-03-22',
+    date: '2026-03-05',
     category: 'AI Careers' as BlogCategory,
     readTime: '15 min read',
     featured: false,
@@ -206,7 +206,7 @@ export const BLOG_POSTS = [
   {
     slug: 'how-steadywrk-hires',
     title: 'How STEADYWRK Hires: A Transparent 7-Stage Process',
-    date: '2026-03-22',
+    date: '2026-03-04',
     category: 'Behind the Build' as BlogCategory,
     readTime: '12 min read',
     featured: false,
@@ -218,7 +218,7 @@ export const BLOG_POSTS = [
   {
     slug: 'jordans-ai-bpo-revolution',
     title: "Jordan's AI BPO Revolution: Why US Companies Are Hiring Jordanian Talent",
-    date: '2026-03-22',
+    date: '2026-03-03',
     category: 'AI Careers' as BlogCategory,
     readTime: '15 min read',
     featured: true,
