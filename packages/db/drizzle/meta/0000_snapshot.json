@@ -363,9 +363,7 @@
         "blog_posts_slug_unique": {
           "name": "blog_posts_slug_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "slug"
-          ]
+          "columns": ["slug"]
         }
       },
       "policies": {},
@@ -526,12 +524,8 @@
           "name": "email_events_applicant_id_applicants_id_fk",
           "tableFrom": "email_events",
           "tableTo": "applicants",
-          "columnsFrom": [
-            "applicant_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["applicant_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -679,9 +673,7 @@
         "employees_clerk_user_id_unique": {
           "name": "employees_clerk_user_id_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "clerk_user_id"
-          ]
+          "columns": ["clerk_user_id"]
         }
       },
       "policies": {},
@@ -794,12 +786,8 @@
           "name": "interview_slots_applicant_id_applicants_id_fk",
           "tableFrom": "interview_slots",
           "tableTo": "applicants",
-          "columnsFrom": [
-            "applicant_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["applicant_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -953,9 +941,7 @@
         "job_listings_slug_unique": {
           "name": "job_listings_slug_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "slug"
-          ]
+          "columns": ["slug"]
         }
       },
       "policies": {},
@@ -980,51 +966,27 @@
     "public.blog_status": {
       "name": "blog_status",
       "schema": "public",
-      "values": [
-        "draft",
-        "published",
-        "archived"
-      ]
+      "values": ["draft", "published", "archived"]
     },
     "public.email_event_type": {
       "name": "email_event_type",
       "schema": "public",
-      "values": [
-        "advance",
-        "reject",
-        "status_update",
-        "welcome",
-        "reminder"
-      ]
+      "values": ["advance", "reject", "status_update", "welcome", "reminder"]
     },
     "public.employee_level": {
       "name": "employee_level",
       "schema": "public",
-      "values": [
-        "explorer",
-        "contributor",
-        "builder",
-        "leader"
-      ]
+      "values": ["explorer", "contributor", "builder", "leader"]
     },
     "public.job_status": {
       "name": "job_status",
       "schema": "public",
-      "values": [
-        "open",
-        "closed",
-        "draft"
-      ]
+      "values": ["open", "closed", "draft"]
     },
     "public.job_type": {
       "name": "job_type",
       "schema": "public",
-      "values": [
-        "full-time",
-        "part-time",
-        "contract",
-        "internship"
-      ]
+      "values": ["full-time", "part-time", "contract", "internship"]
     }
   },
   "schemas": {},

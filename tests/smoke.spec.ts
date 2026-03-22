@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 const ROUTES = [
   '/',
@@ -21,12 +21,12 @@ test.describe('Static Route Smoke Tests', () => {
       // Listen for any unhandled exceptions or console errors
       const errors: string[] = [];
       page.on('pageerror', (err) => errors.push(err.message));
-      
+
       const response = await page.goto(route);
-      
+
       // Ensure the server responds with a 200 OK status
       expect(response?.status()).toBe(200);
-      
+
       // Ensure no client-side React errors occurred during hydration
       expect(errors).toHaveLength(0);
 

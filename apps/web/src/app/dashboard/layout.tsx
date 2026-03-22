@@ -5,7 +5,6 @@ import {
   ChevronLeft,
   GraduationCap,
   LayoutDashboard,
-  Mail,
   Map,
   Menu,
   Rocket,
