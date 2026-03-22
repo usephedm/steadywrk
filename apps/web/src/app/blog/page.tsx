@@ -10,7 +10,7 @@ import { useMemo, useState } from 'react';
 
 const getPublishedPosts = (): (typeof BLOG_POSTS)[number][] => {
   const now = new Date();
-  return getPublishedPosts().filter((post) => new Date(post.date) <= now);
+  return BLOG_POSTS.filter((post) => new Date(post.date) <= now);
 };
 
 export default function PublicBlogPage() {
