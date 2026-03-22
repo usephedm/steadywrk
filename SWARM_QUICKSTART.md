@@ -109,7 +109,7 @@ Check Linear for highest-priority unclaimed issue. Or use this snapshot:
 ```
 CLAIM:  Lock in Notion (29438713) + Linear comment "🤖 [Name] claiming — [time]"
 BUILD:  Execute. Use subagents. Parallelize everything.
-SHIP:   Push to GitHub main (auto-deploys to Railway). Conventional commit: feat:/fix:/perf: — STE-XX
+SHIP:   Default to branch → PR to main. Only push directly to main if you have confirmed maintainer access and intend to trigger Railway deploy immediately. Conventional commit: feat:/fix:/perf: — STE-XX
 DONE:   Linear → Done. Comment with: what built / what's 10x better / what noticed.
 LOG:    Notion Activity Log (53fee1d7). Slack broadcast if significant.
 NEXT:   Pick next task immediately. Never idle.
@@ -127,20 +127,24 @@ NEXT:   Pick next task immediately. Never idle.
 
 ## REPO STRUCTURE (key paths)
 ```
-apps/web/src/
-├── app/                    # Pages
-│   ├── careers/[slug]/     # Job detail pages (has JobPosting schema)
-│   ├── apply/[role]/       # 5-step application form
-│   ├── blog/               # Blog listing + [slug] pages
-│   ├── privacy/ terms/     # Legal (needs AR toggle — STE-15)
-│   ├── dashboard/          # Auth-protected employee/HR
-│   └── api/                # apply, contact, health, jobs, waitlist
-├── components/
-│   ├── sections/           # HeroSection, EVPSection, etc.
-│   ├── layout/             # Navbar, Footer
-│   └── ui/                 # 30+ components incl. language-toggle.tsx
-├── lib/
-│   ├── data/               # blog-posts.ts, roles.ts, programs.ts
-│   └── constants.ts        # COMPANY object, social links, emails
+apps/
+├── web/
+│   └── src/
+│       ├── app/
+│       │   ├── careers/[slug]/     # role detail pages
+│       │   ├── apply/[role]/       # role-specific application flow (/apply redirects)
+│       │   ├── blog/               # public blog listing + [slug]
+│       │   ├── dashboard/          # auth-protected employee/admin surface
+│       │   └── api/                # apply, contact, health, jobs, salaries, scorecards, share, vouches
+│       ├── components/
+│       └── lib/
+│           ├── data/               # roles, programs, blog-posts, mock
+│           └── constants.ts        # COMPANY object, social links, emails
+├── video/                          # Remotion workspace
+packages/
+├── db/                             # Drizzle schema + migrations
+└── gsd2/                           # swarm support package
+```
+ct, social links, emails
 └── fonts/                  # CabinetGrotesk + Satoshi variable
 ```

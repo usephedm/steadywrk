@@ -83,11 +83,12 @@ https://raw.githubusercontent.com/karimalsalah/steadywrk/main/{path}
 This works for reading. If you can't push, write the code/changes to a file, share with Karim, and he'll push or assign an agent with push access.
 
 **RULES:**
-- Branch: `main` (auto-deploys to Railway → steadywrk.app)
+- Default delivery: branch → PR to `main`; only push directly to `main` if you have confirmed maintainer access and intentionally want to trigger Railway deploy immediately
+- `main` is the deploy branch for steadywrk.app after merge
 - Commits: conventional format `feat:`, `fix:`, `chore:`, `docs:`, `perf:` — include Linear issue ID
 - Never force push
 - Check latest commits before pushing — if someone committed in last 10 minutes, pull first
-- For large features, use branch: `agent/{your-name}/{feature}` → PR to main
+- Recommended branch format: `agent/{your-name}/{feature}`
 
 ## 2.2 Linear (Team: STE, Project: STEADYWRK Platform v1.0)
 
@@ -284,7 +285,7 @@ Use whatever you have access to. The goal is that ANY agent checking ANY of thes
 | ORM | Drizzle ORM 0.45.1 | @neondatabase/serverless 1.0.2 |
 | Email | Resend + React Email | ADVANCE/REJECT webhooks |
 | Analytics | PostHog | Session recordings |
-| Deploy | Railway | Auto-deploy on main |
+| Deploy | Railway | Auto-deploy after merge to main |
 | Icons | Lucide React | 1.5px stroke, 24px |
 | Monorepo | Turborepo | npm workspaces |
 | Linting | Biome | single quotes, semicolons, 2-space |
@@ -295,11 +296,11 @@ karimalsalah/steadywrk/
 ├── apps/web/src/
 │   ├── app/           # Pages (Next.js App Router)
 │   │   ├── about/, blog/, careers/, culture/, programs/  # Public pages
-│   │   ├── apply/[role]/   # 5-step application form
+│   │   ├── apply/[role]/   # Role-specific application flow (`/apply` redirects)
 │   │   ├── dashboard/      # Employee/HR dashboard (auth-protected)
 │   │   ├── privacy/, terms/ # Legal pages
 │   │   ├── sign-in/, sign-up/ # Clerk auth
-│   │   ├── api/            # API routes (apply, contact, health, jobs, waitlist)
+│   │   ├── api/            # API routes (apply, contact, health, jobs, salaries, scorecards, share, vouches)
 │   │   ├── layout.tsx      # Root layout (Clerk, fonts, PostHog, JSON-LD)
 │   │   ├── globals.css     # @theme inline tokens
 │   │   └── sitemap.ts, robots.ts
@@ -401,7 +402,7 @@ STEP 4: Claim it.
     → Post to Slack: "🤖 [Name] claiming STE-XX — [what you'll do]"
     → START BUILDING IMMEDIATELY. Don't wait for confirmation.
 
-STEP 5: Build. Push to GitHub. Test on steadywrk.app after Railway deploys.
+STEP 5: Build. Push a branch / open a PR (or push to `main` only if you have confirmed direct access). Test on steadywrk.app after Railway deploys from `main`.
 
 STEP 6: Mark done.
   → Update Linear (or post to Slack if no access)
@@ -691,4 +692,13 @@ Agents don't sync at the end of a task. They sync DURING execution.
 
 # END OF SWARM PROTOCOL
 # Register. Claim. Build. Ship. Repeat.
+# "Always find workarounds that turn bottlenecks into superpowers."
+.
+# "Always find workarounds that turn bottlenecks into superpowers."
+ds that turn bottlenecks into superpowers."
+tlenecks into superpowers."
+.
+# "Always find workarounds that turn bottlenecks into superpowers."
+tlenecks into superpowers."
+.
 # "Always find workarounds that turn bottlenecks into superpowers."
