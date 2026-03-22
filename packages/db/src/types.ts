@@ -3,6 +3,7 @@ import {
   applicantVouches,
   applicants,
   blogPosts,
+  contacts,
   emailEvents,
   employees,
   interviewSlots,

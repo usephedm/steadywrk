@@ -1,59 +1,67 @@
+import { isSpamTrapTriggered, jsonResponse, parseJsonBody } from '@/lib/api-guard';
 import { db } from '@/lib/db';
-import { getClientIP, rateLimit } from '@/lib/rate-limit';
+import { getClientFingerprint, rateLimit } from '@/lib/rate-limit';
 import { eq } from 'drizzle-orm';
-import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { applicantVouches, applicants } from '../../../../../../packages/db/src/schema';
 
 const vouchSchema = z.object({
-  vouchCode: z.string().min(5),
-  applicantEmail: z.string().email(),
+  vouchCode: z.string().trim().min(5).max(50),
+  applicantEmail: z.string().trim().email().max(255),
 });
 
-/**
- * Validates and redeems a vouch code for a new applicant.
- * This unlocks Tier 2 Viral Growth Loop #4: The "Vouch For A Peer" Protocol.
- */
 export async function POST(request: Request) {
+  const requestLimit = rateLimit(getClientFingerprint(request, 'vouch'), 5, 60 * 60 * 1000);
+  if (!requestLimit.success) {
+    return jsonResponse({ error: 'Too many requests' }, { status: 429 }, requestLimit);
+  }
+
   try {
-    const ip = getClientIP(request);
-    const { success } = rateLimit(`vouch:${ip}`, 5); // strict rate limit to prevent brute forcing
-    if (!success) {
-      return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
+    const parsed = await parseJsonBody(request, { maxBytes: 4 * 1024 });
+    if (!parsed.ok) {
+      return parsed.response;
+    }
+
+    if (isSpamTrapTriggered(parsed.body)) {
+      return jsonResponse({ success: true }, { status: 202 }, requestLimit);
     }
 
     if (!db) {
-      return NextResponse.json({ error: 'Database not configured' }, { status: 503 });
+      return jsonResponse({ error: 'Database not configured' }, { status: 503 }, requestLimit);
     }
 
-    const body = await request.json();
-    const data = vouchSchema.parse(body);
+    const data = vouchSchema.parse(parsed.body);
 
-    // 1. Verify the code exists and hasn't been claimed yet
     const vouchRecords = await db
       .select()
       .from(applicantVouches)
       .where(eq(applicantVouches.vouchCode, data.vouchCode));
 
     if (vouchRecords.length === 0) {
-      return NextResponse.json({ error: 'Invalid vouch code' }, { status: 400 });
+      return jsonResponse({ error: 'Invalid vouch code' }, { status: 400 }, requestLimit);
     }
 
     const vouch = vouchRecords[0];
-
-    if (vouch.claimedAt !== null) {
-      return NextResponse.json({ error: 'Vouch code has already been claimed' }, { status: 400 });
+    if (!vouch) {
+      return jsonResponse({ error: 'Invalid vouch code' }, { status: 400 }, requestLimit);
     }
 
-    // 2. Verify the email matches the intended recipient (anti-abuse)
-    if (vouch.vouchedEmail.toLowerCase() !== data.applicantEmail.toLowerCase()) {
-      return NextResponse.json(
-        { error: 'This vouch code was issued to a different email address' },
-        { status: 403 },
+    if (vouch.claimedAt !== null) {
+      return jsonResponse(
+        { error: 'Vouch code has already been claimed' },
+        { status: 400 },
+        requestLimit,
       );
     }
 
-    // 3. Look up the referring applicant to ensure they actually passed vetting
+    if (vouch.vouchedEmail.toLowerCase() !== data.applicantEmail.toLowerCase()) {
+      return jsonResponse(
+        { error: 'This vouch code was issued to a different email address' },
+        { status: 403 },
+        requestLimit,
+      );
+    }
+
     const referrers = await db
       .select({ status: applicants.status })
       .from(applicants)
@@ -61,33 +69,35 @@ export async function POST(request: Request) {
 
     if (
       referrers.length === 0 ||
-      referrers[0].status === 'rejected' ||
-      referrers[0].status === 'withdrawn'
+      referrers[0]?.status === 'rejected' ||
+      referrers[0]?.status === 'withdrawn'
     ) {
-      return NextResponse.json(
+      return jsonResponse(
         { error: 'The referring applicant is not in a valid state to issue vouches.' },
         { status: 403 },
+        requestLimit,
       );
     }
 
-    // 4. Mark code as claimed
     await db
       .update(applicantVouches)
       .set({ claimedAt: new Date() })
       .where(eq(applicantVouches.vouchCode, data.vouchCode));
 
-    return NextResponse.json(
+    return jsonResponse(
       {
         success: true,
         message: 'Vouch code redeemed. You will bypass Stage 1 vetting.',
       },
       { status: 200 },
+      requestLimit,
     );
   } catch (err) {
     if (err instanceof z.ZodError) {
-      return NextResponse.json({ error: err.errors[0]?.message }, { status: 400 });
+      return jsonResponse({ error: err.errors[0]?.message }, { status: 400 }, requestLimit);
     }
+
     console.error('Vouch redemption failed:', err);
-    return NextResponse.json({ error: 'Failed to process vouch code' }, { status: 500 });
+    return jsonResponse({ error: 'Failed to process vouch code' }, { status: 500 }, requestLimit);
   }
 }

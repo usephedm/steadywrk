@@ -1,58 +1,108 @@
-// Robust in-memory rate limiter for API routes using a sliding window log approach
-// Resets on cold start (acceptable for serverless/edge environments without Redis)
-
 interface RateLimitEntry {
   timestamps: number[];
 }
 
+export interface RateLimitResult {
+  success: boolean;
+  remaining: number;
+  limit: number;
+  resetAt: number;
+  retryAfterSeconds: number;
+}
+
 const rateLimitMap = new Map<string, RateLimitEntry>();
+const IP_HEADER_CANDIDATES = [
+  'cf-connecting-ip',
+  'x-vercel-forwarded-for',
+  'x-forwarded-for',
+  'x-real-ip',
+  'fly-client-ip',
+] as const;
+
+function pruneTimestamps(timestamps: number[], now: number, windowMs: number) {
+  return timestamps.filter((timestamp) => now - timestamp < windowMs);
+}
 
 export function rateLimit(
   identifier: string,
   limit: number,
-  windowMs = 3600000, // 1 hour default
-): { success: boolean; remaining: number } {
+  windowMs = 60 * 60 * 1000,
+): RateLimitResult {
   const now = Date.now();
-  const entry = rateLimitMap.get(identifier);
+  const existing = rateLimitMap.get(identifier);
+  const timestamps = pruneTimestamps(existing?.timestamps ?? [], now, windowMs);
 
-  if (!entry) {
-    rateLimitMap.set(identifier, { timestamps: [now] });
-    return { success: true, remaining: limit - 1 };
+  if (timestamps.length >= limit) {
+    const oldest = timestamps[0] ?? now;
+    const resetAt = oldest + windowMs;
+    return {
+      success: false,
+      remaining: 0,
+      limit,
+      resetAt,
+      retryAfterSeconds: Math.max(1, Math.ceil((resetAt - now) / 1000)),
+    };
   }
 
-  // Filter out timestamps older than the window
-  entry.timestamps = entry.timestamps.filter((timestamp) => now - timestamp < windowMs);
+  timestamps.push(now);
+  rateLimitMap.set(identifier, { timestamps });
 
-  if (entry.timestamps.length >= limit) {
-    return { success: false, remaining: 0 };
-  }
-
-  // Add the current timestamp
-  entry.timestamps.push(now);
-
-  // Clean up old entries from the map to prevent memory leaks over time
-  // Do this probabilistically to avoid overhead on every call (e.g. 1% chance)
   if (Math.random() < 0.01) {
     cleanupRateLimitMap(windowMs);
   }
 
-  return { success: true, remaining: limit - entry.timestamps.length };
+  return {
+    success: true,
+    remaining: Math.max(0, limit - timestamps.length),
+    limit,
+    resetAt: now + windowMs,
+    retryAfterSeconds: 0,
+  };
 }
 
-function cleanupRateLimitMap(windowMs: number) {
+export function cleanupRateLimitMap(windowMs = 24 * 60 * 60 * 1000) {
   const now = Date.now();
   for (const [key, entry] of rateLimitMap.entries()) {
-    entry.timestamps = entry.timestamps.filter((timestamp) => now - timestamp < windowMs);
-    if (entry.timestamps.length === 0) {
+    const timestamps = pruneTimestamps(entry.timestamps, now, windowMs);
+    if (timestamps.length === 0) {
       rateLimitMap.delete(key);
+      continue;
     }
+
+    rateLimitMap.set(key, { timestamps });
   }
+}
+
+export function createRateLimitHeaders(result: RateLimitResult) {
+  const headers = new Headers();
+  headers.set('X-RateLimit-Limit', String(result.limit));
+  headers.set('X-RateLimit-Remaining', String(result.remaining));
+  headers.set('X-RateLimit-Reset', String(Math.ceil(result.resetAt / 1000)));
+
+  if (!result.success) {
+    headers.set('Retry-After', String(result.retryAfterSeconds));
+  }
+
+  return headers;
 }
 
 export function getClientIP(request: Request): string {
-  const forwarded = request.headers.get('x-forwarded-for');
-  if (forwarded) {
-    return forwarded.split(',')[0].trim();
+  for (const header of IP_HEADER_CANDIDATES) {
+    const value = request.headers.get(header);
+    if (!value) continue;
+
+    const candidate = value.split(',')[0]?.trim();
+    if (candidate) return candidate;
   }
-  return request.headers.get('x-real-ip') ?? 'unknown';
+
+  return 'unknown';
+}
+
+export function getClientFingerprint(request: Request, scope: string) {
+  const ip = getClientIP(request);
+  const userAgent = request.headers.get('user-agent')?.slice(0, 120) ?? 'unknown';
+  const acceptLanguage =
+    request.headers.get('accept-language')?.split(',')[0]?.slice(0, 32) ?? 'unknown';
+
+  return `${scope}:${ip}:${userAgent}:${acceptLanguage}`;
 }

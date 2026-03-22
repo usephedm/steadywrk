@@ -1,22 +1,39 @@
-import { NextResponse } from 'next/server';
+import { isSpamTrapTriggered, jsonResponse, parseJsonBody } from '@/lib/api-guard';
+import { getClientFingerprint, rateLimit } from '@/lib/rate-limit';
+import { z } from 'zod';
+
+const shareSchema = z.object({
+  applicantId: z.string().uuid(),
+  platform: z.enum(['linkedin', 'x', 'whatsapp', 'copy_link']),
+});
 
 export async function POST(request: Request) {
-  try {
-    const { applicantId, platform } = await request.json();
+  const requestLimit = rateLimit(getClientFingerprint(request, 'share'), 20, 60 * 60 * 1000);
+  if (!requestLimit.success) {
+    return jsonResponse({ error: 'Too many requests' }, { status: 429 }, requestLimit);
+  }
 
-    if (!applicantId || !platform) {
-      return NextResponse.json({ error: 'Missing parameters' }, { status: 400 });
+  try {
+    const parsed = await parseJsonBody(request, { maxBytes: 4 * 1024 });
+    if (!parsed.ok) {
+      return parsed.response;
     }
 
-    // In a full implementation, we might track these specific sharing events in a dedicated analytics table.
-    // For now, we update a 'shares' counter on the applicant or just log it for the referral growth loop.
-    console.log(`[Viral Loop] Applicant ${applicantId} shared scorecard on ${platform}`);
+    if (isSpamTrapTriggered(parsed.body)) {
+      return jsonResponse({ success: true }, { status: 202 }, requestLimit);
+    }
 
-    // Optionally: Increase applicant "score" or "reputation" internally for organic sharing.
+    const data = shareSchema.parse(parsed.body);
 
-    return NextResponse.json({ success: true });
+    console.log(`[Viral Loop] Applicant ${data.applicantId} shared scorecard on ${data.platform}`);
+
+    return jsonResponse({ success: true }, { status: 200 }, requestLimit);
   } catch (err) {
+    if (err instanceof z.ZodError) {
+      return jsonResponse({ error: err.errors[0]?.message }, { status: 400 }, requestLimit);
+    }
+
     console.error('Share tracking failed:', err);
-    return NextResponse.json({ error: 'Failed to track share event' }, { status: 500 });
+    return jsonResponse({ error: 'Failed to track share event' }, { status: 500 }, requestLimit);
   }
 }

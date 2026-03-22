@@ -1,42 +1,51 @@
+import { isSpamTrapTriggered, jsonResponse, parseJsonBody } from '@/lib/api-guard';
 import { db } from '@/lib/db';
 import { ApplicationConfirmation } from '@/lib/email/application-confirmation';
 import { HRNotification } from '@/lib/email/hr-notification';
-import { getClientIP, rateLimit } from '@/lib/rate-limit';
+import { getClientFingerprint, rateLimit } from '@/lib/rate-limit';
 import { validateApplyPayload } from '@/lib/schemas';
 import { createScorecardToken } from '@/lib/scorecards';
-import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { applicants, emailEvents } from '../../../../../../packages/db/src/schema';
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
 export async function POST(request: Request) {
+  const requestLimit = rateLimit(getClientFingerprint(request, 'apply'), 5, 60 * 60 * 1000);
+  if (!requestLimit.success) {
+    return jsonResponse(
+      { error: 'Too many submissions. Try again later.' },
+      { status: 429 },
+      requestLimit,
+    );
+  }
+
   try {
-    const ip = getClientIP(request);
-    const { success } = rateLimit(`apply:${ip}`, 5);
-    if (!success) {
-      return NextResponse.json(
-        { error: 'Too many submissions. Try again later.' },
-        { status: 429 },
-      );
+    const parsed = await parseJsonBody(request, { maxBytes: 48 * 1024 });
+    if (!parsed.ok) {
+      return parsed.response;
     }
 
-    const body = await request.json();
+    if (isSpamTrapTriggered(parsed.body)) {
+      return jsonResponse({ success: true }, { status: 202 }, requestLimit);
+    }
 
-    // Validate required fields early
+    const body = parsed.body;
+
     if (!body.email || !body.name || !body.position) {
-      return NextResponse.json(
+      return jsonResponse(
         { error: 'Missing required fields: email, name, and position are required.' },
         { status: 400 },
+        requestLimit,
       );
     }
 
     const data = validateApplyPayload(body);
 
-    // Insert into database
     let applicantId: string | undefined;
     try {
       if (!db) throw new Error('Database not configured');
+
       const [result] = await db
         .insert(applicants)
         .values({
@@ -47,13 +56,14 @@ export async function POST(request: Request) {
           teamInterest: data.team || null,
           portfolioUrl: data.portfolioUrl || null,
           githubUrl: data.githubUrl || null,
-          answers: data.answers || { q1: '', q2: '', q3: '' },
-          skills: data.skills || {},
+          answers: data.answers,
+          skills: data.skills,
           availability: data.availability || null,
           challengeResponse: data.challengeResponse || null,
           pdplConsent: data.pdplConsent,
         })
         .returning({ id: applicants.id });
+
       applicantId = result?.id;
     } catch (dbError) {
       console.error('Database insert failed:', dbError);
@@ -65,19 +75,20 @@ export async function POST(request: Request) {
         message.includes('unique constraint');
 
       if (isDuplicateApplication) {
-        return NextResponse.json(
+        return jsonResponse(
           {
             error:
               'You already applied to this role with this email. We will review your existing application.',
           },
           { status: 409 },
+          requestLimit,
         );
       }
 
-      // Database insertion is critical — fail the request
-      return NextResponse.json(
+      return jsonResponse(
         { error: 'Failed to save application. Please try again later.' },
         { status: 500 },
+        requestLimit,
       );
     }
 
@@ -91,7 +102,6 @@ export async function POST(request: Request) {
       }),
     );
 
-    // Send emails (non-blocking — don't fail the application if email fails)
     const eventDb = db;
     if (resend && eventDb && applicantId) {
       const candidateSubject = `Application received — ${data.position}`;
@@ -163,15 +173,16 @@ export async function POST(request: Request) {
       });
     }
 
-    return NextResponse.json(
+    return jsonResponse(
       {
         success: true,
         scorecardToken: applicantId ? createScorecardToken(applicantId) : null,
       },
       { status: 201 },
+      requestLimit,
     );
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Something went wrong';
-    return NextResponse.json({ error: message }, { status: 400 });
+    return jsonResponse({ error: message }, { status: 400 }, requestLimit);
   }
 }

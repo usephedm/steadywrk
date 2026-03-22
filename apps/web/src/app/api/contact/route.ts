@@ -1,30 +1,37 @@
+import { isSpamTrapTriggered, jsonResponse, parseJsonBody } from '@/lib/api-guard';
 import { COMPANY } from '@/lib/constants';
 import { db } from '@/lib/db';
-import { getClientIP, rateLimit } from '@/lib/rate-limit';
+import { getClientFingerprint, rateLimit } from '@/lib/rate-limit';
 import { validateContactPayload } from '@/lib/schemas';
-import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { contacts } from '../../../../../../packages/db/src/schema';
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
 export async function POST(request: Request) {
+  const requestLimit = rateLimit(getClientFingerprint(request, 'contact'), 5, 60 * 60 * 1000);
+  if (!requestLimit.success) {
+    return jsonResponse(
+      { error: 'Too many submissions. Try again later.' },
+      { status: 429 },
+      requestLimit,
+    );
+  }
+
   try {
-    // Rate limit: 5 submissions per IP per hour
-    const ip = getClientIP(request);
-    const { success } = rateLimit(`contact:${ip}`, 5);
-    if (!success) {
-      return NextResponse.json(
-        { error: 'Too many submissions. Try again later.' },
-        { status: 429 },
-      );
+    const parsed = await parseJsonBody(request, { maxBytes: 16 * 1024 });
+    if (!parsed.ok) {
+      return parsed.response;
     }
 
-    const body = await request.json();
-    const data = validateContactPayload(body);
+    if (isSpamTrapTriggered(parsed.body)) {
+      return jsonResponse({ success: true }, { status: 202 }, requestLimit);
+    }
+
+    const data = validateContactPayload(parsed.body);
 
     if (!db) {
-      return NextResponse.json({ error: 'Database not configured' }, { status: 500 });
+      return jsonResponse({ error: 'Database not configured' }, { status: 500 }, requestLimit);
     }
 
     const [contact] = await db
@@ -38,7 +45,6 @@ export async function POST(request: Request) {
       })
       .returning({ id: contacts.id });
 
-    // Send contact inquiry via email after persistence succeeds
     if (resend) {
       await resend.emails
         .send({
@@ -69,9 +75,9 @@ export async function POST(request: Request) {
       }),
     );
 
-    return NextResponse.json({ success: true });
+    return jsonResponse({ success: true }, { status: 201 }, requestLimit);
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Something went wrong';
-    return NextResponse.json({ error: message }, { status: 400 });
+    return jsonResponse({ error: message }, { status: 400 }, requestLimit);
   }
 }
