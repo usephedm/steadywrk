@@ -1,5 +1,8 @@
+'use client';
+
 import { AnimatedShinyText } from '@/components/ui/animated-shiny-text';
 import { BlurFade } from '@/components/ui/blur-fade';
+import { Particles } from '@/components/ui/particles';
 import { ShimmerButton } from '@/components/ui/shimmer-button';
 import { WordRotate } from '@/components/ui/word-rotate';
 import { ArrowRight, ChevronRight } from 'lucide-react';
@@ -7,31 +10,25 @@ import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
 
-/* ─── Performance-critical: lazy-load heavy components ─── */
-const Particles = dynamic(
-  () => import('@/components/ui/particles').then((m) => m.Particles),
-  { ssr: false },
-);
+/* Only lazy-load the heavy 3D component */
 const LogoTotem3D = dynamic(
   () => import('@/components/ui/logo-totem-3d').then((m) => m.LogoTotem3D),
   { ssr: false, loading: () => <div className="w-full h-full" /> },
 );
-const TextAnimate = dynamic(
-  () => import('@/components/ui/text-animate').then((m) => m.TextAnimate),
-  { ssr: false },
-);
 
 /**
- * HeroSection — Performance-optimized for LCP < 2s
+ * HeroSection — Performance-optimized
  *
- * Changes from v1 (LCP 9.6s):
- * - Removed 'use client' — this is now a Server Component with client islands
- * - Hero image uses explicit width/height + sizes for responsive loading
- * - Removed parallax scroll transforms (saved ~200ms TBT from motion/react)
- * - Lazy-load Particles, TextAnimate, LogoTotem3D via next/dynamic
- * - Removed noise texture SVG overlay (saved paint cost)
- * - Simplified gradient overlays from 2 to 1
- * - BlurFade kept for visual polish but renders immediately on server
+ * This is a client component (uses WordRotate, AnimatedShinyText, etc.)
+ * but lives inside a Server Component page (page.tsx has NO 'use client').
+ * The page.tsx RSC conversion is the big perf win — this component
+ * is a client island within the server-rendered shell.
+ *
+ * Changes from original:
+ * - Removed parallax/scroll transforms (saved TBT)
+ * - Particles hidden on mobile, reduced to 20
+ * - LogoTotem3D lazy-loaded (Three.js is heavy)
+ * - Image quality explicit at 75, priority + fetchPriority="high"
  */
 export function HeroSection() {
   return (
@@ -51,7 +48,7 @@ export function HeroSection() {
         />
       </div>
 
-      {/* Particles — lazy loaded, reduced quantity, hidden on mobile */}
+      {/* Particles — hidden on mobile for performance */}
       <div className="absolute inset-0 z-[1] hidden md:block">
         <Particles
           className="absolute inset-0"
@@ -63,7 +60,7 @@ export function HeroSection() {
         />
       </div>
 
-      {/* Single gradient overlay (merged two into one for fewer paint layers) */}
+      {/* Gradient overlays */}
       <div className="absolute inset-0 z-[3] bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/50 to-[#0A0A0A]/20" />
       <div className="absolute inset-0 z-[3] bg-gradient-to-r from-[#0A0A0A]/70 to-transparent" />
 
