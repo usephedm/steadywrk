@@ -39,6 +39,11 @@ export default async function CareerDetailPage({ params }: PageProps) {
   const role = ROLES.find((r) => r.slug === slug);
   if (!role) notFound();
 
+  // Parse salary range from "400–700 JOD" format
+  const salaryMatch = role.salary?.match(/([\d,]+)\s*[\u2013\-]\s*([\d,]+)/);
+  const minSalary = salaryMatch ? Number(salaryMatch[1].replace(',', '')) : undefined;
+  const maxSalary = salaryMatch ? Number(salaryMatch[2].replace(',', '')) : undefined;
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'JobPosting',
@@ -57,14 +62,29 @@ export default async function CareerDetailPage({ params }: PageProps) {
       '@type': 'Place',
       address: {
         '@type': 'PostalAddress',
+        streetAddress: 'Building 15, King Hussein Business Park',
         addressLocality: 'Amman',
+        addressRegion: 'Amman',
         addressCountry: 'JO',
       },
     },
+    baseSalary: minSalary && maxSalary ? {
+      '@type': 'MonetaryAmount',
+      currency: 'JOD',
+      value: {
+        '@type': 'QuantitativeValue',
+        minValue: minSalary,
+        maxValue: maxSalary,
+        unitText: 'MONTH',
+      },
+    } : undefined,
     applicantLocationRequirements: role.location.includes('Remote')
       ? { '@type': 'Country', name: 'Jordan' }
       : undefined,
     jobLocationType: role.location.includes('Remote') ? 'TELECOMMUTE' : undefined,
+    jobWorkingLanguages: ['en'],
+    directApply: true,
+    industry: 'Technology',
   };
 
   return (
