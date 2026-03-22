@@ -31,7 +31,7 @@ type ScoreKey =
   | 'cultural'
   | 'initiative';
 
-interface Candidate {
+export interface PipelineCandidate {
   id: string;
   name: string;
   role: string;
@@ -42,7 +42,7 @@ interface Candidate {
   email: string;
 }
 
-export function HiringBoard({ initialCandidates }: { initialCandidates: Candidate[] }) {
+export function HiringBoard({ initialCandidates }: { initialCandidates: PipelineCandidate[] }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [roleFilter, setRoleFilter] = useState('All');
   const [selectedCandidate, setSelectedCandidate] = useState<string | null>(null);

@@ -5,11 +5,18 @@ import { motion } from 'motion/react';
 import Image from 'next/image';
 import { useState } from 'react';
 
-export function ScorecardClient({ assessment }: { assessment: any }) {
+interface AssessmentSummary {
+  applicantId: string | null;
+  score: number;
+  role: string;
+  percentile: string;
+}
+
+export function ScorecardClient({ assessment }: { assessment: AssessmentSummary }) {
   const [sharing, setSharing] = useState(false);
   const [downloading, setDownloading] = useState(false);
 
-  const { applicantId, score, role, percentile } = assessment;
+  const { applicantId, role, percentile } = assessment;
 
   const ogImageUrl = `/api/scorecards?id=${applicantId}`;
 

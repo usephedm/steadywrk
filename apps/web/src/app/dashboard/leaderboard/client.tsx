@@ -33,7 +33,7 @@ const ALL_BADGES = [
   { name: 'Steady', icon: Shield, description: 'Complete Week 4: Steady State' },
 ] as const;
 
-interface LeaderboardUser {
+export interface LeaderboardUser {
   id: string;
   name: string;
   points: number;

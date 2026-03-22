@@ -1,9 +1,6 @@
 'use server';
 
-import { db } from '@/lib/db';
 import { auth } from '@clerk/nextjs/server';
-import { eq } from 'drizzle-orm';
-import { applicantVouches, applicants } from '../../../../../packages/db/src/schema';
 
 export async function getReferralStats() {
   const { userId } = await auth();

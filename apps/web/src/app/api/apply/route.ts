@@ -5,7 +5,7 @@ import { HRNotification } from '@/lib/email/hr-notification';
 import { getClientFingerprint, rateLimit } from '@/lib/rate-limit';
 import { validateApplyPayload } from '@/lib/schemas';
 import { createScorecardToken } from '@/lib/scorecards';
-import { and, eq } from 'drizzle-orm';
+import { eq } from 'drizzle-orm';
 import { Resend } from 'resend';
 import {
   applicantVouches,

@@ -4,7 +4,14 @@ import { Check, Copy, ShieldCheck, Sparkles, Users } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useState } from 'react';
 
-export function ReferralsClient({ initialStats }: { initialStats: any }) {
+interface ReferralStats {
+  totalReferrals: number;
+  successfulHires: number;
+  bountyEarned: number;
+  vouchCode: string | null;
+}
+
+export function ReferralsClient({ initialStats }: { initialStats: ReferralStats }) {
   const [copied, setCopied] = useState(false);
   const [generateLoading, setGenerateLoading] = useState(false);
   const [vouchCode, setVouchCode] = useState<string | null>(null);

@@ -3,8 +3,25 @@
 import { Calendar, CheckCircle2, Clock, Edit3, UserCircle, Video } from 'lucide-react';
 import { useState } from 'react';
 
-export function InterviewsClient({ initialInterviews }: { initialInterviews: any[] }) {
-  const [interviews, setInterviews] = useState(initialInterviews);
+interface InterviewRecord {
+  id: string;
+  scheduledAt: string;
+  duration: number;
+  interviewerName: string | null;
+  meetingUrl: string | null;
+  notes: string | null;
+  completed: boolean;
+  applicant: {
+    id: string | null;
+    name: string | null;
+    email: string | null;
+    role: string | null;
+    status: string | null;
+  } | null;
+}
+
+export function InterviewsClient({ initialInterviews }: { initialInterviews: InterviewRecord[] }) {
+  const [interviews] = useState(initialInterviews);
 
   return (
     <div className="p-6 md:p-10 max-w-6xl mx-auto">

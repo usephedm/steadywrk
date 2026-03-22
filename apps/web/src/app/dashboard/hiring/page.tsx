@@ -1,5 +1,5 @@
 import { getPipelineCandidates } from '@/app/actions/hiring';
-import { HiringBoard } from '@/components/dashboard/hiring-board';
+import { HiringBoard, type PipelineCandidate } from '@/components/dashboard/hiring-board';
 
 export default async function HiringPage() {
   const candidates = await getPipelineCandidates();
@@ -7,7 +7,6 @@ export default async function HiringPage() {
   return (
     <div className="min-h-dvh bg-[#FAFAF8]">
       <div className="max-w-7xl mx-auto px-6 py-10">
-        {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-2 mb-1">
             <h1 className="font-[var(--font-display)] text-3xl sm:text-4xl font-extrabold text-[#23211D] tracking-tight">
@@ -22,7 +21,7 @@ export default async function HiringPage() {
           </p>
         </div>
 
-        <HiringBoard initialCandidates={candidates as any} />
+        <HiringBoard initialCandidates={candidates as PipelineCandidate[]} />
       </div>
     </div>
   );

@@ -18,7 +18,7 @@ import { AnimatePresence, motion } from 'motion/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 const NAV_ITEMS = [
   { href: '/dashboard', label: 'Overview', icon: LayoutDashboard },
@@ -50,11 +50,6 @@ export default function DashboardShell({
     () => NAV_ITEMS.filter((item) => !('adminOnly' in item) || !item.adminOnly || canAccessAdmin),
     [canAccessAdmin],
   );
-
-  useEffect(() => {
-    void pathname;
-    setSidebarOpen(false);
-  }, [pathname]);
 
   const isActive = (href: string) => {
     if (href === '/dashboard') return pathname === '/dashboard';
