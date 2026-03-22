@@ -21,7 +21,7 @@ test.describe('Apply Form Flow', () => {
     await page.getByRole('checkbox').check();
 
     // Continue to Step 2
-    await page.getByRole('button', { name: /Continue/i }).click();
+    await page.getByRole('button', { name: 'Continue', exact: true }).click();
 
     // Step 2: Your Story
     await expect(page.getByText('Step 2 of 5')).toBeVisible();
@@ -38,7 +38,7 @@ test.describe('Apply Form Flow', () => {
       .fill('Organized a messy repo into a monorepo.');
 
     // Continue to Step 3
-    await page.getByRole('button', { name: /Continue/i }).click();
+    await page.getByRole('button', { name: 'Continue', exact: true }).click();
 
     // Step 3: Skills Signal
     await expect(page.getByText('Step 3 of 5')).toBeVisible();
@@ -50,7 +50,7 @@ test.describe('Apply Form Flow', () => {
     await page.getByLabel('Immediately').check();
 
     // Continue to Step 4
-    await page.getByRole('button', { name: /Continue/i }).click();
+    await page.getByRole('button', { name: 'Continue', exact: true }).click();
 
     // Step 4: The Challenge
     await expect(page.getByText('Step 4 of 5')).toBeVisible();
