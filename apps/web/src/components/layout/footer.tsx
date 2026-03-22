@@ -38,7 +38,7 @@ export function Footer() {
 
         <div className="border-t border-[rgba(255,255,255,0.04)] pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-[11px] text-white/15">
-            &copy; {new Date().getFullYear()} {COMPANY.legal}. All rights reserved.
+            &copy; 2026 {COMPANY.legal}. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
             <Link

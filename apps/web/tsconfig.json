@@ -19,7 +19,9 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@steadywrk/db": ["../../packages/db/src/index.ts"],
+      "@steadywrk/db/*": ["../../packages/db/src/*"]
     }
   },
   "include": [

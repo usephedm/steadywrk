@@ -27,19 +27,6 @@ After cloning any repository, immediately check for and read these files at the 
 
 Follow all instructions and conventions found in these files. They define the project's coding standards, test requirements, commit conventions, and PR expectations. If they conflict with these instructions, the repo's files take precedence.
 
-## Integrations (Phase 2)
-
-- **Clerk Auth**: `@clerk/nextjs` — middleware at `apps/web/src/middleware.ts`, ClerkProvider in root layout, sign-in/sign-up pages. Protected routes: `/dashboard/*`. Public routes: everything else.
-- **Resend Email**: `resend` + `@react-email/components` — email templates at `apps/web/src/lib/email/`. Application confirmation sent to candidate, HR notification sent to `HR_EMAIL`. Fire-and-forget (don't block API response).
-- **PostHog Analytics**: `posthog-js` + `posthog-node` — provider at `apps/web/src/lib/posthog.tsx`, event helpers at `apps/web/src/lib/analytics.ts`. Wraps children inside ClerkProvider in root layout. Manual pageview capture for SPA navigation.
-
-### Environment Variables
-
-All env vars documented in `apps/web/.env.example`:
-- `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`, `CLERK_SECRET_KEY`, `NEXT_PUBLIC_CLERK_SIGN_IN_URL`, `NEXT_PUBLIC_CLERK_SIGN_UP_URL`
-- `RESEND_API_KEY`, `HR_EMAIL`
-- `NEXT_PUBLIC_POSTHOG_KEY`, `NEXT_PUBLIC_POSTHOG_HOST`
-
 ## Core Rules
 
 - Ensure all changes follow the project's coding standards (as discovered from repo convention files above)

@@ -5,8 +5,10 @@ import { useEffect } from 'react';
 
 export default function BlogError({ error, reset }: { error: Error; reset: () => void }) {
   useEffect(() => {
-    if (typeof window !== 'undefined' && window.posthog) {
-      window.posthog.capture('error_boundary', { error: error.message, page: '/blog' });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const w = window as any;
+    if (typeof window !== 'undefined' && w.posthog) {
+      w.posthog.capture('error_boundary', { error: error.message, page: '/blog' });
     }
   }, [error]);
 

@@ -1,5 +1,8 @@
 import { getClientIP, rateLimit } from '@/lib/rate-limit';
 import { NextResponse } from 'next/server';
+import { z } from 'zod';
+
+const emailSchema = z.string().email();
 
 export async function POST(request: Request) {
   try {
@@ -14,12 +17,11 @@ export async function POST(request: Request) {
     }
 
     const { email } = await request.json();
-
-    if (!email || typeof email !== 'string' || !email.includes('@')) {
+    const parsed = emailSchema.safeParse(email);
+    if (!parsed.success) {
       return NextResponse.json({ error: 'Invalid email' }, { status: 400 });
     }
-
-    const normalized = email.trim().toLowerCase();
+    const normalized = parsed.data.trim().toLowerCase();
 
     // Structured log for Vercel Log Drain
     console.info(

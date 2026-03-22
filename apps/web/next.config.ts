@@ -1,5 +1,4 @@
 import type { NextConfig } from 'next';
-import { resolve } from 'node:path';
 
 const securityHeaders = [
   {
@@ -16,7 +15,7 @@ const securityHeaders = [
   },
   {
     key: 'Referrer-Policy',
-    value: 'origin-when-cross-origin',
+    value: 'strict-origin-when-cross-origin',
   },
   {
     key: 'Permissions-Policy',
@@ -24,7 +23,20 @@ const securityHeaders = [
   },
   {
     key: 'X-Frame-Options',
-    value: 'SAMEORIGIN',
+    value: 'DENY',
+  },
+  {
+    key: 'Content-Security-Policy',
+    value: [
+      "default-src 'self'",
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://analytics.ahrefs.com https://va.vercel-scripts.com https://us.i.posthog.com",
+      "style-src 'self' 'unsafe-inline'",
+      "img-src 'self' data: blob: https://img.clerk.com https://images.clerk.dev",
+      "font-src 'self'",
+      "connect-src 'self' https://us.i.posthog.com https://*.clerk.accounts.dev https://*.neon.tech https://va.vercel-scripts.com https://analytics.ahrefs.com",
+      "frame-src 'self' https://*.clerk.accounts.dev",
+      "worker-src 'self' blob:",
+    ].join('; '),
   },
 ];
 
@@ -34,11 +46,13 @@ const nextConfig: NextConfig = {
   experimental: {
     viewTransition: true,
   },
-  turbopack: {
-    root: resolve(__dirname, '../..'),
+  logging: {
+    fetches: {
+      fullUrl: true,
+    },
   },
   images: {
-    qualities: [100, 75],
+    qualities: [85, 75],
     formats: ['image/avif', 'image/webp'],
   },
   async headers() {

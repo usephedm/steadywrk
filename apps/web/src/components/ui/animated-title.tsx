@@ -1,7 +1,7 @@
 'use client';
 
 import { usePrefersReducedMotion } from '@/lib/hooks/use-prefers-reduced-motion';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 interface AnimatedTitleProps {
   text: string;

@@ -9,6 +9,7 @@ import {
   uuid,
   varchar,
   index,
+  uniqueIndex,
 } from 'drizzle-orm/pg-core';
 
 /* ─── Enums ─── */
@@ -87,6 +88,8 @@ export const applicants = pgTable(
     index('applicant_email_idx').on(table.email),
     index('applicant_status_idx').on(table.status),
     index('applicant_role_idx').on(table.roleSlug),
+    uniqueIndex('applicant_email_role_idx').on(table.email, table.roleSlug),
+    index('applicant_status_created_idx').on(table.status, table.createdAt),
   ],
 );
 
@@ -157,6 +160,7 @@ export const employees = pgTable(
   (table) => [
     index('employee_clerk_idx').on(table.clerkUserId),
     index('employee_dept_idx').on(table.department),
+    uniqueIndex('employee_email_idx').on(table.email),
   ],
 );
 
@@ -198,5 +202,32 @@ export const emailEvents = pgTable(
   (table) => [
     index('email_applicant_idx').on(table.applicantId),
     index('email_type_idx').on(table.type),
+  ],
+);
+
+export const waitlist = pgTable(
+  'waitlist',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    email: varchar('email', { length: 255 }).notNull().unique(),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+  },
+  (table) => [
+    index('waitlist_email_idx').on(table.email),
+  ],
+);
+
+export const contacts = pgTable(
+  'contacts',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    name: varchar('name', { length: 255 }).notNull(),
+    email: varchar('email', { length: 255 }).notNull(),
+    company: varchar('company', { length: 255 }),
+    message: text('message').notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+  },
+  (table) => [
+    index('contact_email_idx').on(table.email),
   ],
 );

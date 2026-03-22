@@ -1,4 +1,5 @@
-import { sql } from '@/lib/db';
+import { db } from '@/lib/db';
+import { applicants } from '../../../../../../packages/db/src/schema';
 import { ApplicationConfirmation } from '@/lib/email/application-confirmation';
 import { HRNotification } from '@/lib/email/hr-notification';
 import { getClientIP, rateLimit } from '@/lib/rate-limit';
@@ -25,13 +26,22 @@ export async function POST(request: Request) {
     // Insert into database
     let applicantId: string | undefined;
     try {
-      if (!sql) throw new Error('Database not configured');
-      const result = await sql`
-        INSERT INTO applicants (email, name, phone, role_slug, team_interest, portfolio_url, github_url, answers, skills, availability, challenge_response, pdpl_consent)
-        VALUES (${data.email}, ${data.name}, ${data.phone || null}, ${data.position}, ${data.team || null}, ${data.portfolioUrl || null}, ${data.githubUrl || null}, ${JSON.stringify(data.answers || {})}, ${JSON.stringify(data.skills || {})}, ${data.availability || null}, ${data.challengeResponse || null}, ${true})
-        RETURNING id
-      `;
-      applicantId = result?.[0]?.id;
+      if (!db) throw new Error('Database not configured');
+      const [result] = await db.insert(applicants).values({
+        email: data.email,
+        name: data.name,
+        phone: data.phone || null,
+        roleSlug: data.position,
+        teamInterest: data.team || null,
+        portfolioUrl: data.portfolioUrl || null,
+        githubUrl: data.githubUrl || null,
+        answers: data.answers || { q1: '', q2: '', q3: '' },
+        skills: data.skills || {},
+        availability: data.availability || null,
+        challengeResponse: data.challengeResponse || null,
+        pdplConsent: true,
+      }).returning({ id: applicants.id });
+      applicantId = result?.id;
     } catch (dbError) {
       console.error('Database insert failed:', dbError);
       // Continue — don't fail the application if DB is down

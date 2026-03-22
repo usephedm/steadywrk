@@ -1,17 +1,10 @@
 import { ImageResponse } from 'next/og';
 
-export const runtime = 'edge';
 export const alt = 'STEADYWRK — Where Ambition Compounds';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
 export default async function Image() {
-  const logoData = await fetch(
-    new URL('../../public/brand/logo-mark-3d-tile.webp', import.meta.url),
-  ).then((res) => res.arrayBuffer());
-
-  const logoSrc = `data:image/webp;base64,${Buffer.from(logoData).toString('base64')}`;
-
   return new ImageResponse(
     <div
       style={{
@@ -37,18 +30,9 @@ export default async function Image() {
         }}
       />
 
-      {/* Official 3D logo mark */}
-      <img
-        src={logoSrc}
-        width={160}
-        height={160}
-        style={{ borderRadius: 24 }}
-      />
-
       <div
         style={{
-          marginTop: 32,
-          fontSize: 56,
+          fontSize: 72,
           fontWeight: 800,
           color: '#FFFFFF',
           letterSpacing: '-0.03em',
@@ -58,8 +42,8 @@ export default async function Image() {
       </div>
       <div
         style={{
-          marginTop: 12,
-          fontSize: 22,
+          marginTop: 16,
+          fontSize: 24,
           color: 'rgba(255,255,255,0.5)',
           letterSpacing: '0.05em',
         }}
@@ -68,8 +52,8 @@ export default async function Image() {
       </div>
       <div
         style={{
-          marginTop: 32,
-          fontSize: 16,
+          marginTop: 40,
+          fontSize: 18,
           color: '#E58A0F',
           fontWeight: 600,
           textTransform: 'uppercase' as const,
