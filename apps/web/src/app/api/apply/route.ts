@@ -21,6 +21,15 @@ export async function POST(request: Request) {
     }
 
     const body = await request.json();
+
+    // Validate required fields early
+    if (!body.email || !body.name || !body.position) {
+      return NextResponse.json(
+        { error: 'Missing required fields: email, name, and position are required.' },
+        { status: 400 },
+      );
+    }
+
     const data = validateApplyPayload(body);
 
     // Insert into database
@@ -44,7 +53,7 @@ export async function POST(request: Request) {
       applicantId = result?.id;
     } catch (dbError) {
       console.error('Database insert failed:', dbError);
-      // Continue — don't fail the application if DB is down
+      // Database insertion is critical — fail the request
     }
 
     console.info(
@@ -102,7 +111,7 @@ export async function POST(request: Request) {
       });
     }
 
-    return NextResponse.json({ success: true, applicantId });
+    return NextResponse.json({ success: true, applicantId }, { status: 201 });
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Something went wrong';
     return NextResponse.json({ error: message }, { status: 400 });
