@@ -42,6 +42,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 0.7,
     },
+    {
+      url: `${baseUrl}/privacy`,
+      lastModified: now,
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    },
+    {
+      url: `${baseUrl}/terms`,
+      lastModified: now,
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    },
   ];
 
   const rolePages: MetadataRoute.Sitemap = ROLES.map((role) => ({
@@ -65,12 +77,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  const blogPages: MetadataRoute.Sitemap = BLOG_POSTS.map((post) => ({
-      url: `${baseUrl}/blog/${post.slug}`,
-      lastModified: now,
-      changeFrequency: 'monthly' as const,
-      priority: 0.6,
-    }));
+  // Only include published blog posts (date <= today)
+  const publishedPosts = BLOG_POSTS.filter(
+    (post) => new Date(post.date) <= now,
+  );
+
+  const blogPages: MetadataRoute.Sitemap = publishedPosts.map((post) => ({
+    url: `${baseUrl}/blog/${post.slug}`,
+    lastModified: new Date(post.date),
+    changeFrequency: 'monthly' as const,
+    priority: 0.6,
+  }));
 
   return [...staticPages, ...rolePages, ...programPages, ...applyPages, ...blogPages];
 }
