@@ -10,7 +10,9 @@ const waitlistSchema = z.object({
 
 export type WaitlistResult = { success: true } | { success: false; error: string };
 
-export async function submitWaitlist(formData: z.infer<typeof waitlistSchema>): Promise<WaitlistResult> {
+export async function submitWaitlist(
+  formData: z.infer<typeof waitlistSchema>,
+): Promise<WaitlistResult> {
   try {
     const data = waitlistSchema.parse(formData);
 

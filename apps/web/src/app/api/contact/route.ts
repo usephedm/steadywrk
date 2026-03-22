@@ -23,21 +23,23 @@ export async function POST(request: Request) {
 
     // Send contact inquiry via email
     if (resend) {
-      await resend.emails.send({
-        from: `STEADYWRK <${COMPANY.emails.noreply}>`,
-        to: COMPANY.emails.public,
-        subject: `Contact inquiry: ${data.subject}`,
-        text: [
-          `Name: ${data.name}`,
-          `Email: ${data.email}`,
-          `Company: ${data.company}`,
-          `Subject: ${data.subject}`,
-          '',
-          data.message,
-        ].join('\n'),
-      }).catch((err) => {
-        console.error('Contact email send failed:', err);
-      });
+      await resend.emails
+        .send({
+          from: `STEADYWRK <${COMPANY.emails.noreply}>`,
+          to: COMPANY.emails.public,
+          subject: `Contact inquiry: ${data.subject}`,
+          text: [
+            `Name: ${data.name}`,
+            `Email: ${data.email}`,
+            `Company: ${data.company}`,
+            `Subject: ${data.subject}`,
+            '',
+            data.message,
+          ].join('\n'),
+        })
+        .catch((err) => {
+          console.error('Contact email send failed:', err);
+        });
     }
 
     // Structured log for Vercel Log Drain

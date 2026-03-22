@@ -10,7 +10,8 @@ const CONTENT = {
     sections: [
       {
         title: '1. Introduction',
-        content: 'STEADYWRK LLC ("STEADYWRK," "we," "our," or "us") is committed to protecting your personal data. This Privacy Policy explains how we collect, use, store, and share your information when you use our website at steadywrk.app and related services. We comply with Jordan\'s Personal Data Protection Law No. 24 of 2023 (PDPL) and applicable international data protection standards.',
+        content:
+          'STEADYWRK LLC ("STEADYWRK," "we," "our," or "us") is committed to protecting your personal data. This Privacy Policy explains how we collect, use, store, and share your information when you use our website at steadywrk.app and related services. We comply with Jordan\'s Personal Data Protection Law No. 24 of 2023 (PDPL) and applicable international data protection standards.',
       },
       {
         title: '2. Data We Collect',
@@ -33,15 +34,18 @@ const CONTENT = {
       },
       {
         title: '4. Data Retention',
-        content: 'Application data is retained for a maximum of 12 months from the date of submission, after which it is automatically deleted unless you are hired or provide explicit consent to retain your information for future opportunities. Analytics data is anonymized and aggregated, and does not contain personally identifiable information. You may request deletion of your data at any time by contacting us at privacy@steadywrk.app.',
+        content:
+          'Application data is retained for a maximum of 12 months from the date of submission, after which it is automatically deleted unless you are hired or provide explicit consent to retain your information for future opportunities. Analytics data is anonymized and aggregated, and does not contain personally identifiable information. You may request deletion of your data at any time by contacting us at privacy@steadywrk.app.',
       },
       {
         title: '5. Data Sharing',
-        content: 'We do not sell your personal data. We may share your data with: hiring managers within STEADYWRK for recruitment purposes; service providers who assist with our operations (hosting, analytics, authentication), subject to appropriate data processing agreements; and legal authorities when required by law. All third-party service providers are contractually bound to handle your data in compliance with applicable data protection regulations.',
+        content:
+          'We do not sell your personal data. We may share your data with: hiring managers within STEADYWRK for recruitment purposes; service providers who assist with our operations (hosting, analytics, authentication), subject to appropriate data processing agreements; and legal authorities when required by law. All third-party service providers are contractually bound to handle your data in compliance with applicable data protection regulations.',
       },
       {
         title: '6. Your Rights Under PDPL',
-        content: 'Under Jordan\'s Personal Data Protection Law No. 24 of 2023, you have the right to:',
+        content:
+          "Under Jordan's Personal Data Protection Law No. 24 of 2023, you have the right to:",
         list: [
           'Access your personal data that we hold.',
           'Request correction of inaccurate or incomplete data.',
@@ -53,14 +57,16 @@ const CONTENT = {
       },
       {
         title: '7. Security',
-        content: 'We implement appropriate technical and organizational measures to protect your personal data against unauthorized access, alteration, disclosure, or destruction. This includes encryption in transit (TLS), secure hosting infrastructure, and access controls limiting data access to authorized personnel only.',
+        content:
+          'We implement appropriate technical and organizational measures to protect your personal data against unauthorized access, alteration, disclosure, or destruction. This includes encryption in transit (TLS), secure hosting infrastructure, and access controls limiting data access to authorized personnel only.',
       },
       {
         title: '8. Contact',
-        content: 'For privacy-related inquiries, data access requests, or to exercise your rights under the PDPL, contact us at: privacy@steadywrk.app',
+        content:
+          'For privacy-related inquiries, data access requests, or to exercise your rights under the PDPL, contact us at: privacy@steadywrk.app',
         extra: 'STEADYWRK LLC, Building 15, King Hussein Business Park, Amman, Jordan.',
       },
-    ]
+    ],
   },
   ar: {
     title: 'سياسة الخصوصية',
@@ -68,7 +74,8 @@ const CONTENT = {
     sections: [
       {
         title: '1. المقدمة',
-        content: 'تلتزم شركة ستيدي وورك (STEADYWRK LLC) ("ستيدي وورك"، "نحن"، "لنا") بحماية بياناتك الشخصية. تشرح سياسة الخصوصية هذه كيف نقوم بجمع معلوماتك واستخدامها وتخزينها ومشاركتها عند استخدامك لموقعنا الإلكتروني steadywrk.app والخدمات ذات الصلة. نحن نلتزم بقانون حماية البيانات الشخصية الأردني رقم 24 لسنة 2023 (PDPL) ومعايير حماية البيانات الدولية المعمول بها.',
+        content:
+          'تلتزم شركة ستيدي وورك (STEADYWRK LLC) ("ستيدي وورك"، "نحن"، "لنا") بحماية بياناتك الشخصية. تشرح سياسة الخصوصية هذه كيف نقوم بجمع معلوماتك واستخدامها وتخزينها ومشاركتها عند استخدامك لموقعنا الإلكتروني steadywrk.app والخدمات ذات الصلة. نحن نلتزم بقانون حماية البيانات الشخصية الأردني رقم 24 لسنة 2023 (PDPL) ومعايير حماية البيانات الدولية المعمول بها.',
       },
       {
         title: '2. البيانات التي نجمعها',
@@ -91,11 +98,13 @@ const CONTENT = {
       },
       {
         title: '4. الاحتفاظ بالبيانات',
-        content: 'يتم الاحتفاظ ببيانات الطلبات لمدة أقصاها 12 شهرًا من تاريخ التقديم، وبعد ذلك يتم حذفها تلقائيًا ما لم يتم تعيينك أو ما لم تقدم موافقة صريحة للاحتفاظ ببياناتك للفرص المستقبلية. بيانات التحليلات مجهولة المصدر ومجمعة، ولا تحتوي على معلومات تعريف شخصية. يمكنك طلب حذف بياناتك في أي وقت عن طريق الاتصال بنا على privacy@steadywrk.app.',
+        content:
+          'يتم الاحتفاظ ببيانات الطلبات لمدة أقصاها 12 شهرًا من تاريخ التقديم، وبعد ذلك يتم حذفها تلقائيًا ما لم يتم تعيينك أو ما لم تقدم موافقة صريحة للاحتفاظ ببياناتك للفرص المستقبلية. بيانات التحليلات مجهولة المصدر ومجمعة، ولا تحتوي على معلومات تعريف شخصية. يمكنك طلب حذف بياناتك في أي وقت عن طريق الاتصال بنا على privacy@steadywrk.app.',
       },
       {
         title: '5. مشاركة البيانات',
-        content: 'نحن لا نبيع بياناتك الشخصية. قد نشارك بياناتك مع: مديري التوظيف داخل ستيدي وورك لأغراض التوظيف؛ مزودي الخدمات الذين يساعدون في عملياتنا (الاستضافة، التحليلات، المصادقة)، وفقًا لاتفاقيات معالجة البيانات المناسبة؛ والسلطات القانونية عندما يقتضي القانون ذلك. جميع مزودي الخدمات التابعين لجهات خارجية ملزمون تعاقديًا بالتعامل مع بياناتك وفقًا للوائح حماية البيانات المعمول بها.',
+        content:
+          'نحن لا نبيع بياناتك الشخصية. قد نشارك بياناتك مع: مديري التوظيف داخل ستيدي وورك لأغراض التوظيف؛ مزودي الخدمات الذين يساعدون في عملياتنا (الاستضافة، التحليلات، المصادقة)، وفقًا لاتفاقيات معالجة البيانات المناسبة؛ والسلطات القانونية عندما يقتضي القانون ذلك. جميع مزودي الخدمات التابعين لجهات خارجية ملزمون تعاقديًا بالتعامل مع بياناتك وفقًا للوائح حماية البيانات المعمول بها.',
       },
       {
         title: '6. حقوقك بموجب قانون حماية البيانات الشخصية',
@@ -111,15 +120,17 @@ const CONTENT = {
       },
       {
         title: '7. الأمان',
-        content: 'نحن ننفذ تدابير فنية وتنظيمية مناسبة لحماية بياناتك الشخصية من الوصول غير المصرح به أو التغيير أو الإفصاح أو الإتلاف. يشمل ذلك التشفير أثناء النقل (TLS)، والبنية التحتية الآمنة للاستضافة، وضوابط الوصول التي تقصر الوصول إلى البيانات على الموظفين المصرح لهم فقط.',
+        content:
+          'نحن ننفذ تدابير فنية وتنظيمية مناسبة لحماية بياناتك الشخصية من الوصول غير المصرح به أو التغيير أو الإفصاح أو الإتلاف. يشمل ذلك التشفير أثناء النقل (TLS)، والبنية التحتية الآمنة للاستضافة، وضوابط الوصول التي تقصر الوصول إلى البيانات على الموظفين المصرح لهم فقط.',
       },
       {
         title: '8. اتصل بنا',
-        content: 'للاستفسارات المتعلقة بالخصوصية، أو طلبات الوصول إلى البيانات، أو لممارسة حقوقك بموجب قانون حماية البيانات الشخصية، اتصل بنا على: privacy@steadywrk.app',
+        content:
+          'للاستفسارات المتعلقة بالخصوصية، أو طلبات الوصول إلى البيانات، أو لممارسة حقوقك بموجب قانون حماية البيانات الشخصية، اتصل بنا على: privacy@steadywrk.app',
         extra: 'STEADYWRK LLC، المبنى 15، مجمع الملك حسين للأعمال، عمّان، الأردن.',
       },
-    ]
-  }
+    ],
+  },
 };
 
 export function PrivacyContent() {
@@ -139,9 +150,7 @@ export function PrivacyContent() {
             >
               {t.title}
             </h1>
-            <p className="text-[14px] text-[#6B6B66] mb-12">
-              {t.lastUpdated}
-            </p>
+            <p className="text-[14px] text-[#6B6B66] mb-12">{t.lastUpdated}</p>
 
             <div className="space-y-10 text-[#23211D]" style={{ fontFamily: 'var(--font-body)' }}>
               {t.sections.map((section, idx) => (

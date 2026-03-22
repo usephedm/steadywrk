@@ -105,11 +105,7 @@ export default function DashboardLayout({
                   <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 rounded-r-full bg-[#E58A0F]" />
                 )}
                 <Icon className="h-5 w-5 shrink-0" strokeWidth={1.5} />
-                {!collapsed && (
-                  <span className="text-sm font-medium truncate">
-                    {item.label}
-                  </span>
-                )}
+                {!collapsed && <span className="text-sm font-medium truncate">{item.label}</span>}
                 {!collapsed && 'adminOnly' in item && item.adminOnly && (
                   <span className="ml-auto text-[10px] font-mono uppercase tracking-wider text-white/20 bg-white/[0.04] px-1.5 py-0.5 rounded">
                     Admin

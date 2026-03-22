@@ -12,10 +12,9 @@ const SmoothCursor = dynamic(
 //   { ssr: false },
 // );
 
-const BackToTop = dynamic(
-  () => import('@/components/ui/back-to-top').then((m) => m.BackToTop),
-  { ssr: false },
-);
+const BackToTop = dynamic(() => import('@/components/ui/back-to-top').then((m) => m.BackToTop), {
+  ssr: false,
+});
 
 export function ClientGlobals() {
   return (

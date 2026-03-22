@@ -11,14 +11,13 @@ export type BlogCategory = (typeof BLOG_CATEGORIES)[number];
 export const BLOG_POSTS = [
   {
     slug: 'jordan-bpo-revolution',
-    title:
-      "Jordan's BPO Revolution: Why US Companies Are Hiring Jordanian Talent in 2026",
+    title: "Jordan's BPO Revolution: Why US Companies Are Hiring Jordanian Talent in 2026",
     date: '2026-03-20',
     category: 'AI Careers' as BlogCategory,
     readTime: '15 min read',
     featured: false,
     excerpt:
-      "The outsourcing industry has a narrative problem. Mention BPO and most companies think India or Philippines. That picture is outdated — and Jordan is the reason why.",
+      'The outsourcing industry has a narrative problem. Mention BPO and most companies think India or Philippines. That picture is outdated — and Jordan is the reason why.',
     content:
       "The outsourcing industry has a narrative problem. Mention 'BPO' and most American companies think: India. Philippines. Call centers. Low-cost labor doing low-skilled work. That picture is outdated. And if you're still hiring based on it, you're leaving money on the table.\n\nJordan sits at a strategic crossroads — literally and figuratively. UTC+3 creates a natural overlap with both European mornings and US East Coast afternoons. Internet penetration exceeds 95%. The workforce is young, educated, and bilingual. Over 7,000 ICT graduates enter the market annually from universities like JUST, University of Jordan, and Princess Sumaya University.\n\nThe cost advantage is real but not the whole story. A senior AI engineer in Amman costs 60-70% less than their Bay Area equivalent — but the quality gap that existed five years ago has closed dramatically. Jordan's National AI Strategy 2023-2027 is actively training 15,000 individuals in AI skills. Companies like Mawdoo3, Estarta, and now STEADYWRK are building production AI systems from Amman that serve US clients.\n\nThe timezone advantage is underrated. When your Amman team starts at 9 AM local, it's 2 AM Eastern — but when your US team starts at 9 AM Eastern, your Amman team is available until 4 PM local. This creates a genuine 18-hour coverage window without anyone working nights. For dispatch operations, customer support, and AI monitoring, this is a structural advantage that no amount of automation can replicate.\n\nSTEADYWRK operates at this intersection. Our agents in Amman manage US commercial maintenance operations using AI-enhanced tooling — dispatching technicians, tracking work orders, and managing client relationships across 50 states. The combination of Jordanian operational talent and AI tooling produces results that traditional BPO models simply cannot match. Apply at steadywrk.app/careers.",
   },
@@ -108,7 +107,8 @@ export const BLOG_POSTS = [
   },
   {
     slug: 'ai-careers-guide-jordan-graduates-2026',
-    title: 'AI Careers Guide for Jordanian Graduates \u2014 Every Role, Every Salary, Every Path (2026)',
+    title:
+      'AI Careers Guide for Jordanian Graduates \u2014 Every Role, Every Salary, Every Path (2026)',
     date: '2026-03-12',
     category: 'AI Careers' as BlogCategory,
     readTime: '15 min read',
@@ -120,7 +120,8 @@ export const BLOG_POSTS = [
   },
   {
     slug: 'jordan-ict-sector-graduate-employment-gap',
-    title: 'Jordan\u2019s $3 Billion ICT Sector Is Growing Fast \u2014 So Why Can\u2019t Graduates Get Hired?',
+    title:
+      'Jordan\u2019s $3 Billion ICT Sector Is Growing Fast \u2014 So Why Can\u2019t Graduates Get Hired?',
     date: '2026-03-11',
     category: 'AI Careers' as BlogCategory,
     readTime: '11 min read',
@@ -180,7 +181,8 @@ export const BLOG_POSTS = [
   },
   {
     slug: 'building-steadywrk-why-amman-ai-career-platform',
-    title: 'Why We Built STEADYWRK: An AI-Native Career Platform, Born in Amman, Built for the World',
+    title:
+      'Why We Built STEADYWRK: An AI-Native Career Platform, Born in Amman, Built for the World',
     date: '2026-03-06',
     category: 'Behind the Build' as BlogCategory,
     readTime: '8 min read',

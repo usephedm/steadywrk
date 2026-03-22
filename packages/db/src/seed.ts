@@ -108,10 +108,7 @@ async function seed() {
   console.log('Seeding job listings...');
 
   for (const job of jobs) {
-    await db
-      .insert(jobListings)
-      .values(job)
-      .onConflictDoNothing({ target: jobListings.slug });
+    await db.insert(jobListings).values(job).onConflictDoNothing({ target: jobListings.slug });
     console.log(`  ✓ ${job.title}`);
   }
 

@@ -160,9 +160,7 @@ export default function LeaderboardPage() {
                     <tr
                       key={person.id}
                       className={`border-b border-[#E5E5E2] last:border-0 transition-colors ${
-                        person.isCurrentUser
-                          ? 'bg-[#FFF4E6]'
-                          : 'hover:bg-[#F5F5F3]'
+                        person.isCurrentUser ? 'bg-[#FFF4E6]' : 'hover:bg-[#F5F5F3]'
                       }`}
                     >
                       <td className="px-4 py-3.5">
@@ -217,15 +215,15 @@ export default function LeaderboardPage() {
                       <td className="px-4 py-3.5 hidden sm:table-cell">
                         <div className="flex gap-1">
                           {ALL_BADGES.map((badge) => {
-                            const earned = (person.badges as readonly string[]).includes(badge.name);
+                            const earned = (person.badges as readonly string[]).includes(
+                              badge.name,
+                            );
                             const Icon = badge.icon;
                             return (
                               <div
                                 key={badge.name}
                                 className={`p-1 rounded ${
-                                  earned
-                                    ? 'text-[#E58A0F]'
-                                    : 'text-[#E5E5E2]'
+                                  earned ? 'text-[#E58A0F]' : 'text-[#E5E5E2]'
                                 }`}
                                 title={earned ? badge.name : `${badge.name} (locked)`}
                               >
@@ -249,7 +247,9 @@ export default function LeaderboardPage() {
         </h2>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           {ALL_BADGES.map((badge) => {
-            const earned = (currentUser?.badges as readonly string[] | undefined)?.includes(badge.name);
+            const earned = (currentUser?.badges as readonly string[] | undefined)?.includes(
+              badge.name,
+            );
             const Icon = badge.icon;
             return (
               <div
@@ -262,14 +262,10 @@ export default function LeaderboardPage() {
               >
                 <div
                   className={`mx-auto w-12 h-12 rounded-full flex items-center justify-center mb-3 ${
-                    earned
-                      ? 'text-white'
-                      : 'bg-[#E5E5E2] text-[#B0B0AB]'
+                    earned ? 'text-white' : 'bg-[#E5E5E2] text-[#B0B0AB]'
                   }`}
                   style={
-                    earned
-                      ? { background: 'linear-gradient(135deg, #E58A0F, #F5C563)' }
-                      : undefined
+                    earned ? { background: 'linear-gradient(135deg, #E58A0F, #F5C563)' } : undefined
                   }
                 >
                   {earned ? (
@@ -278,9 +274,7 @@ export default function LeaderboardPage() {
                     <Lock className="h-5 w-5" strokeWidth={1.5} />
                   )}
                 </div>
-                <p
-                  className={`text-sm font-bold ${earned ? 'text-[#23211D]' : 'text-[#B0B0AB]'}`}
-                >
+                <p className={`text-sm font-bold ${earned ? 'text-[#23211D]' : 'text-[#B0B0AB]'}`}>
                   {badge.name}
                 </p>
                 <p className="text-[11px] text-[#6B6B66] mt-1">{badge.description}</p>

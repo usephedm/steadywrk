@@ -53,10 +53,10 @@ function ZigzagChevron({ yOffset, scale: s }: { yOffset: number; scale: number }
   const h = 0.45 * s; // height of each leg
 
   const points: [number, number][] = [
-    [-w * 1.4, -h],     // bottom-left start
-    [-w * 0.4, h],      // up-right
-    [w * 0.4, -h],      // down-right (middle valley)
-    [w * 1.4, h],       // up-right (end)
+    [-w * 1.4, -h], // bottom-left start
+    [-w * 0.4, h], // up-right
+    [w * 0.4, -h], // down-right (middle valley)
+    [w * 1.4, h], // up-right (end)
   ];
 
   return (
@@ -98,10 +98,8 @@ function TotemMesh({ scrollProgress }: { scrollProgress: number }) {
     // Mouse parallax tilt
     const targetRotX = mouseRef.current.y * 0.15;
     const targetRotZ = mouseRef.current.x * -0.08;
-    groupRef.current.rotation.x +=
-      (targetRotX - groupRef.current.rotation.x) * 2 * delta;
-    groupRef.current.rotation.z +=
-      (targetRotZ - groupRef.current.rotation.z) * 2 * delta;
+    groupRef.current.rotation.x += (targetRotX - groupRef.current.rotation.x) * 2 * delta;
+    groupRef.current.rotation.z += (targetRotZ - groupRef.current.rotation.z) * 2 * delta;
 
     // Scroll-based scale down + fade
     const s = 1 - scrollProgress * 0.3;
@@ -139,21 +137,11 @@ export function LogoTotem3D({ className, scrollProgress = 0 }: LogoTotem3DProps)
         <Suspense fallback={null}>
           <PerformanceMonitor
             onDecline={() => setDpr(1)}
-            onIncline={() =>
-              setDpr(Math.min(window.devicePixelRatio, 2))
-            }
+            onIncline={() => setDpr(Math.min(window.devicePixelRatio, 2))}
           >
             <ambientLight intensity={0.4} />
-            <directionalLight
-              position={[5, 5, 5]}
-              intensity={1.2}
-              color="#FFF8F0"
-            />
-            <directionalLight
-              position={[-3, -2, 4]}
-              intensity={0.3}
-              color="#F5C563"
-            />
+            <directionalLight position={[5, 5, 5]} intensity={1.2} color="#FFF8F0" />
+            <directionalLight position={[-3, -2, 4]} intensity={0.3} color="#F5C563" />
             <pointLight position={[0, 0, 3]} intensity={0.5} color="#E58A0F" />
             <TotemMesh scrollProgress={scrollProgress} />
           </PerformanceMonitor>

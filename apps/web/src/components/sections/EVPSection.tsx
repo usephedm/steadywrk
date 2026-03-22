@@ -52,9 +52,8 @@ export function EVPSection() {
             Built for people who want their growth to compound.
           </h2>
           <p className="mt-3 text-[#6E695F] dark:text-[#8A8A86] text-[16px] leading-relaxed max-w-lg mb-14">
-            Jordan produces 7,000+ tech graduates a year. 66% of young women are unemployed.
-            The pipeline between education and elite work is broken. We&apos;re building the
-            bridge.
+            Jordan produces 7,000+ tech graduates a year. 66% of young women are unemployed. The
+            pipeline between education and elite work is broken. We&apos;re building the bridge.
           </p>
         </ScrollReveal>
 

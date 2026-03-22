@@ -89,9 +89,7 @@ export function HeroSection() {
             >
               <span>If you&apos;re disciplined, bright, and hungry</span>
               <br className="hidden md:block" />
-              <span className="text-[#E58A0F]">
-                this is where your curve bends upward.
-              </span>
+              <span className="text-[#E58A0F]">this is where your curve bends upward.</span>
             </h1>
           </BlurFade>
 

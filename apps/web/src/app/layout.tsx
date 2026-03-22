@@ -99,12 +99,22 @@ export default function RootLayout({
     <html lang="en" className={`${cabinetGrotesk.variable} ${satoshi.variable} h-full antialiased`}>
       <head>
         {/* Ahrefs Web Analytics */}
-{/* Preload critical assets */}
+        {/* Preload critical assets */}
         <link rel="preload" href="/logo.webp" as="image" type="image/webp" />
-        <link rel="preload" href="/brand/steadywrk-ai-work.webp" as="image" type="image/webp" fetchPriority="high" />
+        <link
+          rel="preload"
+          href="/brand/steadywrk-ai-work.webp"
+          as="image"
+          type="image/webp"
+          fetchPriority="high"
+        />
 
         {/* DNS prefetch + preconnect for third-party speed */}
-        <link rel="preconnect" href="https://big-jennet-22.clerk.accounts.dev" crossOrigin="anonymous" />
+        <link
+          rel="preconnect"
+          href="https://big-jennet-22.clerk.accounts.dev"
+          crossOrigin="anonymous"
+        />
         <link rel="dns-prefetch" href="https://big-jennet-22.clerk.accounts.dev" />
         <link rel="preconnect" href="https://analytics.ahrefs.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://analytics.ahrefs.com" />
@@ -134,16 +144,14 @@ export default function RootLayout({
             },
           }}
         >
-          <PostHogProvider>
-            {children}
-          </PostHogProvider>
+          <PostHogProvider>{children}</PostHogProvider>
         </ClerkProvider>
         <ClientGlobals />
-            <Script
-              src="https://analytics.ahrefs.com/analytics.js"
-              data-key="xlEN572+HO98vWtLtHolWQ"
-              strategy="afterInteractive"
-            />
+        <Script
+          src="https://analytics.ahrefs.com/analytics.js"
+          data-key="xlEN572+HO98vWtLtHolWQ"
+          strategy="afterInteractive"
+        />
         <Analytics />
         <SpeedInsights />
         {/* JSON-LD Organization */}

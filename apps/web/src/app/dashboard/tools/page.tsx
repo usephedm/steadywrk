@@ -1,12 +1,6 @@
 'use client';
 
-import {
-  BarChart3,
-  BookOpen,
-  Calendar,
-  Database,
-  Phone,
-} from 'lucide-react';
+import { BarChart3, BookOpen, Calendar, Database, Phone } from 'lucide-react';
 import Link from 'next/link';
 
 const TOOLS = [

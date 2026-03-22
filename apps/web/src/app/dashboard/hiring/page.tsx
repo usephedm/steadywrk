@@ -2,16 +2,7 @@
 
 import { PIPELINE_CANDIDATES, ROLES } from '@/lib/data';
 import type { CandidateStatus } from '@/lib/data';
-import {
-  ArrowRight,
-  Calendar,
-  ChevronRight,
-  Filter,
-  Search,
-  Star,
-  User,
-  X,
-} from 'lucide-react';
+import { ArrowRight, Calendar, ChevronRight, Filter, Search, Star, User, X } from 'lucide-react';
 import { useMemo, useState } from 'react';
 
 const PIPELINE_COLUMNS: { status: CandidateStatus; label: string; color: string }[] = [
@@ -32,7 +23,13 @@ const SCORECARD_DIMENSIONS = [
   { name: 'Initiative', weight: 10, key: 'initiative' as const },
 ];
 
-type ScoreKey = 'technical' | 'organizational' | 'communication' | 'growth' | 'cultural' | 'initiative';
+type ScoreKey =
+  | 'technical'
+  | 'organizational'
+  | 'communication'
+  | 'growth'
+  | 'cultural'
+  | 'initiative';
 
 export default function HiringPage() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -101,17 +98,17 @@ export default function HiringPage() {
         </div>
 
         {/* Kanban board */}
-        <div className="flex gap-4 overflow-x-auto pb-4 -mx-6 px-6" style={{ scrollbarWidth: 'thin' }}>
+        <div
+          className="flex gap-4 overflow-x-auto pb-4 -mx-6 px-6"
+          style={{ scrollbarWidth: 'thin' }}
+        >
           {PIPELINE_COLUMNS.map((col) => {
             const colCandidates = filteredCandidates.filter((c) => c.status === col.status);
             return (
               <div key={col.status} className="shrink-0 w-[260px]">
                 {/* Column header */}
                 <div className="flex items-center gap-2 mb-3 px-1">
-                  <div
-                    className="w-2 h-2 rounded-full"
-                    style={{ backgroundColor: col.color }}
-                  />
+                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: col.color }} />
                   <h3 className="text-sm font-bold text-[#23211D]">{col.label}</h3>
                   <span className="text-[10px] font-mono text-[#6B6B66] bg-[#F5F5F3] px-1.5 py-0.5 rounded-full">
                     {colCandidates.length}
@@ -214,8 +211,7 @@ export default function HiringPage() {
                       <div className="flex-1">
                         <div className="flex items-center justify-between mb-1">
                           <span className="text-xs text-[#6B6B66]">
-                            {dim.name}{' '}
-                            <span className="text-[#B0B0AB]">({dim.weight}%)</span>
+                            {dim.name} <span className="text-[#B0B0AB]">({dim.weight}%)</span>
                           </span>
                           <span className="text-xs font-medium text-[#23211D]">{score}</span>
                         </div>
@@ -225,11 +221,7 @@ export default function HiringPage() {
                             style={{
                               width: `${score}%`,
                               background:
-                                score >= 85
-                                  ? '#4D7A3A'
-                                  : score >= 70
-                                    ? '#E58A0F'
-                                    : '#A03D4A',
+                                score >= 85 ? '#4D7A3A' : score >= 70 ? '#E58A0F' : '#A03D4A',
                             }}
                           />
                         </div>

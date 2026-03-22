@@ -17,11 +17,11 @@ export function PrivacyContent() {
               </h2>
               <p className="text-[16px] leading-relaxed text-[#6E695F]">
                 STEADYWRK LLC (&ldquo;STEADYWRK,&rdquo; &ldquo;we,&rdquo; &ldquo;our,&rdquo; or
-                &ldquo;us&rdquo;) is committed to protecting your personal data. This Privacy
-                Policy explains how we collect, use, store, and share your information when you
-                use our website at steadywrk.app and related services. We comply with Jordan&rsquo;s
-                Personal Data Protection Law No. 24 of 2023 (PDPL) and applicable international
-                data protection standards.
+                &ldquo;us&rdquo;) is committed to protecting your personal data. This Privacy Policy
+                explains how we collect, use, store, and share your information when you use our
+                website at steadywrk.app and related services. We comply with Jordan&rsquo;s
+                Personal Data Protection Law No. 24 of 2023 (PDPL) and applicable international data
+                protection standards.
               </p>
             </section>
 
@@ -86,11 +86,11 @@ export function PrivacyContent() {
                 4. Data Retention
               </h2>
               <p className="text-[16px] leading-relaxed text-[#6E695F]">
-                Application data is retained for a maximum of 12 months from the date of
-                submission, after which it is automatically deleted unless you are hired or provide
-                explicit consent to retain your information for future opportunities. Analytics
-                data is anonymized and aggregated, and does not contain personally identifiable
-                information. You may request deletion of your data at any time by contacting us at{' '}
+                Application data is retained for a maximum of 12 months from the date of submission,
+                after which it is automatically deleted unless you are hired or provide explicit
+                consent to retain your information for future opportunities. Analytics data is
+                anonymized and aggregated, and does not contain personally identifiable information.
+                You may request deletion of your data at any time by contacting us at{' '}
                 <a
                   href="mailto:privacy@steadywrk.app"
                   className="text-[#E58A0F] hover:text-[#CC7408] underline underline-offset-2"
@@ -126,8 +126,8 @@ export function PrivacyContent() {
                 6. Your Rights Under PDPL
               </h2>
               <p className="text-[16px] leading-relaxed text-[#6E695F] mb-3">
-                Under Jordan&rsquo;s Personal Data Protection Law No. 24 of 2023, you have the
-                right to:
+                Under Jordan&rsquo;s Personal Data Protection Law No. 24 of 2023, you have the right
+                to:
               </p>
               <ul className="space-y-2">
                 {[
@@ -159,8 +159,8 @@ export function PrivacyContent() {
               <p className="text-[16px] leading-relaxed text-[#6E695F]">
                 We implement appropriate technical and organizational measures to protect your
                 personal data against unauthorized access, alteration, disclosure, or destruction.
-                This includes encryption in transit (TLS), secure hosting infrastructure, and
-                access controls limiting data access to authorized personnel only.
+                This includes encryption in transit (TLS), secure hosting infrastructure, and access
+                controls limiting data access to authorized personnel only.
               </p>
             </section>
 
@@ -237,20 +237,17 @@ export function PrivacyContent() {
                 3. كيف نستخدم بياناتك
               </h2>
               <ul className="space-y-2">
-                {[
-                  'تقييم التوظيف.',
-                  'تحسين الخدمات.',
-                  'الامتثال القانوني.',
-                  'منع الاحتيال.',
-                ].map((item) => (
-                  <li
-                    key={item.slice(0, 30)}
-                    className="flex items-start gap-3 text-[15px] text-[#6E695F] leading-relaxed"
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#E58A0F] mt-2 shrink-0" />
-                    {item}
-                  </li>
-                ))}
+                {['تقييم التوظيف.', 'تحسين الخدمات.', 'الامتثال القانوني.', 'منع الاحتيال.'].map(
+                  (item) => (
+                    <li
+                      key={item.slice(0, 30)}
+                      className="flex items-start gap-3 text-[15px] text-[#6E695F] leading-relaxed"
+                    >
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#E58A0F] mt-2 shrink-0" />
+                      {item}
+                    </li>
+                  ),
+                )}
               </ul>
             </section>
 
@@ -262,8 +259,8 @@ export function PrivacyContent() {
                 4. الاحتفاظ بالبيانات
               </h2>
               <p className="text-[16px] leading-relaxed text-[#6E695F]">
-                نحتفظ ببيانات المتقدمين لمدة 12 شهراً ثم يتم حذفها تلقائياً. بيانات الموظفين
-                تُحتفظ طوال فترة العمل. يمكنك طلب حذف بياناتك في أي وقت عبر التواصل معنا على{' '}
+                نحتفظ ببيانات المتقدمين لمدة 12 شهراً ثم يتم حذفها تلقائياً. بيانات الموظفين تُحتفظ
+                طوال فترة العمل. يمكنك طلب حذف بياناتك في أي وقت عبر التواصل معنا على{' '}
                 <a
                   href="mailto:privacy@steadywrk.app"
                   className="text-[#E58A0F] hover:text-[#CC7408] underline underline-offset-2"
@@ -282,10 +279,9 @@ export function PrivacyContent() {
                 5. أطراف ثالثة
               </h2>
               <p className="text-[16px] leading-relaxed text-[#6E695F]">
-                لا نبيع بياناتك الشخصية. نشارك بياناتك مع مقدمي خدمات موثوقين: Clerk للمصادقة،
-                Neon لقواعد البيانات، Resend للبريد الإلكتروني، PostHog للتحليلات. جميع مقدمي
-                الخدمات ملزمون تعاقدياً بالتعامل مع بياناتك وفقاً للوائح حماية البيانات المعمول
-                بها.
+                لا نبيع بياناتك الشخصية. نشارك بياناتك مع مقدمي خدمات موثوقين: Clerk للمصادقة، Neon
+                لقواعد البيانات، Resend للبريد الإلكتروني، PostHog للتحليلات. جميع مقدمي الخدمات
+                ملزمون تعاقدياً بالتعامل مع بياناتك وفقاً للوائح حماية البيانات المعمول بها.
               </p>
             </section>
 
@@ -335,8 +331,8 @@ export function PrivacyContent() {
                 7. الأمان
               </h2>
               <p className="text-[16px] leading-relaxed text-[#6E695F]">
-                نطبق إجراءات أمان تقنية وإدارية لحماية بياناتك الشخصية ضد الوصول غير المصرح به
-                أو التعديل أو الإفصاح أو التدمير.
+                نطبق إجراءات أمان تقنية وإدارية لحماية بياناتك الشخصية ضد الوصول غير المصرح به أو
+                التعديل أو الإفصاح أو التدمير.
               </p>
             </section>
 
@@ -348,8 +344,8 @@ export function PrivacyContent() {
                 8. التواصل
               </h2>
               <p className="text-[16px] leading-relaxed text-[#6E695F]">
-                لأي استفسارات حول الخصوصية أو طلبات الوصول إلى البيانات أو لممارسة حقوقك،
-                تواصل معنا على:{' '}
+                لأي استفسارات حول الخصوصية أو طلبات الوصول إلى البيانات أو لممارسة حقوقك، تواصل معنا
+                على:{' '}
                 <a
                   href="mailto:privacy@steadywrk.app"
                   className="text-[#E58A0F] hover:text-[#CC7408] underline underline-offset-2"

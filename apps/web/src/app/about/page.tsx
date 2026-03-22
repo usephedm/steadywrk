@@ -75,8 +75,8 @@ export default function AboutPage() {
                 The Problem
               </h2>
               <p className="text-[#6E695F] text-[16px] leading-relaxed mb-4">
-                Jordan produces 7,000+ ICT graduates every year. 41.72% of youth are unemployed. 66% of
-                young women can&rsquo;t find work that matches their talent. The pipeline between
+                Jordan produces 7,000+ ICT graduates every year. 41.72% of youth are unemployed. 66%
+                of young women can&rsquo;t find work that matches their talent. The pipeline between
                 education and elite work is broken.
               </p>
               <p className="text-[#6E695F] text-[16px] leading-relaxed">

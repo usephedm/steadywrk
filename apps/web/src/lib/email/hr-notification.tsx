@@ -25,7 +25,9 @@ export function HRNotification({ name, email, phone, role, team }: HRNotificatio
   return (
     <Html>
       <Head />
-      <Preview>New application: {name} for {role}</Preview>
+      <Preview>
+        New application: {name} for {role}
+      </Preview>
       <Body style={body}>
         <Container style={container}>
           <Text style={badge}>NEW APPLICATION</Text>
@@ -60,10 +62,16 @@ export function HRNotification({ name, email, phone, role, team }: HRNotificatio
           <Hr style={divider} />
 
           <Section style={buttonSection}>
-            <Button style={advanceButton} href={`mailto:hello@steadywrk.app?subject=ADVANCE: ${name} - ${role}&body=ADVANCE`}>
+            <Button
+              style={advanceButton}
+              href={`mailto:hello@steadywrk.app?subject=ADVANCE: ${name} - ${role}&body=ADVANCE`}
+            >
               ADVANCE
             </Button>
-            <Button style={rejectButton} href={`mailto:hello@steadywrk.app?subject=REJECT: ${name} - ${role}&body=REJECT`}>
+            <Button
+              style={rejectButton}
+              href={`mailto:hello@steadywrk.app?subject=REJECT: ${name} - ${role}&body=REJECT`}
+            >
               REJECT
             </Button>
           </Section>

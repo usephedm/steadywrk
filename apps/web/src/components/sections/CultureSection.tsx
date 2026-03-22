@@ -5,7 +5,10 @@ import Image from 'next/image';
 
 const CULTURE_PHOTOS = [
   { src: '/brand/steadywrk-team-collab.webp', caption: 'Collaboration is how we build' },
-  { src: '/brand/steadywrk-workspace.webp', caption: 'Our Amman HQ — modern workspace with a city view' },
+  {
+    src: '/brand/steadywrk-workspace.webp',
+    caption: 'Our Amman HQ — modern workspace with a city view',
+  },
   { src: '/brand/steadywrk-hero-engineer.webp', caption: 'Engineering excellence, day one' },
 ];
 

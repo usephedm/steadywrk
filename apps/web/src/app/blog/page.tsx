@@ -49,7 +49,9 @@ export default function PublicBlogPage() {
           {/* Search + Category filters */}
           <div className="flex flex-col gap-4 mb-10">
             <div className="relative max-w-md mx-auto w-full">
-              <label htmlFor="blog-search" className="sr-only">Search articles</label>
+              <label htmlFor="blog-search" className="sr-only">
+                Search articles
+              </label>
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#B0B0AB]" />
               <input
                 id="blog-search"

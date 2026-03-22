@@ -18,10 +18,7 @@ const PROGRAM_COLORS: Record<string, string> = {
 
 export function ProgramsSection() {
   return (
-    <section
-      id="programs"
-      className="relative py-20 md:py-32 px-6 bg-[#1A1A18] overflow-hidden"
-    >
+    <section id="programs" className="relative py-20 md:py-32 px-6 bg-[#1A1A18] overflow-hidden">
       {/* Blurred background photo */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -54,8 +51,8 @@ export function ProgramsSection() {
             Three tracks. One trajectory.
           </h2>
           <p className="text-white/35 text-[16px] leading-relaxed max-w-lg mb-14">
-            Every program builds real skills with real projects. No simulations. You ship
-            production work serving US clients.
+            Every program builds real skills with real projects. No simulations. You ship production
+            work serving US clients.
           </p>
         </ScrollReveal>
 

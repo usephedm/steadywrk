@@ -33,18 +33,9 @@ export const employeeLevelEnum = pgEnum('employee_level', [
 
 export const jobStatusEnum = pgEnum('job_status', ['open', 'closed', 'draft']);
 
-export const jobTypeEnum = pgEnum('job_type', [
-  'full-time',
-  'part-time',
-  'contract',
-  'internship',
-]);
+export const jobTypeEnum = pgEnum('job_type', ['full-time', 'part-time', 'contract', 'internship']);
 
-export const blogStatusEnum = pgEnum('blog_status', [
-  'draft',
-  'published',
-  'archived',
-]);
+export const blogStatusEnum = pgEnum('blog_status', ['draft', 'published', 'archived']);
 
 export const emailEventTypeEnum = pgEnum('email_event_type', [
   'advance',
@@ -135,10 +126,7 @@ export const blogPosts = pgTable(
     createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
     updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(),
   },
-  (table) => [
-    index('blog_slug_idx').on(table.slug),
-    index('blog_status_idx').on(table.status),
-  ],
+  (table) => [index('blog_slug_idx').on(table.slug), index('blog_status_idx').on(table.status)],
 );
 
 export const employees = pgTable(
@@ -212,9 +200,7 @@ export const waitlist = pgTable(
     email: varchar('email', { length: 255 }).notNull().unique(),
     createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
   },
-  (table) => [
-    index('waitlist_email_idx').on(table.email),
-  ],
+  (table) => [index('waitlist_email_idx').on(table.email)],
 );
 
 export const contacts = pgTable(
@@ -227,7 +213,5 @@ export const contacts = pgTable(
     message: text('message').notNull(),
     createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
   },
-  (table) => [
-    index('contact_email_idx').on(table.email),
-  ],
+  (table) => [index('contact_email_idx').on(table.email)],
 );

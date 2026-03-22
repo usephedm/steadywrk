@@ -13,7 +13,9 @@ const contactSchema = z.object({
 
 export type ContactResult = { success: true } | { success: false; error: string };
 
-export async function submitContact(formData: z.infer<typeof contactSchema>): Promise<ContactResult> {
+export async function submitContact(
+  formData: z.infer<typeof contactSchema>,
+): Promise<ContactResult> {
   try {
     const data = contactSchema.parse(formData);
 

@@ -90,9 +90,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   // Only include published blog posts (date <= today)
-  const publishedPosts = BLOG_POSTS.filter(
-    (post) => new Date(post.date) <= now,
-  );
+  const publishedPosts = BLOG_POSTS.filter((post) => new Date(post.date) <= now);
 
   const blogPages: MetadataRoute.Sitemap = publishedPosts.map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,

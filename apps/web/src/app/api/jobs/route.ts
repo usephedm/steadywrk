@@ -6,22 +6,18 @@ import { NextResponse } from 'next/server';
 export async function GET() {
   try {
     if (!db) {
-      return NextResponse.json(
-        { error: 'Database not configured' },
-        { status: 503 },
-      );
+      return NextResponse.json({ error: 'Database not configured' }, { status: 503 });
     }
 
-    const jobs = await db.select().from(jobListings)
+    const jobs = await db
+      .select()
+      .from(jobListings)
       .where(eq(jobListings.status, 'open'))
       .orderBy(desc(jobListings.featured), desc(jobListings.createdAt));
 
     return NextResponse.json(jobs);
   } catch (err) {
     console.error('Failed to fetch jobs:', err);
-    return NextResponse.json(
-      { error: 'Failed to fetch job listings' },
-      { status: 500 },
-    );
+    return NextResponse.json({ error: 'Failed to fetch job listings' }, { status: 500 });
   }
 }

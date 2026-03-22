@@ -4,10 +4,16 @@ export default function NotFound() {
   return (
     <main className="min-h-dvh flex items-center justify-center px-6 bg-[#FAFAF8]">
       <div className="text-center max-w-md">
-        <div className="text-6xl font-extrabold text-[#E58A0F] mb-4" style={{ fontFamily: 'var(--font-display)' }}>
+        <div
+          className="text-6xl font-extrabold text-[#E58A0F] mb-4"
+          style={{ fontFamily: 'var(--font-display)' }}
+        >
           404
         </div>
-        <h1 className="text-2xl font-bold text-[#23211D] mb-3" style={{ fontFamily: 'var(--font-display)' }}>
+        <h1
+          className="text-2xl font-bold text-[#23211D] mb-3"
+          style={{ fontFamily: 'var(--font-display)' }}
+        >
           Page not found
         </h1>
         <p className="text-[#6E695F] mb-8">
@@ -28,7 +34,11 @@ export default function NotFound() {
               { href: '/blog', label: 'Blog' },
               { href: '/about', label: 'About' },
             ].map((link) => (
-              <Link key={link.href} href={link.href} className="text-sm text-[#E58A0F] hover:underline">
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-sm text-[#E58A0F] hover:underline"
+              >
                 {link.label}
               </Link>
             ))}

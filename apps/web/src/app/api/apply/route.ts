@@ -36,20 +36,23 @@ export async function POST(request: Request) {
     let applicantId: string | undefined;
     try {
       if (!db) throw new Error('Database not configured');
-      const [result] = await db.insert(applicants).values({
-        email: data.email,
-        name: data.name,
-        phone: data.phone || null,
-        roleSlug: data.position,
-        teamInterest: data.team || null,
-        portfolioUrl: data.portfolioUrl || null,
-        githubUrl: data.githubUrl || null,
-        answers: data.answers || { q1: '', q2: '', q3: '' },
-        skills: data.skills || {},
-        availability: data.availability || null,
-        challengeResponse: data.challengeResponse || null,
-        pdplConsent: true,
-      }).returning({ id: applicants.id });
+      const [result] = await db
+        .insert(applicants)
+        .values({
+          email: data.email,
+          name: data.name,
+          phone: data.phone || null,
+          roleSlug: data.position,
+          teamInterest: data.team || null,
+          portfolioUrl: data.portfolioUrl || null,
+          githubUrl: data.githubUrl || null,
+          answers: data.answers || { q1: '', q2: '', q3: '' },
+          skills: data.skills || {},
+          availability: data.availability || null,
+          challengeResponse: data.challengeResponse || null,
+          pdplConsent: true,
+        })
+        .returning({ id: applicants.id });
       applicantId = result?.id;
     } catch (dbError) {
       console.error('Database insert failed:', dbError);

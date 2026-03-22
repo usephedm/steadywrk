@@ -16,7 +16,12 @@ import {
 
 const QUICK_ACTIONS = [
   { label: 'Start Shift', icon: Play, href: '/dashboard/tools', color: 'bg-[#E58A0F]' },
-  { label: 'View Training', icon: GraduationCap, href: '/dashboard/training', color: 'bg-[#0F6B6F]' },
+  {
+    label: 'View Training',
+    icon: GraduationCap,
+    href: '/dashboard/training',
+    color: 'bg-[#0F6B6F]',
+  },
   { label: 'Check Schedule', icon: Calendar, href: '/dashboard/tools', color: 'bg-[#4D7A3A]' },
   { label: 'Leaderboard', icon: Trophy, href: '/dashboard/leaderboard', color: 'bg-[#A03D4A]' },
 ] as const;

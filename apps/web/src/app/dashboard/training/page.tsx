@@ -161,9 +161,7 @@ export default function TrainingPage() {
                 {level.name}
                 <span className="ml-1.5 text-[10px] opacity-70">{level.range}</span>
               </div>
-              {i < LEVELS.length - 1 && (
-                <div className="w-6 h-px bg-[#E5E5E2]" />
-              )}
+              {i < LEVELS.length - 1 && <div className="w-6 h-px bg-[#E5E5E2]" />}
             </div>
           ))}
         </div>
@@ -201,9 +199,7 @@ export default function TrainingPage() {
 
                   <div
                     className={`rounded-xl border bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04)] overflow-hidden transition-all duration-[180ms] ease-out hover:-translate-y-[2px] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] ${
-                      week.status === 'active'
-                        ? 'border-[#E58A0F]/20'
-                        : 'border-[rgba(0,0,0,0.06)]'
+                      week.status === 'active' ? 'border-[#E58A0F]/20' : 'border-[rgba(0,0,0,0.06)]'
                     }`}
                   >
                     {/* Week header */}
@@ -288,11 +284,20 @@ export default function TrainingPage() {
                           {week.tasks.map((task) => (
                             <div key={task.label} className="flex items-center gap-3">
                               {task.completed ? (
-                                <CheckCircle2 className="h-5 w-5 text-[#4D7A3A] shrink-0" strokeWidth={1.5} />
+                                <CheckCircle2
+                                  className="h-5 w-5 text-[#4D7A3A] shrink-0"
+                                  strokeWidth={1.5}
+                                />
                               ) : week.status === 'locked' ? (
-                                <Circle className="h-5 w-5 text-[#E5E5E2] shrink-0" strokeWidth={1.5} />
+                                <Circle
+                                  className="h-5 w-5 text-[#E5E5E2] shrink-0"
+                                  strokeWidth={1.5}
+                                />
                               ) : (
-                                <Circle className="h-5 w-5 text-[#B0B0AB] shrink-0" strokeWidth={1.5} />
+                                <Circle
+                                  className="h-5 w-5 text-[#B0B0AB] shrink-0"
+                                  strokeWidth={1.5}
+                                />
                               )}
                               <span
                                 className={`text-sm ${

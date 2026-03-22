@@ -68,16 +68,19 @@ export default async function CareerDetailPage({ params }: PageProps) {
         addressCountry: 'JO',
       },
     },
-    baseSalary: minSalary && maxSalary ? {
-      '@type': 'MonetaryAmount',
-      currency: 'JOD',
-      value: {
-        '@type': 'QuantitativeValue',
-        minValue: minSalary,
-        maxValue: maxSalary,
-        unitText: 'MONTH',
-      },
-    } : undefined,
+    baseSalary:
+      minSalary && maxSalary
+        ? {
+            '@type': 'MonetaryAmount',
+            currency: 'JOD',
+            value: {
+              '@type': 'QuantitativeValue',
+              minValue: minSalary,
+              maxValue: maxSalary,
+              unitText: 'MONTH',
+            },
+          }
+        : undefined,
     applicantLocationRequirements: role.location.includes('Remote')
       ? { '@type': 'Country', name: 'Jordan' }
       : undefined,

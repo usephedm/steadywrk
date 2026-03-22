@@ -16,8 +16,7 @@ export function trackPageView(url: string) {
 
 // Pre-defined event helpers for the application funnel
 export const analytics = {
-  applyButtonClicked: (role: string) =>
-    trackEvent('apply_button_clicked', { role }),
+  applyButtonClicked: (role: string) => trackEvent('apply_button_clicked', { role }),
 
   roleCardViewed: (role: string, department: string) =>
     trackEvent('role_card_viewed', { role, department }),
@@ -31,9 +30,7 @@ export const analytics = {
   applicationSubmitted: (role: string, team: string) =>
     trackEvent('application_submitted', { role, team }),
 
-  programViewed: (program: string) =>
-    trackEvent('program_viewed', { program }),
+  programViewed: (program: string) => trackEvent('program_viewed', { program }),
 
-  blogPostRead: (slug: string, title: string) =>
-    trackEvent('blog_post_read', { slug, title }),
+  blogPostRead: (slug: string, title: string) => trackEvent('blog_post_read', { slug, title }),
 };

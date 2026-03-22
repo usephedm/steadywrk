@@ -20,7 +20,9 @@ export function ApplicationConfirmation({ name, role }: ApplicationConfirmationP
   return (
     <Html>
       <Head />
-      <Preview>Thank you for applying to STEADYWRK — we received your application for {role}.</Preview>
+      <Preview>
+        Thank you for applying to STEADYWRK — we received your application for {role}.
+      </Preview>
       <Body style={body}>
         <Container style={container}>
           <Section style={logoSection}>
@@ -88,9 +90,7 @@ export function ApplicationConfirmation({ name, role }: ApplicationConfirmationP
           <Text style={footer}>
             Questions? Reply to this email or reach us at hello@steadywrk.app.
           </Text>
-          <Text style={footerMuted}>
-            STEADYWRK LLC · Amman, Jordan · steadywrk.app
-          </Text>
+          <Text style={footerMuted}>STEADYWRK LLC · Amman, Jordan · steadywrk.app</Text>
         </Container>
       </Body>
     </Html>

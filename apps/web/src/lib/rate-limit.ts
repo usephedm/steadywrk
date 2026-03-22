@@ -1,7 +1,11 @@
-// Simple in-memory rate limiter for API routes
-// Resets on cold start (acceptable for Vercel serverless)
+// Robust in-memory rate limiter for API routes using a sliding window log approach
+// Resets on cold start (acceptable for serverless/edge environments without Redis)
 
-const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
+interface RateLimitEntry {
+  timestamps: number[];
+}
+
+const rateLimitMap = new Map<string, RateLimitEntry>();
 
 export function rateLimit(
   identifier: string,
@@ -11,17 +15,38 @@ export function rateLimit(
   const now = Date.now();
   const entry = rateLimitMap.get(identifier);
 
-  if (!entry || now > entry.resetAt) {
-    rateLimitMap.set(identifier, { count: 1, resetAt: now + windowMs });
+  if (!entry) {
+    rateLimitMap.set(identifier, { timestamps: [now] });
     return { success: true, remaining: limit - 1 };
   }
 
-  if (entry.count >= limit) {
+  // Filter out timestamps older than the window
+  entry.timestamps = entry.timestamps.filter((timestamp) => now - timestamp < windowMs);
+
+  if (entry.timestamps.length >= limit) {
     return { success: false, remaining: 0 };
   }
 
-  entry.count++;
-  return { success: true, remaining: limit - entry.count };
+  // Add the current timestamp
+  entry.timestamps.push(now);
+
+  // Clean up old entries from the map to prevent memory leaks over time
+  // Do this probabilistically to avoid overhead on every call (e.g. 1% chance)
+  if (Math.random() < 0.01) {
+    cleanupRateLimitMap(windowMs);
+  }
+
+  return { success: true, remaining: limit - entry.timestamps.length };
+}
+
+function cleanupRateLimitMap(windowMs: number) {
+  const now = Date.now();
+  for (const [key, entry] of rateLimitMap.entries()) {
+    entry.timestamps = entry.timestamps.filter((timestamp) => now - timestamp < windowMs);
+    if (entry.timestamps.length === 0) {
+      rateLimitMap.delete(key);
+    }
+  }
 }
 
 export function getClientIP(request: Request): string {

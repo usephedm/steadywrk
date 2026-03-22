@@ -11,9 +11,7 @@ export default function RoadmapPage() {
           <h1 className="font-[var(--font-display)] text-3xl sm:text-4xl font-extrabold text-[#23211D] tracking-tight">
             Steady...W-hat?
           </h1>
-          <p className="text-[#6B6B66] mt-2 text-sm">
-            STEADYWRK 1.0 &mdash; 2026 Roadmap
-          </p>
+          <p className="text-[#6B6B66] mt-2 text-sm">STEADYWRK 1.0 &mdash; 2026 Roadmap</p>
         </div>
 
         {/* Timeline */}
@@ -34,9 +32,7 @@ export default function RoadmapPage() {
                   {/* Dot */}
                   <div
                     className={`absolute left-[11px] top-1.5 w-2.5 h-2.5 rounded-full ring-4 ${
-                      isActive
-                        ? 'bg-[#E58A0F] ring-[#E58A0F]/20'
-                        : 'bg-[#E5E5E2] ring-[#E5E5E2]/20'
+                      isActive ? 'bg-[#E58A0F] ring-[#E58A0F]/20' : 'bg-[#E5E5E2] ring-[#E5E5E2]/20'
                     }`}
                   />
 
@@ -65,7 +61,9 @@ export default function RoadmapPage() {
                     <ul className="space-y-2">
                       {milestone.items.map((item) => (
                         <li key={item} className="text-[#6B6B66] text-sm flex items-start gap-2.5">
-                          <span className={`mt-0.5 shrink-0 ${isActive ? 'text-[#E58A0F]' : 'text-[#B0B0AB]'}`}>
+                          <span
+                            className={`mt-0.5 shrink-0 ${isActive ? 'text-[#E58A0F]' : 'text-[#B0B0AB]'}`}
+                          >
                             {isActive ? '▸' : '›'}
                           </span>
                           {item}
