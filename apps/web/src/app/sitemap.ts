@@ -100,13 +100,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  const applyPages: MetadataRoute.Sitemap = ROLES.map((role) => ({
-    url: `${baseUrl}/apply/${role.slug}`,
-    lastModified: now,
-    changeFrequency: 'monthly' as const,
-    priority: 0.6,
-  }));
-
   // Only include published blog posts (date <= today)
   const publishedPosts = BLOG_POSTS.filter((post) => new Date(post.date) <= now);
 
@@ -117,5 +110,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticPages, ...rolePages, ...programPages, ...applyPages, ...blogPages];
+  return [...staticPages, ...rolePages, ...programPages, ...blogPages];
 }
