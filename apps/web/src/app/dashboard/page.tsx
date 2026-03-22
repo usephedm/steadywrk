@@ -4,7 +4,6 @@ import Link from 'next/link';
 import {
   Calendar,
   CheckCircle2,
-  ChevronRight,
   Clock,
   Flame,
   GraduationCap,

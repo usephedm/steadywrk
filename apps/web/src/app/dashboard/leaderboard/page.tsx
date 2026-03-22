@@ -2,7 +2,6 @@
 
 import { LEADERBOARD_DATA } from '@/lib/data';
 import {
-  Award,
   ChevronDown,
   ChevronUp,
   Crown,
@@ -52,7 +51,7 @@ export default function LeaderboardPage() {
     }
   };
 
-  const SortIcon = ({ field }: { field: SortKey }) => {
+  const renderSortIcon = (field: SortKey) => {
     if (sortBy !== field) return <ChevronDown className="h-3 w-3 opacity-30" />;
     return sortDesc ? (
       <ChevronDown className="h-3 w-3 text-[#E58A0F]" />
@@ -127,7 +126,7 @@ export default function LeaderboardPage() {
                       onClick={() => toggleSort('points')}
                       className="flex items-center gap-1 min-h-[44px] -my-3 py-3"
                     >
-                      Points <SortIcon field="points" />
+                      Points {renderSortIcon('points')}
                     </button>
                   </th>
                   <th className="text-left text-[10px] font-mono uppercase tracking-wider text-[#6B6B66] px-4 py-3">
@@ -136,7 +135,7 @@ export default function LeaderboardPage() {
                       onClick={() => toggleSort('streak')}
                       className="flex items-center gap-1 min-h-[44px] -my-3 py-3"
                     >
-                      Streak <SortIcon field="streak" />
+                      Streak {renderSortIcon('streak')}
                     </button>
                   </th>
                   <th className="text-left text-[10px] font-mono uppercase tracking-wider text-[#6B6B66] px-4 py-3">
@@ -145,7 +144,7 @@ export default function LeaderboardPage() {
                       onClick={() => toggleSort('level')}
                       className="flex items-center gap-1 min-h-[44px] -my-3 py-3"
                     >
-                      Level <SortIcon field="level" />
+                      Level {renderSortIcon('level')}
                     </button>
                   </th>
                   <th className="text-left text-[10px] font-mono uppercase tracking-wider text-[#6B6B66] px-4 py-3 hidden sm:table-cell">

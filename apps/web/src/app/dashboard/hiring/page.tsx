@@ -2,7 +2,7 @@
 
 import { PIPELINE_CANDIDATES, ROLES } from '@/lib/data';
 import type { CandidateStatus } from '@/lib/data';
-import { ArrowRight, Calendar, ChevronRight, Filter, Search, Star, User, X } from 'lucide-react';
+import { ArrowRight, Calendar, Filter, Search, Star, X } from 'lucide-react';
 import { useMemo, useState } from 'react';
 
 const PIPELINE_COLUMNS: { status: CandidateStatus; label: string; color: string }[] = [

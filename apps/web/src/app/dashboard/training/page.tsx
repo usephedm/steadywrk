@@ -1,18 +1,13 @@
 'use client';
 
 import {
-  Award,
   CheckCircle2,
   ChevronDown,
   Circle,
-  Flag,
   Rocket,
   Satellite,
   Shield,
-  Star,
   Target,
-  Users,
-  Zap,
 } from 'lucide-react';
 import { useState } from 'react';
 

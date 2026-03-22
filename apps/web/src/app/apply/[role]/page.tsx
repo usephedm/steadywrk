@@ -7,6 +7,7 @@ import { ROLES } from '@/lib/data';
 import confetti from 'canvas-confetti';
 import { ArrowLeft, ArrowRight, CheckCircle2, Clock, Save, Sparkles, Upload } from 'lucide-react';
 import { useParams } from 'next/navigation';
+import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 /* ─── Types ─── */
@@ -100,7 +101,7 @@ export default function ApplyPage() {
     }
 
     // PostHog: track form started
-    (window as any).posthog?.capture('apply_form_started', { role: role?.slug });
+    (window as { posthog?: { capture: (e: string, p?: unknown) => void } }).posthog?.capture('apply_form_started', { role: role?.slug });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Auto-save to localStorage
@@ -108,7 +109,8 @@ export default function ApplyPage() {
     if (submitted) return;
     const timeout = setTimeout(() => {
       try {
-        const { cvFile, ...saveable } = form;
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const { cvFile: _cvFile, ...saveable } = form;
         localStorage.setItem(STORAGE_KEY, JSON.stringify({ ...saveable, _step: step }));
       } catch {
         // ignore
@@ -125,7 +127,8 @@ export default function ApplyPage() {
     setStep((s) => {
       const nextStep = Math.min(s + 1, 5);
       // PostHog: track step completion
-      (window as any).posthog?.capture('apply_step_completed', {
+       
+      (window as { posthog?: { capture: (e: string, p?: unknown) => void } }).posthog?.capture('apply_step_completed', {
         role: role?.slug,
         step: s,
         step_name: STEP_NAMES[s - 1],
@@ -171,7 +174,8 @@ export default function ApplyPage() {
       localStorage.removeItem(STORAGE_KEY);
 
       // PostHog: track successful submission
-      (window as any).posthog?.capture('apply_form_submitted', {
+       
+      (window as { posthog?: { capture: (e: string, p?: unknown) => void } }).posthog?.capture('apply_form_submitted', {
         role: role?.slug,
         team: form.team,
       });
@@ -201,7 +205,8 @@ export default function ApplyPage() {
       }, 250);
     } catch {
       // PostHog: track submission error
-      (window as any).posthog?.capture('apply_form_error', {
+       
+      (window as { posthog?: { capture: (e: string, p?: unknown) => void } }).posthog?.capture('apply_form_error', {
         role: role?.slug,
         error: 'submission_failed',
       });
@@ -225,9 +230,9 @@ export default function ApplyPage() {
             <p className="text-[#6E695F] mb-6">
               The position you&rsquo;re looking for doesn&rsquo;t exist.
             </p>
-            <a href="/careers" className="text-[#E58A0F] font-medium hover:underline">
+            <Link href="/careers" className="text-[#E58A0F] font-medium hover:underline">
               View all open positions
-            </a>
+            </Link>
           </div>
         </main>
         <Footer />
@@ -662,18 +667,18 @@ export default function ApplyPage() {
               </div>
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a
+                <Link
                   href="/careers"
                   className="inline-flex items-center gap-2 bg-[#E58A0F] hover:bg-[#CC7408] text-white font-medium text-[15px] px-8 py-3.5 rounded-lg transition-colors duration-[180ms]"
                 >
                   Explore more roles
-                </a>
-                <a
+                </Link>
+                <Link
                   href="/"
                   className="text-[14px] font-medium text-[#6E695F] hover:text-[#23211D] transition-colors"
                 >
                   Back to home
-                </a>
+                </Link>
               </div>
             </div>
           )}
@@ -695,7 +700,8 @@ export default function ApplyPage() {
                   type="button"
                   onClick={() => {
                     try {
-                      const { cvFile, ...saveable } = form;
+                      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const { cvFile: _cvFile, ...saveable } = form;
                       localStorage.setItem(
                         STORAGE_KEY,
                         JSON.stringify({ ...saveable, _step: step }),

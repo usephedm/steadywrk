@@ -16,9 +16,11 @@ export function Navbar() {
   const closeMobile = useCallback(() => setMobileOpen(false), []);
 
   // Close on route change
-  useEffect(() => {
+  const [prevPathname, setPrevPathname] = useState(pathname);
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname);
     setMobileOpen(false);
-  }, [pathname]);
+  }
 
   // Scroll lock when mobile menu is open
   useEffect(() => {

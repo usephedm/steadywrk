@@ -13,6 +13,7 @@ export function WhatsAppFloat() {
   useEffect(() => {
     const wasDismissed = sessionStorage.getItem('steadywrk-wa-dismissed');
     if (!wasDismissed) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setDismissed(false);
     }
   }, []);

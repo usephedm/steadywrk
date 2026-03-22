@@ -18,7 +18,7 @@ import {
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 
 const NAV_ITEMS = [
   { href: '/dashboard', label: 'Overview', icon: LayoutDashboard },
@@ -43,9 +43,11 @@ export default function DashboardLayout({
   const closeSidebar = useCallback(() => setSidebarOpen(false), []);
 
   // Close mobile sidebar on route change
-  useEffect(() => {
+  const [prevPathname, setPrevPathname] = useState(pathname);
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname);
     setSidebarOpen(false);
-  }, [pathname]);
+  }
 
   const isActive = (href: string) => {
     if (href === '/dashboard') return pathname === '/dashboard';

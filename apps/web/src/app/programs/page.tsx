@@ -69,7 +69,7 @@ export default function ProgramsPage() {
             />
           </div>
           <div className="relative z-10 max-w-5xl mx-auto space-y-8">
-            {PROGRAMS.map((program, i) => (
+            {PROGRAMS.map((program) => (
               <Link
                 key={program.slug}
                 href={`/programs/${program.slug}`}
