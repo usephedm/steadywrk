@@ -30,6 +30,7 @@ export interface ApplyPayload {
   skills: Record<string, number>;
   availability: string;
   challengeResponse: string;
+  vouchCode?: string;
 }
 
 export function validateApplyPayload(body: Record<string, unknown>): ApplyPayload {
@@ -39,6 +40,7 @@ export function validateApplyPayload(body: Record<string, unknown>): ApplyPayloa
   const phone = typeof body.phone === 'string' ? body.phone.trim() : '';
   const position = validateRequired(body.position, 'Position');
   const team = typeof body.team === 'string' ? body.team.trim() : '';
+  const vouchCode = typeof body.vouchCode === 'string' ? body.vouchCode.trim() : undefined;
 
   if (body.pdplConsent !== true) {
     throw new Error('PDPL consent is required');
@@ -75,6 +77,7 @@ export function validateApplyPayload(body: Record<string, unknown>): ApplyPayloa
     skills,
     availability,
     challengeResponse,
+    vouchCode,
   };
 }
 

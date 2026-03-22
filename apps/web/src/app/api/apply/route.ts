@@ -4,9 +4,14 @@ import { HRNotification } from '@/lib/email/hr-notification';
 import { getClientIP, rateLimit } from '@/lib/rate-limit';
 import { validateApplyPayload } from '@/lib/schemas';
 import { createScorecardToken } from '@/lib/scorecards';
+import { and, eq } from 'drizzle-orm';
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
-import { applicants, emailEvents } from '../../../../../../packages/db/src/schema';
+import {
+  applicantVouches,
+  applicants,
+  emailEvents,
+} from '../../../../../../packages/db/src/schema';
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
@@ -33,6 +38,27 @@ export async function POST(request: Request) {
 
     const data = validateApplyPayload(body);
 
+    let initialStatus: 'applied' | 'assessment' = 'applied';
+
+    if (db && data.vouchCode) {
+      try {
+        const vouchRecords = await db
+          .select()
+          .from(applicantVouches)
+          .where(eq(applicantVouches.vouchCode, data.vouchCode));
+
+        if (
+          vouchRecords.length > 0 &&
+          vouchRecords[0]?.claimedAt === null &&
+          vouchRecords[0]?.vouchedEmail.toLowerCase() === data.email.toLowerCase()
+        ) {
+          initialStatus = 'assessment';
+        }
+      } catch (err) {
+        console.error('Failed to validate vouch code during application:', err);
+      }
+    }
+
     // Insert into database
     let applicantId: string | undefined;
     try {
@@ -45,6 +71,7 @@ export async function POST(request: Request) {
           phone: data.phone || null,
           roleSlug: data.position,
           teamInterest: data.team || null,
+          status: initialStatus,
           portfolioUrl: data.portfolioUrl || null,
           githubUrl: data.githubUrl || null,
           answers: data.answers || { q1: '', q2: '', q3: '' },
@@ -55,6 +82,13 @@ export async function POST(request: Request) {
         })
         .returning({ id: applicants.id });
       applicantId = result?.id;
+
+      if (initialStatus === 'assessment' && data.vouchCode && applicantId) {
+        await db
+          .update(applicantVouches)
+          .set({ claimedAt: new Date() })
+          .where(eq(applicantVouches.vouchCode, data.vouchCode));
+      }
     } catch (dbError) {
       console.error('Database insert failed:', dbError);
 

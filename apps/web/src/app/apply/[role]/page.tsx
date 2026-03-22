@@ -7,8 +7,8 @@ import { ROLES } from '@/lib/data';
 import confetti from 'canvas-confetti';
 import { ArrowLeft, ArrowRight, CheckCircle2, Clock, Save, Sparkles, Upload } from 'lucide-react';
 import Link from 'next/link';
-import { useParams } from 'next/navigation';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useParams, useSearchParams } from 'next/navigation';
+import { Suspense, useCallback, useEffect, useRef, useState } from 'react';
 
 /* ─── Types ─── */
 interface FormData {
@@ -76,8 +76,10 @@ const STEP_NAMES = ['info', 'story', 'skills', 'challenge', 'confirm'] as const;
 
 const STORAGE_KEY = 'steadywrk-apply-draft';
 
-export default function ApplyPage() {
+function ApplyForm() {
   const params = useParams();
+  const searchParams = useSearchParams();
+  const vouchCode = searchParams.get('vouch');
   const roleSlug = params.role as string;
   const role = ROLES.find((r) => r.slug === roleSlug);
 
@@ -783,5 +785,13 @@ export default function ApplyPage() {
 
       <Footer />
     </>
+  );
+}
+
+export default function ApplyPage() {
+  return (
+    <Suspense fallback={null}>
+      <ApplyForm />
+    </Suspense>
   );
 }
