@@ -1,36 +1,3 @@
-'use client';
-
-import { PIPELINE_CANDIDATES, ROLES } from '@/lib/data';
-import type { CandidateStatus } from '@/lib/data';
-import { ArrowRight, Calendar, Filter, Search, Star, X } from 'lucide-react';
-import { useMemo, useState } from 'react';
-
-const PIPELINE_COLUMNS: { status: CandidateStatus; label: string; color: string }[] = [
-  { status: 'applied', label: 'Applied', color: '#6B6B66' },
-  { status: 'screening', label: 'Screening', color: '#E58A0F' },
-  { status: 'assessment', label: 'Assessment', color: '#0F6B6F' },
-  { status: 'interview', label: 'Interview', color: '#4D7A3A' },
-  { status: 'offer', label: 'Offer', color: '#E58A0F' },
-  { status: 'rejected', label: 'Rejected', color: '#A03D4A' },
-];
-
-const SCORECARD_DIMENSIONS = [
-  { name: 'Technical', weight: 30, key: 'technical' as const },
-  { name: 'Organizational', weight: 20, key: 'organizational' as const },
-  { name: 'Communication', weight: 15, key: 'communication' as const },
-  { name: 'Growth', weight: 15, key: 'growth' as const },
-  { name: 'Cultural', weight: 10, key: 'cultural' as const },
-  { name: 'Initiative', weight: 10, key: 'initiative' as const },
-];
-
-type ScoreKey =
-  | 'technical'
-  | 'organizational'
-  | 'communication'
-  | 'growth'
-  | 'cultural'
-  | 'initiative';
-
 import { getPipelineCandidates } from '@/app/actions/hiring';
 import { HiringBoard } from '@/components/dashboard/hiring-board';
 

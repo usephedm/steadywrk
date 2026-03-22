@@ -2,6 +2,7 @@
 
 import {
   BookOpen,
+  Calendar,
   ChevronLeft,
   GraduationCap,
   LayoutDashboard,
@@ -26,6 +27,7 @@ const NAV_ITEMS = [
   { href: '/dashboard/leaderboard', label: 'Leaderboard', icon: Trophy },
   { href: '/dashboard/blog', label: 'Blog', icon: BookOpen },
   { href: '/dashboard/hiring', label: 'Hiring', icon: Users, adminOnly: true },
+  { href: '/dashboard/interviews', label: 'Interviews', icon: Calendar, adminOnly: true },
   { href: '/dashboard/referrals', label: 'Referrals', icon: Users },
   { href: '/dashboard/scorecard', label: 'Scorecard', icon: Trophy },
   { href: '/dashboard/roadmap', label: 'Roadmap', icon: MapIcon },
