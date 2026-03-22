@@ -29,7 +29,7 @@ export function CultureSection() {
         </ScrollReveal>
 
         {/* Desktop: horizontal scroll gallery */}
-        <div className="flex gap-5 overflow-x-auto snap-x snap-mandatory md:pb-4 scrollbar-hide md:flex-row flex-col">
+        <div tabIndex={0} className="flex gap-5 overflow-x-auto snap-x snap-mandatory md:pb-4 scrollbar-hide md:flex-row flex-col focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E58A0F]">
           {CULTURE_PHOTOS.map((photo, i) => (
             <ScrollReveal
               key={photo.src}

@@ -23,7 +23,7 @@ export function CredibilityBar() {
           ].map((item) => (
             <span
               key={item}
-              className="text-[13px] font-medium text-[#B0B0AB] dark:text-[#4A4A47] whitespace-nowrap uppercase tracking-[0.06em]"
+              className="text-[13px] font-medium text-[#74746D] dark:text-[#4A4A47] whitespace-nowrap uppercase tracking-[0.06em]"
             >
               {item}
             </span>
