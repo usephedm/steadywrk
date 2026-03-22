@@ -1,11 +1,13 @@
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
 import {
+  applicantVouches,
   applicants,
   blogPosts,
   emailEvents,
   employees,
   interviewSlots,
   jobListings,
+  salarySubmissions,
 } from './schema';
 
 /* ─── Applicants ─── */
@@ -56,3 +58,17 @@ export const insertContactSchema = createInsertSchema(contacts);
 export const selectContactSchema = createSelectSchema(contacts);
 export type InsertContact = typeof contacts.$inferInsert;
 export type SelectContact = typeof contacts.$inferSelect;
+
+/* ─── Applicant Vouches ─── */
+
+export const insertApplicantVouchSchema = createInsertSchema(applicantVouches);
+export const selectApplicantVouchSchema = createSelectSchema(applicantVouches);
+export type InsertApplicantVouch = typeof applicantVouches.$inferInsert;
+export type SelectApplicantVouch = typeof applicantVouches.$inferSelect;
+
+/* ─── Salary Submissions ─── */
+
+export const insertSalarySubmissionSchema = createInsertSchema(salarySubmissions);
+export const selectSalarySubmissionSchema = createSelectSchema(salarySubmissions);
+export type InsertSalarySubmission = typeof salarySubmissions.$inferInsert;
+export type SelectSalarySubmission = typeof salarySubmissions.$inferSelect;
