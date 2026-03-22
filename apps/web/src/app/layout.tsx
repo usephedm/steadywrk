@@ -1,4 +1,5 @@
 import { ClerkProvider } from '@clerk/nextjs';
+import Script from 'next/script';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata, Viewport } from 'next';
@@ -98,13 +99,7 @@ export default function RootLayout({
     <html lang="en" className={`${cabinetGrotesk.variable} ${satoshi.variable} h-full antialiased`}>
       <head>
         {/* Ahrefs Web Analytics */}
-        <script
-          src="https://analytics.ahrefs.com/analytics.js"
-          data-key="xlEN572+HO98vWtLtHolWQ"
-          async
-        />
-
-        {/* Preload critical assets */}
+{/* Preload critical assets */}
         <link rel="preload" href="/logo.webp" as="image" type="image/webp" />
         <link rel="preload" href="/brand/steadywrk-ai-work.webp" as="image" type="image/webp" fetchPriority="high" />
 
@@ -144,6 +139,11 @@ export default function RootLayout({
           </PostHogProvider>
         </ClerkProvider>
         <ClientGlobals />
+            <Script
+              src="https://analytics.ahrefs.com/analytics.js"
+              data-key="xlEN572+HO98vWtLtHolWQ"
+              strategy="afterInteractive"
+            />
         <Analytics />
         <SpeedInsights />
         {/* JSON-LD Organization */}
