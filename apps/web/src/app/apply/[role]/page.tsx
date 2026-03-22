@@ -47,11 +47,11 @@ const INITIAL_FORM: FormData = {
 };
 
 const TEAMS = [
-  { id: 'ai-lab', label: 'AI Lab', emoji: '\u{1F9E0}' },
-  { id: 'engineering', label: 'Engineering', emoji: '\u{1F6E0}\uFE0F' },
-  { id: 'operations', label: 'Operations', emoji: '\u{26A1}' },
-  { id: 'marketing', label: 'Growth', emoji: '\u{1F4C8}' },
-  { id: 'bpo', label: 'BPO', emoji: '\u{1F4AC}' },
+  { id: 'ai-lab', label: 'AI Lab', emoji: '🧠' },
+  { id: 'engineering', label: 'Engineering', emoji: '🛠️' },
+  { id: 'operations', label: 'Operations', emoji: '⚡' },
+  { id: 'marketing', label: 'Growth', emoji: '📈' },
+  { id: 'bpo', label: 'BPO', emoji: '💬' },
 ];
 
 const SKILL_OPTIONS = [
