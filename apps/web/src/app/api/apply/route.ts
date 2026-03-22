@@ -166,7 +166,6 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         success: true,
-        applicantId,
         scorecardToken: applicantId ? createScorecardToken(applicantId) : null,
       },
       { status: 201 },
