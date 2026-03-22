@@ -108,12 +108,7 @@ export default function RootLayout({
         />
 
         {/* DNS prefetch + preconnect for third-party speed */}
-        <link
-          rel="preconnect"
-          href="https://big-jennet-22.clerk.accounts.dev"
-          crossOrigin="anonymous"
-        />
-        <link rel="dns-prefetch" href="https://big-jennet-22.clerk.accounts.dev" />
+        <link rel="preconnect" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://analytics.ahrefs.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://analytics.ahrefs.com" />
         <link rel="preconnect" href="https://us.i.posthog.com" crossOrigin="anonymous" />
