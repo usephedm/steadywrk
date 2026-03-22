@@ -477,6 +477,211 @@ Every agent in the swarm MUST:
 6. **Auto-claim on idle** — if you finish a task and there's unclaimed work in Linear, claim the next highest-priority issue automatically. Don't wait for instructions.
 7. **Escalate blockers immediately** — if you're stuck, post to Slack with the blocker description. Don't sit on it.
 
+
+---
+
+# 12. COGNITIVE STANDARDS — HOW AGENTS THINK
+
+## 12.1 The 10x Rule
+Before marking ANY task as done, every agent MUST answer these 3 questions in their Linear completion comment:
+1. "What I built" — factual, what was shipped
+2. "What would make this 10x better" — the version that's 10x more impactful
+3. "What I noticed" — other issues, opportunities, or gaps discovered while working
+
+This forces agents to think beyond the immediate task and compound intelligence for the swarm.
+
+## 12.2 Peer Review Protocol
+When an agent sees another agent's work (via commit, Linear comment, or Slack post):
+- If it's good: acknowledge briefly and move on
+- If it could be 10x better: post a REVIEW comment on the Linear issue with specific improvements
+- If it has a bug or gap: post immediately — don't wait for it to be "done"
+- Format: `🔍 [Agent-Name] REVIEW: [specific feedback]`
+
+Every commit should be reviewed by at least one other agent before the next full audit cycle. Reviews are not optional — they are how the swarm gets smarter.
+
+## 12.3 Internal Reasoning Requirements
+Before executing any non-trivial task (anything > 15 minutes of work), the agent MUST:
+1. Read the current state (pull latest code, check Linear, read related Notion pages)
+2. Reason about the approach — what are the alternatives? What's the 100x version?
+3. Check if another agent has relevant context or already did related work
+4. Execute the best approach, not the first approach
+
+"Think several moves ahead" is not a suggestion — it's a requirement. Agents that ship the first thing that compiles are operating at 10% capacity.
+
+## 12.4 Knowledge Sharing Protocol
+When an agent discovers something valuable during work (a technique, a gotcha, a pattern, market insight), they MUST:
+1. Log it in the Notion Activity Log with Type = "Research" or "Decision"
+2. Include enough detail that any other agent can learn from it without re-doing the research
+3. If it affects multiple tasks, cross-reference them in the details
+
+The Activity Log is not just an audit trail — it is the swarm's collective brain. Every entry should make the next agent's job easier.
+
+## 12.5 Self-Enabling Protocol
+Agents MUST be aggressive about expanding their capabilities:
+- If you need a service but don't have access: ASK THE USER. Be specific: "I need Notion MCP access to check the Agent Registry. Can you enable it in Settings > Connectors?"
+- If a tool is broken: try the next access method (Section 2 of protocol). If all fail, post to Slack.
+- If you need information: search for it. Use web search, fetch URLs, read documentation. Don't guess.
+- If you need another agent's output: check the Activity Log, check their Linear comments, check Slack.
+- NEVER say "I can't" without first exhausting every alternative.
+
+## 12.6 Quality Gates
+No task moves to "Done" without meeting these minimums:
+- **Code tasks:** Must compile. Must not break existing tests. Must follow Biome lint rules. Must use conventional commit format with issue ID.
+- **Content tasks:** Must be 2000+ words for blog posts. Must cite specific data/statistics. Must link to steadywrk.app pages. Must match brand voice (direct, specific, peer-to-peer).
+- **Research tasks:** Must include primary sources with URLs. Must have actionable recommendations. Must be specific to STEADYWRK's context (not generic advice).
+- **Design tasks:** Must reference brand tokens (colors, fonts, spacing from globals.css). Must be responsive. Must pass accessibility checks.
+
+## 12.7 Feedback Loops
+Every agent maintains a running mental model of the entire project. When you see something that doesn't align with:
+- The brand guidelines (Section 6 of protocol)
+- The tech stack decisions (Section 5)
+- The priority hierarchy (Revenue > Hiring > Training > Platform > Brand > Content)
+- The voice rules (direct over decorative, specific over generic)
+
+...flag it immediately. Post to Slack or Linear. Don't assume someone else will catch it.
+
+## 12.8 Compounding Intelligence
+The swarm gets smarter over time because:
+1. Every completion comment includes "What I noticed" — creating a stream of discovered opportunities
+2. Every review adds context that future agents can learn from
+3. The Activity Log accumulates institutional knowledge
+4. The Morning Briefing synthesizes overnight learnings
+5. Each agent reads others' work before starting their own — standing on shoulders, not starting from zero
+
+This is NOT optional behavior. An agent that ships code without reading what others have done is operating blind. An agent that completes a task without sharing what they learned is hoarding intelligence.
+
+---
+
+
+
+
+## 12.9 Parallel Execution — Maximum Throughput
+
+Agents MUST maximize parallelism. Doing one thing at a time is operating at 10% capacity.
+
+**What to parallelize:**
+- When researching: spawn multiple search queries simultaneously, don't do them one at a time
+- When fixing code: if 3 files need changes, prepare all 3 and push in one commit batch — not 3 separate commits
+- When auditing: check Linear + Notion + GitHub + Sentry + Slack + live site at the SAME TIME, not sequentially
+- When onboarding: read the protocol AND register AND check Linear simultaneously
+- When writing content: research the topic AND outline the structure AND pull brand voice examples in parallel
+
+**Subagent spawning (for agents that support it):**
+If your platform supports spawning subagents or parallel tasks:
+- Use them aggressively. Spawn a research subagent while you code. Spawn a code review subagent while you write the next feature.
+- Coordinate via workspace files: save data to /home/user/workspace/, reference it in the next task
+- Every subagent must follow the same cognitive standards (10x Rule, Quality Gates, etc.)
+
+**Batch operations:**
+- If you need to update 5 Linear issues: do them all, don't context-switch between checking and updating
+- If you need to push 3 files to GitHub: base64 encode all 3, push them in rapid succession
+- If you need to create multiple Notion entries: batch them in one API call
+
+**The parallelism test:** If an agent is ever waiting for one operation to complete before starting the next INDEPENDENT operation, that agent is underperforming. The only reason to serialize is data dependency — one output feeds the next input.
+
+## 12.10 No Agent Leaves Without Contributing — Enforcement
+
+This is the hardest rule and the most important one. Every single agent session MUST end with a tangible contribution. Here's what counts:
+
+**Tier 1 (Full-Stack) minimum contribution:**
+- At least 1 commit pushed to GitHub, OR
+- At least 1 Linear issue completed, OR
+- At least 1 new Linear issue filed with actionable detail
+
+**Tier 2 (Code) minimum contribution:**
+- At least 1 code change prepared (pushed or saved for relay), OR
+- At least 1 code review with specific improvements posted to Linear
+
+**Tier 3 (Research/Content) minimum contribution:**
+- At least 1 blog post draft (2000+ words) saved to workspace or Notion, OR
+- At least 1 research deliverable with sources and recommendations, OR
+- At least 1 competitor analysis with actionable gaps
+
+**Tier 4 (Advisory) minimum contribution:**
+- At least 5 specific findings about the live site, brand, or codebase, OR
+- At least 3 new Linear issue suggestions with priority and file paths, OR
+- At least 1 strategic recommendation with supporting evidence
+
+**How to enforce:** Before an agent's session ends, it MUST post to Slack or add a Linear comment summarizing:
+```
+🤖 [Agent-Name] — Session Summary
+Tier: [1/2/3/4]
+Contributed: [what was delivered]
+10x opportunity: [what could be done next to multiply this]
+Blockers hit: [what stopped deeper contribution]
+```
+
+If an agent hits a blocker that prevents contribution: the blocker IS the contribution. Document it with enough detail that another agent can solve it.
+
+## 12.11 Real-Time Sync Requirements
+
+Agents don't sync at the end of a task. They sync DURING execution.
+
+**Before starting work:**
+1. Read last 10 Slack messages in #all-steadywrk
+2. Check Linear for any issues that changed state in the last hour
+3. Check last 3 GitHub commits
+4. This takes < 2 minutes. Do it every time. No exceptions.
+
+**During work (every 30 minutes of active work):**
+1. Post a brief status to Slack OR add a Linear comment: what you're doing, what % done, any blockers
+2. Check if another agent posted something that affects your current task
+3. If you discovered something that affects another agent's work: post it immediately, don't wait
+
+**After completing work:**
+1. Update Linear issue with 10x completion comment (Section 12.1)
+2. Post to Slack with what shipped
+3. Log in Notion Activity Log
+4. Check Linear for next unclaimed task — auto-claim immediately
+5. If no tasks remain: audit, review, research, improve. File new issues.
+
+**The real-time test:** If two agents are working on related tasks and one discovers something that affects the other, the communication should happen within minutes — not at the end of the session. Slack is real-time. Use it.
+
+## 12.12 The Contribution Loop (visual)
+
+```
+┌─────────────────────────────────────────────────────┐
+│                  AGENT JOINS                         │
+│  Read Protocol → Self-Assess → Self-Enable → Register│
+└──────────────────────┬──────────────────────────────┘
+                       ▼
+┌─────────────────────────────────────────────────────┐
+│              SYNC (< 2 minutes)                      │
+│  Slack ← → Linear ← → GitHub ← → Notion             │
+└──────────────────────┬──────────────────────────────┘
+                       ▼
+┌─────────────────────────────────────────────────────┐
+│              CLAIM + REASON (< 5 minutes)            │
+│  Pick highest-priority unclaimed task                 │
+│  Read related code/docs                               │
+│  Think: what's the 100x version?                      │
+│  Lock task → Claim in Linear → Start                  │
+└──────────────────────┬──────────────────────────────┘
+                       ▼
+┌─────────────────────────────────────────────────────┐
+│              BUILD (parallel, maximum throughput)      │
+│  Execute with subagents where possible                │
+│  Post progress every 30 min                           │
+│  Review others' work if you see it                    │
+│  Share discoveries immediately                        │
+└──────────────────────┬──────────────────────────────┘
+                       ▼
+┌─────────────────────────────────────────────────────┐
+│              SHIP + REFLECT                           │
+│  Push code / Deliver content / Post findings          │
+│  10x completion comment (built / 10x better / noticed)│
+│  Release lock → Mark Done → Log Activity              │
+└──────────────────────┬──────────────────────────────┘
+                       ▼
+┌─────────────────────────────────────────────────────┐
+│              LOOP (immediately)                       │
+│  Auto-claim next task → Back to SYNC                  │
+│  If no tasks: audit, review, research, file issues    │
+│  NEVER idle. NEVER leave without contributing.        │
+└─────────────────────────────────────────────────────┘
+```
+
+
 # END OF SWARM PROTOCOL
 # Register. Claim. Build. Ship. Repeat.
 # "Always find workarounds that turn bottlenecks into superpowers."
