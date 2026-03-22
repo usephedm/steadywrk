@@ -1,4 +1,3 @@
-import fs from 'node:fs';
 import { expect, test } from '@playwright/test';
 
 const viewports = [
@@ -7,21 +6,25 @@ const viewports = [
   { width: 414, height: 896 },
 ];
 
-test('Responsive Audit - Check for horizontal overflow', async ({ page }) => {
-  let auditResults =
-    '# Responsive Audit Results\n\n## LCP Audit (Google PageSpeed)\n\nEncountered HTTP 429 (Too Many Requests) during LCP fetch, or pending execution.\n\n## Horizontal Overflow Check\n\n';
+const routes = ['/', '/careers', '/programs', '/contact', '/blog'];
 
-  for (const vp of viewports) {
-    await page.setViewportSize(vp);
-    await page.goto('https://steadywrk.app', { waitUntil: 'networkidle' });
+test.describe('Responsive layout regression checks', () => {
+  for (const route of routes) {
+    test(`should avoid horizontal overflow on ${route}`, async ({ page }) => {
+      for (const viewport of viewports) {
+        await page.setViewportSize(viewport);
+        await page.goto(route);
+        await expect(page.locator('main')).toBeVisible();
 
-    // Check if there is horizontal overflow
-    const hasOverflow = await page.evaluate(() => {
-      return document.documentElement.scrollWidth > window.innerWidth;
+        const hasOverflow = await page.evaluate(() => {
+          return document.documentElement.scrollWidth > window.innerWidth;
+        });
+
+        expect(
+          hasOverflow,
+          `Expected no horizontal overflow for ${route} at ${viewport.width}x${viewport.height}`,
+        ).toBeFalsy();
+      }
     });
-
-    auditResults += `- Viewport ${vp.width}x${vp.height}: ${hasOverflow ? '❌ FAIL (Overflow detected)' : '✅ PASS (No overflow)'}\n`;
   }
-
-  fs.writeFileSync('STE-29-audit.md', auditResults);
 });
