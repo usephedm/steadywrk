@@ -88,6 +88,7 @@ function ApplyForm() {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [pipelinePath, setPipelinePath] = useState<string | null>(null);
   const formRef = useRef<HTMLDivElement>(null);
 
   // Restore draft from localStorage + track form start
@@ -175,6 +176,7 @@ function ApplyForm() {
         skills: form.skills,
         availability: form.availability,
         challengeResponse: form.challengeResponse,
+        vouchCode: vouchCode || undefined,
       };
 
       const response = await fetch('/api/apply', {
@@ -183,21 +185,25 @@ function ApplyForm() {
         body: JSON.stringify(body),
       });
 
+      const payload = (await response.json()) as {
+        error?: string;
+        pipelinePath?: string | null;
+        scorecardToken?: string | null;
+      };
+
       if (!response.ok) {
         let errorMessage = 'Failed to submit application. Please try again.';
-
-        try {
-          const payload = (await response.json()) as { error?: string };
-          if (payload.error) {
-            errorMessage = payload.error;
-          }
-        } catch {
-          // ignore malformed error payloads
+        if (payload.error) {
+          errorMessage = payload.error;
         }
 
         throw new Error(errorMessage);
       }
 
+      setPipelinePath(
+        payload.pipelinePath ??
+          (payload.scorecardToken ? `/pipeline/${payload.scorecardToken}` : null),
+      );
       setSubmitted(true);
       setStep(5);
       localStorage.removeItem(STORAGE_KEY);
@@ -250,7 +256,7 @@ function ApplyForm() {
     } finally {
       setSubmitting(false);
     }
-  }, [form, role, roleSlug]);
+  }, [form, role, roleSlug, vouchCode]);
 
   if (!role) {
     return (
@@ -727,9 +733,17 @@ function ApplyForm() {
               </div>
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                {pipelinePath && (
+                  <Link
+                    href={pipelinePath}
+                    className="inline-flex items-center gap-2 bg-[#E58A0F] hover:bg-[#CC7408] text-white font-medium text-[15px] px-8 py-3.5 rounded-lg transition-colors duration-[180ms]"
+                  >
+                    Track your pipeline
+                  </Link>
+                )}
                 <Link
                   href="/careers"
-                  className="inline-flex items-center gap-2 bg-[#E58A0F] hover:bg-[#CC7408] text-white font-medium text-[15px] px-8 py-3.5 rounded-lg transition-colors duration-[180ms]"
+                  className="inline-flex items-center gap-2 bg-[#F5F5F3] hover:bg-[#E5E5E2] text-[#23211D] font-medium text-[15px] px-8 py-3.5 rounded-lg transition-colors duration-[180ms]"
                 >
                   Explore more roles
                 </Link>

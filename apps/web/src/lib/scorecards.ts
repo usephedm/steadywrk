@@ -4,6 +4,10 @@ const TOKEN_VERSION = 'v1';
 const DEFAULT_MAX_AGE_SECONDS = 60 * 60 * 24 * 7;
 
 function getSecret() {
+  if (process.env.PLAYWRIGHT_BYPASS_AUTH === '1') {
+    return process.env.SCORECARD_SECRET || 'steadywrk-test-scorecard-secret';
+  }
+
   return process.env.SCORECARD_SECRET || process.env.RESEND_API_KEY || null;
 }
 

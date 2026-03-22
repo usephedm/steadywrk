@@ -5,6 +5,11 @@ import { HRNotification } from '@/lib/email/hr-notification';
 import { rateLimitRequest } from '@/lib/rate-limit';
 import { validateApplyPayload } from '@/lib/schemas';
 import { createScorecardToken } from '@/lib/scorecards';
+import {
+  createTestApplicantRecord,
+  findTestApplicantByEmailRole,
+  isTestPipelineMode,
+} from '@/lib/test-pipeline-store';
 import { eq } from 'drizzle-orm';
 import { Resend } from 'resend';
 import {
@@ -70,34 +75,68 @@ export async function POST(request: Request) {
 
     let applicantId: string | undefined;
     try {
-      if (!db) throw new Error('Database not configured');
+      if (!db) {
+        if (!isTestPipelineMode()) {
+          throw new Error('Database not configured');
+        }
 
-      const [result] = await db
-        .insert(applicants)
-        .values({
+        const existingApplicant = findTestApplicantByEmailRole(data.email, data.position);
+        if (existingApplicant) {
+          return jsonResponse(
+            {
+              error:
+                'You already applied to this role with this email. We will review your existing application.',
+            },
+            { status: 409 },
+            requestLimit,
+          );
+        }
+
+        const result = createTestApplicantRecord({
           email: data.email,
           name: data.name,
-          phone: data.phone || null,
+          phone: data.phone,
           roleSlug: data.position,
-          teamInterest: data.team || null,
+          teamInterest: data.team,
+          portfolioUrl: data.portfolioUrl,
+          githubUrl: data.githubUrl,
+          availability: data.availability,
+          challengeResponse: data.challengeResponse,
           status: initialStatus,
-          portfolioUrl: data.portfolioUrl || null,
-          githubUrl: data.githubUrl || null,
           answers: data.answers,
           skills: data.skills,
-          availability: data.availability || null,
-          challengeResponse: data.challengeResponse || null,
           pdplConsent: data.pdplConsent,
-        })
-        .returning({ id: applicants.id });
+        });
 
-      applicantId = result?.id;
+        applicantId = result.id;
+      } else {
+        const [result] = await db
+          .insert(applicants)
+          .values({
+            email: data.email,
+            name: data.name,
+            phone: data.phone || null,
+            roleSlug: data.position,
+            teamInterest: data.team || null,
+            status: initialStatus,
+            portfolioUrl: data.portfolioUrl || null,
+            githubUrl: data.githubUrl || null,
+            answers: data.answers,
+            skills: data.skills,
+            availability: data.availability || null,
+            challengeResponse: data.challengeResponse || null,
+            pdplConsent: data.pdplConsent,
+          })
+          .returning({ id: applicants.id });
 
-      if (initialStatus === 'assessment' && data.vouchCode && applicantId) {
-        await db
-          .update(applicantVouches)
-          .set({ claimedAt: new Date() })
-          .where(eq(applicantVouches.vouchCode, data.vouchCode));
+        applicantId = result?.id;
+
+        if (initialStatus === 'assessment' && data.vouchCode && applicantId) {
+          await db
+            .update(applicantVouches)
+            .set({ claimedAt: new Date() })
+            .where(eq(applicantVouches.vouchCode, data.vouchCode));
+        }
       }
     } catch (dbError) {
       console.error('Database insert failed:', dbError);
@@ -207,11 +246,14 @@ export async function POST(request: Request) {
       });
     }
 
+    const scorecardToken = applicantId ? createScorecardToken(applicantId) : null;
+
     return jsonResponse(
       {
         success: true,
         applicantId,
-        scorecardToken: applicantId ? createScorecardToken(applicantId) : null,
+        scorecardToken,
+        pipelinePath: scorecardToken ? `/pipeline/${scorecardToken}` : null,
       },
       { status: 201 },
       requestLimit,
