@@ -1,6 +1,6 @@
 import { isSpamTrapTriggered, jsonResponse, parseJsonBody } from '@/lib/api-guard';
 import { db } from '@/lib/db';
-import { getClientFingerprint, rateLimit } from '@/lib/rate-limit';
+import { rateLimitRequest } from '@/lib/rate-limit';
 import { eq } from 'drizzle-orm';
 import { z } from 'zod';
 import { applicantVouches, applicants } from '../../../../../../packages/db/src/schema';
@@ -11,7 +11,7 @@ const vouchSchema = z.object({
 });
 
 export async function POST(request: Request) {
-  const requestLimit = rateLimit(getClientFingerprint(request, 'vouch'), 5, 60 * 60 * 1000);
+  const requestLimit = await rateLimitRequest(request, 'vouch', 5, 60 * 60 * 1000);
   if (!requestLimit.success) {
     return jsonResponse({ error: 'Too many requests' }, { status: 429 }, requestLimit);
   }

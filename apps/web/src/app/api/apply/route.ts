@@ -2,7 +2,7 @@ import { isSpamTrapTriggered, jsonResponse, parseJsonBody } from '@/lib/api-guar
 import { db } from '@/lib/db';
 import { ApplicationConfirmation } from '@/lib/email/application-confirmation';
 import { HRNotification } from '@/lib/email/hr-notification';
-import { getClientFingerprint, rateLimit } from '@/lib/rate-limit';
+import { rateLimitRequest } from '@/lib/rate-limit';
 import { validateApplyPayload } from '@/lib/schemas';
 import { createScorecardToken } from '@/lib/scorecards';
 import { eq } from 'drizzle-orm';
@@ -16,7 +16,7 @@ import {
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
 export async function POST(request: Request) {
-  const requestLimit = rateLimit(getClientFingerprint(request, 'apply'), 5, 60 * 60 * 1000);
+  const requestLimit = await rateLimitRequest(request, 'apply', 5, 60 * 60 * 1000);
   if (!requestLimit.success) {
     return jsonResponse(
       { error: 'Too many submissions. Try again later.' },

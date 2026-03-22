@@ -1,7 +1,7 @@
 import { isSpamTrapTriggered, jsonResponse, parseJsonBody } from '@/lib/api-guard';
 import { COMPANY } from '@/lib/constants';
 import { db } from '@/lib/db';
-import { getClientFingerprint, rateLimit } from '@/lib/rate-limit';
+import { rateLimitRequest } from '@/lib/rate-limit';
 import { validateContactPayload } from '@/lib/schemas';
 import { Resend } from 'resend';
 import { contacts } from '../../../../../../packages/db/src/schema';
@@ -9,7 +9,7 @@ import { contacts } from '../../../../../../packages/db/src/schema';
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
 export async function POST(request: Request) {
-  const requestLimit = rateLimit(getClientFingerprint(request, 'contact'), 5, 60 * 60 * 1000);
+  const requestLimit = await rateLimitRequest(request, 'contact', 5, 60 * 60 * 1000);
   if (!requestLimit.success) {
     return jsonResponse(
       { error: 'Too many submissions. Try again later.' },

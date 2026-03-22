@@ -1,5 +1,5 @@
 import { isSpamTrapTriggered, jsonResponse, parseJsonBody } from '@/lib/api-guard';
-import { getClientFingerprint, rateLimit } from '@/lib/rate-limit';
+import { rateLimitRequest } from '@/lib/rate-limit';
 import { z } from 'zod';
 
 const shareSchema = z.object({
@@ -8,7 +8,7 @@ const shareSchema = z.object({
 });
 
 export async function POST(request: Request) {
-  const requestLimit = rateLimit(getClientFingerprint(request, 'share'), 20, 60 * 60 * 1000);
+  const requestLimit = await rateLimitRequest(request, 'share', 20, 60 * 60 * 1000);
   if (!requestLimit.success) {
     return jsonResponse({ error: 'Too many requests' }, { status: 429 }, requestLimit);
   }

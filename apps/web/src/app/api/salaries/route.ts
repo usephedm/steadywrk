@@ -1,6 +1,6 @@
 import { isSpamTrapTriggered, jsonResponse, parseJsonBody } from '@/lib/api-guard';
 import { db } from '@/lib/db';
-import { getClientFingerprint, rateLimit } from '@/lib/rate-limit';
+import { rateLimitRequest } from '@/lib/rate-limit';
 import { z } from 'zod';
 import { salarySubmissions } from '../../../../../../packages/db/src/schema';
 
@@ -15,7 +15,7 @@ const salarySchema = z.object({
 });
 
 export async function POST(request: Request) {
-  const requestLimit = rateLimit(getClientFingerprint(request, 'salary'), 3, 24 * 60 * 60 * 1000);
+  const requestLimit = await rateLimitRequest(request, 'salary', 3, 24 * 60 * 60 * 1000);
   if (!requestLimit.success) {
     return jsonResponse(
       { error: 'Too many requests. Please try again later.' },

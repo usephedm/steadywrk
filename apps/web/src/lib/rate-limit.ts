@@ -1,3 +1,6 @@
+import { Ratelimit } from '@upstash/ratelimit';
+import { Redis } from '@upstash/redis';
+
 interface RateLimitEntry {
   timestamps: number[];
 }
@@ -11,6 +14,7 @@ export interface RateLimitResult {
 }
 
 const rateLimitMap = new Map<string, RateLimitEntry>();
+const limiterCache = new Map<string, Ratelimit>();
 const IP_HEADER_CANDIDATES = [
   'cf-connecting-ip',
   'x-vercel-forwarded-for',
@@ -18,6 +22,8 @@ const IP_HEADER_CANDIDATES = [
   'x-real-ip',
   'fly-client-ip',
 ] as const;
+
+let redisClient: Redis | null | undefined;
 
 function pruneTimestamps(timestamps: number[], now: number, windowMs: number) {
   return timestamps.filter((timestamp) => now - timestamp < windowMs);
@@ -105,4 +111,73 @@ export function getClientFingerprint(request: Request, scope: string) {
     request.headers.get('accept-language')?.split(',')[0]?.slice(0, 32) ?? 'unknown';
 
   return `${scope}:${ip}:${userAgent}:${acceptLanguage}`;
+}
+
+function getRedisClient() {
+  if (redisClient !== undefined) {
+    return redisClient;
+  }
+
+  const url = process.env.UPSTASH_REDIS_REST_URL;
+  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
+
+  if (!url || !token) {
+    redisClient = null;
+    return redisClient;
+  }
+
+  redisClient = new Redis({ url, token });
+  return redisClient;
+}
+
+function getDistributedLimiter(scope: string, limit: number, windowMs: number) {
+  const redis = getRedisClient();
+  if (!redis) return null;
+
+  const key = `${scope}:${limit}:${windowMs}`;
+  const existing = limiterCache.get(key);
+  if (existing) {
+    return existing;
+  }
+
+  const windowSeconds = Math.max(1, Math.ceil(windowMs / 1000));
+  const limiter = new Ratelimit({
+    redis,
+    limiter: Ratelimit.slidingWindow(limit, `${windowSeconds} s`),
+    prefix: 'steadywrk:ratelimit',
+    analytics: false,
+  });
+
+  limiterCache.set(key, limiter);
+  return limiter;
+}
+
+export async function rateLimitRequest(
+  request: Request,
+  scope: string,
+  limit: number,
+  windowMs = 60 * 60 * 1000,
+): Promise<RateLimitResult> {
+  const identifier = getClientFingerprint(request, scope);
+  const distributedLimiter = getDistributedLimiter(scope, limit, windowMs);
+
+  if (!distributedLimiter) {
+    return rateLimit(identifier, limit, windowMs);
+  }
+
+  try {
+    const result = await distributedLimiter.limit(identifier);
+    const resetAt = typeof result.reset === 'number' ? result.reset : Date.now() + windowMs;
+
+    return {
+      success: result.success,
+      remaining: result.remaining,
+      limit,
+      resetAt,
+      retryAfterSeconds: result.success ? 0 : Math.max(1, Math.ceil((resetAt - Date.now()) / 1000)),
+    };
+  } catch (error) {
+    console.error('Distributed rate limit failed, falling back to memory:', error);
+    return rateLimit(identifier, limit, windowMs);
+  }
 }
