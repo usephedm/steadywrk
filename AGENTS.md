@@ -1,11 +1,11 @@
 # AGENTS.md — AI Agent Guide for STEADYWRK
 
 ## Architecture
-- **Monorepo**: Turborepo with `apps/web` (Next.js 16) and `packages/db` (Drizzle/Neon)
+- **Monorepo**: Turborepo with `apps/web` (Next.js 16) and `packages/db` (Drizzle/Postgres)
 - **Runtime**: Node.js 22, React 19, TypeScript 5.8
 - **Styling**: Tailwind CSS v4, CSS custom properties in globals.css
 - **Auth**: Clerk v7 with proxy.ts (Next.js 16 convention)
-- **Database**: Neon Postgres (Frankfurt) with Drizzle ORM 0.45
+- **Database**: Supabase Postgres with Drizzle ORM 0.45
 - **Email**: Resend
 - **Analytics**: PostHog (session recordings enabled)
 - **Deployment**: Railway (auto-deploy from main)
@@ -28,7 +28,7 @@
 - Public email: hello@steadywrk.app
 
 ## Database
-- Neon Postgres (EU Central / Frankfurt)
+- Supabase Postgres
 - Use Drizzle query builder, NOT raw SQL
 - Schema in `packages/db/src/schema.ts`
 - Tables: applicants, job_listings, blog_posts, employees, interview_slots, email_events, waitlist, contacts
@@ -41,3 +41,4 @@
 
 ## Environment Variables
 See `.env.example` for required variables.
+ variables.

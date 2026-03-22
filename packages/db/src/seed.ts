@@ -1,5 +1,5 @@
-import { neon } from '@neondatabase/serverless';
-import { drizzle } from 'drizzle-orm/neon-http';
+import { drizzle } from 'drizzle-orm/postgres-js';
+import postgres from 'postgres';
 import { jobListings } from './schema';
 
 const DATABASE_URL = process.env.DATABASE_URL;
@@ -8,7 +8,9 @@ if (!DATABASE_URL) {
   process.exit(1);
 }
 
-const sql = neon(DATABASE_URL);
+const sql = postgres(DATABASE_URL, {
+  prepare: false,
+});
 const db = drizzle(sql);
 
 const jobs = [

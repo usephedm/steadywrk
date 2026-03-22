@@ -1,7 +1,7 @@
 -- STE-19: Create pg_cron job for PDPL compliance
 -- This deletes applicant records older than 12 months to comply with Jordan PDPL
 
--- Enable pg_cron extension if not already enabled (Requires superuser/admin rights on Neon)
+-- Enable pg_cron extension if not already enabled (requires admin rights on your Postgres host)
 CREATE EXTENSION IF NOT EXISTS pg_cron;
 
 -- Schedule the job to run every day at midnight

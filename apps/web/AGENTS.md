@@ -5,7 +5,7 @@
 ### Stack
 - Next.js 16 (App Router) + React 19 + TypeScript
 - Tailwind CSS v4 + motion (framer-motion successor)
-- Clerk auth, Neon Postgres + Drizzle ORM, Resend email, PostHog analytics
+- Clerk auth, Supabase Postgres + Drizzle ORM, Resend email, PostHog analytics
 - Turborepo monorepo: apps/web, packages/db
 
 ### Conventions

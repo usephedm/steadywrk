@@ -1,6 +1,6 @@
 import { db } from '@/lib/db';
 import { salarySubmissions } from '@steadywrk/db/schema';
-import { sql } from 'drizzle-orm';
+import { and, eq, gte, sql } from 'drizzle-orm';
 import { NextResponse } from 'next/server';
 
 // Vercel/Railway Cron standard authentication
@@ -15,21 +15,24 @@ export async function GET(request: Request) {
       return NextResponse.json({ error: 'Database not configured' }, { status: 503 });
     }
 
-    // 1. Calculate aggregate stats for the past week
-    const recentSubmissions = await db.execute(sql`
-      SELECT 
-        COUNT(*) as total_new,
-        AVG(base_salary_usd) as avg_salary,
-        MAX(base_salary_usd) as max_salary
-      FROM ${salarySubmissions}
-      WHERE created_at >= NOW() - INTERVAL '7 days'
-        AND verified = false
-    `);
+    const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
 
-    const stats = recentSubmissions.rows[0];
+    const [stats] = await db
+      .select({
+        totalNew: sql<number>`COUNT(*)`,
+        avgSalary: sql<number>`AVG(${salarySubmissions.baseSalaryUsd})`,
+        maxSalary: sql<number>`MAX(${salarySubmissions.baseSalaryUsd})`,
+      })
+      .from(salarySubmissions)
+      .where(
+        and(gte(salarySubmissions.createdAt, sevenDaysAgo), eq(salarySubmissions.verified, false)),
+      );
 
-    // 2. Trigger webhook to n8n for Slack/Listmonk digest if there's new data
-    if (Number(stats.total_new) > 0) {
+    const totalNew = Number(stats?.totalNew ?? 0);
+    const averageSalary = Math.round(Number(stats?.avgSalary ?? 0));
+    const maxSalary = Number(stats?.maxSalary ?? 0);
+
+    if (totalNew > 0) {
       const webhookUrl = process.env.N8N_WEBHOOK_URL;
       if (webhookUrl) {
         await fetch(webhookUrl, {
@@ -38,9 +41,9 @@ export async function GET(request: Request) {
           body: JSON.stringify({
             event: 'weekly_salary_digest',
             data: {
-              newSubmissions: Number(stats.total_new),
-              averageSalary: Math.round(Number(stats.avg_salary)),
-              maxSalary: Number(stats.max_salary),
+              newSubmissions: totalNew,
+              averageSalary,
+              maxSalary,
               timestamp: new Date().toISOString(),
             },
           }),
@@ -48,13 +51,10 @@ export async function GET(request: Request) {
       }
     }
 
-    // 3. (Optional) Auto-verify bounds or clean up extreme outliers
-    // await db.execute(sql`UPDATE ${salarySubmissions} SET verified = true WHERE base_salary_usd BETWEEN 5000 AND 300000`);
-
     return NextResponse.json({
       success: true,
       message: 'Weekly salary cron executed',
-      processed: Number(stats.total_new),
+      processed: totalNew,
     });
   } catch (error) {
     console.error('Salary cron failed:', error);
