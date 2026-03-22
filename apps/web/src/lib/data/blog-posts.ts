@@ -10,12 +10,49 @@ export type BlogCategory = (typeof BLOG_CATEGORIES)[number];
 
 export const BLOG_POSTS = [
   {
+    slug: 'jordan-bpo-revolution',
+    title:
+      "Jordan's BPO Revolution: Why US Companies Are Hiring Jordanian Talent in 2026",
+    date: '2026-03-20',
+    category: 'AI Careers' as BlogCategory,
+    readTime: '15 min read',
+    featured: false,
+    excerpt:
+      "The outsourcing industry has a narrative problem. Mention BPO and most companies think India or Philippines. That picture is outdated — and Jordan is the reason why.",
+    content:
+      "The outsourcing industry has a narrative problem. Mention 'BPO' and most American companies think: India. Philippines. Call centers. Low-cost labor doing low-skilled work. That picture is outdated. And if you're still hiring based on it, you're leaving money on the table.\n\nJordan sits at a strategic crossroads — literally and figuratively. UTC+3 creates a natural overlap with both European mornings and US East Coast afternoons. Internet penetration exceeds 95%. The workforce is young, educated, and bilingual. Over 7,000 ICT graduates enter the market annually from universities like JUST, University of Jordan, and Princess Sumaya University.\n\nThe cost advantage is real but not the whole story. A senior AI engineer in Amman costs 60-70% less than their Bay Area equivalent — but the quality gap that existed five years ago has closed dramatically. Jordan's National AI Strategy 2023-2027 is actively training 15,000 individuals in AI skills. Companies like Mawdoo3, Estarta, and now STEADYWRK are building production AI systems from Amman that serve US clients.\n\nThe timezone advantage is underrated. When your Amman team starts at 9 AM local, it's 2 AM Eastern — but when your US team starts at 9 AM Eastern, your Amman team is available until 4 PM local. This creates a genuine 18-hour coverage window without anyone working nights. For dispatch operations, customer support, and AI monitoring, this is a structural advantage that no amount of automation can replicate.\n\nSTEADYWRK operates at this intersection. Our agents in Amman manage US commercial maintenance operations using AI-enhanced tooling — dispatching technicians, tracking work orders, and managing client relationships across 50 states. The combination of Jordanian operational talent and AI tooling produces results that traditional BPO models simply cannot match. Apply at steadywrk.app/careers.",
+  },
+  {
+    slug: 'steadywrk-hiring-process',
+    title: 'How STEADYWRK Hires: Our Transparent 7-Stage Process',
+    date: '2026-03-17',
+    category: 'Behind the Build' as BlogCategory,
+    readTime: '14 min read',
+    featured: false,
+    excerpt:
+      "Most hiring processes are broken. Here's exactly how STEADYWRK hires — every stage, every timeline, every decision point. No black boxes.",
+    content:
+      "Most hiring processes are broken. Candidates don't know what matters. Hiring managers make gut calls at stage two and then rationalize them for the next four weeks. Companies talk about hiring for 'culture fit' but actually mean 'people like us.' Candidates waste months in limbo wondering if they're still being considered.\n\nAt STEADYWRK, we think that's unacceptable. Here's exactly how we hire — transparently, respectfully, and fast. Our target is 14 days from application to offer.\n\nStage 1: Application (6-8 minutes). You fill out our multi-step form at steadywrk.app. Name, email, team preference, three short answers, and a role-specific micro-challenge. No account required. No CV parsing black box.\n\nStage 2: AI-Assisted Review (within 48 hours). Every application is read by a real person, assisted by AI screening that evaluates response quality, not keywords. We look for clarity of thought, relevant experience, and genuine interest.\n\nStage 3: Skills Assessment. A timed, role-specific challenge that mirrors actual work you'd do here. Dispatchers get a prioritization scenario. Engineers get a prompt engineering task. Designers get a UI critique. This IS the filter.\n\nStage 4: Video Interview. Three recorded questions, done asynchronously. Show us how you think and communicate. Female interviewer option available. Prayer-time-aware scheduling.\n\nStage 5: Live Interview (45 minutes). Structured conversation with the hiring manager. No trick questions. Scorecard-based evaluation across six dimensions: technical skill (30%), organizational ability (20%), communication (15%), growth mindset (15%), cultural alignment (10%), initiative (10%).\n\nStage 6: Team Meet. Casual 30-minute session with 2-3 team members. This is for mutual fit — we want you to evaluate us too.\n\nStage 7: Offer. Transparent compensation formula. Clear growth path. Decision in 72 hours after final interview. We respond to every applicant within 48 hours, every time. Apply at steadywrk.app/careers.",
+  },
+  {
+    slug: 'ai-careers-jordan-2026',
+    title: 'The Complete Guide to AI Careers in Jordan 2026',
+    date: '2026-03-16',
+    category: 'AI Careers' as BlogCategory,
+    readTime: '18 min read',
+    featured: true,
+    excerpt:
+      'Everything Jordanian graduates need to know about AI careers in 2026: salary ranges, skills in demand, and proven paths to landing your first role.',
+    content:
+      "The AI job market in Jordan is moving faster than most graduates realize. Twelve months ago, 'AI engineer' wasn't a real job category here. Today, companies across Amman are actively hiring. The gap between what's happening in the market and what most people think they know is massive.\n\nJordan's ICT sector is worth $3.11 billion and growing at nearly 16% per year. By 2031, it's projected to reach $6.52 billion. Yet youth unemployment sits at 41.72%, and 7,000 new ICT graduates enter the market annually without guaranteed pathways. This is the paradox.\n\nHere are the six AI career paths available in Jordan right now, with real salary data:\n\n1. AI/ML Engineer (800-1,500 JOD/month): Build and deploy models. Most in-demand locally. Companies: Mawdoo3, Estarta, STEADYWRK.\n\n2. Prompt Engineer (600-1,200 JOD/month): Design and optimize LLM interactions. Fastest-growing new role. No CS degree required — demonstrated skill matters more.\n\n3. Data Scientist (700-1,400 JOD/month): Analysis, experimentation, insight generation. Strong at banks, telecoms (Zain, Orange), and fintechs.\n\n4. AI BPO Agent (350-500 JOD/month): Handle business processes with AI-enhanced tooling. Training provided. Entry point for non-technical graduates who are sharp, organized, and bilingual.\n\n5. Frontend Developer with AI (700-1,200 JOD/month): Build AI-powered interfaces. Next.js, React, TypeScript. Every AI product needs a frontend.\n\n6. Digital Marketing Lead with AI (600-1,000 JOD/month): Run campaigns using AI tools for content generation, audience targeting, and performance optimization.\n\nThe salary jump from local to international remote is 3-5x. A Jordanian AI engineer earning 1,000 JOD locally can earn $3,000-5,000/month remotely for a US company. This is the career-defining strategic move.\n\nSTEADYWRK's IGNITE program (3 months), ORBIT fellowship (6 months), and APEX leadership track (12 months) are designed to bridge this gap. You work on production AI systems serving US clients from day one. No simulations. Apply at steadywrk.app/careers.",
+  },
+  {
     slug: 'hello-world',
     title: 'STEADYWRK Has Landed in Jordan',
     date: '2026-03-21',
     category: 'Behind the Build' as BlogCategory,
     readTime: '4 min read',
-    featured: true,
+    featured: false,
     excerpt:
       'We\u2019re a US company that just opened our Jordan office. Here\u2019s what we\u2019re building and why Amman is the right place to do it.',
     content:
