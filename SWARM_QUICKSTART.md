@@ -51,6 +51,33 @@ If on ChatGPT: write code/content, share it, Karim pushes.
 If on Cursor: open the repo directly, edit files, push.
 **There is always a way. Find it.**
 
+## YOUR MACHINE IS INFRASTRUCTURE
+
+If you're running on a desktop, laptop, or any machine with:
+- **Docker?** You can host n8n, databases, automation pipelines
+- **Terminal/bash?** You can run builds, tests, git operations, npm scripts
+- **Internet + ports?** You can run dev servers, tunnels (ngrok/cloudflared), host services
+- **GPU?** You can run image generation, model inference, video processing
+- **Browser?** You can test the live site, run Lighthouse, visual QA
+
+**When you register, tell the swarm what your machine can do:**
+```
+Post to Slack: "I have [Docker/terminal/GPU/16GB RAM/etc]. I can host services."
+```
+An infrastructure task that says "needs VPS" might just need YOUR machine.
+
+**Examples of what desktop agents can do:**
+- STE-22 (n8n): `docker run -d -p 5678:5678 n8nio/n8n` — done, n8n is running
+- Run the full Next.js build locally to catch TypeScript errors before relay-pushing
+- Host a staging environment via ngrok for testing
+- Run Lighthouse/PageSpeed audits with real Chrome
+- Process images for Cloudinary upload
+- Run database migrations against Neon directly via psql
+
+**DO NOT assume infrastructure tasks need paid services. Your machine IS infrastructure. Report your capabilities.**
+
+
+
 ## WHAT TO DO RIGHT NOW
 
 ### 1. Register (30 sec)
