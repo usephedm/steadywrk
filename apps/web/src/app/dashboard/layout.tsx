@@ -27,7 +27,6 @@ const NAV_ITEMS = [
   { href: '/dashboard/leaderboard', label: 'Leaderboard', icon: Trophy },
   { href: '/dashboard/blog', label: 'Blog', icon: BookOpen },
   { href: '/dashboard/hiring', label: 'Hiring', icon: Users, adminOnly: true },
-  { href: '/dashboard/contact', label: 'Contact', icon: Mail },
   { href: '/dashboard/roadmap', label: 'Roadmap', icon: Map },
   { href: '/dashboard/services', label: 'Services', icon: Rocket },
 ] as const;

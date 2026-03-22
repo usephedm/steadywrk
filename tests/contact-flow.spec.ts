@@ -3,7 +3,7 @@ import { expect, test } from '@playwright/test';
 test.describe('Contact Form Flow', () => {
   test('should submit the contact form successfully', async ({ page }) => {
     // Navigate to the contact page
-    await page.goto('/dashboard/contact');
+    await page.goto('/contact');
 
     // Fill out the form
     await page.fill('input#contact-company', 'Test Company LLC');
