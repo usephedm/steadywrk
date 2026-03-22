@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>High-Value Tech Arbitrage</title>
+  <style>
+    body { font-family: 'Satoshi', sans-serif; background-color: #FFFFFF; color: #0A0A0A; padding: 20px; line-height: 1.5; font-size: 15px; }
+    .container { max-width: 600px; margin: 0 auto; }
+    p { margin-bottom: 16px; }
+    .footer { margin-top: 40px; font-size: 12px; color: #6B6B66; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <p>Hi {{ .Subscriber.Name }},</p>
+    
+    {{ .Campaign.Body }}
+
+    <p>Best,</p>
+    <p><strong>Karim Alsalah</strong><br>VP, STEADYWRK<br><a href="https://steadywrk.app" style="color: #E58A0F; text-decoration: none;">steadywrk.app</a></p>
+
+    <div class="footer">
+      If you are not the right person to speak with regarding engineering hiring, please let me know or <a href="{{ .UnsubscribeURL }}" style="color: #6B6B66;">opt out here</a>.
+    </div>
+  </div>
+</body>
+</html>

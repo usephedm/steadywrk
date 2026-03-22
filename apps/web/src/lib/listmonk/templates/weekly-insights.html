@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STEADYWRK | MENA Hiring Insights</title>
+  <style>
+    body { font-family: 'Cabinet Grotesk', 'Satoshi', sans-serif; background-color: #FAF9F6; color: #0A0A0A; padding: 40px 20px; line-height: 1.6; }
+    .container { max-width: 600px; margin: 0 auto; background-color: #FFFFFF; padding: 40px; border-radius: 8px; border: 1px solid #E5E5E2; }
+    .header { font-size: 18px; font-weight: 800; color: #E58A0F; letter-spacing: 0.05em; margin-bottom: 30px; text-transform: uppercase; border-bottom: 2px solid #E58A0F; padding-bottom: 10px; display: inline-block; }
+    h1 { font-size: 28px; margin-bottom: 16px; font-weight: 700; line-height: 1.2; }
+    .content { margin-bottom: 30px; }
+    p { margin-bottom: 16px; }
+    .data-box { background-color: #FAF9F6; border-left: 4px solid #E58A0F; padding: 20px; margin: 24px 0; font-weight: 500; }
+    .footer { margin-top: 40px; font-size: 12px; color: #6B6B66; border-top: 1px solid #E5E5E2; padding-top: 20px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">STEADYWRK Insights</div>
+    <h1>{{ .Campaign.Subject }}</h1>
+    <div class="content">
+      {{ .Campaign.Body }}
+    </div>
+    <div class="footer">
+      &copy; 2026 STEADYWRK LLC. Building 15, King Hussein Business Park, Amman, Jordan.<br>
+      <a href="{{ .UnsubscribeURL }}" style="color: #6B6B66;">Unsubscribe</a>
+    </div>
+  </div>
+</body>
+</html>
