@@ -40,7 +40,7 @@ export default function ArabicHomePage() {
           </p>
           <div className="flex gap-4 justify-center">
             <Link
-              href="/careers"
+              href="/ar/careers"
               className="bg-[#E58A0F] text-white px-8 py-3 rounded-lg font-medium hover:bg-[#CC7408] transition-colors"
             >
               اكتشف الوظائف
