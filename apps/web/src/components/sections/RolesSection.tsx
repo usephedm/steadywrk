@@ -3,8 +3,8 @@
 import { BorderBeam } from '@/components/ui/border-beam';
 import { ScrollReveal, StaggerContainer, staggerItem } from '@/components/ui/scroll-reveal';
 import { ROLES } from '@/lib/data';
-import { motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
+import { motion } from 'motion/react';
 import Link from 'next/link';
 
 export function RolesSection() {

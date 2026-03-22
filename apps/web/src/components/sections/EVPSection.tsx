@@ -2,8 +2,8 @@
 
 import { MagicCard } from '@/components/ui/magic-card';
 import { ScrollReveal } from '@/components/ui/scroll-reveal';
-import { motion } from 'motion/react';
 import { Shield, Target, TrendingUp, Zap } from 'lucide-react';
+import { motion } from 'motion/react';
 import Image from 'next/image';
 
 const VALUES = [

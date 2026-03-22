@@ -1,6 +1,6 @@
-const { execSync } = require('child_process');
-const fs = require('fs');
-const http = require('http');
+const { execSync } = require('node:child_process');
+const fs = require('node:fs');
+const http = require('node:http');
 
 console.log('Starting QA Broken Link & Lighthouse Audit...');
 

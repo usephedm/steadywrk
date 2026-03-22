@@ -1,8 +1,8 @@
 'use server';
 
 import { db } from '@/lib/db';
-import { contacts } from '../../../../../packages/db/src/schema';
 import { z } from 'zod';
+import { contacts } from '../../../../../packages/db/src/schema';
 
 const contactSchema = z.object({
   name: z.string().min(1, 'Name is required'),

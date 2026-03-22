@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 test.describe('Apply Form Flow', () => {
   test('should navigate through the apply form steps', async ({ page }) => {

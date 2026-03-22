@@ -10,8 +10,8 @@
  */
 import { Footer } from '@/components/layout/footer';
 import { Navbar } from '@/components/layout/navbar';
-import { HeroSection } from '@/components/sections/HeroSection';
 import { CredibilityBar } from '@/components/sections/CredibilityBar';
+import { HeroSection } from '@/components/sections/HeroSection';
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
 

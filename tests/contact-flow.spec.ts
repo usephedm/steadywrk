@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 test.describe('Contact Form Flow', () => {
   test('should submit the contact form successfully', async ({ page }) => {
@@ -12,7 +12,7 @@ test.describe('Contact Form Flow', () => {
     await page.fill('input#contact-subject', 'Business Inquiry');
     await page.fill('textarea#contact-message', 'This is a test message from Playwright E2E.');
 
-    // Intercept the API call to prevent actual DB inserts if it's hitting a live API, 
+    // Intercept the API call to prevent actual DB inserts if it's hitting a live API,
     // or just let it hit the local dev server.
     await page.route('/api/contact', async (route) => {
       // Mock the response so we don't spam the database
@@ -24,7 +24,7 @@ test.describe('Contact Form Flow', () => {
     await page.click('button[type="submit"]');
 
     // Verify success message
-    const successMessage = page.locator('text=Message received. We\'ll get back to you shortly.');
+    const successMessage = page.locator("text=Message received. We'll get back to you shortly.");
     await expect(successMessage).toBeVisible();
   });
 });

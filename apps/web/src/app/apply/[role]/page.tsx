@@ -6,8 +6,8 @@ import { Breadcrumbs } from '@/components/ui/breadcrumbs';
 import { ROLES } from '@/lib/data';
 import confetti from 'canvas-confetti';
 import { ArrowLeft, ArrowRight, CheckCircle2, Clock, Save, Sparkles, Upload } from 'lucide-react';
-import { useParams } from 'next/navigation';
 import Link from 'next/link';
+import { useParams } from 'next/navigation';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 /* ─── Types ─── */
@@ -101,7 +101,10 @@ export default function ApplyPage() {
     }
 
     // PostHog: track form started
-    (window as { posthog?: { capture: (e: string, p?: unknown) => void } }).posthog?.capture('apply_form_started', { role: role?.slug });
+    (window as { posthog?: { capture: (e: string, p?: unknown) => void } }).posthog?.capture(
+      'apply_form_started',
+      { role: role?.slug },
+    );
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Auto-save to localStorage
@@ -127,12 +130,15 @@ export default function ApplyPage() {
     setStep((s) => {
       const nextStep = Math.min(s + 1, 5);
       // PostHog: track step completion
-       
-      (window as { posthog?: { capture: (e: string, p?: unknown) => void } }).posthog?.capture('apply_step_completed', {
-        role: role?.slug,
-        step: s,
-        step_name: STEP_NAMES[s - 1],
-      });
+
+      (window as { posthog?: { capture: (e: string, p?: unknown) => void } }).posthog?.capture(
+        'apply_step_completed',
+        {
+          role: role?.slug,
+          step: s,
+          step_name: STEP_NAMES[s - 1],
+        },
+      );
       return nextStep;
     });
     formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -174,11 +180,14 @@ export default function ApplyPage() {
       localStorage.removeItem(STORAGE_KEY);
 
       // PostHog: track successful submission
-       
-      (window as { posthog?: { capture: (e: string, p?: unknown) => void } }).posthog?.capture('apply_form_submitted', {
-        role: role?.slug,
-        team: form.team,
-      });
+
+      (window as { posthog?: { capture: (e: string, p?: unknown) => void } }).posthog?.capture(
+        'apply_form_submitted',
+        {
+          role: role?.slug,
+          team: form.team,
+        },
+      );
 
       // Confetti burst with brand colors
       confetti({
@@ -205,11 +214,14 @@ export default function ApplyPage() {
       }, 250);
     } catch {
       // PostHog: track submission error
-       
-      (window as { posthog?: { capture: (e: string, p?: unknown) => void } }).posthog?.capture('apply_form_error', {
-        role: role?.slug,
-        error: 'submission_failed',
-      });
+
+      (window as { posthog?: { capture: (e: string, p?: unknown) => void } }).posthog?.capture(
+        'apply_form_error',
+        {
+          role: role?.slug,
+          error: 'submission_failed',
+        },
+      );
     } finally {
       setSubmitting(false);
     }
@@ -701,7 +713,7 @@ export default function ApplyPage() {
                   onClick={() => {
                     try {
                       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const { cvFile: _cvFile, ...saveable } = form;
+                      const { cvFile: _cvFile, ...saveable } = form;
                       localStorage.setItem(
                         STORAGE_KEY,
                         JSON.stringify({ ...saveable, _step: step }),

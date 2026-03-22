@@ -1,7 +1,7 @@
 import { db } from '@/lib/db';
-import { jobListings } from '../../../../../../packages/db/src/schema';
-import { eq, desc } from 'drizzle-orm';
+import { desc, eq } from 'drizzle-orm';
 import { NextResponse } from 'next/server';
+import { jobListings } from '../../../../../../packages/db/src/schema';
 
 export async function GET() {
   try {

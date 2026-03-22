@@ -1,11 +1,11 @@
+import { ClientGlobals } from '@/components/ui/client-globals';
+import { PostHogProvider } from '@/lib/posthog';
 import { ClerkProvider } from '@clerk/nextjs';
-import Script from 'next/script';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
-import { ClientGlobals } from '@/components/ui/client-globals';
-import { PostHogProvider } from '@/lib/posthog';
+import Script from 'next/script';
 import './globals.css';
 
 const cabinetGrotesk = localFont({

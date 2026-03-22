@@ -1,15 +1,15 @@
 import {
+  boolean,
+  index,
+  integer,
+  jsonb,
+  pgEnum,
   pgTable,
   text,
   timestamp,
-  integer,
-  boolean,
-  jsonb,
-  pgEnum,
+  uniqueIndex,
   uuid,
   varchar,
-  index,
-  uniqueIndex,
 } from 'drizzle-orm/pg-core';
 
 /* ─── Enums ─── */

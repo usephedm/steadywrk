@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import {
   Calendar,
   CheckCircle2,
@@ -12,6 +11,7 @@ import {
   Trophy,
   Zap,
 } from 'lucide-react';
+import Link from 'next/link';
 
 const QUICK_ACTIONS = [
   { label: 'Start Shift', icon: Play, href: '/dashboard/tools', color: 'bg-[#E58A0F]' },

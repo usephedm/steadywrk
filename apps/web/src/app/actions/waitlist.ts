@@ -1,8 +1,8 @@
 'use server';
 
 import { db } from '@/lib/db';
-import { waitlist } from '../../../../../packages/db/src/schema';
 import { z } from 'zod';
+import { waitlist } from '../../../../../packages/db/src/schema';
 
 const waitlistSchema = z.object({
   email: z.string().email('Invalid email'),

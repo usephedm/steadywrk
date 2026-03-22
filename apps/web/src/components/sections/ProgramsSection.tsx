@@ -5,8 +5,8 @@ import { Particles } from '@/components/ui/particles';
 import { ScrollReveal, StaggerContainer, staggerItem } from '@/components/ui/scroll-reveal';
 import { TiltCard } from '@/components/ui/tilt-card';
 import { PROGRAMS } from '@/lib/data';
-import { motion } from 'motion/react';
 import { ChevronRight } from 'lucide-react';
+import { motion } from 'motion/react';
 import Image from 'next/image';
 import Link from 'next/link';
 

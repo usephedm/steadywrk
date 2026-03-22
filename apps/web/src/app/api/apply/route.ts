@@ -1,11 +1,11 @@
 import { db } from '@/lib/db';
-import { applicants } from '../../../../../../packages/db/src/schema';
 import { ApplicationConfirmation } from '@/lib/email/application-confirmation';
 import { HRNotification } from '@/lib/email/hr-notification';
 import { getClientIP, rateLimit } from '@/lib/rate-limit';
 import { validateApplyPayload } from '@/lib/schemas';
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
+import { applicants } from '../../../../../../packages/db/src/schema';
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 

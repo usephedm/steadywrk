@@ -1,11 +1,11 @@
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
 import {
   applicants,
-  jobListings,
   blogPosts,
+  emailEvents,
   employees,
   interviewSlots,
-  emailEvents,
+  jobListings,
 } from './schema';
 
 /* ─── Applicants ─── */

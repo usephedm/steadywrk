@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require('node:fs');
 const tsFile = 'apps/web/src/lib/data/blog-posts.ts';
 let tsContent = fs.readFileSync(tsFile, 'utf8');
 
@@ -18,8 +18,9 @@ const obj1 = {
   category: 'AI Careers',
   readTime: '15 min read',
   featured: false,
-  excerpt: 'A comprehensive guide to the AI job market in Jordan for 2026. Explore in-demand roles, salary expectations, and how the National AI Strategy is shaping the future of tech employment.',
-  content: cleanContent(post1)
+  excerpt:
+    'A comprehensive guide to the AI job market in Jordan for 2026. Explore in-demand roles, salary expectations, and how the National AI Strategy is shaping the future of tech employment.',
+  content: cleanContent(post1),
 };
 
 const obj2 = {
@@ -29,8 +30,9 @@ const obj2 = {
   category: 'Behind the Build',
   readTime: '12 min read',
   featured: false,
-  excerpt: 'Discover STEADYWRK’s rigorous, comprehensive, and fundamentally fair 7-stage hiring process. Built to be transparent, respectful of your time, and highly predictive of on-the-job success.',
-  content: cleanContent(post2)
+  excerpt:
+    'Discover STEADYWRK’s rigorous, comprehensive, and fundamentally fair 7-stage hiring process. Built to be transparent, respectful of your time, and highly predictive of on-the-job success.',
+  content: cleanContent(post2),
 };
 
 const obj3 = {
@@ -40,12 +42,14 @@ const obj3 = {
   category: 'AI Careers',
   readTime: '15 min read',
   featured: true,
-  excerpt: 'The outsourcing narrative has changed forever. Discover why forward-thinking US companies are turning to Jordan for high-value, AI-powered BPO solutions that deliver unprecedented quality.',
-  content: cleanContent(post3)
+  excerpt:
+    'The outsourcing narrative has changed forever. Discover why forward-thinking US companies are turning to Jordan for high-value, AI-powered BPO solutions that deliver unprecedented quality.',
+  content: cleanContent(post3),
 };
 
-const newPosts = [obj1, obj2, obj3].map(obj => {
-  return `  {
+const newPosts = [obj1, obj2, obj3]
+  .map((obj) => {
+    return `  {
     slug: ${JSON.stringify(obj.slug)},
     title: ${JSON.stringify(obj.title)},
     date: ${JSON.stringify(obj.date)},
@@ -55,10 +59,11 @@ const newPosts = [obj1, obj2, obj3].map(obj => {
     excerpt: ${JSON.stringify(obj.excerpt)},
     content: ${JSON.stringify(obj.content)},
   },`;
-}).join('\n');
+  })
+  .join('\n');
 
 // Insert before the last array bracket
-tsContent = tsContent.replace(/\]\s*as\s*const;\s*$/, newPosts + '\n] as const;\n');
+tsContent = tsContent.replace(/\]\s*as\s*const;\s*$/, `${newPosts}\n] as const;\n`);
 
 fs.writeFileSync(tsFile, tsContent);
 console.log('Successfully updated blog-posts.ts');

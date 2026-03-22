@@ -1,14 +1,6 @@
 'use client';
 
-import {
-  CheckCircle2,
-  ChevronDown,
-  Circle,
-  Rocket,
-  Satellite,
-  Shield,
-  Target,
-} from 'lucide-react';
+import { CheckCircle2, ChevronDown, Circle, Rocket, Satellite, Shield, Target } from 'lucide-react';
 import { useState } from 'react';
 
 type WeekStatus = 'completed' | 'active' | 'locked';

@@ -1,8 +1,8 @@
 'use client';
 
 import { ScrollReveal, StaggerContainer, staggerItem } from '@/components/ui/scroll-reveal';
-import { motion } from 'motion/react';
 import { Brain, Building2, Megaphone, Sparkles } from 'lucide-react';
+import { motion } from 'motion/react';
 
 const SERVICES_INLINE = [
   {

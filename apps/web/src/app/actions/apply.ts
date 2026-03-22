@@ -1,8 +1,8 @@
 'use server';
 
 import { db } from '@/lib/db';
-import { applicants } from '../../../../../packages/db/src/schema';
 import { z } from 'zod';
+import { applicants } from '../../../../../packages/db/src/schema';
 
 const applySchema = z.object({
   name: z.string().min(1, 'Name is required'),

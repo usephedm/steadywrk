@@ -5,13 +5,12 @@ import { TermsContent } from './content';
 
 export const metadata: Metadata = {
   title: 'Terms of Service',
-  description:
-    'STEADYWRK LLC terms of service. Governing law: Kingdom of Jordan, Amman courts.',
+  description: 'STEADYWRK LLC terms of service. Governing law: Kingdom of Jordan, Amman courts.',
   alternates: {
     canonical: '/terms',
     languages: {
-      'en': '/terms',
-      'ar': '/ar/terms',
+      en: '/terms',
+      ar: '/ar/terms',
     },
   },
   openGraph: {

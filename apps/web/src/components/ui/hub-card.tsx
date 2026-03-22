@@ -3,8 +3,8 @@
 import { BorderBeam } from '@/components/ui/border-beam';
 import { usePrefersReducedMotion } from '@/lib/hooks/use-prefers-reduced-motion';
 import { useTouchDevice } from '@/lib/hooks/use-touch-device';
-import { AnimatePresence, motion } from 'motion/react';
 import { Layers, type LucideIcon, Mail, Map, Newspaper, Users } from 'lucide-react';
+import { AnimatePresence, motion } from 'motion/react';
 import Link from 'next/link';
 import type React from 'react';
 import { useCallback, useEffect, useRef, useState } from 'react';

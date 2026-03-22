@@ -3,8 +3,8 @@
 import { ShimmerButton } from '@/components/ui/shimmer-button';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
 import { NAV_LINKS } from '@/lib/constants';
-import { AnimatePresence, motion } from 'motion/react';
 import { Menu, X } from 'lucide-react';
+import { AnimatePresence, motion } from 'motion/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';

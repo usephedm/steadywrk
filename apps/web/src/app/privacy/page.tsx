@@ -7,17 +7,17 @@ import { PrivacyContent } from './privacy-content';
 export const metadata: Metadata = {
   title: 'Privacy Policy',
   description:
-    'STEADYWRK LLC privacy policy. How we collect, use, and protect your data under Jordan\'s PDPL Law No. 24 of 2023.',
+    "STEADYWRK LLC privacy policy. How we collect, use, and protect your data under Jordan's PDPL Law No. 24 of 2023.",
   alternates: {
     canonical: '/privacy',
     languages: {
-      'en': '/privacy',
-      'ar': '/ar/privacy',
+      en: '/privacy',
+      ar: '/ar/privacy',
     },
   },
   openGraph: {
     title: 'Privacy Policy | STEADYWRK',
-    description: 'How we protect your data under Jordan\'s PDPL.',
+    description: "How we protect your data under Jordan's PDPL.",
     url: 'https://steadywrk.app/privacy',
     images: [
       {
