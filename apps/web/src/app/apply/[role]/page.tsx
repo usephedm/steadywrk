@@ -753,7 +753,7 @@ export default function ApplyPage() {
                   }}
                   className="flex items-center gap-1.5 text-[13px] text-[#B0B0AB] hover:text-[#6E695F] transition-colors duration-[180ms]"
                 >
-                  <Save className="w-3.5 h-3.5" /> Save & continue later
+                  <Save className="w-3.5 h-3.5" /> Save on this device
                 </button>
               </div>
 
