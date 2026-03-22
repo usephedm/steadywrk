@@ -164,18 +164,19 @@ export async function getAssessment() {
     .from(applicants)
     .where(isNotNull(applicants.score));
 
+  const applicantScore = applicant.score;
   const rankedScores = scoredRows
     .map((row) => Number(row.score ?? 0))
     .filter((score) => Number.isFinite(score))
     .sort((a, b) => b - a);
 
-  const rank = Math.max(1, rankedScores.findIndex((score) => score <= applicant.score) + 1);
+  const rank = Math.max(1, rankedScores.findIndex((score) => score <= applicantScore) + 1);
   const percentileRank =
     rankedScores.length === 0 ? 50 : Math.max(1, Math.round((rank / rankedScores.length) * 100));
 
   return {
     applicantId: applicant.id,
-    score: applicant.score,
+    score: applicantScore,
     role: applicant.roleSlug,
     percentile: `Top ${percentileRank}%`,
   };
