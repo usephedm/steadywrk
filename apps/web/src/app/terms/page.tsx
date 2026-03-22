@@ -18,6 +18,14 @@ export const metadata: Metadata = {
     title: 'Terms of Service | STEADYWRK',
     description: 'Terms governing your use of the STEADYWRK platform.',
     url: 'https://steadywrk.app/terms',
+    images: [
+      {
+        url: 'https://steadywrk.app/opengraph-image',
+        width: 1200,
+        height: 630,
+        alt: 'STEADYWRK — Where Ambition Compounds',
+      },
+    ],
   },
 };
 

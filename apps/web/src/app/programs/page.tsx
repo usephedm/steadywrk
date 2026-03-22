@@ -15,6 +15,14 @@ export const metadata: Metadata = {
     title: 'Programs | STEADYWRK',
     description: 'IGNITE, ORBIT, APEX — structured career programs for ambitious Jordanian talent.',
     url: 'https://steadywrk.app/programs',
+    images: [
+      {
+        url: 'https://steadywrk.app/opengraph-image',
+        width: 1200,
+        height: 630,
+        alt: 'STEADYWRK — Where Ambition Compounds',
+      },
+    ],
   },
 };
 

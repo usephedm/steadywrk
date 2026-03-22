@@ -14,6 +14,14 @@ export const metadata: Metadata = {
     title: 'Culture at STEADYWRK',
     description: 'Where ambition compounds. Our values, our way.',
     url: 'https://steadywrk.app/culture',
+    images: [
+      {
+        url: 'https://steadywrk.app/opengraph-image',
+        width: 1200,
+        height: 630,
+        alt: 'STEADYWRK — Where Ambition Compounds',
+      },
+    ],
   },
 };
 

@@ -15,6 +15,14 @@ export const metadata: Metadata = {
     title: 'About STEADYWRK',
     description: 'AI-native career platform. Building 15, King Hussein Business Park, Amman.',
     url: 'https://steadywrk.app/about',
+    images: [
+      {
+        url: 'https://steadywrk.app/opengraph-image',
+        width: 1200,
+        height: 630,
+        alt: 'STEADYWRK — Where Ambition Compounds',
+      },
+    ],
   },
 };
 

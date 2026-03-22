@@ -57,6 +57,10 @@ export async function POST(request: Request) {
     } catch (dbError) {
       console.error('Database insert failed:', dbError);
       // Database insertion is critical — fail the request
+      return NextResponse.json(
+        { error: 'Failed to save application. Please try again later.' },
+        { status: 500 },
+      );
     }
 
     console.info(

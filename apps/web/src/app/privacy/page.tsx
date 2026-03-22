@@ -19,6 +19,14 @@ export const metadata: Metadata = {
     title: 'Privacy Policy | STEADYWRK',
     description: 'How we protect your data under Jordan\'s PDPL.',
     url: 'https://steadywrk.app/privacy',
+    images: [
+      {
+        url: 'https://steadywrk.app/opengraph-image',
+        width: 1200,
+        height: 630,
+        alt: 'STEADYWRK — Where Ambition Compounds',
+      },
+    ],
   },
 };
 
