@@ -8,12 +8,17 @@ import { Calendar, Clock, Search } from 'lucide-react';
 import Link from 'next/link';
 import { useMemo, useState } from 'react';
 
+const getPublishedPosts = () => {
+  const now = new Date();
+  return getPublishedPosts().filter((post) => new Date(post.date) <= now);
+};
+
 export default function PublicBlogPage() {
   const [activeCategory, setActiveCategory] = useState<BlogCategory>('All');
   const [searchQuery, setSearchQuery] = useState('');
 
   const filtered = useMemo(() => {
-    return BLOG_POSTS.filter((post) => {
+    return getPublishedPosts().filter((post) => {
       const matchesCategory = activeCategory === 'All' || post.category === activeCategory;
       const matchesSearch =
         !searchQuery ||
@@ -23,7 +28,7 @@ export default function PublicBlogPage() {
     });
   }, [activeCategory, searchQuery]);
 
-  const featured = BLOG_POSTS.find((p) => p.featured);
+  const featured = getPublishedPosts().find((p) => p.featured);
   const regular = filtered.filter((p) => !p.featured || activeCategory !== 'All');
 
   return (
@@ -143,7 +148,7 @@ export default function PublicBlogPage() {
       <Footer />
 
       {/* Article Schema for each blog post */}
-      {BLOG_POSTS.map((post) => (
+      {getPublishedPosts().map((post) => (
         <script
           key={`schema-${post.slug}`}
           type="application/ld+json"
