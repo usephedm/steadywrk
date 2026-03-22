@@ -3,7 +3,7 @@ import { eq } from 'drizzle-orm';
 import { ImageResponse } from 'next/og';
 import { applicants } from '../../../../../../packages/db/src/schema';
 
-const size = { width: 1200, height: 630 };
+const imageSize = { width: 1200, height: 630 };
 
 // Force dynamic so we don't cache candidate scores globally
 export const dynamic = 'force-dynamic';
@@ -121,7 +121,7 @@ export async function GET(request: Request) {
           </div>
         </div>
       </div>,
-      { ...size },
+      { ...imageSize },
     );
   } catch (error) {
     console.error('Failed to generate scorecard:', error);
