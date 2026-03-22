@@ -51,7 +51,7 @@ export async function POST(request: Request) {
           skills: data.skills || {},
           availability: data.availability || null,
           challengeResponse: data.challengeResponse || null,
-          pdplConsent: true,
+          pdplConsent: data.pdplConsent,
         })
         .returning({ id: applicants.id });
       applicantId = result?.id;

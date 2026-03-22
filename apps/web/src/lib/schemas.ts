@@ -18,6 +18,7 @@ export interface ApplyPayload {
   phone: string;
   position: string;
   team: string;
+  pdplConsent: true;
   answers: {
     q1: string;
     q2: string;
@@ -38,6 +39,10 @@ export function validateApplyPayload(body: Record<string, unknown>): ApplyPayloa
   const phone = typeof body.phone === 'string' ? body.phone.trim() : '';
   const position = validateRequired(body.position, 'Position');
   const team = typeof body.team === 'string' ? body.team.trim() : '';
+
+  if (body.pdplConsent !== true) {
+    throw new Error('PDPL consent is required');
+  }
 
   const rawAnswers = body.answers as Record<string, unknown> | undefined;
   const answers = {
@@ -62,6 +67,7 @@ export function validateApplyPayload(body: Record<string, unknown>): ApplyPayloa
     phone,
     position,
     team,
+    pdplConsent: true,
     answers,
     portfolioUrl,
     githubUrl,

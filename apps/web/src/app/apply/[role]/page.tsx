@@ -161,6 +161,7 @@ export default function ApplyPage() {
         phone: form.phone,
         team: form.team,
         position: roleSlug,
+        pdplConsent: form.pdplConsent,
         answers: {
           q1: form.answer1,
           q2: form.answer2,
