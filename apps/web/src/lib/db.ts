@@ -11,4 +11,4 @@ function createDb() {
 }
 
 const { db, sql } = createDb();
-export { db, sql };
+export { db, schema, sql };

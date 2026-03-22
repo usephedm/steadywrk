@@ -1,7 +1,5 @@
-import { hasAdminAccess } from '@/lib/auth/roles';
-import { currentUser } from '@clerk/nextjs/server';
+import { requireDashboardAdmin } from '@/lib/auth/dashboard-access';
 import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
 
 export const metadata: Metadata = {
   title: "Careers — We're Hiring AI Engineers, Marketers & Operations",
@@ -15,11 +13,6 @@ export const metadata: Metadata = {
 };
 
 export default async function HiringLayout({ children }: { children: React.ReactNode }) {
-  const user = await currentUser();
-
-  if (!user || !hasAdminAccess(user.publicMetadata)) {
-    notFound();
-  }
-
+  await requireDashboardAdmin();
   return children;
 }
