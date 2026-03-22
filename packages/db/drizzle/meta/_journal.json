@@ -15,6 +15,13 @@
       "when": 1774196948594,
       "tag": "0001_minor_skullbuster",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1774201189024,
+      "tag": "0002_closed_gladiator",
+      "breakpoints": true
     }
   ]
 }

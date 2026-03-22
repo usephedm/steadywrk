@@ -49,3 +49,10 @@ export const insertEmailEventSchema = createInsertSchema(emailEvents);
 export const selectEmailEventSchema = createSelectSchema(emailEvents);
 export type InsertEmailEvent = typeof emailEvents.$inferInsert;
 export type SelectEmailEvent = typeof emailEvents.$inferSelect;
+
+/* ─── Contacts ─── */
+
+export const insertContactSchema = createInsertSchema(contacts);
+export const selectContactSchema = createSelectSchema(contacts);
+export type InsertContact = typeof contacts.$inferInsert;
+export type SelectContact = typeof contacts.$inferSelect;
