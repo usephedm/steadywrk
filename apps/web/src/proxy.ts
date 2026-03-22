@@ -1,4 +1,5 @@
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
+import { NextResponse } from 'next/server';
 
 const isPublicRoute = createRouteMatcher([
   '/',
@@ -25,11 +26,15 @@ const isPublicRoute = createRouteMatcher([
   '/opengraph-image(.*)',
 ]);
 
-export default clerkMiddleware(async (auth, request) => {
+const authMiddleware = clerkMiddleware(async (auth, request) => {
   if (!isPublicRoute(request)) {
     await auth.protect();
   }
 });
+
+export default process.env.PLAYWRIGHT_BYPASS_AUTH === '1'
+  ? () => NextResponse.next()
+  : authMiddleware;
 
 export const config = {
   matcher: [

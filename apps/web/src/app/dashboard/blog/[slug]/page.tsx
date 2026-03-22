@@ -40,7 +40,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   }
 
   const hiringHref = hasAdminAccess(user?.publicMetadata) ? '/dashboard/hiring' : '/careers';
-  const hiringCtaLabel = hiringHref === '/dashboard/hiring' ? 'Open Hiring Pipeline' : 'View Open Roles';
+  const hiringCtaLabel =
+    hiringHref === '/dashboard/hiring' ? 'Open Hiring Pipeline' : 'View Open Roles';
   const paragraphs = post.content.split('\n\n');
   const relatedPosts = BLOG_POSTS.filter(
     (p) => p.slug !== post.slug && p.category === post.category,

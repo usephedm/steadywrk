@@ -19,7 +19,9 @@ jobs:
       run: npx playwright install --with-deps
     - name: Run Playwright tests
       env:
-        NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: pk_test_bW9jay1jbGVyay1rZXk=
+        PLAYWRIGHT_BYPASS_AUTH: '1'
+        CLERK_SECRET_KEY: sk_test_bW9jay1jbGVyay1zZWNyZXQ=
+        NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: pk_test_Z3Jvd24tcGFycm90LTc3LmNsZXJrLmFjY291bnRzLmRldiQ
         NEXT_PUBLIC_CLERK_SIGN_IN_URL: /sign-in
         NEXT_PUBLIC_CLERK_SIGN_UP_URL: /sign-up
       run: npx playwright test

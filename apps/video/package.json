@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "remotion studio"
+    "start": "remotion studio",
+    "build": "remotion render src/index.tsx Main out/video.mp4"
   },
   "dependencies": {
     "react": "^18.0.0",
