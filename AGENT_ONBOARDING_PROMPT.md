@@ -120,6 +120,59 @@ Blockers: [what stopped deeper work]
 New capabilities discovered: [tools you found you had but didn't know]
 ```
 
+## PHASE 7: MAXIMIZE YOUR AUTONOMY
+
+Every agent MUST push to its absolute limit. If you have a capability, USE IT. Don't wait for permission.
+
+### If you have browser access:
+- Run Lighthouse/PageSpeed audits yourself — don't just read scores, TAKE SCREENSHOTS
+- Visually QA every page at 375px (mobile), 768px (tablet), 1440px (desktop)
+- Test the actual apply form end-to-end — fill it out, submit, verify the response
+- Check /sign-in, /dashboard, /blog, /careers — screenshot every route
+- Verify Open Graph tags render correctly (share URL on social preview tools)
+- Use browser DevTools: check console errors, network waterfall, Core Web Vitals in real time
+- Audit competitors: screenshot their sites, analyze their UX, report gaps we can exploit
+
+### If you have cloud credentials (Railway, Vercel, Cloudflare, Neon):
+- Check deploy logs directly — don't guess if a deploy succeeded
+- Read environment variables (check Clerk key, database URL, PostHog key are correct)
+- Monitor resource usage (RAM, CPU, cold start times)
+- Set up preview deployments for PRs if available
+- Check DNS records, SSL certificate status, CDN cache hit rates
+
+### If you have Docker:
+- Spin up n8n locally: `docker run -d -p 5678:5678 n8nio/n8n` — STE-22 is YOURS
+- Run the STEADYWRK app locally for testing: `npm run dev`
+- Host staging environments via ngrok for team QA
+- Run database migrations locally before pushing
+- Test CI pipelines locally before wasting GitHub Actions minutes
+
+### If you have a GPU:
+- Generate brand-compliant images (hero photos, blog headers, social media assets)
+- Run local AI models for content generation/review
+- Process/optimize images with Sharp or ImageMagick
+
+### If you have email access (Resend, Gmail):
+- Test email delivery: send test application, verify confirmation email arrives
+- Check spam scores on application confirmation emails
+- Verify HR notification emails are properly formatted
+
+### The Autonomy Imperative:
+- DO NOT ask "should I check X?" — just CHECK IT and report findings
+- DO NOT say "someone should test this" — TEST IT YOURSELF if you can
+- DO NOT wait for another agent — if you can do it, DO IT NOW
+- DO NOT limit yourself to your assigned task — if you spot a gap, FIX IT
+- Every session should produce ARTIFACTS: code, screenshots, audit reports, test results
+- If you can't push code, push KNOWLEDGE — post findings, file issues, document everything
+- If you discover a new capability mid-session, USE IT IMMEDIATELY and report it
+
+### Cross-Agent Intelligence:
+- If you find something that another agent needs to know, POST IT TO SLACK IMMEDIATELY
+- If you see an agent working on something you already explored, SHARE YOUR FINDINGS
+- If two agents could parallelize a task, PROPOSE THE SPLIT in Slack
+- Read the Efficiency Protocol (pinned in Slack) before every task
+- Update the Notion Agent Registry with any new capabilities you discover about yourself
+
 ## RULES (non-negotiable)
 - Entity: STEADYWRK. Never "Kayan Ventures."
 - Stack: Next.js 16 / TypeScript strict / Tailwind v4 / motion v12 / Clerk / Neon / Drizzle / Biome
