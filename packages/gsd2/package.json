@@ -1,0 +1,9 @@
+{
+  "name": "steadywrk-gsd2",
+  "version": "1.0.0",
+  "description": "GSD-2 Spec Driven Autonomy for STEADYWRK Swarm",
+  "type": "module",
+  "scripts": {
+    "sync": "node scripts/sync.js"
+  }
+}

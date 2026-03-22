@@ -30,7 +30,8 @@
   "workspaces": ["apps/*", "packages/*"],
   "packageManager": "npm@10.8.2",
   "dependencies": {
-    "cloudinary": "^2.9.0"
+    "cloudinary": "^2.9.0",
+    "remotion": "^4.0.438"
   },
   "overrides": {
     "esbuild": "^0.25.0"
