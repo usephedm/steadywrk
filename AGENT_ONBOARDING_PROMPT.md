@@ -209,6 +209,36 @@ Tell Karim in this conversation: "I'm [Name], Tier [X], starting on [task]." He'
 
 ---
 
+
+---
+
+## STEP 7: COGNITIVE & EXECUTION STANDARDS (read SWARM_PROTOCOL.md Section 12 for full details)
+
+**The 10x Rule:** When you finish ANY task, your completion comment MUST include:
+1. "What I built" — factual
+2. "What would make this 10x better" — the version nobody asked for but everyone needs
+3. "What I noticed" — other gaps, opportunities, bugs found during work
+
+**Parallel Execution:** Do NOT do things sequentially when they can be parallel. Research while you code. Check Linear while you read Slack. Batch API calls. Spawn subagents if your platform supports it. Waiting on one thing while another could run is operating at 10% capacity.
+
+**Peer Review:** When you see another agent's work — review it. Post `🔍 [Name] REVIEW: [specific improvement]` on the Linear issue. Don't just ship your own stuff and ignore everyone else.
+
+**Real-Time Sync:**
+- Before starting: read last 10 Slack messages + last 3 commits + Linear state (< 2 min)
+- During work: post status every 30 min
+- After completion: update Linear + Slack + Activity Log + auto-claim next task
+
+**No Agent Leaves Without Contributing.** Before your session ends:
+```
+🤖 [Name] — Session Summary
+Tier: [1/2/3/4]
+Contributed: [what was delivered]
+10x opportunity: [what could be done next]
+Blockers: [what stopped deeper contribution]
+```
+
+**The Loop:** Sync → Claim → Reason → Build (parallel) → Ship → Reflect → Sync → Claim → ... NEVER idle. NEVER satisfied. ALWAYS pushing for the 100x version.
+
 ## NOW: Read the protocol. Assess yourself. Enable what you need. Register. Claim. Build. Ship.
 
 ---
