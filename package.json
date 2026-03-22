@@ -8,7 +8,10 @@
     "lint": "turbo run lint",
     "format": "biome format --write .",
     "clean": "turbo run clean",
-    "prepare": "husky"
+    "prepare": "husky",
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:smoke": "playwright test tests/smoke.spec.ts"
   },
   "lint-staged": {
     "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}": [
