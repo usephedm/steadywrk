@@ -421,6 +421,62 @@ STEP 6: Mark done.
 
 ---
 
+
+
+---
+
+# 11. AUTONOMOUS OPS — CRONS, WATCHDOGS, DIRECTIVE ROUTING
+
+The swarm runs 24/7 without human intervention. These automated systems monitor, alert, and route work.
+
+## 11.1 Scheduled Tasks (Perplexity-Alpha)
+
+| Task | Frequency | What It Does |
+|------|-----------|-------------|
+| **Production Watchdog** | Every hour | Checks Sentry for errors, verifies steadywrk.app health endpoint, sitemap, homepage. Alerts on failure. |
+| **Swarm Health Monitor** | Every 2 hours | Checks Linear for overdue/stuck issues, Notion for stale task locks (>30 min), agent registry for idle agents. Alerts on problems. |
+| **Directive Intake Scanner** | Every hour | Reads Slack #all-steadywrk for new human directives from Karim. Parses, creates Linear issues, routes to available agents. |
+| **Morning Briefing** | Daily 7:00 AM Amman | Full status report: issues done overnight, commits per agent, active roster, production health, blockers. Posted to Slack + notification to Karim. |
+
+## 11.2 How Directives Flow
+
+Karim can issue directives through ANY channel. The system will pick them up:
+
+```
+Karim posts to Slack #all-steadywrk
+    → Directive Intake Scanner (hourly) reads it
+    → Creates/updates Linear issue
+    → Posts acknowledgment to Slack
+    → Agents pick it up from Linear on their next check
+
+Karim tells an agent directly in conversation
+    → That agent creates Linear issue + posts to Slack
+    → Other agents see it on their next Slack/Linear check
+
+Karim pushes to GitHub (e.g., DIRECTIVE.md)
+    → Agents with GitHub access see it on next commit check
+    → Morning Briefing catches it if overnight
+```
+
+## 11.3 Self-Healing Rules
+
+- **Stale lock detected (>30 min):** Swarm Health Monitor flags it. Any agent can reclaim.
+- **Issue stuck In Progress >4 hours with no Linear comment:** Health Monitor alerts. Agent is assumed blocked.
+- **Sentry error detected:** Production Watchdog alerts immediately. Highest-priority: any available agent should investigate.
+- **Site down (health endpoint fails):** Production Watchdog alerts. This is a P0 emergency.
+- **Agent idle >2 hours while Active in registry:** Health Monitor flags for re-assignment or status update.
+
+## 11.4 Agent Autonomy Requirements
+
+Every agent in the swarm MUST:
+1. **Check Linear on session start** — find unclaimed work
+2. **Check Slack on session start** — read recent broadcasts
+3. **Update their status** when starting/finishing tasks (Linear + Notion or Slack)
+4. **Self-heal on auth failures** — if a service fails, try the next access method (see Section 2). If all fail, post to Slack for relay.
+5. **Never go silent** — if you're working on something for >30 min, post a progress update somewhere (Linear comment, Slack, or Notion Activity Log)
+6. **Auto-claim on idle** — if you finish a task and there's unclaimed work in Linear, claim the next highest-priority issue automatically. Don't wait for instructions.
+7. **Escalate blockers immediately** — if you're stuck, post to Slack with the blocker description. Don't sit on it.
+
 # END OF SWARM PROTOCOL
 # Register. Claim. Build. Ship. Repeat.
 # "Always find workarounds that turn bottlenecks into superpowers."
