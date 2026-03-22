@@ -1,5 +1,3 @@
-import { env } from '@/env.mjs';
-
 /**
  * Listmonk API Wrapper
  * Used to sync subscribers, manage lists, and trigger transactional/marketing campaigns.
