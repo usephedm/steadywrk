@@ -1,4 +1,3 @@
-import { hasAdminAccess } from '@/lib/auth/roles';
 import { db, schema } from '@/lib/db';
 import { currentUser } from '@clerk/nextjs/server';
 import { eq } from 'drizzle-orm';
@@ -24,8 +23,7 @@ export async function getDashboardAccess() {
     .where(eq(schema.employees.clerkUserId, user.id))
     .limit(1);
 
-  const canAccessAdmin =
-    !!employee && (hasEmployeeAdminRole(employee.role) || hasAdminAccess(user.publicMetadata));
+  const canAccessAdmin = !!employee && hasEmployeeAdminRole(employee.role);
 
   return { user, employee: employee ?? null, canAccessAdmin } as const;
 }
