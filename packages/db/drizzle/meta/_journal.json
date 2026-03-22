@@ -8,6 +8,13 @@
       "when": 1774186786860,
       "tag": "0000_handy_vertigo",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1774196948594,
+      "tag": "0001_minor_skullbuster",
+      "breakpoints": true
     }
   ]
 }

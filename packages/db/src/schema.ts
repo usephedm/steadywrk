@@ -205,3 +205,43 @@ export const contacts = pgTable(
   },
   (table) => [index('contact_email_idx').on(table.email)],
 );
+
+/* ─── Viral Architecture Loops (V3.0) ─── */
+
+export const salarySubmissions = pgTable(
+  'salary_submissions',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    jobTitle: varchar('job_title', { length: 255 }).notNull(),
+    country: varchar('country', { length: 100 }).notNull(),
+    city: varchar('city', { length: 100 }),
+    yearsOfExperience: integer('years_of_experience').notNull(),
+    baseSalaryUsd: integer('base_salary_usd').notNull(),
+    equityValueUsd: integer('equity_value_usd').default(0),
+    isRemote: boolean('is_remote').default(false).notNull(),
+    verified: boolean('verified').default(false).notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+  },
+  (table) => [
+    index('salary_title_country_idx').on(table.jobTitle, table.country),
+    index('salary_verified_idx').on(table.verified),
+  ],
+);
+
+export const applicantVouches = pgTable(
+  'applicant_vouches',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    referrerApplicantId: uuid('referrer_applicant_id')
+      .notNull()
+      .references(() => applicants.id),
+    vouchedEmail: varchar('vouched_email', { length: 255 }).notNull(),
+    vouchCode: varchar('vouch_code', { length: 50 }).notNull().unique(),
+    claimedAt: timestamp('claimed_at', { withTimezone: true }),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+  },
+  (table) => [
+    index('vouch_code_idx').on(table.vouchCode),
+    uniqueIndex('unique_vouch_email_idx').on(table.referrerApplicantId, table.vouchedEmail),
+  ],
+);
