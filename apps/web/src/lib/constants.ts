@@ -17,7 +17,7 @@ export const COMPANY = {
   social: {
     linkedin: 'https://www.linkedin.com/company/steadywrk',
     twitter: 'https://x.com/steadywrk',
-    instagram: 'https://instagram.com/steadywrk',
+    instagram: 'https://instagram.com/swrk.jo',
     whatsapp: '962770000000',
   },
   location: {
