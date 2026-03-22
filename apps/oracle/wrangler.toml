@@ -1,0 +1,15 @@
+name = "dispatch-oracle"
+main = "src/index.ts"
+compatibility_date = "2024-05-29"
+compatibility_flags = ["nodejs_compat"]
+
+# KV Namespace for Swarm Agent State
+# [[kv_namespaces]]
+# binding = "SWARM_STATE"
+# id = "..."
+
+[observability]
+enabled = true
+
+[triggers]
+crons = ["*/15 * * * *"] # Run every 15 minutes for watchdog/health monitor
