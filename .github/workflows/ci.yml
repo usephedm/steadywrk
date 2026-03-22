@@ -2,23 +2,30 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [ main ]
   pull_request:
-    branches: [main]
+    branches: [ main ]
 
 jobs:
-  build:
+  build-and-lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
-          cache: npm
-      - run: npm ci
-      - run: npx tsc --noEmit
-        working-directory: apps/web
-      - run: npx next build
-        working-directory: apps/web
+          node-version: lts/*
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check Formatting & Linting (Biome)
+        run: npx biome check .
+
+      - name: Type Check
+        run: npx tsc --noEmit -p apps/web/tsconfig.json
+
+      - name: Build Next.js
         env:
-          NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: pk_test_placeholder
+          NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: pk_test_bW9jay1jbGVyay1rZXk=
+        run: npm run build
