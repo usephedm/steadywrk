@@ -6,7 +6,7 @@ import { validateApplyPayload } from '@/lib/schemas';
 import { createScorecardToken } from '@/lib/scorecards';
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
-import { applicants } from '../../../../../../packages/db/src/schema';
+import { applicants, emailEvents } from '../../../../../../packages/db/src/schema';
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
@@ -94,42 +94,71 @@ export async function POST(request: Request) {
     );
 
     // Send emails (non-blocking — don't fail the application if email fails)
-    if (resend) {
-      const emailPromises: Promise<unknown>[] = [];
+    const eventDb = db;
+    if (resend && eventDb && applicantId) {
+      const candidateSubject = `Application received — ${data.position}`;
+      const hrSubject = `New application: ${data.name} — ${data.position}`;
+      const emailJobs = [
+        {
+          type: 'status_update' as const,
+          subject: candidateSubject,
+          send: () =>
+            resend.emails.send({
+              from: 'STEADYWRK <noreply@steadywrk.app>',
+              to: data.email,
+              subject: candidateSubject,
+              react: ApplicationConfirmation({ name: data.name, role: data.position }),
+            }),
+          metadata: {
+            recipient: data.email,
+            channel: 'candidate_confirmation',
+          },
+        },
+      ];
 
-      // Confirmation email to candidate
-      emailPromises.push(
-        resend.emails.send({
-          from: 'STEADYWRK <noreply@steadywrk.app>',
-          to: data.email,
-          subject: `Application received — ${data.position}`,
-          react: ApplicationConfirmation({ name: data.name, role: data.position }),
-        }),
-      );
-
-      // HR notification email
       const hrEmail = process.env.HR_EMAIL;
       if (hrEmail) {
-        emailPromises.push(
-          resend.emails.send({
-            from: 'STEADYWRK Hiring <hiring@steadywrk.app>',
-            to: hrEmail,
-            subject: `New application: ${data.name} — ${data.position}`,
-            react: HRNotification({
-              name: data.name,
-              email: data.email,
-              phone: data.phone,
-              role: data.position,
-              team: data.team,
+        emailJobs.push({
+          type: 'status_update' as const,
+          subject: hrSubject,
+          send: () =>
+            resend.emails.send({
+              from: 'STEADYWRK Hiring <hiring@steadywrk.app>',
+              to: hrEmail,
+              subject: hrSubject,
+              react: HRNotification({
+                name: data.name,
+                email: data.email,
+                phone: data.phone,
+                role: data.position,
+                team: data.team,
+              }),
             }),
-          }),
-        );
+          metadata: {
+            recipient: hrEmail,
+            channel: 'hr_notification',
+          },
+        });
       }
 
-      // Fire and forget — log errors but don't fail the response
-      Promise.allSettled(emailPromises).then((results) => {
-        for (const result of results) {
-          if (result.status === 'rejected') {
+      Promise.allSettled(emailJobs.map((job) => job.send())).then(async (results) => {
+        for (const [index, result] of results.entries()) {
+          const job = emailJobs[index];
+          if (!job) continue;
+
+          if (result.status === 'fulfilled') {
+            try {
+              await eventDb.insert(emailEvents).values({
+                applicantId,
+                type: job.type,
+                subject: job.subject,
+                resendMessageId: result.value.data?.id ?? null,
+                metadata: job.metadata,
+              });
+            } catch (eventError) {
+              console.error('Email event insert failed:', eventError);
+            }
+          } else {
             console.error('Email send failed:', result.reason);
           }
         }
