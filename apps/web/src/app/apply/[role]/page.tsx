@@ -259,12 +259,12 @@ function ApplyForm() {
         <main className="pt-16 min-h-[60vh] flex items-center justify-center px-6">
           <div className="text-center">
             <h1
-              className="text-2xl font-bold text-[#23211D] mb-4"
+              className="text-2xl font-bold text-[#23211D] dark:text-[#E8E8E6] mb-4"
               style={{ fontFamily: 'var(--font-display)' }}
             >
               Role not found
             </h1>
-            <p className="text-[#6E695F] mb-6">
+            <p className="text-[#6E695F] dark:text-[#8A8A86] mb-6">
               The position you&rsquo;re looking for doesn&rsquo;t exist.
             </p>
             <Link href="/careers" className="text-[#E58A0F] font-medium hover:underline">
@@ -283,7 +283,7 @@ function ApplyForm() {
     <>
       <Navbar />
 
-      <main className="pt-16 bg-[#FAFAF8] min-h-screen">
+      <main className="pt-16 bg-[#FAFAF8] dark:bg-[#111110] min-h-screen">
         <div ref={formRef} className="max-w-2xl mx-auto px-6 py-10 md:py-16">
           <Breadcrumbs />
 
@@ -291,9 +291,13 @@ function ApplyForm() {
           {step < 5 && (
             <div className="mb-10">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-[14px] font-medium text-[#23211D]">
+                <span className="text-[14px] font-medium text-[#23211D] dark:text-[#E8E8E6]">
                   Step {step} of 5 —{' '}
-                  {step <= 4 && <span className="text-[#6E695F]">you&apos;re doing great.</span>}
+                  {step <= 4 && (
+                    <span className="text-[#6E695F] dark:text-[#8A8A86]">
+                      you&apos;re doing great.
+                    </span>
+                  )}
                 </span>
                 <div className="flex items-center gap-1.5 text-[13px] text-[#B0B0AB]">
                   <Clock className="w-3.5 h-3.5" />
@@ -328,7 +332,7 @@ function ApplyForm() {
                 Applying for
               </span>
               <h1
-                className="text-[24px] font-bold text-[#23211D] tracking-[-0.01em]"
+                className="text-[24px] font-bold text-[#23211D] dark:text-[#E8E8E6] tracking-[-0.01em]"
                 style={{ fontFamily: 'var(--font-display)' }}
               >
                 {role.title}
@@ -342,7 +346,7 @@ function ApplyForm() {
               <div>
                 <label
                   htmlFor="name"
-                  className="block text-[14px] font-medium text-[#23211D] mb-1.5"
+                  className="block text-[14px] font-medium text-[#23211D] dark:text-[#E8E8E6] mb-1.5"
                 >
                   Full name *
                 </label>
@@ -351,7 +355,7 @@ function ApplyForm() {
                   type="text"
                   value={form.name}
                   onChange={(e) => update('name', e.target.value)}
-                  className="w-full bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg px-4 py-3 text-[16px] text-[#23211D] placeholder:text-[#B0B0AB] input-brand transition-all duration-[180ms]"
+                  className="w-full bg-[#F9FAFB] dark:bg-[#1A1A18] border border-[#E5E7EB] dark:border-[#2A2A28] rounded-lg px-4 py-3 text-[16px] text-[#23211D] dark:text-[#E8E8E6] placeholder:text-[#B0B0AB] input-brand transition-all duration-[180ms]"
                   placeholder="Your full name"
                 />
               </div>
@@ -359,7 +363,7 @@ function ApplyForm() {
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-[14px] font-medium text-[#23211D] mb-1.5"
+                  className="block text-[14px] font-medium text-[#23211D] dark:text-[#E8E8E6] mb-1.5"
                 >
                   Email address *
                 </label>
@@ -368,7 +372,7 @@ function ApplyForm() {
                   type="email"
                   value={form.email}
                   onChange={(e) => update('email', e.target.value)}
-                  className="w-full bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg px-4 py-3 text-[16px] text-[#23211D] placeholder:text-[#B0B0AB] input-brand transition-all duration-[180ms]"
+                  className="w-full bg-[#F9FAFB] dark:bg-[#1A1A18] border border-[#E5E7EB] dark:border-[#2A2A28] rounded-lg px-4 py-3 text-[16px] text-[#23211D] dark:text-[#E8E8E6] placeholder:text-[#B0B0AB] input-brand transition-all duration-[180ms]"
                   placeholder="you@email.com"
                 />
               </div>
@@ -376,7 +380,7 @@ function ApplyForm() {
               <div>
                 <label
                   htmlFor="phone"
-                  className="block text-[14px] font-medium text-[#23211D] mb-1.5"
+                  className="block text-[14px] font-medium text-[#23211D] dark:text-[#E8E8E6] mb-1.5"
                 >
                   Phone number *
                 </label>
@@ -385,13 +389,13 @@ function ApplyForm() {
                   type="tel"
                   value={form.phone}
                   onChange={(e) => update('phone', e.target.value)}
-                  className="w-full bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg px-4 py-3 text-[16px] text-[#23211D] placeholder:text-[#B0B0AB] input-brand transition-all duration-[180ms]"
+                  className="w-full bg-[#F9FAFB] dark:bg-[#1A1A18] border border-[#E5E7EB] dark:border-[#2A2A28] rounded-lg px-4 py-3 text-[16px] text-[#23211D] dark:text-[#E8E8E6] placeholder:text-[#B0B0AB] input-brand transition-all duration-[180ms]"
                   placeholder="+962 7XX XXX XXXX"
                 />
               </div>
 
               <fieldset>
-                <legend className="block text-[14px] font-medium text-[#23211D] mb-3">
+                <legend className="block text-[14px] font-medium text-[#23211D] dark:text-[#E8E8E6] mb-3">
                   Which team excites you? *
                 </legend>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
@@ -403,11 +407,13 @@ function ApplyForm() {
                       className={`p-4 rounded-xl border text-center transition-all duration-[180ms] ${
                         form.team === t.id
                           ? 'border-[#E58A0F] bg-[#FFF4E6] shadow-[0_0_0_3px_rgba(229,138,15,0.1)]'
-                          : 'border-[#E5E7EB] bg-[#F9FAFB] hover:border-[#E58A0F]/30'
+                          : 'border-[#E5E7EB] dark:border-[#2A2A28] bg-[#F9FAFB] dark:bg-[#1A1A18] hover:border-[#E58A0F]/30'
                       }`}
                     >
                       <span className="text-[20px] block mb-1">{t.emoji}</span>
-                      <span className="text-[13px] font-medium text-[#23211D]">{t.label}</span>
+                      <span className="text-[13px] font-medium text-[#23211D] dark:text-[#E8E8E6]">
+                        {t.label}
+                      </span>
                     </button>
                   ))}
                 </div>
@@ -418,9 +424,9 @@ function ApplyForm() {
                   type="checkbox"
                   checked={form.pdplConsent}
                   onChange={(e) => update('pdplConsent', e.target.checked)}
-                  className="mt-1 w-4 h-4 rounded border-[#E5E7EB] text-[#E58A0F] focus:ring-[#E58A0F]"
+                  className="mt-1 w-4 h-4 rounded border-[#E5E7EB] dark:border-[#2A2A28] text-[#E58A0F] focus:ring-[#E58A0F]"
                 />
-                <span className="text-[13px] text-[#6E695F] leading-relaxed">
+                <span className="text-[13px] text-[#6E695F] dark:text-[#8A8A86] leading-relaxed">
                   I consent to STEADYWRK processing my personal data for recruitment purposes in
                   accordance with Jordan&rsquo;s Personal Data Protection Law (PDPL). *
                 </span>
@@ -432,12 +438,12 @@ function ApplyForm() {
           {step === 2 && (
             <div className="space-y-6">
               <div>
-                <p className="block text-[14px] font-medium text-[#23211D] mb-1.5">
+                <p className="block text-[14px] font-medium text-[#23211D] dark:text-[#E8E8E6] mb-1.5">
                   Upload your CV <span className="text-[#B0B0AB]">(optional)</span>
                 </p>
-                <div className="border-2 border-dashed border-[#E5E7EB] rounded-xl p-8 text-center hover:border-[#E58A0F]/30 transition-colors duration-[180ms] cursor-pointer">
+                <div className="border-2 border-dashed border-[#E5E7EB] dark:border-[#2A2A28] rounded-xl p-8 text-center hover:border-[#E58A0F]/30 transition-colors duration-[180ms] cursor-pointer">
                   <Upload className="w-6 h-6 text-[#B0B0AB] mx-auto mb-3" />
-                  <p className="text-[14px] text-[#6E695F] mb-1">
+                  <p className="text-[14px] text-[#6E695F] dark:text-[#8A8A86] mb-1">
                     {form.cvFile ? form.cvFile.name : 'Drop your CV here or click to browse'}
                   </p>
                   <p className="text-[12px] text-[#B0B0AB]">PDF, DOCX, or TXT — max 5MB</p>
@@ -452,7 +458,10 @@ function ApplyForm() {
               </div>
 
               <div>
-                <label htmlFor="a1" className="block text-[14px] font-medium text-[#23211D] mb-1.5">
+                <label
+                  htmlFor="a1"
+                  className="block text-[14px] font-medium text-[#23211D] dark:text-[#E8E8E6] mb-1.5"
+                >
                   What&rsquo;s the most interesting thing you&rsquo;ve built or organized? *
                 </label>
                 <textarea
@@ -461,7 +470,7 @@ function ApplyForm() {
                   onChange={(e) => update('answer1', e.target.value)}
                   maxLength={900}
                   rows={4}
-                  className="w-full bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg px-4 py-3 text-[16px] text-[#23211D] placeholder:text-[#B0B0AB] input-brand transition-all duration-[180ms] resize-none"
+                  className="w-full bg-[#F9FAFB] dark:bg-[#1A1A18] border border-[#E5E7EB] dark:border-[#2A2A28] rounded-lg px-4 py-3 text-[16px] text-[#23211D] dark:text-[#E8E8E6] placeholder:text-[#B0B0AB] input-brand transition-all duration-[180ms] resize-none"
                   placeholder="Tell us about something you're proud of..."
                 />
                 <p className="text-[12px] text-[#B0B0AB] mt-1 text-right">
@@ -470,7 +479,10 @@ function ApplyForm() {
               </div>
 
               <div>
-                <label htmlFor="a2" className="block text-[14px] font-medium text-[#23211D] mb-1.5">
+                <label
+                  htmlFor="a2"
+                  className="block text-[14px] font-medium text-[#23211D] dark:text-[#E8E8E6] mb-1.5"
+                >
                   Why does AI in Jordan matter to you? *
                 </label>
                 <textarea
@@ -479,7 +491,7 @@ function ApplyForm() {
                   onChange={(e) => update('answer2', e.target.value)}
                   maxLength={900}
                   rows={4}
-                  className="w-full bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg px-4 py-3 text-[16px] text-[#23211D] placeholder:text-[#B0B0AB] input-brand transition-all duration-[180ms] resize-none"
+                  className="w-full bg-[#F9FAFB] dark:bg-[#1A1A18] border border-[#E5E7EB] dark:border-[#2A2A28] rounded-lg px-4 py-3 text-[16px] text-[#23211D] dark:text-[#E8E8E6] placeholder:text-[#B0B0AB] input-brand transition-all duration-[180ms] resize-none"
                   placeholder="Share your perspective..."
                 />
                 <p className="text-[12px] text-[#B0B0AB] mt-1 text-right">
@@ -488,7 +500,10 @@ function ApplyForm() {
               </div>
 
               <div>
-                <label htmlFor="a3" className="block text-[14px] font-medium text-[#23211D] mb-1.5">
+                <label
+                  htmlFor="a3"
+                  className="block text-[14px] font-medium text-[#23211D] dark:text-[#E8E8E6] mb-1.5"
+                >
                   Describe a time you turned chaos into order. *
                 </label>
                 <textarea
@@ -497,7 +512,7 @@ function ApplyForm() {
                   onChange={(e) => update('answer3', e.target.value)}
                   maxLength={900}
                   rows={4}
-                  className="w-full bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg px-4 py-3 text-[16px] text-[#23211D] placeholder:text-[#B0B0AB] input-brand transition-all duration-[180ms] resize-none"
+                  className="w-full bg-[#F9FAFB] dark:bg-[#1A1A18] border border-[#E5E7EB] dark:border-[#2A2A28] rounded-lg px-4 py-3 text-[16px] text-[#23211D] dark:text-[#E8E8E6] placeholder:text-[#B0B0AB] input-brand transition-all duration-[180ms] resize-none"
                   placeholder="Walk us through the situation..."
                 />
                 <p className="text-[12px] text-[#B0B0AB] mt-1 text-right">
@@ -513,7 +528,7 @@ function ApplyForm() {
               <div>
                 <label
                   htmlFor="portfolio"
-                  className="block text-[14px] font-medium text-[#23211D] mb-1.5"
+                  className="block text-[14px] font-medium text-[#23211D] dark:text-[#E8E8E6] mb-1.5"
                 >
                   Portfolio URL <span className="text-[#B0B0AB]">(optional)</span>
                 </label>
@@ -522,7 +537,7 @@ function ApplyForm() {
                   type="url"
                   value={form.portfolioUrl}
                   onChange={(e) => update('portfolioUrl', e.target.value)}
-                  className="w-full bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg px-4 py-3 text-[16px] text-[#23211D] placeholder:text-[#B0B0AB] input-brand transition-all duration-[180ms]"
+                  className="w-full bg-[#F9FAFB] dark:bg-[#1A1A18] border border-[#E5E7EB] dark:border-[#2A2A28] rounded-lg px-4 py-3 text-[16px] text-[#23211D] dark:text-[#E8E8E6] placeholder:text-[#B0B0AB] input-brand transition-all duration-[180ms]"
                   placeholder="https://your-portfolio.com"
                 />
               </div>
@@ -530,7 +545,7 @@ function ApplyForm() {
               <div>
                 <label
                   htmlFor="github"
-                  className="block text-[14px] font-medium text-[#23211D] mb-1.5"
+                  className="block text-[14px] font-medium text-[#23211D] dark:text-[#E8E8E6] mb-1.5"
                 >
                   GitHub URL <span className="text-[#B0B0AB]">(optional)</span>
                 </label>
@@ -539,7 +554,7 @@ function ApplyForm() {
                   type="url"
                   value={form.githubUrl}
                   onChange={(e) => update('githubUrl', e.target.value)}
-                  className="w-full bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg px-4 py-3 text-[16px] text-[#23211D] placeholder:text-[#B0B0AB] input-brand transition-all duration-[180ms]"
+                  className="w-full bg-[#F9FAFB] dark:bg-[#1A1A18] border border-[#E5E7EB] dark:border-[#2A2A28] rounded-lg px-4 py-3 text-[16px] text-[#23211D] dark:text-[#E8E8E6] placeholder:text-[#B0B0AB] input-brand transition-all duration-[180ms]"
                   placeholder="https://github.com/yourusername"
                 />
               </div>
@@ -547,7 +562,7 @@ function ApplyForm() {
               <div>
                 <label
                   htmlFor="behance"
-                  className="block text-[14px] font-medium text-[#23211D] mb-1.5"
+                  className="block text-[14px] font-medium text-[#23211D] dark:text-[#E8E8E6] mb-1.5"
                 >
                   Behance / Dribbble <span className="text-[#B0B0AB]">(optional)</span>
                 </label>
@@ -556,21 +571,23 @@ function ApplyForm() {
                   type="url"
                   value={form.behanceUrl}
                   onChange={(e) => update('behanceUrl', e.target.value)}
-                  className="w-full bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg px-4 py-3 text-[16px] text-[#23211D] placeholder:text-[#B0B0AB] input-brand transition-all duration-[180ms]"
+                  className="w-full bg-[#F9FAFB] dark:bg-[#1A1A18] border border-[#E5E7EB] dark:border-[#2A2A28] rounded-lg px-4 py-3 text-[16px] text-[#23211D] dark:text-[#E8E8E6] placeholder:text-[#B0B0AB] input-brand transition-all duration-[180ms]"
                   placeholder="https://behance.net/yourusername"
                 />
               </div>
 
               {/* Skill sliders */}
               <fieldset>
-                <legend className="block text-[14px] font-medium text-[#23211D] mb-3">
+                <legend className="block text-[14px] font-medium text-[#23211D] dark:text-[#E8E8E6] mb-3">
                   Self-assess your skills <span className="text-[#B0B0AB]">(drag to rate)</span>
                 </legend>
                 <div className="space-y-4">
                   {SKILL_OPTIONS.map((skill) => (
                     <div key={skill}>
                       <div className="flex items-center justify-between mb-1">
-                        <span className="text-[13px] text-[#6E695F]">{skill}</span>
+                        <span className="text-[13px] text-[#6E695F] dark:text-[#8A8A86]">
+                          {skill}
+                        </span>
                         <span className="text-[12px] text-[#E58A0F] font-medium">
                           {form.skills[skill] ?? 5}/10
                         </span>
@@ -595,7 +612,7 @@ function ApplyForm() {
 
               {/* Availability */}
               <fieldset>
-                <legend className="block text-[14px] font-medium text-[#23211D] mb-3">
+                <legend className="block text-[14px] font-medium text-[#23211D] dark:text-[#E8E8E6] mb-3">
                   Availability *
                 </legend>
                 <div className="space-y-2">
@@ -608,9 +625,11 @@ function ApplyForm() {
                           value={opt}
                           checked={form.availability === opt}
                           onChange={(e) => update('availability', e.target.value)}
-                          className="w-4 h-4 text-[#E58A0F] border-[#E5E7EB] focus:ring-[#E58A0F]"
+                          className="w-4 h-4 text-[#E58A0F] border-[#E5E7EB] dark:border-[#2A2A28] focus:ring-[#E58A0F]"
                         />
-                        <span className="text-[14px] text-[#23211D]">{opt}</span>
+                        <span className="text-[14px] text-[#23211D] dark:text-[#E8E8E6]">
+                          {opt}
+                        </span>
                       </label>
                     ),
                   )}
@@ -624,12 +643,12 @@ function ApplyForm() {
             <div className="space-y-6">
               <div className="bg-[#FFF4E6] rounded-xl p-6 border border-[#E58A0F]/10">
                 <h3
-                  className="text-[16px] font-bold text-[#23211D] mb-2"
+                  className="text-[16px] font-bold text-[#23211D] dark:text-[#E8E8E6] mb-2"
                   style={{ fontFamily: 'var(--font-display)' }}
                 >
                   The Challenge
                 </h3>
-                <p className="text-[14px] text-[#6E695F] leading-relaxed">
+                <p className="text-[14px] text-[#6E695F] dark:text-[#8A8A86] leading-relaxed">
                   This is our first filter. We use assessments to find the best mutual fit — not to
                   trick you. Take your time and show us how you think.
                 </p>
@@ -638,11 +657,11 @@ function ApplyForm() {
               <div>
                 <label
                   htmlFor="challenge"
-                  className="block text-[14px] font-medium text-[#23211D] mb-1.5"
+                  className="block text-[14px] font-medium text-[#23211D] dark:text-[#E8E8E6] mb-1.5"
                 >
                   Scenario Response *
                 </label>
-                <p className="text-[14px] text-[#6E695F] mb-3 leading-relaxed">
+                <p className="text-[14px] text-[#6E695F] dark:text-[#8A8A86] mb-3 leading-relaxed">
                   A property manager calls at 11 PM furious that their HVAC system is down in a
                   200-unit building. Write your response to the property manager and your next 3
                   action steps.
@@ -652,7 +671,7 @@ function ApplyForm() {
                   value={form.challengeResponse}
                   onChange={(e) => update('challengeResponse', e.target.value)}
                   rows={10}
-                  className="w-full bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg px-4 py-3 text-[16px] text-[#23211D] placeholder:text-[#B0B0AB] input-brand transition-all duration-[180ms] resize-none"
+                  className="w-full bg-[#F9FAFB] dark:bg-[#1A1A18] border border-[#E5E7EB] dark:border-[#2A2A28] rounded-lg px-4 py-3 text-[16px] text-[#23211D] dark:text-[#E8E8E6] placeholder:text-[#B0B0AB] input-brand transition-all duration-[180ms] resize-none"
                   placeholder="Write your response here..."
                 />
               </div>
@@ -666,12 +685,12 @@ function ApplyForm() {
                 <CheckCircle2 className="w-8 h-8 text-[#4D7A3A]" strokeWidth={1.5} />
               </div>
               <h1
-                className="text-[clamp(2rem,1.2rem+2.5vw,3rem)] font-bold text-[#23211D] mb-4"
+                className="text-[clamp(2rem,1.2rem+2.5vw,3rem)] font-bold text-[#23211D] dark:text-[#E8E8E6] mb-4"
                 style={{ fontFamily: 'var(--font-display)' }}
               >
                 Application submitted!
               </h1>
-              <p className="text-[#6E695F] text-[17px] leading-relaxed max-w-md mx-auto mb-10">
+              <p className="text-[#6E695F] dark:text-[#8A8A86] text-[17px] leading-relaxed max-w-md mx-auto mb-10">
                 We&rsquo;ll review your application within 48 hours. Here&rsquo;s what happens next:
               </p>
 
@@ -688,7 +707,9 @@ function ApplyForm() {
                     <div className="flex flex-col items-center">
                       <div
                         className={`w-8 h-8 rounded-full flex items-center justify-center text-[12px] font-bold ${
-                          s.active ? 'bg-[#E58A0F] text-white' : 'bg-[#E5E5E2] text-[#6E695F]'
+                          s.active
+                            ? 'bg-[#E58A0F] text-white'
+                            : 'bg-[#E5E5E2] text-[#6E695F] dark:text-[#8A8A86]'
                         }`}
                       >
                         {i + 1}
@@ -696,7 +717,9 @@ function ApplyForm() {
                       {i < 4 && <div className="w-px h-6 bg-[#E5E5E2] mt-1" />}
                     </div>
                     <div className="pt-1">
-                      <p className="text-[14px] font-medium text-[#23211D]">{s.step}</p>
+                      <p className="text-[14px] font-medium text-[#23211D] dark:text-[#E8E8E6]">
+                        {s.step}
+                      </p>
                       <p className="text-[12px] text-[#B0B0AB]">{s.time}</p>
                     </div>
                   </div>
@@ -712,7 +735,7 @@ function ApplyForm() {
                 </Link>
                 <Link
                   href="/"
-                  className="text-[14px] font-medium text-[#6E695F] hover:text-[#23211D] transition-colors"
+                  className="text-[14px] font-medium text-[#6E695F] dark:text-[#8A8A86] hover:text-[#23211D] dark:text-[#E8E8E6] transition-colors"
                 >
                   Back to home
                 </Link>
@@ -734,7 +757,7 @@ function ApplyForm() {
                   <button
                     type="button"
                     onClick={prev}
-                    className="flex items-center gap-2 text-[14px] font-medium text-[#6E695F] hover:text-[#23211D] transition-colors duration-[180ms]"
+                    className="flex items-center gap-2 text-[14px] font-medium text-[#6E695F] dark:text-[#8A8A86] hover:text-[#23211D] dark:text-[#E8E8E6] transition-colors duration-[180ms]"
                   >
                     <ArrowLeft className="w-4 h-4" /> Back
                   </button>
@@ -753,7 +776,7 @@ function ApplyForm() {
                       // ignore
                     }
                   }}
-                  className="flex items-center gap-1.5 text-[13px] text-[#B0B0AB] hover:text-[#6E695F] transition-colors duration-[180ms]"
+                  className="flex items-center gap-1.5 text-[13px] text-[#B0B0AB] hover:text-[#6E695F] dark:text-[#8A8A86] transition-colors duration-[180ms]"
                 >
                   <Save className="w-3.5 h-3.5" /> Save & continue later
                 </button>

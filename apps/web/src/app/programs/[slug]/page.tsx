@@ -43,7 +43,7 @@ export default async function ProgramDetailPage({ params }: PageProps) {
       <Navbar />
 
       <main id="main-content" className="pt-16">
-        <section className="py-20 md:py-28 px-6 bg-[#FAFAF8]">
+        <section className="py-20 md:py-28 px-6 bg-[#FAFAF8] dark:bg-[#111110]">
           <div className="max-w-3xl mx-auto">
             <Breadcrumbs />
 
@@ -51,22 +51,22 @@ export default async function ProgramDetailPage({ params }: PageProps) {
               {program.type} · {program.duration}
             </div>
             <h1
-              className="text-[clamp(2.5rem,1rem+4vw,4.5rem)] font-extrabold text-[#23211D] leading-[1.04] tracking-[-0.03em] mb-6"
+              className="text-[clamp(2.5rem,1rem+4vw,4.5rem)] font-extrabold text-[#23211D] dark:text-[#E8E8E6] leading-[1.04] tracking-[-0.03em] mb-6"
               style={{ fontFamily: 'var(--font-display)' }}
             >
               {program.name}
             </h1>
-            <p className="text-[#6E695F] text-[17px] leading-relaxed max-w-xl">
+            <p className="text-[#6E695F] dark:text-[#8A8A86] text-[17px] leading-relaxed max-w-xl">
               {program.longDesc}
             </p>
           </div>
         </section>
 
         {/* Outcomes */}
-        <section className="py-16 md:py-24 px-6 bg-[#F7F4EE]">
+        <section className="py-16 md:py-24 px-6 bg-[#F7F4EE] dark:bg-[#1A1A18]">
           <div className="max-w-3xl mx-auto">
             <h2
-              className="text-[clamp(1.5rem,1.2rem+1.25vw,2.25rem)] font-bold text-[#23211D] mb-8"
+              className="text-[clamp(1.5rem,1.2rem+1.25vw,2.25rem)] font-bold text-[#23211D] dark:text-[#E8E8E6] mb-8"
               style={{ fontFamily: 'var(--font-display)' }}
             >
               What You&rsquo;ll Walk Away With
@@ -75,13 +75,15 @@ export default async function ProgramDetailPage({ params }: PageProps) {
               {program.outcomes.map((outcome) => (
                 <div
                   key={outcome}
-                  className="flex items-start gap-3 bg-white rounded-xl p-5 border border-[rgba(0,0,0,0.06)] shadow-[0_1px_2px_rgba(0,0,0,0.04)]"
+                  className="flex items-start gap-3 bg-white dark:bg-[#1A1A18] rounded-xl p-5 border border-[rgba(0,0,0,0.06)] dark:border-[rgba(255,255,255,0.06)] shadow-[0_1px_2px_rgba(0,0,0,0.04)]"
                 >
                   <CheckCircle2
                     className="w-5 h-5 text-[#4D7A3A] shrink-0 mt-0.5"
                     strokeWidth={1.5}
                   />
-                  <p className="text-[#23211D] text-[15px] leading-relaxed">{outcome}</p>
+                  <p className="text-[#23211D] dark:text-[#E8E8E6] text-[15px] leading-relaxed">
+                    {outcome}
+                  </p>
                 </div>
               ))}
             </div>
@@ -89,15 +91,15 @@ export default async function ProgramDetailPage({ params }: PageProps) {
         </section>
 
         {/* CTA */}
-        <section className="py-16 md:py-24 px-6 bg-[#FAFAF8]">
+        <section className="py-16 md:py-24 px-6 bg-[#FAFAF8] dark:bg-[#111110]">
           <div className="max-w-2xl mx-auto text-center">
             <h2
-              className="text-[clamp(1.5rem,1.2rem+1.25vw,2.25rem)] font-bold text-[#23211D] mb-4"
+              className="text-[clamp(1.5rem,1.2rem+1.25vw,2.25rem)] font-bold text-[#23211D] dark:text-[#E8E8E6] mb-4"
               style={{ fontFamily: 'var(--font-display)' }}
             >
               Ready to join {program.name}?
             </h2>
-            <p className="text-[#6E695F] text-[16px] mb-8">
+            <p className="text-[#6E695F] dark:text-[#8A8A86] text-[16px] mb-8">
               6–8 minute application. We respond within 48 hours.
             </p>
             <Link

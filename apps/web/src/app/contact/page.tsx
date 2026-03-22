@@ -36,26 +36,26 @@ export default function ContactPage() {
   return (
     <>
       <Navbar />
-      <main id="main-content" className="min-h-dvh bg-[#FAFAF8] pt-16">
+      <main id="main-content" className="min-h-dvh bg-[#FAFAF8] dark:bg-[#111110] pt-16">
         <div className="max-w-3xl mx-auto px-6 py-10">
           <WhatsAppFloat />
 
           {/* Header */}
           <div className="mb-8">
-            <h1 className="font-[var(--font-display)] text-3xl sm:text-4xl font-extrabold text-[#23211D] tracking-tight">
+            <h1 className="font-[var(--font-display)] text-3xl sm:text-4xl font-extrabold text-[#23211D] dark:text-[#E8E8E6] tracking-tight">
               Get in Touch
             </h1>
-            <p className="text-[#6B6B66] mt-2 text-sm">
+            <p className="text-[#6B6B66] dark:text-[#8A8A86] mt-2 text-sm">
               Business inquiries, partnerships, and deals.
             </p>
           </div>
 
           {/* Contact form */}
-          <div className="rounded-xl border border-[rgba(0,0,0,0.06)] bg-white p-8 shadow-[0_1px_2px_rgba(0,0,0,0.04)]">
+          <div className="rounded-xl border border-[rgba(0,0,0,0.06)] dark:border-[rgba(255,255,255,0.06)] bg-white dark:bg-[#1A1A18] p-8 shadow-[0_1px_2px_rgba(0,0,0,0.04)]">
             {formStatus === 'success' ? (
               <div className="text-center py-12 space-y-3">
                 <div className="text-[#E58A0F] text-4xl">&#10003;</div>
-                <p className="text-[#6B6B66] text-sm">
+                <p className="text-[#6B6B66] dark:text-[#8A8A86] text-sm">
                   Message received. We&apos;ll get back to you shortly.
                 </p>
               </div>
@@ -73,7 +73,7 @@ export default function ContactPage() {
                     autoComplete="organization"
                     value={formData.company}
                     onChange={(e) => setFormData((f) => ({ ...f, company: e.target.value }))}
-                    className="w-full bg-[#F5F5F3] border border-[#E5E5E2] rounded-lg px-4 py-3 min-h-[44px] text-sm text-[#23211D] placeholder:text-[#B0B0AB] focus:outline-none focus:border-[#E58A0F] focus:ring-2 focus:ring-[#E58A0F]/10 transition-all"
+                    className="w-full bg-[#F5F5F3] dark:bg-[#222220] border border-[#E5E5E2] dark:border-[#2A2A28] rounded-lg px-4 py-3 min-h-[44px] text-sm text-[#23211D] dark:text-[#E8E8E6] placeholder:text-[#B0B0AB] focus:outline-none focus:border-[#E58A0F] focus:ring-2 focus:ring-[#E58A0F]/10 transition-all"
                   />
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -90,7 +90,7 @@ export default function ContactPage() {
                       autoComplete="name"
                       value={formData.name}
                       onChange={(e) => setFormData((f) => ({ ...f, name: e.target.value }))}
-                      className="w-full bg-[#F5F5F3] border border-[#E5E5E2] rounded-lg px-4 py-3 min-h-[44px] text-sm text-[#23211D] placeholder:text-[#B0B0AB] focus:outline-none focus:border-[#E58A0F] focus:ring-2 focus:ring-[#E58A0F]/10 transition-all"
+                      className="w-full bg-[#F5F5F3] dark:bg-[#222220] border border-[#E5E5E2] dark:border-[#2A2A28] rounded-lg px-4 py-3 min-h-[44px] text-sm text-[#23211D] dark:text-[#E8E8E6] placeholder:text-[#B0B0AB] focus:outline-none focus:border-[#E58A0F] focus:ring-2 focus:ring-[#E58A0F]/10 transition-all"
                     />
                   </div>
                   <div>
@@ -106,7 +106,7 @@ export default function ContactPage() {
                       autoComplete="email"
                       value={formData.email}
                       onChange={(e) => setFormData((f) => ({ ...f, email: e.target.value }))}
-                      className="w-full bg-[#F5F5F3] border border-[#E5E5E2] rounded-lg px-4 py-3 min-h-[44px] text-sm text-[#23211D] placeholder:text-[#B0B0AB] focus:outline-none focus:border-[#E58A0F] focus:ring-2 focus:ring-[#E58A0F]/10 transition-all"
+                      className="w-full bg-[#F5F5F3] dark:bg-[#222220] border border-[#E5E5E2] dark:border-[#2A2A28] rounded-lg px-4 py-3 min-h-[44px] text-sm text-[#23211D] dark:text-[#E8E8E6] placeholder:text-[#B0B0AB] focus:outline-none focus:border-[#E58A0F] focus:ring-2 focus:ring-[#E58A0F]/10 transition-all"
                     />
                   </div>
                 </div>
@@ -122,7 +122,7 @@ export default function ContactPage() {
                     inputMode="text"
                     value={formData.subject}
                     onChange={(e) => setFormData((f) => ({ ...f, subject: e.target.value }))}
-                    className="w-full bg-[#F5F5F3] border border-[#E5E5E2] rounded-lg px-4 py-3 min-h-[44px] text-sm text-[#23211D] placeholder:text-[#B0B0AB] focus:outline-none focus:border-[#E58A0F] focus:ring-2 focus:ring-[#E58A0F]/10 transition-all"
+                    className="w-full bg-[#F5F5F3] dark:bg-[#222220] border border-[#E5E5E2] dark:border-[#2A2A28] rounded-lg px-4 py-3 min-h-[44px] text-sm text-[#23211D] dark:text-[#E8E8E6] placeholder:text-[#B0B0AB] focus:outline-none focus:border-[#E58A0F] focus:ring-2 focus:ring-[#E58A0F]/10 transition-all"
                   />
                 </div>
                 <div>
@@ -136,7 +136,7 @@ export default function ContactPage() {
                     rows={5}
                     value={formData.message}
                     onChange={(e) => setFormData((f) => ({ ...f, message: e.target.value }))}
-                    className="w-full bg-[#F5F5F3] border border-[#E5E5E2] rounded-lg px-4 py-3 min-h-[44px] text-sm text-[#23211D] placeholder:text-[#B0B0AB] focus:outline-none focus:border-[#E58A0F] focus:ring-2 focus:ring-[#E58A0F]/10 transition-all resize-none"
+                    className="w-full bg-[#F5F5F3] dark:bg-[#222220] border border-[#E5E5E2] dark:border-[#2A2A28] rounded-lg px-4 py-3 min-h-[44px] text-sm text-[#23211D] dark:text-[#E8E8E6] placeholder:text-[#B0B0AB] focus:outline-none focus:border-[#E58A0F] focus:ring-2 focus:ring-[#E58A0F]/10 transition-all resize-none"
                   />
                 </div>
                 <button
@@ -164,11 +164,11 @@ export default function ContactPage() {
 
           {/* Direct contact */}
           <div className="mt-10 flex flex-col sm:flex-row gap-6 justify-center text-center">
-            <div className="flex items-center justify-center gap-2 text-[#6B6B66] text-sm hover:text-[#E58A0F] transition-colors">
+            <div className="flex items-center justify-center gap-2 text-[#6B6B66] dark:text-[#8A8A86] text-sm hover:text-[#E58A0F] transition-colors">
               <Mail className="h-4 w-4" />
               <span>{COMPANY.email}</span>
             </div>
-            <div className="flex items-center justify-center gap-2 text-[#6B6B66] text-sm">
+            <div className="flex items-center justify-center gap-2 text-[#6B6B66] dark:text-[#8A8A86] text-sm">
               <MapPin className="h-4 w-4" />
               <span>Amman, Jordan &middot; United States</span>
             </div>

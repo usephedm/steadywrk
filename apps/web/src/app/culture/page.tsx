@@ -64,25 +64,25 @@ export default function CulturePage() {
       <Navbar />
 
       <main id="main-content" className="pt-16">
-        <section className="py-20 md:py-28 px-6 bg-[#FAFAF8]">
+        <section className="py-20 md:py-28 px-6 bg-[#FAFAF8] dark:bg-[#111110]">
           <div className="max-w-3xl mx-auto">
             <nav className="text-[13px] text-[#B0B0AB] mb-8">
-              <Link href="/" className="hover:text-[#6E695F] transition-colors">
+              <Link href="/" className="hover:text-[#6E695F] dark:text-[#8A8A86] transition-colors">
                 Home
               </Link>
               <span className="mx-2">/</span>
-              <span className="text-[#23211D]">Culture</span>
+              <span className="text-[#23211D] dark:text-[#E8E8E6]">Culture</span>
             </nav>
             <p className="text-[13px] uppercase tracking-[0.12em] text-[#E58A0F] font-semibold mb-4">
               Our Culture
             </p>
             <h1
-              className="text-[clamp(2.5rem,1rem+4vw,4rem)] font-bold text-[#23211D] leading-[1.08] tracking-[-0.03em] mb-6"
+              className="text-[clamp(2.5rem,1rem+4vw,4rem)] font-bold text-[#23211D] dark:text-[#E8E8E6] leading-[1.08] tracking-[-0.03em] mb-6"
               style={{ fontFamily: 'var(--font-display)' }}
             >
               Precision warmth.
             </h1>
-            <p className="text-[#6E695F] text-[17px] leading-relaxed">
+            <p className="text-[#6E695F] dark:text-[#8A8A86] text-[17px] leading-relaxed">
               Technologically elite but humanly breathable. We hire deliberately, grow visibly, and
               move fast — because ambitious people shouldn&rsquo;t wait.
             </p>
@@ -90,10 +90,10 @@ export default function CulturePage() {
         </section>
 
         {/* Values */}
-        <section className="py-16 md:py-24 px-6 bg-[#F7F4EE]">
+        <section className="py-16 md:py-24 px-6 bg-[#F7F4EE] dark:bg-[#1A1A18]">
           <div className="max-w-5xl mx-auto">
             <h2
-              className="text-[clamp(1.5rem,1.2rem+1.25vw,2.25rem)] font-bold text-[#23211D] mb-10"
+              className="text-[clamp(1.5rem,1.2rem+1.25vw,2.25rem)] font-bold text-[#23211D] dark:text-[#E8E8E6] mb-10"
               style={{ fontFamily: 'var(--font-display)' }}
             >
               What We Stand For
@@ -102,16 +102,18 @@ export default function CulturePage() {
               {VALUES.map((v) => (
                 <div
                   key={v.title}
-                  className="bg-white rounded-xl p-6 border border-[rgba(0,0,0,0.06)] shadow-[0_1px_2px_rgba(0,0,0,0.04)] card-hover"
+                  className="bg-white dark:bg-[#1A1A18] rounded-xl p-6 border border-[rgba(0,0,0,0.06)] dark:border-[rgba(255,255,255,0.06)] shadow-[0_1px_2px_rgba(0,0,0,0.04)] card-hover"
                 >
                   <v.icon className="w-5 h-5 text-[#E58A0F] mb-4" strokeWidth={1.5} />
                   <h3
-                    className="text-[16px] font-bold text-[#23211D] mb-2"
+                    className="text-[16px] font-bold text-[#23211D] dark:text-[#E8E8E6] mb-2"
                     style={{ fontFamily: 'var(--font-display)' }}
                   >
                     {v.title}
                   </h3>
-                  <p className="text-[#6E695F] text-[14px] leading-relaxed">{v.desc}</p>
+                  <p className="text-[#6E695F] dark:text-[#8A8A86] text-[14px] leading-relaxed">
+                    {v.desc}
+                  </p>
                 </div>
               ))}
             </div>
@@ -119,7 +121,7 @@ export default function CulturePage() {
         </section>
 
         {/* Culture photography */}
-        <section className="py-16 md:py-24 px-6 bg-[#FAFAF8]">
+        <section className="py-16 md:py-24 px-6 bg-[#FAFAF8] dark:bg-[#111110]">
           <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-5">
             <div className="relative rounded-xl overflow-hidden aspect-[4/3]">
               <Image
@@ -151,15 +153,15 @@ export default function CulturePage() {
         </section>
 
         {/* Onboarding */}
-        <section className="py-16 md:py-24 px-6 bg-[#F7F4EE]">
+        <section className="py-16 md:py-24 px-6 bg-[#F7F4EE] dark:bg-[#1A1A18]">
           <div className="max-w-3xl mx-auto">
             <h2
-              className="text-[clamp(1.5rem,1.2rem+1.25vw,2.25rem)] font-bold text-[#23211D] mb-5"
+              className="text-[clamp(1.5rem,1.2rem+1.25vw,2.25rem)] font-bold text-[#23211D] dark:text-[#E8E8E6] mb-5"
               style={{ fontFamily: 'var(--font-display)' }}
             >
               Your First 30 Days
             </h2>
-            <p className="text-[#6E695F] text-[16px] leading-relaxed mb-10">
+            <p className="text-[#6E695F] dark:text-[#8A8A86] text-[16px] leading-relaxed mb-10">
               We don&rsquo;t do orientation slideshows. Your first month is a quest line with real
               milestones, real badges, and real momentum.
             </p>
@@ -193,7 +195,7 @@ export default function CulturePage() {
               ].map((q) => (
                 <div
                   key={q.week}
-                  className="bg-white rounded-xl p-6 border border-[rgba(0,0,0,0.06)] shadow-[0_1px_2px_rgba(0,0,0,0.04)]"
+                  className="bg-white dark:bg-[#1A1A18] rounded-xl p-6 border border-[rgba(0,0,0,0.06)] dark:border-[rgba(255,255,255,0.06)] shadow-[0_1px_2px_rgba(0,0,0,0.04)]"
                 >
                   <div className="flex items-center justify-between mb-3">
                     <div>
@@ -201,7 +203,7 @@ export default function CulturePage() {
                         {q.week}
                       </span>
                       <h3
-                        className="text-[17px] font-bold text-[#23211D]"
+                        className="text-[17px] font-bold text-[#23211D] dark:text-[#E8E8E6]"
                         style={{ fontFamily: 'var(--font-display)' }}
                       >
                         {q.title}
@@ -211,7 +213,10 @@ export default function CulturePage() {
                   </div>
                   <ul className="space-y-1">
                     {q.items.map((item) => (
-                      <li key={item} className="flex items-center gap-2 text-[14px] text-[#6E695F]">
+                      <li
+                        key={item}
+                        className="flex items-center gap-2 text-[14px] text-[#6E695F] dark:text-[#8A8A86]"
+                      >
                         <span className="w-1 h-1 rounded-full bg-[#E58A0F]" />
                         {item}
                       </li>
@@ -224,15 +229,15 @@ export default function CulturePage() {
         </section>
 
         {/* CTA */}
-        <section className="py-16 md:py-24 px-6 bg-[#F7F4EE]">
+        <section className="py-16 md:py-24 px-6 bg-[#F7F4EE] dark:bg-[#1A1A18]">
           <div className="max-w-2xl mx-auto text-center">
             <h2
-              className="text-[clamp(1.5rem,1.2rem+1.25vw,2.25rem)] font-bold text-[#23211D] mb-4"
+              className="text-[clamp(1.5rem,1.2rem+1.25vw,2.25rem)] font-bold text-[#23211D] dark:text-[#E8E8E6] mb-4"
               style={{ fontFamily: 'var(--font-display)' }}
             >
               This is where your curve bends upward.
             </h2>
-            <p className="text-[#6E695F] text-[16px] mb-8">
+            <p className="text-[#6E695F] dark:text-[#8A8A86] text-[16px] mb-8">
               If you&rsquo;re disciplined, bright, and hungry — we&rsquo;re hiring.
             </p>
             <Link

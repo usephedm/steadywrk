@@ -34,14 +34,14 @@ export default function PublicBlogPage() {
   return (
     <>
       <Navbar />
-      <main id="main-content" className="min-h-dvh bg-[#FAFAF8] pt-16">
+      <main id="main-content" className="min-h-dvh bg-[#FAFAF8] dark:bg-[#111110] pt-16">
         <div className="max-w-4xl mx-auto px-6 py-12">
           {/* Header */}
           <div className="mb-10 text-center">
-            <h1 className="font-[var(--font-display)] text-4xl sm:text-5xl font-extrabold text-[#23211D] tracking-tight">
+            <h1 className="font-[var(--font-display)] text-4xl sm:text-5xl font-extrabold text-[#23211D] dark:text-[#E8E8E6] tracking-tight">
               Blog
             </h1>
-            <p className="text-[#6B6B66] mt-3 text-base max-w-xl mx-auto">
+            <p className="text-[#6B6B66] dark:text-[#8A8A86] mt-3 text-base max-w-xl mx-auto">
               Insights on AI careers, the Jordan tech ecosystem, and building the future of work.
             </p>
           </div>
@@ -59,7 +59,7 @@ export default function PublicBlogPage() {
                 placeholder="Search articles..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 min-h-[44px] rounded-lg border border-[#E5E5E2] bg-white text-sm text-[#23211D] placeholder:text-[#B0B0AB] focus:outline-none focus:border-[#E58A0F] focus:ring-2 focus:ring-[#E58A0F]/10 transition-all"
+                className="w-full pl-10 pr-4 py-2.5 min-h-[44px] rounded-lg border border-[#E5E5E2] dark:border-[#2A2A28] bg-white dark:bg-[#1A1A18] text-sm text-[#23211D] dark:text-[#E8E8E6] placeholder:text-[#B0B0AB] focus:outline-none focus:border-[#E58A0F] focus:ring-2 focus:ring-[#E58A0F]/10 transition-all"
               />
             </div>
             <div className="flex flex-wrap justify-center gap-2">
@@ -71,7 +71,7 @@ export default function PublicBlogPage() {
                   className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all duration-200 border min-h-[36px] ${
                     activeCategory === cat
                       ? 'bg-[#E58A0F] border-[#E58A0F] text-white'
-                      : 'bg-white border-[#E5E5E2] text-[#6B6B66] hover:border-[#E58A0F]/30 hover:text-[#E58A0F]'
+                      : 'bg-white dark:bg-[#1A1A18] border-[#E5E5E2] dark:border-[#2A2A28] text-[#6B6B66] dark:text-[#8A8A86] hover:border-[#E58A0F]/30 hover:text-[#E58A0F]'
                   }`}
                 >
                   {cat}
@@ -84,15 +84,17 @@ export default function PublicBlogPage() {
           {featured && activeCategory === 'All' && !searchQuery && (
             <Link
               href={`/blog/${featured.slug}`}
-              className="group block rounded-xl border border-[rgba(0,0,0,0.06)] bg-white p-8 shadow-[0_1px_2px_rgba(0,0,0,0.04)] transition-all duration-[180ms] ease-out hover:-translate-y-[2px] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] mb-8"
+              className="group block rounded-xl border border-[rgba(0,0,0,0.06)] dark:border-[rgba(255,255,255,0.06)] bg-white dark:bg-[#1A1A18] p-8 shadow-[0_1px_2px_rgba(0,0,0,0.04)] transition-all duration-[180ms] ease-out hover:-translate-y-[2px] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] mb-8"
             >
               <span className="inline-block text-[10px] font-mono uppercase tracking-wider text-[#E58A0F] bg-[#FFF4E6] px-2 py-0.5 rounded-full mb-3">
                 Featured
               </span>
-              <h2 className="font-[var(--font-display)] text-2xl font-bold text-[#23211D] group-hover:text-[#E58A0F] transition-colors mb-2">
+              <h2 className="font-[var(--font-display)] text-2xl font-bold text-[#23211D] dark:text-[#E8E8E6] group-hover:text-[#E58A0F] transition-colors mb-2">
                 {featured.title}
               </h2>
-              <p className="text-[#6B6B66] text-sm leading-relaxed mb-4">{featured.excerpt}</p>
+              <p className="text-[#6B6B66] dark:text-[#8A8A86] text-sm leading-relaxed mb-4">
+                {featured.excerpt}
+              </p>
               <div className="flex items-center gap-4 text-xs text-[#B0B0AB]">
                 <span className="flex items-center gap-1">
                   <Calendar className="h-3 w-3" />
@@ -102,7 +104,7 @@ export default function PublicBlogPage() {
                   <Clock className="h-3 w-3" />
                   {featured.readTime}
                 </span>
-                <span className="px-2 py-0.5 rounded-full bg-[#F5F5F3] text-[#6B6B66] text-[10px] font-medium">
+                <span className="px-2 py-0.5 rounded-full bg-[#F5F5F3] dark:bg-[#222220] text-[#6B6B66] dark:text-[#8A8A86] text-[10px] font-medium">
                   {featured.category}
                 </span>
               </div>
@@ -115,15 +117,15 @@ export default function PublicBlogPage() {
               <Link
                 key={post.slug}
                 href={`/blog/${post.slug}`}
-                className="group rounded-xl border border-[rgba(0,0,0,0.06)] bg-white p-6 shadow-[0_1px_2px_rgba(0,0,0,0.04)] transition-all duration-[180ms] ease-out hover:-translate-y-[2px] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]"
+                className="group rounded-xl border border-[rgba(0,0,0,0.06)] dark:border-[rgba(255,255,255,0.06)] bg-white dark:bg-[#1A1A18] p-6 shadow-[0_1px_2px_rgba(0,0,0,0.04)] transition-all duration-[180ms] ease-out hover:-translate-y-[2px] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]"
               >
-                <span className="inline-block px-2 py-0.5 rounded-full bg-[#F5F5F3] text-[#6B6B66] text-[10px] font-medium mb-3">
+                <span className="inline-block px-2 py-0.5 rounded-full bg-[#F5F5F3] dark:bg-[#222220] text-[#6B6B66] dark:text-[#8A8A86] text-[10px] font-medium mb-3">
                   {post.category}
                 </span>
-                <h3 className="font-[var(--font-display)] text-base font-bold text-[#23211D] group-hover:text-[#E58A0F] transition-colors mb-2 line-clamp-2">
+                <h3 className="font-[var(--font-display)] text-base font-bold text-[#23211D] dark:text-[#E8E8E6] group-hover:text-[#E58A0F] transition-colors mb-2 line-clamp-2">
                   {post.title}
                 </h3>
-                <p className="text-[#6B6B66] text-sm leading-relaxed mb-3 line-clamp-2">
+                <p className="text-[#6B6B66] dark:text-[#8A8A86] text-sm leading-relaxed mb-3 line-clamp-2">
                   {post.excerpt}
                 </p>
                 <div className="flex items-center gap-3 text-xs text-[#B0B0AB]">

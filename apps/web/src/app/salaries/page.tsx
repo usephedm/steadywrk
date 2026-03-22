@@ -37,26 +37,28 @@ export default function SubmitSalaryPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-dvh bg-[#FAFAF8] pt-32 pb-20 px-6">
+      <main className="min-h-dvh bg-[#FAFAF8] dark:bg-[#111110] pt-32 pb-20 px-6">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-10">
-            <h1 className="font-[var(--font-display)] text-4xl md:text-5xl font-extrabold text-[#23211D] tracking-tight mb-4">
+            <h1 className="font-[var(--font-display)] text-4xl md:text-5xl font-extrabold text-[#23211D] dark:text-[#E8E8E6] tracking-tight mb-4">
               Contribute to Open Salary Data
             </h1>
-            <p className="text-[#6B6B66] text-lg">
+            <p className="text-[#6B6B66] dark:text-[#8A8A86] text-lg">
               Help us map the true tech salary landscape across the MENA region. All submissions are
               100% anonymous.
             </p>
           </div>
 
-          <div className="bg-white rounded-2xl border border-[rgba(0,0,0,0.06)] p-8 shadow-sm">
+          <div className="bg-white dark:bg-[#1A1A18] rounded-2xl border border-[rgba(0,0,0,0.06)] dark:border-[rgba(255,255,255,0.06)] p-8 shadow-sm">
             {formStatus === 'success' ? (
               <div className="text-center py-12">
                 <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#E58A0F]/10 text-[#E58A0F] mb-6">
                   <Sparkles className="w-8 h-8" />
                 </div>
-                <h3 className="text-2xl font-bold text-[#23211D] mb-2">Thank you!</h3>
-                <p className="text-[#6B6B66]">
+                <h3 className="text-2xl font-bold text-[#23211D] dark:text-[#E8E8E6] mb-2">
+                  Thank you!
+                </h3>
+                <p className="text-[#6B6B66] dark:text-[#8A8A86]">
                   Your data has been successfully ingested. It will be included in the next regional
                   benchmarking update.
                 </p>
@@ -66,7 +68,7 @@ export default function SubmitSalaryPage() {
                 <div>
                   <label
                     htmlFor="jobTitle"
-                    className="block text-sm font-medium text-[#23211D] mb-2"
+                    className="block text-sm font-medium text-[#23211D] dark:text-[#E8E8E6] mb-2"
                   >
                     Job Title
                   </label>
@@ -77,7 +79,7 @@ export default function SubmitSalaryPage() {
                     placeholder="e.g. Senior AI Engineer"
                     value={formData.jobTitle}
                     onChange={(e) => setFormData({ ...formData, jobTitle: e.target.value })}
-                    className="w-full bg-[#F5F5F3] border border-[#E5E5E2] rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#E58A0F] focus:ring-1 focus:ring-[#E58A0F] transition-all"
+                    className="w-full bg-[#F5F5F3] dark:bg-[#222220] border border-[#E5E5E2] dark:border-[#2A2A28] rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#E58A0F] focus:ring-1 focus:ring-[#E58A0F] transition-all"
                   />
                 </div>
 
@@ -85,7 +87,7 @@ export default function SubmitSalaryPage() {
                   <div>
                     <label
                       htmlFor="country"
-                      className="block text-sm font-medium text-[#23211D] mb-2"
+                      className="block text-sm font-medium text-[#23211D] dark:text-[#E8E8E6] mb-2"
                     >
                       Country
                     </label>
@@ -94,7 +96,7 @@ export default function SubmitSalaryPage() {
                       required
                       value={formData.country}
                       onChange={(e) => setFormData({ ...formData, country: e.target.value })}
-                      className="w-full bg-[#F5F5F3] border border-[#E5E5E2] rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#E58A0F] focus:ring-1 focus:ring-[#E58A0F] transition-all"
+                      className="w-full bg-[#F5F5F3] dark:bg-[#222220] border border-[#E5E5E2] dark:border-[#2A2A28] rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#E58A0F] focus:ring-1 focus:ring-[#E58A0F] transition-all"
                     >
                       <option value="" disabled>
                         Select Country...
@@ -109,7 +111,7 @@ export default function SubmitSalaryPage() {
                   <div>
                     <label
                       htmlFor="yearsOfExperience"
-                      className="block text-sm font-medium text-[#23211D] mb-2"
+                      className="block text-sm font-medium text-[#23211D] dark:text-[#E8E8E6] mb-2"
                     >
                       Experience (Years)
                     </label>
@@ -126,7 +128,7 @@ export default function SubmitSalaryPage() {
                           yearsOfExperience: Number.parseInt(e.target.value) || 0,
                         })
                       }
-                      className="w-full bg-[#F5F5F3] border border-[#E5E5E2] rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#E58A0F] focus:ring-1 focus:ring-[#E58A0F] transition-all"
+                      className="w-full bg-[#F5F5F3] dark:bg-[#222220] border border-[#E5E5E2] dark:border-[#2A2A28] rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#E58A0F] focus:ring-1 focus:ring-[#E58A0F] transition-all"
                     />
                   </div>
                 </div>
@@ -134,7 +136,7 @@ export default function SubmitSalaryPage() {
                 <div>
                   <label
                     htmlFor="baseSalaryUsd"
-                    className="block text-sm font-medium text-[#23211D] mb-2"
+                    className="block text-sm font-medium text-[#23211D] dark:text-[#E8E8E6] mb-2"
                   >
                     Base Salary (USD/Year)
                   </label>
@@ -152,7 +154,7 @@ export default function SubmitSalaryPage() {
                         baseSalaryUsd: Number.parseInt(e.target.value) || 0,
                       })
                     }
-                    className="w-full bg-[#F5F5F3] border border-[#E5E5E2] rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#E58A0F] focus:ring-1 focus:ring-[#E58A0F] transition-all"
+                    className="w-full bg-[#F5F5F3] dark:bg-[#222220] border border-[#E5E5E2] dark:border-[#2A2A28] rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#E58A0F] focus:ring-1 focus:ring-[#E58A0F] transition-all"
                   />
                 </div>
 
@@ -162,9 +164,12 @@ export default function SubmitSalaryPage() {
                     id="isRemote"
                     checked={formData.isRemote}
                     onChange={(e) => setFormData({ ...formData, isRemote: e.target.checked })}
-                    className="w-5 h-5 rounded border-[#E5E5E2] text-[#E58A0F] focus:ring-[#E58A0F]"
+                    className="w-5 h-5 rounded border-[#E5E5E2] dark:border-[#2A2A28] text-[#E58A0F] focus:ring-[#E58A0F]"
                   />
-                  <label htmlFor="isRemote" className="text-sm font-medium text-[#23211D]">
+                  <label
+                    htmlFor="isRemote"
+                    className="text-sm font-medium text-[#23211D] dark:text-[#E8E8E6]"
+                  >
                     Is this a fully remote role?
                   </label>
                 </div>

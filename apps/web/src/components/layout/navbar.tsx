@@ -35,9 +35,9 @@ export function Navbar() {
       <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-2xl bg-[#FAFAF8]/70 dark:bg-[#111110]/80 border-b border-[rgba(0,0,0,0.04)] dark:border-[rgba(255,255,255,0.04)]">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2.5">
-            {/* Light mode: orange mark + dark wordmark on white bg */}
+            {/* Light mode: orange mark + dark wordmark on light bg */}
             <Image
-              src="/brand/logo-gold-chrome-white.webp"
+              src="/brand/logo-orange-dark.webp"
               alt="STEADYWRK"
               width={140}
               height={32}

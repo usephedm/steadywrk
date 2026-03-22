@@ -33,7 +33,7 @@ export default function TermsOfServicePage() {
     <>
       <Navbar />
       <main id="main-content" className="pt-16">
-        <section className="py-20 md:py-28 px-6 bg-[#FAFAF8]">
+        <section className="py-20 md:py-28 px-6 bg-[#FAFAF8] dark:bg-[#111110]">
           <TermsContent />
         </section>
       </main>

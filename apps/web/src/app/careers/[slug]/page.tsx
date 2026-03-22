@@ -95,14 +95,14 @@ export default async function CareerDetailPage({ params }: PageProps) {
       <Navbar />
 
       <main id="main-content" className="pt-16">
-        <section className="py-20 md:py-28 px-6 bg-[#FAFAF8]">
+        <section className="py-20 md:py-28 px-6 bg-[#FAFAF8] dark:bg-[#111110]">
           <div className="max-w-3xl mx-auto">
             <Breadcrumbs />
 
             {/* Header */}
             <div className="mb-12">
               <div className="flex items-center gap-3 mb-4">
-                <span className="text-[11px] uppercase tracking-[0.1em] font-semibold text-[#6B6B66]">
+                <span className="text-[11px] uppercase tracking-[0.1em] font-semibold text-[#6B6B66] dark:text-[#8A8A86]">
                   {role.dept}
                 </span>
                 {role.featured && (
@@ -112,13 +112,13 @@ export default async function CareerDetailPage({ params }: PageProps) {
                 )}
               </div>
               <h1
-                className="text-[clamp(2rem,1.2rem+2.5vw,3.5rem)] font-bold text-[#23211D] leading-[1.08] tracking-[-0.02em] mb-6"
+                className="text-[clamp(2rem,1.2rem+2.5vw,3.5rem)] font-bold text-[#23211D] dark:text-[#E8E8E6] leading-[1.08] tracking-[-0.02em] mb-6"
                 style={{ fontFamily: 'var(--font-display)' }}
               >
                 {role.title}
               </h1>
 
-              <div className="flex flex-wrap items-center gap-4 text-[14px] text-[#6E695F]">
+              <div className="flex flex-wrap items-center gap-4 text-[14px] text-[#6E695F] dark:text-[#8A8A86]">
                 <div className="flex items-center gap-1.5">
                   <MapPin className="w-4 h-4 text-[#E58A0F]" strokeWidth={1.5} />
                   <span>{role.location}</span>
@@ -137,15 +137,17 @@ export default async function CareerDetailPage({ params }: PageProps) {
             {/* Description */}
             <div className="prose-steady mb-12">
               <h2
-                className="text-[20px] font-bold text-[#23211D] mb-4"
+                className="text-[20px] font-bold text-[#23211D] dark:text-[#E8E8E6] mb-4"
                 style={{ fontFamily: 'var(--font-display)' }}
               >
                 About the Role
               </h2>
-              <p className="text-[#6E695F] text-[16px] leading-relaxed mb-8">{role.description}</p>
+              <p className="text-[#6E695F] dark:text-[#8A8A86] text-[16px] leading-relaxed mb-8">
+                {role.description}
+              </p>
 
               <h2
-                className="text-[20px] font-bold text-[#23211D] mb-4"
+                className="text-[20px] font-bold text-[#23211D] dark:text-[#E8E8E6] mb-4"
                 style={{ fontFamily: 'var(--font-display)' }}
               >
                 Requirements
@@ -154,7 +156,7 @@ export default async function CareerDetailPage({ params }: PageProps) {
                 {role.requirements.map((req) => (
                   <li
                     key={req}
-                    className="flex items-start gap-3 text-[#6E695F] text-[15px] leading-relaxed"
+                    className="flex items-start gap-3 text-[#6E695F] dark:text-[#8A8A86] text-[15px] leading-relaxed"
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-[#E58A0F] mt-2 shrink-0" />
                     {req}
@@ -163,12 +165,12 @@ export default async function CareerDetailPage({ params }: PageProps) {
               </ul>
 
               <h2
-                className="text-[20px] font-bold text-[#23211D] mb-4"
+                className="text-[20px] font-bold text-[#23211D] dark:text-[#E8E8E6] mb-4"
                 style={{ fontFamily: 'var(--font-display)' }}
               >
                 Our Hiring Process
               </h2>
-              <p className="text-[#6E695F] text-[16px] leading-relaxed mb-4">
+              <p className="text-[#6E695F] dark:text-[#8A8A86] text-[16px] leading-relaxed mb-4">
                 We believe in speed and transparency. Our process takes 14 days or fewer:
               </p>
               <ol className="space-y-2 mb-8">
@@ -181,7 +183,7 @@ export default async function CareerDetailPage({ params }: PageProps) {
                 ].map((step, i) => (
                   <li
                     key={step}
-                    className="flex items-start gap-3 text-[#6E695F] text-[15px] leading-relaxed"
+                    className="flex items-start gap-3 text-[#6E695F] dark:text-[#8A8A86] text-[15px] leading-relaxed"
                   >
                     <span className="w-6 h-6 rounded-full bg-[#E58A0F]/10 text-[#E58A0F] text-[12px] font-bold flex items-center justify-center shrink-0 mt-0.5">
                       {i + 1}
@@ -193,14 +195,14 @@ export default async function CareerDetailPage({ params }: PageProps) {
             </div>
 
             {/* CTA */}
-            <div className="p-8 bg-white rounded-xl border border-[rgba(0,0,0,0.06)] shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
+            <div className="p-8 bg-white dark:bg-[#1A1A18] rounded-xl border border-[rgba(0,0,0,0.06)] dark:border-[rgba(255,255,255,0.06)] shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
               <h3
-                className="text-[20px] font-bold text-[#23211D] mb-2"
+                className="text-[20px] font-bold text-[#23211D] dark:text-[#E8E8E6] mb-2"
                 style={{ fontFamily: 'var(--font-display)' }}
               >
                 Ready to apply?
               </h3>
-              <p className="text-[#6E695F] text-[15px] mb-6">
+              <p className="text-[#6E695F] dark:text-[#8A8A86] text-[15px] mb-6">
                 6–8 minutes. No account required. We respond within 48 hours.
               </p>
               <Link

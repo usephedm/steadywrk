@@ -35,17 +35,19 @@ export default function PrivacyPolicyPage() {
     <>
       <Navbar />
       <main id="main-content" className="pt-16">
-        <section className="py-20 md:py-28 px-6 bg-[#FAFAF8]">
+        <section className="py-20 md:py-28 px-6 bg-[#FAFAF8] dark:bg-[#111110]">
           <div className="max-w-3xl mx-auto">
             <Breadcrumbs />
 
             <h1
-              className="text-[clamp(2rem,1.2rem+2.5vw,3.5rem)] font-bold text-[#23211D] leading-[1.08] tracking-[-0.02em] mb-4"
+              className="text-[clamp(2rem,1.2rem+2.5vw,3.5rem)] font-bold text-[#23211D] dark:text-[#E8E8E6] leading-[1.08] tracking-[-0.02em] mb-4"
               style={{ fontFamily: 'var(--font-display)' }}
             >
               Privacy Policy
             </h1>
-            <p className="text-[14px] text-[#6B6B66] mb-12">Last updated: March 21, 2026</p>
+            <p className="text-[14px] text-[#6B6B66] dark:text-[#8A8A86] mb-12">
+              Last updated: March 21, 2026
+            </p>
 
             <PrivacyContent />
           </div>

@@ -32,25 +32,25 @@ export default function AboutPage() {
 
       <main id="main-content" className="pt-16">
         {/* Header */}
-        <section className="py-20 md:py-28 px-6 bg-[#FAFAF8]">
+        <section className="py-20 md:py-28 px-6 bg-[#FAFAF8] dark:bg-[#111110]">
           <div className="max-w-3xl mx-auto">
             <nav className="text-[13px] text-[#B0B0AB] mb-8">
-              <Link href="/" className="hover:text-[#6E695F] transition-colors">
+              <Link href="/" className="hover:text-[#6E695F] dark:text-[#8A8A86] transition-colors">
                 Home
               </Link>
               <span className="mx-2">/</span>
-              <span className="text-[#23211D]">About</span>
+              <span className="text-[#23211D] dark:text-[#E8E8E6]">About</span>
             </nav>
             <p className="text-[13px] uppercase tracking-[0.12em] text-[#E58A0F] font-semibold mb-4">
               About Us
             </p>
             <h1
-              className="text-[clamp(2.5rem,1rem+4vw,4rem)] font-bold text-[#23211D] leading-[1.08] tracking-[-0.03em] mb-6"
+              className="text-[clamp(2.5rem,1rem+4vw,4rem)] font-bold text-[#23211D] dark:text-[#E8E8E6] leading-[1.08] tracking-[-0.03em] mb-6"
               style={{ fontFamily: 'var(--font-display)' }}
             >
               Where ambition compounds.
             </h1>
-            <p className="text-[#6E695F] text-[17px] leading-relaxed">
+            <p className="text-[#6E695F] dark:text-[#8A8A86] text-[17px] leading-relaxed">
               STEADYWRK is an AI-native career-launch platform built for Jordan&rsquo;s most
               ambitious talent. We bridge the gap between world-class education and world-class
               work.
@@ -72,21 +72,21 @@ export default function AboutPage() {
         </section>
 
         {/* Story */}
-        <section className="py-16 md:py-24 px-6 bg-[#F7F4EE]">
+        <section className="py-16 md:py-24 px-6 bg-[#F7F4EE] dark:bg-[#1A1A18]">
           <div className="max-w-3xl mx-auto space-y-12">
             <div>
               <h2
-                className="text-[clamp(1.5rem,1.2rem+1.25vw,2.25rem)] font-bold text-[#23211D] mb-5"
+                className="text-[clamp(1.5rem,1.2rem+1.25vw,2.25rem)] font-bold text-[#23211D] dark:text-[#E8E8E6] mb-5"
                 style={{ fontFamily: 'var(--font-display)' }}
               >
                 The Problem
               </h2>
-              <p className="text-[#6E695F] text-[16px] leading-relaxed mb-4">
+              <p className="text-[#6E695F] dark:text-[#8A8A86] text-[16px] leading-relaxed mb-4">
                 Jordan produces 7,000+ ICT graduates every year. 41.72% of youth are unemployed. 66%
                 of young women can&rsquo;t find work that matches their talent. The pipeline between
                 education and elite work is broken.
               </p>
-              <p className="text-[#6E695F] text-[16px] leading-relaxed">
+              <p className="text-[#6E695F] dark:text-[#8A8A86] text-[16px] leading-relaxed">
                 Traditional employers offer generic ATS templates, 30-day hiring timelines, and no
                 feedback. Ambitious people deserve better.
               </p>
@@ -94,17 +94,17 @@ export default function AboutPage() {
 
             <div>
               <h2
-                className="text-[clamp(1.5rem,1.2rem+1.25vw,2.25rem)] font-bold text-[#23211D] mb-5"
+                className="text-[clamp(1.5rem,1.2rem+1.25vw,2.25rem)] font-bold text-[#23211D] dark:text-[#E8E8E6] mb-5"
                 style={{ fontFamily: 'var(--font-display)' }}
               >
                 Our Approach
               </h2>
-              <p className="text-[#6E695F] text-[16px] leading-relaxed mb-4">
+              <p className="text-[#6E695F] dark:text-[#8A8A86] text-[16px] leading-relaxed mb-4">
                 We&rsquo;re building the bridge. STEADYWRK combines AI-powered operations,
                 structured hiring, and real mentorship to launch careers at speed. You ship
                 production AI systems from week one — not a simulation.
               </p>
-              <p className="text-[#6E695F] text-[16px] leading-relaxed">
+              <p className="text-[#6E695F] dark:text-[#8A8A86] text-[16px] leading-relaxed">
                 14-day hiring. 48-hour response to every applicant. Structured scorecards,
                 transparent criteria, and constructive feedback at every stage. Speed is our brand.
                 Fairness is our foundation.
@@ -113,7 +113,7 @@ export default function AboutPage() {
 
             <div>
               <h2
-                className="text-[clamp(1.5rem,1.2rem+1.25vw,2.25rem)] font-bold text-[#23211D] mb-5"
+                className="text-[clamp(1.5rem,1.2rem+1.25vw,2.25rem)] font-bold text-[#23211D] dark:text-[#E8E8E6] mb-5"
                 style={{ fontFamily: 'var(--font-display)' }}
               >
                 Where We Are
@@ -143,16 +143,18 @@ export default function AboutPage() {
                 ].map((item) => (
                   <div
                     key={item.label}
-                    className="bg-white rounded-xl p-6 border border-[rgba(0,0,0,0.06)] shadow-[0_1px_2px_rgba(0,0,0,0.04)]"
+                    className="bg-white dark:bg-[#1A1A18] rounded-xl p-6 border border-[rgba(0,0,0,0.06)] dark:border-[rgba(255,255,255,0.06)] shadow-[0_1px_2px_rgba(0,0,0,0.04)]"
                   >
                     <item.icon className="w-5 h-5 text-[#E58A0F] mb-3" strokeWidth={1.5} />
                     <h3
-                      className="text-[16px] font-bold text-[#23211D] mb-1"
+                      className="text-[16px] font-bold text-[#23211D] dark:text-[#E8E8E6] mb-1"
                       style={{ fontFamily: 'var(--font-display)' }}
                     >
                       {item.label}
                     </h3>
-                    <p className="text-[#6E695F] text-[14px] leading-relaxed">{item.desc}</p>
+                    <p className="text-[#6E695F] dark:text-[#8A8A86] text-[14px] leading-relaxed">
+                      {item.desc}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -161,15 +163,15 @@ export default function AboutPage() {
         </section>
 
         {/* CTA */}
-        <section className="py-16 md:py-24 px-6 bg-[#FAFAF8]">
+        <section className="py-16 md:py-24 px-6 bg-[#FAFAF8] dark:bg-[#111110]">
           <div className="max-w-2xl mx-auto text-center">
             <h2
-              className="text-[clamp(1.5rem,1.2rem+1.25vw,2.25rem)] font-bold text-[#23211D] mb-4"
+              className="text-[clamp(1.5rem,1.2rem+1.25vw,2.25rem)] font-bold text-[#23211D] dark:text-[#E8E8E6] mb-4"
               style={{ fontFamily: 'var(--font-display)' }}
             >
               Want to be part of this?
             </h2>
-            <p className="text-[#6E695F] text-[16px] mb-8">
+            <p className="text-[#6E695F] dark:text-[#8A8A86] text-[16px] mb-8">
               We&rsquo;re hiring across engineering, AI, operations, and marketing.
             </p>
             <Link
