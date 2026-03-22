@@ -108,12 +108,8 @@ export default function RootLayout({
         />
 
         {/* DNS prefetch + preconnect for third-party speed */}
-        <link
-          rel="preconnect"
-          href="https://big-jennet-22.clerk.accounts.dev"
-          crossOrigin="anonymous"
-        />
-        <link rel="dns-prefetch" href="https://big-jennet-22.clerk.accounts.dev" />
+        <link rel="preconnect" href="https://clerk.steadywrk.app" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://clerk.steadywrk.app" />
         <link rel="preconnect" href="https://analytics.ahrefs.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://analytics.ahrefs.com" />
         <link rel="preconnect" href="https://us.i.posthog.com" crossOrigin="anonymous" />
@@ -162,7 +158,11 @@ export default function RootLayout({
               description:
                 'AI-native career-launch platform for Jordan\u2019s most ambitious talent. We bridge the gap between education and elite work through structured hiring, real AI projects, and mentorship.',
               foundingDate: '2026',
-              sameAs: ['https://instagram.com/swrk.jo'],
+              sameAs: [
+                'https://linkedin.com/company/steadywrk',
+                'https://x.com/steadywrk',
+                'https://instagram.com/swrk.jo',
+              ],
               address: [
                 {
                   '@type': 'PostalAddress',

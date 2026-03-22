@@ -9,11 +9,12 @@ export default function ScorecardPage() {
   const [sharing, setSharing] = useState(false);
   const [downloading, setDownloading] = useState(false);
 
-  // Mock data for the authenticated candidate's assessment result
-  const mockScore = 92;
-  const mockRole = 'AI Engineer';
+  // TODO(STE-DB): Replace with Supabase query using Clerk userId
+  // const { data: assessment } = await getAssessment(userId);
+  const score = 92;
+  const role = 'AI Engineer';
   const percentile = 'Top 1%';
-  const applicantId = 'demo-id-123'; // In production, this comes from Clerk/DB
+  const applicantId = 'demo-id-123'; // TODO(STE-DB): Pull from Clerk user session
 
   const ogImageUrl = `/api/scorecards?id=${applicantId}`;
 
@@ -32,7 +33,7 @@ export default function ScorecardPage() {
     }
 
     // 2. Open share intent
-    const text = `I just ranked in the ${percentile} of assessed candidates for the ${mockRole} cohort on STEADYWRK.\\n\\nIf you're building an AI team and need pre-vetted engineers in Amman, you know where to look.`;
+    const text = `I just ranked in the ${percentile} of assessed candidates for the ${role} cohort on STEADYWRK.\\n\\nIf you're building an AI team and need pre-vetted engineers in Amman, you know where to look.`;
     const url = 'https://steadywrk.app';
 
     if (platform === 'linkedin') {
@@ -54,7 +55,7 @@ export default function ScorecardPage() {
     setDownloading(true);
     const a = document.createElement('a');
     a.href = ogImageUrl;
-    a.download = `steadywrk-scorecard-${mockRole.toLowerCase().replace(' ', '-')}.png`;
+    a.download = `steadywrk-scorecard-${role.toLowerCase().replace(' ', '-')}.png`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);

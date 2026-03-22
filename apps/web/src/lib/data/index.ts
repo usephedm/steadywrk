@@ -7,6 +7,6 @@ export {
   LEADERBOARD_DATA,
   ROADMAP,
   HUB_CARDS,
-} from './mock';
-export type { CandidateStatus, EmployeeLevel } from './mock';
+} from './dashboard';
+export type { CandidateStatus, EmployeeLevel } from './dashboard';
 export { SERVICES, TECH } from './services';

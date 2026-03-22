@@ -9,11 +9,12 @@ export default function ReferralsPage() {
   const [generateLoading, setGenerateLoading] = useState(false);
   const [vouchCode, setVouchCode] = useState<string | null>(null);
 
-  // Mock data for the dashboard layout
+  // TODO(STE-DB): Replace with Supabase query using Clerk userId
+  // const { data: referralStats } = await getReferralStats(userId);
   const stats = [
-    { label: 'Total Referrals', value: '3', icon: Users },
-    { label: 'Successful Hires', value: '1', icon: ShieldCheck },
-    { label: 'Bounty Earned', value: '$1,500', icon: Sparkles },
+    { label: 'Total Referrals', value: '0', icon: Users },
+    { label: 'Successful Hires', value: '0', icon: ShieldCheck },
+    { label: 'Bounty Earned', value: '$0', icon: Sparkles },
   ];
 
   const handleGenerate = () => {

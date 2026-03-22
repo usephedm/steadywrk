@@ -9,9 +9,9 @@
 
 AI-native career-launch platform for Jordan's most ambitious talent.
 
-**Next.js 16 · React 19 · Tailwind v4 · Drizzle ORM · Neon · Vercel**
+**Next.js 16 · React 19 · Tailwind v4 · Drizzle ORM · Supabase · Railway**
 
-[![Deploy](https://img.shields.io/badge/deploy-vercel-black?logo=vercel)](https://steadywrk.app)
+[![Live](https://img.shields.io/badge/live-steadywrk.app-orange)](https://steadywrk.app)
 [![License](https://img.shields.io/badge/license-private-red)]()
 
 </div>
@@ -37,7 +37,7 @@ Single Next.js 16 application serving four role-based experiences from one codeb
 | **Employee** | Dashboard, training, tools, leaderboard | Clerk RBAC | `/dashboard/*` |
 | **HR Admin** | Pipeline, team management, analytics | Clerk RBAC (admin) | `/dashboard/*` |
 
-Routed silently via Clerk `publicMetadata` middleware. One Neon Postgres database. One Vercel deployment.
+Routed silently via Clerk `publicMetadata` middleware. One Supabase Postgres database. Deployed on Railway.
 
 ## Tech Stack
 
@@ -47,12 +47,12 @@ Routed silently via Clerk `publicMetadata` middleware. One Neon Postgres databas
 | Styling | Tailwind CSS v4, Framer Motion 12 |
 | Typography | Cabinet Grotesk (display) + Satoshi (body) via Fontshare |
 | Auth | Clerk (RBAC, passwordless, OAuth) |
-| Database | Neon (Serverless Postgres) |
+| Database | Supabase (Postgres) |
 | ORM | Drizzle ORM with drizzle-zod |
 | Email | Resend + React Email |
 | Analytics | PostHog (funnels, drop-off) |
 | Scheduling | Cal.com (WhatsApp workflows) |
-| Deploy | Railway + Nixpacks (web) |
+| Deploy | Railway (web), Cloudflare Workers (MCPs) |
 
 ## Getting Started
 
@@ -129,7 +129,7 @@ steadywrk/
     ├── src/
     │   ├── schema.ts                # Drizzle ORM tables (6)
     │   ├── types.ts                 # Insert/select schemas (drizzle-zod)
-    │   └── index.ts                 # Neon driver + exports
+    │   └── index.ts                 # Supabase driver + exports
     └── drizzle.config.ts            # Migration config
 ```
 
@@ -152,10 +152,6 @@ Six tables in `packages/db/`:
 
 &copy; 2026 STEADYWRK LLC &middot; Building 15, KHBP, Amman, Jordan &middot; [steadywrk.app](https://steadywrk.app)
 
-</div>
-ordan &middot; [steadywrk.app](https://steadywrk.app)
-
-</div>
-26 STEADYWRK LLC &middot; Building 15, KHBP, Amman, Jordan &middot; [steadywrk.app](https://steadywrk.app)
+[LinkedIn](https://linkedin.com/company/steadywrk) &middot; [X](https://x.com/steadywrk) &middot; [Instagram](https://instagram.com/swrk.jo)
 
 </div>
