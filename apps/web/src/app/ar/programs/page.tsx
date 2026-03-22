@@ -6,6 +6,17 @@ import Link from 'next/link';
 export const metadata: Metadata = {
   title: 'STEADYWRK | البرامج',
   description: 'برامج STEADYWRK لتسريع المسار المهني.',
+  alternates: {
+    canonical: '/ar/programs',
+    languages: {
+      en: '/programs',
+      ar: '/ar/programs',
+    },
+  },
+  robots: {
+    index: false,
+    follow: true,
+  },
 };
 
 export default function ArabicProgramsPage() {

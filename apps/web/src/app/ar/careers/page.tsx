@@ -6,6 +6,17 @@ import Link from 'next/link';
 export const metadata: Metadata = {
   title: 'STEADYWRK | الوظائف',
   description: 'انضم إلى نخبة مهندسي ومشغلي الذكاء الاصطناعي في الأردن.',
+  alternates: {
+    canonical: '/ar/careers',
+    languages: {
+      en: '/careers',
+      ar: '/ar/careers',
+    },
+  },
+  robots: {
+    index: false,
+    follow: true,
+  },
 };
 
 export default function ArabicCareersPage() {
