@@ -76,6 +76,33 @@ test.describe('Apply Form Flow', () => {
     });
   });
 
+  test('shows a duplicate-application message and stays on the form when /api/apply returns 409', async ({
+    page,
+  }) => {
+    await page.route('**/api/apply', async (route) => {
+      await route.fulfill({
+        status: 409,
+        contentType: 'application/json',
+        body: JSON.stringify({
+          error:
+            'You already applied to this role with this email. We will review your existing application.',
+        }),
+      });
+    });
+
+    await completeApplyForm(page);
+    await page.getByRole('button', { name: /Submit Application/i }).click();
+
+    await expect(
+      page.getByText(
+        'You already applied to this role with this email. We will review your existing application.',
+      ),
+    ).toBeVisible();
+    await expect(page.getByText('Step 4 of 5')).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Application submitted!' })).toHaveCount(0);
+    await expect(page.getByRole('button', { name: /Submit Application/i })).toBeEnabled();
+  });
+
   test('shows an error and stays on the form when /api/apply fails', async ({ page }) => {
     await page.route('**/api/apply', async (route) => {
       await route.fulfill({

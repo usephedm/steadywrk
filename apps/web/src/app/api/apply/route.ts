@@ -57,6 +57,23 @@ export async function POST(request: Request) {
       applicantId = result?.id;
     } catch (dbError) {
       console.error('Database insert failed:', dbError);
+
+      const message = dbError instanceof Error ? dbError.message : String(dbError);
+      const isDuplicateApplication =
+        message.includes('applicant_email_role_idx') ||
+        message.includes('duplicate key value') ||
+        message.includes('unique constraint');
+
+      if (isDuplicateApplication) {
+        return NextResponse.json(
+          {
+            error:
+              'You already applied to this role with this email. We will review your existing application.',
+          },
+          { status: 409 },
+        );
+      }
+
       // Database insertion is critical — fail the request
       return NextResponse.json(
         { error: 'Failed to save application. Please try again later.' },
