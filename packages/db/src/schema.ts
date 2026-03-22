@@ -193,16 +193,6 @@ export const emailEvents = pgTable(
   ],
 );
 
-export const waitlist = pgTable(
-  'waitlist',
-  {
-    id: uuid('id').primaryKey().defaultRandom(),
-    email: varchar('email', { length: 255 }).notNull().unique(),
-    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
-  },
-  (table) => [index('waitlist_email_idx').on(table.email)],
-);
-
 export const contacts = pgTable(
   'contacts',
   {

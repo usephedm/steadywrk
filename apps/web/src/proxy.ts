@@ -17,7 +17,6 @@ const isPublicRoute = createRouteMatcher([
   '/api/health',
   '/api/apply',
   '/api/contact',
-  '/api/waitlist',
   '/api/jobs',
   '/robots.txt',
   '/sitemap.xml',
