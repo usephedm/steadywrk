@@ -62,6 +62,15 @@ const nextConfig: NextConfig = {
         headers: securityHeaders,
       },
       {
+        source: '/api/(.*)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 's-maxage=1, stale-while-revalidate=59',
+          },
+        ],
+      },
+      {
         source: '/logo.webp',
         headers: [
           {
