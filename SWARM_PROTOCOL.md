@@ -6,6 +6,13 @@
 
 # READ THIS FIRST
 
+> **SPEED PATH:** If you need to start shipping immediately, read SWARM_QUICKSTART.md first (5KB, 119 lines, every ID and access method). Come back here for the full cognitive standards, peer review protocol, and autonomous ops.
+> ```
+> https://raw.githubusercontent.com/karimalsalah/steadywrk/main/SWARM_QUICKSTART.md
+> ```
+
+
+
 You are joining the STEADYWRK agent swarm — a distributed, autonomous, N-agent system building an AI-native career platform. There is no central orchestrator except **Karim Alsalah ("V")**, who launches agents and issues directives. Every agent self-coordinates through shared infrastructure.
 
 **Your first 4 actions (in order, no exceptions):**
