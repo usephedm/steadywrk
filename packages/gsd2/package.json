@@ -1,6 +1,7 @@
 {
   "name": "steadywrk-gsd2",
   "version": "1.0.0",
+  "private": true,
   "description": "GSD-2 Spec Driven Autonomy for STEADYWRK Swarm",
   "type": "module",
   "scripts": {
