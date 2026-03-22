@@ -18,7 +18,7 @@ import { TextReveal } from '@/components/ui/text-reveal';
 import { TiltCard } from '@/components/ui/tilt-card';
 import { WordRotate } from '@/components/ui/word-rotate';
 import { PROGRAMS, ROLES, TECH } from '@/lib/data';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'motion/react';
 import {
   ArrowRight,
   Brain,
@@ -44,9 +44,6 @@ const LogoTotem3D = dynamic(
   () => import('@/components/ui/logo-totem-3d').then((m) => m.LogoTotem3D),
   { ssr: false },
 );
-
-/* Brand motion tokens — Guidelines v2 §09 */
-const ease = [0.22, 1, 0.36, 1] as const;
 
 const VALUES = [
   {
@@ -142,6 +139,7 @@ export default function HomePage() {
               alt="STEADYWRK team working on AI systems in the Amman office"
               fill
               priority
+              fetchPriority="high"
               className="object-cover object-center"
               sizes="100vw"
               style={{ filter: 'brightness(0.45) saturate(1.1)' }}
@@ -216,7 +214,7 @@ export default function HomePage() {
                   <span>Where ambition</span>
                   <WordRotate
                     words={['compounds.', 'accelerates.', 'materializes.', 'transforms.']}
-                    duration={2800}
+                    duration={2000}
                     className="text-[#E58A0F] font-semibold inline-block"
                   />
                 </div>
@@ -224,7 +222,7 @@ export default function HomePage() {
 
               <BlurFade delay={0.7} direction="up">
                 <div className="mt-10 flex flex-col sm:flex-row gap-4">
-                  <Link href="/apply/operations-dispatcher">
+                  <Link href="/careers">
                     <ShimmerButton
                       shimmerColor="#F5C563"
                       shimmerSize="0.05em"
@@ -758,7 +756,7 @@ export default function HomePage() {
                 6–8 minutes. No account required. We review within 48 hours and respond to every
                 applicant.
               </p>
-              <Link href="/apply/operations-dispatcher">
+              <Link href="/careers">
                 <ShimmerButton
                   shimmerColor="#F5C563"
                   shimmerSize="0.05em"

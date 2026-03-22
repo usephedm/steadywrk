@@ -12,6 +12,10 @@ if (typeof window !== 'undefined' && process.env.NEXT_PUBLIC_POSTHOG_KEY) {
     person_profiles: 'identified_only',
     capture_pageview: false, // We capture manually for SPA navigation
     capture_pageleave: true,
+    disable_session_recording: false,
+    session_recording: {
+      maskAllInputs: true,
+    },
   });
 }
 

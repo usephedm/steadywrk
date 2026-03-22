@@ -101,7 +101,7 @@ export default async function ProgramDetailPage({ params }: PageProps) {
               6–8 minute application. We respond within 48 hours.
             </p>
             <Link
-              href="/apply/operations-dispatcher"
+              href="/careers"
               className="inline-flex items-center gap-2.5 bg-[#E58A0F] hover:bg-[#CC7408] text-white font-medium text-[15px] px-8 py-3.5 rounded-lg transition-colors duration-[180ms]"
             >
               Start your application <ArrowRight className="w-4 h-4" />

@@ -2,7 +2,7 @@
 
 import { ShimmerButton } from '@/components/ui/shimmer-button';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'motion/react';
 import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -59,7 +59,7 @@ export function Navbar() {
         <div className="flex items-center gap-2">
           <ThemeToggle />
 
-          <Link href="/apply/operations-dispatcher">
+          <Link href="/careers">
             <ShimmerButton
               shimmerColor="#F5C563"
               shimmerSize="0.06em"

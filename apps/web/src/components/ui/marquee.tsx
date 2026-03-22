@@ -65,6 +65,7 @@ export function Marquee({
               'group-hover:[animation-play-state:paused]': pauseOnHover,
               '[animation-direction:reverse]': reverse,
             })}
+            {...(i > 0 ? { 'aria-hidden': true } : {})}
           >
             {children}
           </div>

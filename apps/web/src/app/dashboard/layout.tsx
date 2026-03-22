@@ -1,10 +1,9 @@
 'use client';
 
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'motion/react';
 import {
   BookOpen,
   ChevronLeft,
-  Compass,
   GraduationCap,
   LayoutDashboard,
   Mail,

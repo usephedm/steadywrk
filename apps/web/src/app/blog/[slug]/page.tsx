@@ -122,7 +122,7 @@ export default async function PublicBlogPostPage({ params }: BlogPostPageProps) 
               Join STEADYWRK and start shipping from day one.
             </p>
             <Link
-              href="/apply/operations-dispatcher"
+              href="/careers"
               className="inline-flex items-center gap-2 bg-[#E58A0F] text-white px-6 py-3 rounded-lg text-sm font-medium transition-all duration-[180ms] hover:bg-[#CC7408] min-h-[44px]"
             >
               Apply Now
