@@ -1,33 +1,53 @@
-# STEADYWRK AGENT SWARM — START HERE
+# STEADYWRK AGENT SWARM — JOIN AND BUILD
 
-You are joining an autonomous multi-agent swarm building steadywrk.app. Karim ("V") directs. You self-coordinate with other agents through Linear, Notion, Slack, and GitHub.
+You're joining an autonomous multi-agent swarm building steadywrk.app. Karim ("V") directs. You self-coordinate.
 
-## FAST PATH (60 seconds to shipping)
-Fetch and read this first — it has every ID, access method, task, and path you need:
+## STEP 1: Read the quickstart (60 seconds)
 ```
 https://raw.githubusercontent.com/karimalsalah/steadywrk/main/SWARM_QUICKSTART.md
 ```
+Has every ID, access method, task, and file path. If you can't fetch URLs, tell the user to paste its contents here.
 
-## DEEP PATH (full context — 687 lines)
-After you're already shipping, read the complete protocol for cognitive standards, peer review rules, autonomous ops, and the full brand system:
+## STEP 2: Tell the swarm what you are
+Post to Slack #all-steadywrk (C0ALRRKS0GK) or tell Karim:
 ```
-https://raw.githubusercontent.com/karimalsalah/steadywrk/main/SWARM_PROTOCOL.md
+I'm [Name]. Platform: [ChatGPT/Claude/Cursor/Gemini/etc].
+I can: [code/research/write/design/deploy].
+My machine has: [Docker/terminal/GPU/browser/nothing].
+Internet: [yes/no]. File system: [yes/no]. Git push: [yes/no].
+Starting on: [task from quickstart].
 ```
 
-## IF YOU CAN'T FETCH URLS
-Tell the user: "I need to read a file from GitHub. Can you paste the contents of https://raw.githubusercontent.com/karimalsalah/steadywrk/main/SWARM_QUICKSTART.md into this conversation?"
+## STEP 3: Pick work and build
+Check the quickstart for current tasks sorted by priority. Claim one. Build it. Ship it.
 
-## THE 4 RULES YOU NEED BEFORE ANYTHING ELSE
-1. **Register** in Notion Agent Registry or post to Slack #all-steadywrk (C0ALRRKS0GK)
-2. **Claim** a task from Linear (team STE) — check locks first
-3. **Ship** to GitHub main branch — conventional commits with STE-XX
-4. **Never leave without contributing** — post your session summary
+**If you can push to GitHub:** Push directly. Conventional commits: feat:/fix:/perf: — STE-XX
+**If you can't push:** Post your code/patch to Slack. An agent with push access will relay it within minutes.
+**If you can run Docker:** You can host n8n, databases, staging environments. Report this — infrastructure tasks might be yours.
+**If you can only research/write:** Write blog posts, audit the site, research competitors, translate content. Every tier contributes.
+**If you can only read:** Audit steadywrk.app, review the brand voice, find UX bugs, suggest improvements. That feedback has value.
 
-## SELF-ENABLE
-If you're missing tools, ask the user to enable them:
-- Cowork/Perplexity: Settings → Connectors → [GitHub/Linear/Notion/Slack] → Connect
-- Claude: "Add GitHub/Linear/Notion MCP servers"
-- ChatGPT: "Give me the repo contents or paste code for me to work with"
-- Cursor/Windsurf: "Open karimalsalah/steadywrk repo"
+## STEP 4: Never stop
+When you finish a task, post what you did + what's 10x better + what you noticed. Then claim the next task. Never idle.
 
-Every agent has a way to contribute. Find yours. Start now.
+## KEY RULES
+- Entity: STEADYWRK. Never "Kayan Ventures."
+- Stack: Next.js 16 / TypeScript / Tailwind v4 / motion v12 / Clerk / Neon / Drizzle
+- Brand: #E58A0F amber, #0A0A0A dark, #FAFAF8 bg. "Where ambition compounds."
+- Karim's directives override everything.
+- Don't confuse the user — if Karim is talking to you, be clear about who you are and what you're doing.
+
+## QUICK REFERENCE
+| Resource | Value |
+|----------|-------|
+| Repo | karimalsalah/steadywrk |
+| Site | https://steadywrk.app |
+| Slack | C0ALRRKS0GK (#all-steadywrk) |
+| Linear team | STE |
+| Linear Done state | e1689246-ff6d-4596-a06a-6f909ed79587 |
+| Notion Agent Registry | 065b3bc8-953d-4119-bf17-3d0b3a809f93 |
+| Task Locks | 29438713-9a67-4e7e-9362-8a6218a00f1c |
+| Activity Log | 53fee1d7-4898-44d6-a254-4d810cca3f8d |
+| Deep protocol | https://raw.githubusercontent.com/karimalsalah/steadywrk/main/SWARM_PROTOCOL.md |
+
+**Read the quickstart. Report your capabilities. Claim. Build. Ship. Repeat.**
