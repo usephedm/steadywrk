@@ -42,8 +42,10 @@ export function HeroSection() {
           priority
           fetchPriority="high"
           className="object-cover object-center"
-          sizes="100vw"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
           quality={75}
+          placeholder="blur"
+          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFAABAAAAAAAAAAAAAAAAAAAABv/EAB0QAAICAgMBAAAAAAAAAAAAAAECAAMEBREhMUH/xAAVAQEBAAAAAAAAAAAAAAAAAAADBf/EABkRAAIDAQAAAAAAAAAAAAAAAAABAgMRIf/aAAwDAQACEQMRAD8AkdTl3Y+TRXTcyKsu4Kjr7EROxjpVmtn/2Q=="
           style={{ filter: 'brightness(0.45) saturate(1.1)' }}
         />
       </div>
