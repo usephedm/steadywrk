@@ -54,6 +54,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'yearly',
       priority: 0.3,
     },
+    {
+      url: `${baseUrl}/ar/privacy`,
+      lastModified: now,
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    },
+    {
+      url: `${baseUrl}/ar/terms`,
+      lastModified: now,
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    },
   ];
 
   const rolePages: MetadataRoute.Sitemap = ROLES.map((role) => ({

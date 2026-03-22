@@ -9,6 +9,10 @@ export const metadata: Metadata = {
     'STEADYWRK terms of service — the rules and conditions governing your use of our platform.',
   alternates: {
     canonical: 'https://steadywrk.app/terms',
+    languages: {
+      'en': '/terms',
+      'ar': '/ar/terms',
+    },
   },
 };
 

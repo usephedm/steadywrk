@@ -10,6 +10,10 @@ export const metadata: Metadata = {
     'STEADYWRK privacy policy — how we collect, use, and protect your personal data in compliance with Jordan\u2019s Personal Data Protection Law (PDPL).',
   alternates: {
     canonical: 'https://steadywrk.app/privacy',
+    languages: {
+      'en': '/privacy',
+      'ar': '/ar/privacy',
+    },
   },
 };
 
