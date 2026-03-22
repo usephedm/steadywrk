@@ -106,8 +106,11 @@ export default function RootLayout({
 
         {/* Preload critical assets */}
         <link rel="preload" href="/logo.webp" as="image" type="image/webp" />
+        <link rel="preload" href="/brand/steadywrk-ai-work.webp" as="image" type="image/webp" fetchPriority="high" />
 
         {/* DNS prefetch + preconnect for third-party speed */}
+        <link rel="preconnect" href="https://big-jennet-22.clerk.accounts.dev" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://big-jennet-22.clerk.accounts.dev" />
         <link rel="preconnect" href="https://analytics.ahrefs.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://analytics.ahrefs.com" />
         <link rel="preconnect" href="https://va.vercel-scripts.com" crossOrigin="anonymous" />
