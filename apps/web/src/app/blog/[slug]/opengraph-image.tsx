@@ -1,4 +1,4 @@
-import { BLOG_POSTS } from '@/lib/data';
+import { getPublicBlogPostBySlug } from '@/lib/data';
 import { ImageResponse } from 'next/og';
 
 export const alt = 'STEADYWRK Blog';
@@ -7,9 +7,8 @@ export const contentType = 'image/png';
 
 export default async function Image({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const post = BLOG_POSTS.find((p) => p.slug === slug);
+  const post = getPublicBlogPostBySlug(slug);
 
-  // Fallback if post not found
   if (!post) {
     return new ImageResponse(
       <div

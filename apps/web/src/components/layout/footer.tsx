@@ -3,6 +3,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 export function Footer() {
+  const socialLinks = [
+    { label: 'LinkedIn', href: COMPANY.social.linkedin },
+    { label: 'X', href: COMPANY.social.twitter },
+    { label: 'Instagram', href: COMPANY.social.instagram },
+  ].filter((link) => link.href !== COMPANY.url);
+
   return (
     <footer className="py-12 px-6 bg-[#0A0A0A] border-t border-[rgba(255,255,255,0.04)]">
       <div className="max-w-6xl mx-auto">
@@ -53,30 +59,17 @@ export function Footer() {
             >
               Terms of Service
             </Link>
-            <a
-              href={COMPANY.social.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[11px] text-[#7B7A7A] hover:text-[#A0A0A0] transition-colors duration-[180ms] min-h-[44px] min-w-[44px] inline-flex items-center justify-center"
-            >
-              LinkedIn
-            </a>
-            <a
-              href={COMPANY.social.twitter}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[11px] text-[#7B7A7A] hover:text-[#A0A0A0] transition-colors duration-[180ms] min-h-[44px] min-w-[44px] inline-flex items-center justify-center"
-            >
-              X
-            </a>
-            <a
-              href={COMPANY.social.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[11px] text-[#7B7A7A] hover:text-[#A0A0A0] transition-colors duration-[180ms] min-h-[44px] min-w-[44px] inline-flex items-center justify-center"
-            >
-              Instagram
-            </a>
+            {socialLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[11px] text-[#7B7A7A] hover:text-[#A0A0A0] transition-colors duration-[180ms] min-h-[44px] min-w-[44px] inline-flex items-center justify-center"
+              >
+                {link.label}
+              </a>
+            ))}
           </div>
           <p className="text-[11px] text-[#7B7A7A]">{COMPANY.address}</p>
         </div>

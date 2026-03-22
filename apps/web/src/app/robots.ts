@@ -10,6 +10,6 @@ export default function robots(): MetadataRoute.Robots {
       },
     ],
     sitemap: 'https://steadywrk.app/sitemap.xml',
-    host: 'https://steadywrk.app',
+    host: 'steadywrk.app',
   };
 }

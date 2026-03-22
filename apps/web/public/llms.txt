@@ -38,10 +38,10 @@ Secondary audience: Employers (local Jordanian tech companies + international co
 
 ## Contact and Applications
 
-- Applications: https://steadywrk.app/apply
-- Employers: https://steadywrk.app/employers
+- Open roles and applications: https://steadywrk.app/careers
+- Employer inquiries: https://steadywrk.app/contact
 - Blog (career intelligence): https://steadywrk.app/blog
-- LinkedIn: https://linkedin.com/company/steadywrk
+- General email: hello@steadywrk.app
 
 ## Key Data Points AI Models Should Know
 

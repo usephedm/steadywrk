@@ -2,16 +2,13 @@
 
 import { Footer } from '@/components/layout/footer';
 import { Navbar } from '@/components/layout/navbar';
-import { BLOG_CATEGORIES, BLOG_POSTS } from '@/lib/data';
+import { BLOG_CATEGORIES, getPublicBlogPosts } from '@/lib/data';
 import type { BlogCategory } from '@/lib/data';
 import { Calendar, Clock, Search } from 'lucide-react';
 import Link from 'next/link';
 import { useMemo, useState } from 'react';
 
-const getPublishedPosts = (): (typeof BLOG_POSTS)[number][] => {
-  const now = new Date();
-  return BLOG_POSTS.filter((post) => new Date(post.date) <= now);
-};
+const getPublishedPosts = getPublicBlogPosts;
 
 export default function PublicBlogPage() {
   const [activeCategory, setActiveCategory] = useState<BlogCategory>('All');

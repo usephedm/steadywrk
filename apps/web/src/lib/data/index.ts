@@ -1,6 +1,11 @@
 export { ROLES, DEPARTMENTS } from './roles';
 export { PROGRAMS } from './programs';
-export { BLOG_CATEGORIES, BLOG_POSTS } from './blog-posts';
+export {
+  BLOG_CATEGORIES,
+  BLOG_POSTS,
+  getPublicBlogPostBySlug,
+  getPublicBlogPosts,
+} from './blog-posts';
 export type { BlogCategory } from './blog-posts';
 export {
   PIPELINE_CANDIDATES,

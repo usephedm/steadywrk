@@ -1,7 +1,7 @@
 import { Footer } from '@/components/layout/footer';
 import { Navbar } from '@/components/layout/navbar';
 import { Breadcrumbs } from '@/components/ui/breadcrumbs';
-import { BLOG_POSTS } from '@/lib/data';
+import { getPublicBlogPostBySlug, getPublicBlogPosts } from '@/lib/data';
 import { ArrowLeft, Calendar, Clock, Link2, Share2 } from 'lucide-react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
@@ -12,12 +12,12 @@ interface BlogPostPageProps {
 }
 
 export async function generateStaticParams() {
-  return BLOG_POSTS.map((post) => ({ slug: post.slug }));
+  return getPublicBlogPosts().map((post) => ({ slug: post.slug }));
 }
 
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const post = BLOG_POSTS.find((p) => p.slug === slug);
+  const post = getPublicBlogPostBySlug(slug);
   if (!post) return { title: 'Post Not Found | STEADYWRK' };
 
   return {
@@ -37,16 +37,16 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 
 export default async function PublicBlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params;
-  const post = BLOG_POSTS.find((p) => p.slug === slug);
+  const post = getPublicBlogPostBySlug(slug);
 
   if (!post) {
     notFound();
   }
 
   const paragraphs = post.content.split('\n\n');
-  const relatedPosts = BLOG_POSTS.filter(
-    (p) => p.slug !== post.slug && p.category === post.category,
-  ).slice(0, 3);
+  const relatedPosts = getPublicBlogPosts()
+    .filter((p) => p.slug !== post.slug && p.category === post.category)
+    .slice(0, 3);
 
   return (
     <>
@@ -55,7 +55,6 @@ export default async function PublicBlogPostPage({ params }: BlogPostPageProps) 
         <article className="max-w-3xl mx-auto px-6 py-12">
           <Breadcrumbs />
 
-          {/* Header */}
           <header className="mb-10">
             <span className="inline-block px-2.5 py-1 rounded-full bg-[#FFF4E6] text-[#E58A0F] text-xs font-medium mb-4">
               {post.category}
@@ -81,7 +80,6 @@ export default async function PublicBlogPostPage({ params }: BlogPostPageProps) 
             />
           </header>
 
-          {/* Content */}
           <div className="space-y-5 mb-12">
             {paragraphs.map((paragraph, i) => (
               <p key={i} className="text-[#23211D] text-base leading-relaxed">
@@ -90,7 +88,6 @@ export default async function PublicBlogPostPage({ params }: BlogPostPageProps) 
             ))}
           </div>
 
-          {/* Share buttons */}
           <div className="flex items-center gap-3 mb-12 p-4 rounded-lg bg-[#F5F5F3]">
             <span className="text-sm text-[#6B6B66]">Share:</span>
             <a
@@ -113,7 +110,6 @@ export default async function PublicBlogPostPage({ params }: BlogPostPageProps) 
             </a>
           </div>
 
-          {/* CTA */}
           <div className="rounded-xl border border-[#E58A0F]/20 bg-[#FFF4E6] p-8 text-center mb-12">
             <h3 className="font-[var(--font-display)] text-xl font-bold text-[#23211D] mb-2">
               Ready to build something real?
@@ -129,7 +125,6 @@ export default async function PublicBlogPostPage({ params }: BlogPostPageProps) 
             </Link>
           </div>
 
-          {/* Related posts */}
           {relatedPosts.length > 0 && (
             <div>
               <h3 className="font-[var(--font-display)] text-lg font-bold text-[#23211D] mb-4">
@@ -152,7 +147,6 @@ export default async function PublicBlogPostPage({ params }: BlogPostPageProps) 
             </div>
           )}
 
-          {/* Back to blog */}
           <div className="mt-10 pt-8 border-t border-[#E5E5E2]">
             <Link
               href="/blog"
@@ -166,7 +160,6 @@ export default async function PublicBlogPostPage({ params }: BlogPostPageProps) 
       </main>
       <Footer />
 
-      {/* BlogPosting JSON-LD */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

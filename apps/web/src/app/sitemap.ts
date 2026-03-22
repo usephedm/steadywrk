@@ -1,4 +1,4 @@
-import { BLOG_POSTS, PROGRAMS, ROLES } from '@/lib/data';
+import { PROGRAMS, ROLES, getPublicBlogPosts } from '@/lib/data';
 import type { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -88,10 +88,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  // Only include published blog posts (date <= today)
-  const publishedPosts = BLOG_POSTS.filter((post) => new Date(post.date) <= now);
-
-  const blogPages: MetadataRoute.Sitemap = publishedPosts.map((post) => ({
+  const blogPages: MetadataRoute.Sitemap = getPublicBlogPosts().map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
     lastModified: new Date(post.date),
     changeFrequency: 'monthly' as const,
