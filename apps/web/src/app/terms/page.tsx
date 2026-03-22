@@ -6,13 +6,18 @@ import { TermsContent } from './content';
 export const metadata: Metadata = {
   title: 'Terms of Service',
   description:
-    'STEADYWRK terms of service — the rules and conditions governing your use of our platform.',
+    'STEADYWRK LLC terms of service. Governing law: Kingdom of Jordan, Amman courts.',
   alternates: {
-    canonical: 'https://steadywrk.app/terms',
+    canonical: '/terms',
     languages: {
       'en': '/terms',
       'ar': '/ar/terms',
     },
+  },
+  openGraph: {
+    title: 'Terms of Service | STEADYWRK',
+    description: 'Terms governing your use of the STEADYWRK platform.',
+    url: 'https://steadywrk.app/terms',
   },
 };
 

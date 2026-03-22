@@ -1,15 +1,14 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Careers — Open Positions',
+  title: 'Careers',
   description:
-    'Join STEADYWRK. Ship production AI systems from week one. Structured hiring, transparent criteria, 14-day timeline. We respond to every applicant within 48 hours.',
-  alternates: {
-    canonical: 'https://steadywrk.app/careers',
-  },
+    'Join STEADYWRK. Open roles in AI, engineering, operations, and marketing in Amman, Jordan. Apply in 3 minutes.',
+  alternates: { canonical: '/careers' },
   openGraph: {
-    title: 'Careers at STEADYWRK',
-    description: 'Open positions across engineering, AI, operations, and marketing. Amman, Jordan.',
+    title: 'Careers at STEADYWRK | AI & Tech Jobs in Jordan',
+    description: 'Open roles in AI, engineering, operations, and marketing. Amman, Jordan.',
+    url: 'https://steadywrk.app/careers',
   },
 };
 

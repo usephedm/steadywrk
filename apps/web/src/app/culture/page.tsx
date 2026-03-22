@@ -8,9 +8,12 @@ import Link from 'next/link';
 export const metadata: Metadata = {
   title: 'Culture',
   description:
-    'Built for women who build. Elite standards, visible growth, real fairness, and speed as brand. Discover the values that drive STEADYWRK.',
-  alternates: {
-    canonical: 'https://steadywrk.app/culture',
+    'STEADYWRK culture — where ambition compounds. Sharp, elite, warmly exacting, modern.',
+  alternates: { canonical: '/culture' },
+  openGraph: {
+    title: 'Culture at STEADYWRK',
+    description: 'Where ambition compounds. Our values, our way.',
+    url: 'https://steadywrk.app/culture',
   },
 };
 

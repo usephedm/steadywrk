@@ -7,11 +7,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'About STEADYWRK',
+  title: 'About',
   description:
-    'AI-native career-launch platform. US-incorporated, Jordan-operated. Building the bridge between education and elite work for Jordan\u2019s most ambitious talent.',
-  alternates: {
-    canonical: 'https://steadywrk.app/about',
+    'STEADYWRK LLC — AI-native career platform headquartered at King Hussein Business Park, Amman, Jordan.',
+  alternates: { canonical: '/about' },
+  openGraph: {
+    title: 'About STEADYWRK',
+    description: 'AI-native career platform. Building 15, King Hussein Business Park, Amman.',
+    url: 'https://steadywrk.app/about',
   },
 };
 

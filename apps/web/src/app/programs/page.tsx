@@ -7,11 +7,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Career Programs — IGNITE, ORBIT, APEX',
+  title: 'Programs',
   description:
-    'Three career tracks for ambitious talent. IGNITE internships, ORBIT fellowships, and APEX leadership. Ship production work from week one.',
-  alternates: {
-    canonical: 'https://steadywrk.app/programs',
+    'STEADYWRK programs: IGNITE (internship), ORBIT (fellowship), APEX (leadership). Structured paths for Jordanian talent.',
+  alternates: { canonical: '/programs' },
+  openGraph: {
+    title: 'Programs | STEADYWRK',
+    description: 'IGNITE, ORBIT, APEX — structured career programs for ambitious Jordanian talent.',
+    url: 'https://steadywrk.app/programs',
   },
 };
 
