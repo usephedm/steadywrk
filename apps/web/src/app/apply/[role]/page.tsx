@@ -47,11 +47,11 @@ const INITIAL_FORM: FormData = {
 };
 
 const TEAMS = [
-  { id: 'ai-lab', label: 'AI Lab', emoji: '🧠' },
-  { id: 'engineering', label: 'Engineering', emoji: '🛠️' },
-  { id: 'operations', label: 'Operations', emoji: '⚡' },
-  { id: 'marketing', label: 'Growth', emoji: '📈' },
-  { id: 'bpo', label: 'BPO', emoji: '💬' },
+  { id: 'ai-lab', label: 'AI Lab', emoji: '\u{1F9E0}' },
+  { id: 'engineering', label: 'Engineering', emoji: '\u{1F6E0}\uFE0F' },
+  { id: 'operations', label: 'Operations', emoji: '\u{26A1}' },
+  { id: 'marketing', label: 'Growth', emoji: '\u{1F4C8}' },
+  { id: 'bpo', label: 'BPO', emoji: '\u{1F4AC}' },
 ];
 
 const SKILL_OPTIONS = [
@@ -71,6 +71,8 @@ const STEPS = [
   { label: 'Confirmation', time: '' },
 ];
 
+const STEP_NAMES = ['info', 'story', 'skills', 'challenge', 'confirm'] as const;
+
 const STORAGE_KEY = 'steadywrk-apply-draft';
 
 export default function ApplyPage() {
@@ -84,7 +86,7 @@ export default function ApplyPage() {
   const [submitted, setSubmitted] = useState(false);
   const formRef = useRef<HTMLDivElement>(null);
 
-  // Restore draft from localStorage
+  // Restore draft from localStorage + track form start
   useEffect(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
@@ -96,7 +98,10 @@ export default function ApplyPage() {
     } catch {
       // ignore
     }
-  }, []);
+
+    // PostHog: track form started
+    (window as any).posthog?.capture('apply_form_started', { role: role?.slug });
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Auto-save to localStorage
   useEffect(() => {
@@ -117,9 +122,18 @@ export default function ApplyPage() {
   }, []);
 
   const next = useCallback(() => {
-    setStep((s) => Math.min(s + 1, 5));
+    setStep((s) => {
+      const nextStep = Math.min(s + 1, 5);
+      // PostHog: track step completion
+      (window as any).posthog?.capture('apply_step_completed', {
+        role: role?.slug,
+        step: s,
+        step_name: STEP_NAMES[s - 1],
+      });
+      return nextStep;
+    });
     formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }, []);
+  }, [role?.slug]);
 
   const prev = useCallback(() => {
     setStep((s) => Math.max(s - 1, 1));
@@ -156,6 +170,12 @@ export default function ApplyPage() {
       setStep(5);
       localStorage.removeItem(STORAGE_KEY);
 
+      // PostHog: track successful submission
+      (window as any).posthog?.capture('apply_form_submitted', {
+        role: role?.slug,
+        team: form.team,
+      });
+
       // Confetti burst with brand colors
       confetti({
         particleCount: 100,
@@ -180,7 +200,11 @@ export default function ApplyPage() {
         });
       }, 250);
     } catch {
-      // silently handle — form data is in localStorage
+      // PostHog: track submission error
+      (window as any).posthog?.capture('apply_form_error', {
+        role: role?.slug,
+        error: 'submission_failed',
+      });
     } finally {
       setSubmitting(false);
     }
