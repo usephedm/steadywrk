@@ -4,7 +4,7 @@ const TOKEN_VERSION = 'v1';
 const DEFAULT_MAX_AGE_SECONDS = 60 * 60 * 24 * 7;
 
 function getSecret() {
-  return process.env.SCORECARD_SECRET || process.env.RESEND_API_KEY || null;
+  return process.env.SCORECARD_SECRET || null;
 }
 
 function sign(payload: string) {
@@ -28,7 +28,8 @@ export function verifyScorecardToken(token: string, maxAgeSeconds = DEFAULT_MAX_
   if (parts.length !== 4) return null;
 
   const [version, applicantId, issuedAtRaw, providedSignature] = parts;
-  if (version !== TOKEN_VERSION || !applicantId || !issuedAtRaw || !providedSignature) return null;
+  if (!version || !applicantId || !issuedAtRaw || !providedSignature) return null;
+  if (version !== TOKEN_VERSION) return null;
 
   const issuedAt = Number(issuedAtRaw);
   if (!Number.isFinite(issuedAt)) return null;
@@ -42,7 +43,8 @@ export function verifyScorecardToken(token: string, maxAgeSeconds = DEFAULT_MAX_
 
   const provided = Buffer.from(providedSignature);
   const expected = Buffer.from(expectedSignature);
-  if (provided.length !== expected.length || !timingSafeEqual(provided, expected)) return null;
+  if (provided.length !== expected.length) return null;
+  if (!timingSafeEqual(provided, expected)) return null;
 
   return { applicantId, issuedAt };
 }
