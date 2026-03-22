@@ -1,6 +1,6 @@
 import { Footer } from '@/components/layout/footer';
 import { Navbar } from '@/components/layout/navbar';
-import { COMPANY } from '@/lib/data';
+import { COMPANY } from '@/lib/constants';
 import { Globe, MapPin, Users, Zap } from 'lucide-react';
 import type { Metadata } from 'next';
 import Image from 'next/image';

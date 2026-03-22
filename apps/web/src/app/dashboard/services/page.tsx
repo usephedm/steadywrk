@@ -1,7 +1,8 @@
 'use client';
 
 import { WhatsAppFloat } from '@/components/ui/whatsapp-float';
-import { COMPANY, SERVICES } from '@/lib/data';
+import { COMPANY } from '@/lib/constants';
+import { SERVICES } from '@/lib/data';
 import { Bot, Brain, Building2, type LucideIcon, Megaphone } from 'lucide-react';
 import Link from 'next/link';
 

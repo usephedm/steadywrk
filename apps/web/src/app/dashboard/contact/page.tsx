@@ -1,7 +1,7 @@
 'use client';
 
 import { WhatsAppFloat } from '@/components/ui/whatsapp-float';
-import { COMPANY } from '@/lib/data';
+import { COMPANY } from '@/lib/constants';
 import { Mail, MapPin, Send } from 'lucide-react';
 import { useState } from 'react';
 

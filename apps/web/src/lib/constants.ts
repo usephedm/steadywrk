@@ -1,7 +1,11 @@
 export const COMPANY = {
   name: 'STEADYWRK',
+  legal: 'STEADYWRK LLC',
   legalName: 'STEADYWRK LLC',
   domain: 'steadywrk.app',
+  url: 'https://steadywrk.app',
+  email: 'hello@steadywrk.app',
+  address: 'Building 15, King Hussein Business Park, Amman, Jordan',
   emails: {
     public: 'hello@steadywrk.app',
     admin: 'v@steadywrk.dev',
@@ -23,3 +27,10 @@ export const COMPANY = {
     countryCode: 'JO',
   },
 } as const;
+
+export const NAV_LINKS = [
+  { href: '/careers', label: 'Careers' },
+  { href: '/programs', label: 'Programs' },
+  { href: '/about', label: 'About' },
+  { href: '/culture', label: 'Culture' },
+] as const;

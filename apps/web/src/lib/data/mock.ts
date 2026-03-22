@@ -1,0 +1,113 @@
+export type CandidateStatus = 'applied' | 'screening' | 'assessment' | 'interview' | 'offer' | 'rejected';
+
+export const PIPELINE_CANDIDATES = [
+  { id: '1', name: 'Lina Al-Masri', role: 'AI Engineer', appliedDate: '2026-03-18', status: 'interview' as CandidateStatus, score: 92, scores: { technical: 95, organizational: 88, communication: 90, growth: 94, cultural: 91, initiative: 89 } },
+  { id: '2', name: 'Omar Khalil', role: 'Frontend Developer', appliedDate: '2026-03-19', status: 'assessment' as CandidateStatus, score: 85, scores: { technical: 88, organizational: 82, communication: 86, growth: 80, cultural: 85, initiative: 84 } },
+  { id: '3', name: 'Rania Haddad', role: 'Operations Dispatcher', appliedDate: '2026-03-17', status: 'offer' as CandidateStatus, score: 88, scores: { technical: 78, organizational: 95, communication: 92, growth: 86, cultural: 90, initiative: 88 } },
+  { id: '4', name: 'Tariq Nasser', role: 'Digital Marketing Lead', appliedDate: '2026-03-20', status: 'screening' as CandidateStatus, score: 76, scores: { technical: 72, organizational: 80, communication: 78, growth: 74, cultural: 76, initiative: 73 } },
+  { id: '5', name: 'Sara Mansour', role: 'AI BPO Agent', appliedDate: '2026-03-15', status: 'applied' as CandidateStatus, score: 70, scores: { technical: 65, organizational: 75, communication: 72, growth: 70, cultural: 74, initiative: 68 } },
+  { id: '6', name: 'Yazan Qasim', role: 'AI Engineer', appliedDate: '2026-03-16', status: 'rejected' as CandidateStatus, score: 55, scores: { technical: 50, organizational: 58, communication: 60, growth: 52, cultural: 56, initiative: 54 } },
+  { id: '7', name: 'Nour Abed', role: 'Frontend Developer', appliedDate: '2026-03-14', status: 'interview' as CandidateStatus, score: 90, scores: { technical: 92, organizational: 86, communication: 91, growth: 88, cultural: 92, initiative: 90 } },
+  { id: '8', name: 'Faris Jarrar', role: 'Operations Dispatcher', appliedDate: '2026-03-19', status: 'applied' as CandidateStatus, score: 68, scores: { technical: 62, organizational: 74, communication: 70, growth: 66, cultural: 72, initiative: 64 } },
+  { id: '9', name: 'Dana Khoury', role: 'AI BPO Agent', appliedDate: '2026-03-20', status: 'screening' as CandidateStatus, score: 74, scores: { technical: 68, organizational: 78, communication: 80, growth: 72, cultural: 76, initiative: 70 } },
+  { id: '10', name: 'Kareem Saleh', role: 'Digital Marketing Lead', appliedDate: '2026-03-13', status: 'assessment' as CandidateStatus, score: 82, scores: { technical: 80, organizational: 84, communication: 85, growth: 78, cultural: 82, initiative: 80 } },
+  { id: '11', name: 'Hala Dajani', role: 'AI Engineer', appliedDate: '2026-03-21', status: 'applied' as CandidateStatus, score: 78, scores: { technical: 82, organizational: 76, communication: 74, growth: 80, cultural: 78, initiative: 76 } },
+  { id: '12', name: 'Sami Issa', role: 'Frontend Developer', appliedDate: '2026-03-12', status: 'offer' as CandidateStatus, score: 94, scores: { technical: 96, organizational: 90, communication: 93, growth: 95, cultural: 94, initiative: 92 } },
+] as const;
+
+export type EmployeeLevel = 'Explorer' | 'Contributor' | 'Builder' | 'Leader';
+
+export const LEADERBOARD_DATA = [
+  { id: '1', name: 'Rania Haddad', points: 2450, streak: 18, level: 'Builder' as EmployeeLevel, badges: ['Launched', 'First Build', 'Orbital'], isCurrentUser: false },
+  { id: '2', name: 'Nour Abed', points: 2280, streak: 22, level: 'Builder' as EmployeeLevel, badges: ['Launched', 'First Build', 'Orbital', 'Steady'], isCurrentUser: false },
+  { id: '3', name: 'You', points: 1950, streak: 12, level: 'Contributor' as EmployeeLevel, badges: ['Launched', 'First Build'], isCurrentUser: true },
+  { id: '4', name: 'Lina Al-Masri', points: 1820, streak: 15, level: 'Contributor' as EmployeeLevel, badges: ['Launched', 'First Build', 'Orbital'], isCurrentUser: false },
+  { id: '5', name: 'Omar Khalil', points: 1650, streak: 9, level: 'Contributor' as EmployeeLevel, badges: ['Launched', 'First Build'], isCurrentUser: false },
+  { id: '6', name: 'Sara Mansour', points: 1420, streak: 7, level: 'Explorer' as EmployeeLevel, badges: ['Launched'], isCurrentUser: false },
+  { id: '7', name: 'Tariq Nasser', points: 1180, streak: 5, level: 'Explorer' as EmployeeLevel, badges: ['Launched'], isCurrentUser: false },
+  { id: '8', name: 'Dana Khoury', points: 980, streak: 3, level: 'Explorer' as EmployeeLevel, badges: [], isCurrentUser: false },
+  { id: '9', name: 'Faris Jarrar', points: 850, streak: 4, level: 'Explorer' as EmployeeLevel, badges: ['Launched'], isCurrentUser: false },
+  { id: '10', name: 'Hala Dajani', points: 720, streak: 2, level: 'Explorer' as EmployeeLevel, badges: [], isCurrentUser: false },
+] as const;
+
+export const ROADMAP = [
+  {
+    quarter: 'Q1 2026',
+    title: 'Launch',
+    items: ['Platform live', 'First hires in Jordan', 'Core services operational'],
+  },
+  {
+    quarter: 'Q2 2026',
+    title: 'Scale',
+    items: [
+      'AI Lab first projects delivered',
+      'BPO team fully onboarded',
+      'Client acquisition pipeline active',
+    ],
+  },
+  {
+    quarter: 'Q3 2026',
+    title: 'Expand',
+    items: [
+      'US operations active',
+      'Facility management contracts signed',
+      'Marketing client portfolio growing',
+    ],
+  },
+  {
+    quarter: 'Q4 2026',
+    title: 'Steady',
+    items: [
+      'Full service delivery across all verticals',
+      'MCP platform layer launched',
+      'Series readiness',
+    ],
+  },
+] as const;
+
+export const HUB_CARDS = [
+  {
+    title: 'Steady...W-hat?',
+    subtitle: '1.0 Roadmap 2026',
+    href: '/dashboard/roadmap',
+    icon: 'Map',
+    colors: [[245, 158, 11]] as number[][],
+  },
+  {
+    title: 'Yes, We are hiring',
+    subtitle: 'Join the team',
+    href: '/dashboard/hiring',
+    icon: 'Users',
+    colors: [
+      [245, 158, 11],
+      [255, 200, 50],
+    ] as number[][],
+  },
+  {
+    title: 'Blog',
+    subtitle: 'Thoughts & updates',
+    href: '/dashboard/blog',
+    icon: 'Newspaper',
+    colors: [[200, 130, 10]] as number[][],
+  },
+  {
+    title: 'Our Services',
+    subtitle: 'What we build',
+    href: '/dashboard/services',
+    icon: 'Layers',
+    colors: [
+      [245, 158, 11],
+      [220, 100, 10],
+    ] as number[][],
+  },
+  {
+    title: 'Get in Touch',
+    subtitle: 'Business inquiries',
+    href: '/dashboard/contact',
+    icon: 'Mail',
+    colors: [
+      [180, 150, 80],
+      [245, 158, 11],
+    ] as number[][],
+  },
+] as const;

@@ -1,14 +1,6 @@
-import { COMPANY } from '@/lib/constants';
-import { COMPANY as COMPANY_DATA } from '@/lib/data';
+import { COMPANY, NAV_LINKS } from '@/lib/constants';
 import Image from 'next/image';
 import Link from 'next/link';
-
-const FOOTER_LINKS = [
-  { href: '/careers', label: 'Careers' },
-  { href: '/programs', label: 'Programs' },
-  { href: '/about', label: 'About' },
-  { href: '/culture', label: 'Culture' },
-] as const;
 
 export function Footer() {
   return (
@@ -26,7 +18,7 @@ export function Footer() {
           </div>
 
           <div className="flex flex-wrap items-center gap-6 text-[13px] text-white/30">
-            {FOOTER_LINKS.map((link) => (
+            {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
@@ -46,7 +38,7 @@ export function Footer() {
 
         <div className="border-t border-[rgba(255,255,255,0.04)] pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-[11px] text-white/15">
-            &copy; {new Date().getFullYear()} {COMPANY_DATA.legal}. All rights reserved.
+            &copy; {new Date().getFullYear()} {COMPANY.legal}. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
             <Link
@@ -86,7 +78,7 @@ export function Footer() {
               Instagram
             </a>
           </div>
-          <p className="text-[11px] text-white/15">{COMPANY_DATA.address}</p>
+          <p className="text-[11px] text-white/15">{COMPANY.address}</p>
         </div>
       </div>
     </footer>

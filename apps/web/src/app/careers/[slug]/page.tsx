@@ -1,7 +1,8 @@
 import { Footer } from '@/components/layout/footer';
 import { Navbar } from '@/components/layout/navbar';
 import { Breadcrumbs } from '@/components/ui/breadcrumbs';
-import { COMPANY, ROLES } from '@/lib/data';
+import { COMPANY } from '@/lib/constants';
+import { ROLES } from '@/lib/data';
 import { ArrowRight, Briefcase, Clock, MapPin } from 'lucide-react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
