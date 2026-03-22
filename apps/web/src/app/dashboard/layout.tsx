@@ -1,5 +1,7 @@
 'use client';
 
+import { hasAdminAccess } from '@/lib/auth/roles';
+import { useUser } from '@clerk/nextjs';
 import {
   BookOpen,
   ChevronLeft,
@@ -17,7 +19,7 @@ import { AnimatePresence, motion } from 'motion/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 const NAV_ITEMS = [
   { href: '/dashboard', label: 'Overview', icon: LayoutDashboard },
@@ -36,9 +38,16 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
+  const { user, isLoaded } = useUser();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
   const closeSidebar = useCallback(() => setSidebarOpen(false), []);
+
+  const canAccessAdmin = isLoaded && hasAdminAccess(user?.publicMetadata);
+  const visibleNavItems = useMemo(
+    () => NAV_ITEMS.filter((item) => !('adminOnly' in item) || !item.adminOnly || canAccessAdmin),
+    [canAccessAdmin],
+  );
 
   // Close mobile sidebar on route change
   const [prevPathname, setPrevPathname] = useState(pathname);
@@ -88,7 +97,7 @@ export default function DashboardLayout({
 
         {/* Nav items */}
         <nav className="flex-1 py-4 px-3 space-y-1 overflow-y-auto">
-          {NAV_ITEMS.map((item) => {
+          {visibleNavItems.map((item) => {
             const active = isActive(item.href);
             const Icon = item.icon;
             return (
@@ -189,7 +198,7 @@ export default function DashboardLayout({
               </div>
 
               <nav className="flex-1 py-4 px-3 space-y-1 overflow-y-auto">
-                {NAV_ITEMS.map((item) => {
+                {visibleNavItems.map((item) => {
                   const active = isActive(item.href);
                   const Icon = item.icon;
                   return (

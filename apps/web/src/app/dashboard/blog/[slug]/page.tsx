@@ -1,4 +1,6 @@
+import { hasAdminAccess } from '@/lib/auth/roles';
 import { BLOG_POSTS } from '@/lib/data';
+import { currentUser } from '@clerk/nextjs/server';
 import { ArrowLeft, Calendar, Clock, Link2, Share2 } from 'lucide-react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
@@ -30,13 +32,15 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const { slug } = await params;
+  const [{ slug }, user] = await Promise.all([params, currentUser()]);
   const post = BLOG_POSTS.find((p) => p.slug === slug);
 
   if (!post) {
     notFound();
   }
 
+  const hiringHref = hasAdminAccess(user?.publicMetadata) ? '/dashboard/hiring' : '/careers';
+  const hiringCtaLabel = hiringHref === '/dashboard/hiring' ? 'Open Hiring Pipeline' : 'View Open Roles';
   const paragraphs = post.content.split('\n\n');
   const relatedPosts = BLOG_POSTS.filter(
     (p) => p.slug !== post.slug && p.category === post.category,
@@ -121,10 +125,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             Join STEADYWRK and start shipping from day one.
           </p>
           <Link
-            href="/dashboard/hiring"
+            href={hiringHref}
             className="inline-flex items-center gap-2 bg-[#E58A0F] text-white px-6 py-3 rounded-lg text-sm font-medium transition-all duration-[180ms] hover:bg-[#CC7408] min-h-[44px]"
           >
-            Apply Now
+            {hiringCtaLabel}
           </Link>
         </div>
 
