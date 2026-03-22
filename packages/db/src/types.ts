@@ -2,6 +2,7 @@ import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
 import {
   applicants,
   blogPosts,
+  contacts,
   emailEvents,
   employees,
   interviewSlots,
