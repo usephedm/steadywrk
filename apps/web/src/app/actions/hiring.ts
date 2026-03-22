@@ -1,9 +1,21 @@
 'use server';
 
 import { requireDashboardEmployee } from '@/lib/auth/dashboard-access';
+import { ROLES } from '@/lib/data';
 import { db } from '@/lib/db';
-import { desc } from 'drizzle-orm';
+import { desc, eq } from 'drizzle-orm';
+import { revalidatePath } from 'next/cache';
 import { applicants } from '../../../../../packages/db/src/schema';
+
+const ROLE_LABELS = new Map<string, string>(ROLES.map((role) => [role.slug, role.title]));
+
+export type HiringStatus =
+  | 'applied'
+  | 'screening'
+  | 'assessment'
+  | 'interview'
+  | 'offer'
+  | 'rejected';
 
 export async function getPipelineCandidates() {
   const { canAccessAdmin } = await requireDashboardEmployee();
@@ -22,7 +34,7 @@ export async function getPipelineCandidates() {
     return records.map((record) => ({
       id: record.id,
       name: record.name,
-      role: record.roleSlug,
+      role: ROLE_LABELS.get(record.roleSlug) ?? record.roleSlug,
       appliedDate: record.createdAt.toISOString().split('T')[0],
       status: record.status,
       score: record.score || 0,
@@ -39,5 +51,32 @@ export async function getPipelineCandidates() {
   } catch (error) {
     console.error('Failed to fetch pipeline candidates:', error);
     return [];
+  }
+}
+
+export async function updateApplicantStatus(applicantId: string, status: HiringStatus) {
+  const { canAccessAdmin } = await requireDashboardEmployee();
+
+  if (!canAccessAdmin) {
+    return { success: false as const, error: 'Unauthorized' };
+  }
+
+  if (!db) {
+    return { success: false as const, error: 'Database not configured' };
+  }
+
+  try {
+    await db
+      .update(applicants)
+      .set({ status, updatedAt: new Date() })
+      .where(eq(applicants.id, applicantId));
+
+    revalidatePath('/dashboard/hiring');
+    revalidatePath('/dashboard/interviews');
+
+    return { success: true as const };
+  } catch (error) {
+    console.error('Failed to update applicant status:', error);
+    return { success: false as const, error: 'Failed to update applicant status' };
   }
 }

@@ -1,9 +1,12 @@
 'use client';
 
+import { type HiringStatus, updateApplicantStatus } from '@/app/actions/hiring';
+import { scheduleInterviewSlot } from '@/app/actions/interviews';
 import { ROLES } from '@/lib/data';
 import type { CandidateStatus } from '@/lib/data';
 import { ArrowRight, Calendar, Filter, Search, Star, X } from 'lucide-react';
-import { useMemo, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useMemo, useState, useTransition } from 'react';
 
 const PIPELINE_COLUMNS: { status: CandidateStatus; label: string; color: string }[] = [
   { status: 'applied', label: 'Applied', color: '#6B6B66' },
@@ -22,6 +25,13 @@ const SCORECARD_DIMENSIONS = [
   { name: 'Cultural', weight: 10, key: 'cultural' as const },
   { name: 'Initiative', weight: 10, key: 'initiative' as const },
 ];
+
+const NEXT_STATUS: Partial<Record<CandidateStatus, HiringStatus>> = {
+  applied: 'screening',
+  screening: 'assessment',
+  assessment: 'interview',
+  interview: 'offer',
+};
 
 type ScoreKey =
   | 'technical'
@@ -42,10 +52,26 @@ export interface PipelineCandidate {
   email: string;
 }
 
+function toDatetimeLocalInputValue(date: Date) {
+  const pad = (value: number) => String(value).padStart(2, '0');
+  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}`;
+}
+
 export function HiringBoard({ initialCandidates }: { initialCandidates: PipelineCandidate[] }) {
+  const router = useRouter();
   const [searchQuery, setSearchQuery] = useState('');
   const [roleFilter, setRoleFilter] = useState('All');
   const [selectedCandidate, setSelectedCandidate] = useState<string | null>(null);
+  const [statusMessage, setStatusMessage] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [scheduleForm, setScheduleForm] = useState(() => ({
+    scheduledAt: toDatetimeLocalInputValue(new Date(Date.now() + 24 * 60 * 60 * 1000)),
+    duration: '45',
+    interviewerName: 'Reem',
+    meetingUrl: '',
+    notes: '',
+  }));
+  const [isPending, startTransition] = useTransition();
 
   const roleOptions = ['All', ...ROLES.map((r) => r.title)] as const;
 
@@ -54,23 +80,70 @@ export function HiringBoard({ initialCandidates }: { initialCandidates: Pipeline
       const matchesSearch =
         !searchQuery ||
         c.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        c.role.toLowerCase().includes(searchQuery.toLowerCase());
+        c.role.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        c.email.toLowerCase().includes(searchQuery.toLowerCase());
       const matchesRole = roleFilter === 'All' || c.role === roleFilter;
       return matchesSearch && matchesRole;
     });
   }, [searchQuery, roleFilter, initialCandidates]);
 
-  const selected = initialCandidates.find((c) => c.id === selectedCandidate);
+  const selected = initialCandidates.find((c) => c.id === selectedCandidate) ?? null;
+  const nextStatus = selected ? (NEXT_STATUS[selected.status] ?? null) : null;
+
+  async function runStatusUpdate(
+    candidate: PipelineCandidate,
+    status: HiringStatus,
+    label: string,
+  ) {
+    setErrorMessage(null);
+    setStatusMessage(null);
+
+    startTransition(async () => {
+      const result = await updateApplicantStatus(candidate.id, status);
+      if (!result.success) {
+        setErrorMessage(result.error);
+        return;
+      }
+
+      setStatusMessage(`${candidate.name} moved to ${label}.`);
+      router.refresh();
+    });
+  }
+
+  async function handleScheduleInterview() {
+    if (!selected) return;
+
+    setErrorMessage(null);
+    setStatusMessage(null);
+
+    startTransition(async () => {
+      const result = await scheduleInterviewSlot({
+        applicantId: selected.id,
+        scheduledAt: scheduleForm.scheduledAt,
+        duration: Number(scheduleForm.duration) || 45,
+        interviewerName: scheduleForm.interviewerName,
+        meetingUrl: scheduleForm.meetingUrl,
+        notes: scheduleForm.notes,
+      });
+
+      if (!result.success) {
+        setErrorMessage(result.error);
+        return;
+      }
+
+      setStatusMessage(`Interview scheduled for ${selected.name}.`);
+      router.refresh();
+    });
+  }
 
   return (
     <>
-      {/* Filter bar */}
       <div className="flex flex-col sm:flex-row gap-3 mb-8">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#B0B0AB]" />
           <input
             type="text"
-            placeholder="Search by name or role..."
+            placeholder="Search by name, email, or role..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full pl-10 pr-4 py-2.5 min-h-[44px] rounded-lg border border-[#E5E5E2] bg-white text-sm text-[#23211D] placeholder:text-[#B0B0AB] focus:outline-none focus:border-[#E58A0F] focus:ring-2 focus:ring-[#E58A0F]/10 transition-all"
@@ -92,7 +165,18 @@ export function HiringBoard({ initialCandidates }: { initialCandidates: Pipeline
         </div>
       </div>
 
-      {/* Kanban board */}
+      {(statusMessage || errorMessage) && (
+        <div
+          className={`mb-6 rounded-xl border px-4 py-3 text-sm ${
+            errorMessage
+              ? 'border-[#A03D4A]/20 bg-[#FDF0F2] text-[#A03D4A]'
+              : 'border-[#4D7A3A]/20 bg-[#EEF7ED] text-[#355C2D]'
+          }`}
+        >
+          {errorMessage ?? statusMessage}
+        </div>
+      )}
+
       <div
         className="flex gap-4 overflow-x-auto pb-4 -mx-6 px-6"
         style={{ scrollbarWidth: 'thin' }}
@@ -101,7 +185,6 @@ export function HiringBoard({ initialCandidates }: { initialCandidates: Pipeline
           const colCandidates = filteredCandidates.filter((c) => c.status === col.status);
           return (
             <div key={col.status} className="shrink-0 w-[260px]">
-              {/* Column header */}
               <div className="flex items-center gap-2 mb-3 px-1">
                 <div className="w-2 h-2 rounded-full" style={{ backgroundColor: col.color }} />
                 <h3 className="text-sm font-bold text-[#23211D]">{col.label}</h3>
@@ -110,7 +193,6 @@ export function HiringBoard({ initialCandidates }: { initialCandidates: Pipeline
                 </span>
               </div>
 
-              {/* Cards */}
               <div className="space-y-3">
                 {colCandidates.map((candidate) => (
                   <button
@@ -157,7 +239,6 @@ export function HiringBoard({ initialCandidates }: { initialCandidates: Pipeline
         })}
       </div>
 
-      {/* Candidate detail panel */}
       {selected && (
         <div className="mt-8 rounded-xl border border-[rgba(0,0,0,0.06)] bg-white shadow-[0_1px_3px_rgba(0,0,0,0.06)] overflow-hidden">
           <div className="flex items-center justify-between p-6 border-b border-[#E5E5E2]">
@@ -169,19 +250,27 @@ export function HiringBoard({ initialCandidates }: { initialCandidates: Pipeline
                 {selected.role} · Applied {selected.appliedDate}
               </p>
             </div>
-            <div className="flex items-center gap-3">
-              <button
-                type="button"
-                className="px-4 py-2 min-h-[44px] rounded-lg bg-[#E58A0F] text-white text-sm font-medium transition-all duration-[180ms] hover:bg-[#CC7408] flex items-center gap-1.5"
-              >
-                Advance <ArrowRight className="h-4 w-4" />
-              </button>
-              <button
-                type="button"
-                className="px-4 py-2 min-h-[44px] rounded-lg border border-[#E5E5E2] text-[#6B6B66] text-sm font-medium transition-all duration-[180ms] hover:bg-[#F5F5F3]"
-              >
-                Reject
-              </button>
+            <div className="flex items-center gap-3 flex-wrap justify-end">
+              {nextStatus && (
+                <button
+                  type="button"
+                  disabled={isPending}
+                  onClick={() => runStatusUpdate(selected, nextStatus, nextStatus)}
+                  className="px-4 py-2 min-h-[44px] rounded-lg bg-[#E58A0F] text-white text-sm font-medium transition-all duration-[180ms] hover:bg-[#CC7408] flex items-center gap-1.5 disabled:opacity-50"
+                >
+                  Advance <ArrowRight className="h-4 w-4" />
+                </button>
+              )}
+              {selected.status !== 'rejected' && (
+                <button
+                  type="button"
+                  disabled={isPending}
+                  onClick={() => runStatusUpdate(selected, 'rejected', 'rejected')}
+                  className="px-4 py-2 min-h-[44px] rounded-lg border border-[#E5E5E2] text-[#6B6B66] text-sm font-medium transition-all duration-[180ms] hover:bg-[#F5F5F3] disabled:opacity-50"
+                >
+                  Reject
+                </button>
+              )}
               <button
                 type="button"
                 onClick={() => setSelectedCandidate(null)}
@@ -193,44 +282,123 @@ export function HiringBoard({ initialCandidates }: { initialCandidates: Pipeline
             </div>
           </div>
 
-          {/* Scorecard */}
-          <div className="p-6">
-            <h3 className="font-[var(--font-display)] text-base font-bold text-[#23211D] mb-4">
-              Scorecard
-            </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {SCORECARD_DIMENSIONS.map((dim) => {
-                const score = selected.scores[dim.key as ScoreKey];
-                return (
-                  <div key={dim.key} className="flex items-center gap-3">
-                    <div className="flex-1">
-                      <div className="flex items-center justify-between mb-1">
-                        <span className="text-xs text-[#6B6B66]">
-                          {dim.name} <span className="text-[#B0B0AB]">({dim.weight}%)</span>
-                        </span>
-                        <span className="text-xs font-medium text-[#23211D]">{score}</span>
-                      </div>
-                      <div className="h-2 rounded-full bg-[#F5F5F3] overflow-hidden">
-                        <div
-                          className="h-full rounded-full transition-all duration-500"
-                          style={{
-                            width: `${score}%`,
-                            background:
-                              score >= 85 ? '#4D7A3A' : score >= 70 ? '#E58A0F' : '#A03D4A',
-                          }}
-                        />
+          <div className="p-6 space-y-6">
+            <div>
+              <h3 className="font-[var(--font-display)] text-base font-bold text-[#23211D] mb-4">
+                Scorecard
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {SCORECARD_DIMENSIONS.map((dim) => {
+                  const score = selected.scores[dim.key as ScoreKey];
+                  return (
+                    <div key={dim.key} className="flex items-center gap-3">
+                      <div className="flex-1">
+                        <div className="flex items-center justify-between mb-1">
+                          <span className="text-xs text-[#6B6B66]">
+                            {dim.name} <span className="text-[#B0B0AB]">({dim.weight}%)</span>
+                          </span>
+                          <span className="text-xs font-medium text-[#23211D]">{score}</span>
+                        </div>
+                        <div className="h-2 rounded-full bg-[#F5F5F3] overflow-hidden">
+                          <div
+                            className="h-full rounded-full transition-all duration-500"
+                            style={{
+                              width: `${score}%`,
+                              background:
+                                score >= 85 ? '#4D7A3A' : score >= 70 ? '#E58A0F' : '#A03D4A',
+                            }}
+                          />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
+
+              <div className="mt-6 flex items-center gap-3 p-4 rounded-lg bg-[#F5F5F3]">
+                <Star className="h-5 w-5 text-[#E58A0F]" strokeWidth={1.5} />
+                <span className="text-sm text-[#6B6B66]">Overall Score:</span>
+                <span className="text-lg font-bold text-[#23211D]">{selected.score}/100</span>
+              </div>
             </div>
 
-            {/* Overall score */}
-            <div className="mt-6 flex items-center gap-3 p-4 rounded-lg bg-[#F5F5F3]">
-              <Star className="h-5 w-5 text-[#E58A0F]" strokeWidth={1.5} />
-              <span className="text-sm text-[#6B6B66]">Overall Score:</span>
-              <span className="text-lg font-bold text-[#23211D]">{selected.score}/100</span>
+            <div className="rounded-xl border border-[rgba(0,0,0,0.06)] bg-[#FAFAF8] p-5">
+              <h3 className="font-[var(--font-display)] text-base font-bold text-[#23211D] mb-4">
+                Schedule interview
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <label className="text-sm text-[#23211D]">
+                  <span className="block mb-1">Date & time</span>
+                  <input
+                    type="datetime-local"
+                    value={scheduleForm.scheduledAt}
+                    onChange={(e) =>
+                      setScheduleForm((current) => ({ ...current, scheduledAt: e.target.value }))
+                    }
+                    className="w-full rounded-lg border border-[#E5E5E2] bg-white px-3 py-2.5"
+                  />
+                </label>
+                <label className="text-sm text-[#23211D]">
+                  <span className="block mb-1">Duration (minutes)</span>
+                  <input
+                    type="number"
+                    min="15"
+                    step="15"
+                    value={scheduleForm.duration}
+                    onChange={(e) =>
+                      setScheduleForm((current) => ({ ...current, duration: e.target.value }))
+                    }
+                    className="w-full rounded-lg border border-[#E5E5E2] bg-white px-3 py-2.5"
+                  />
+                </label>
+                <label className="text-sm text-[#23211D]">
+                  <span className="block mb-1">Interviewer</span>
+                  <input
+                    type="text"
+                    value={scheduleForm.interviewerName}
+                    onChange={(e) =>
+                      setScheduleForm((current) => ({
+                        ...current,
+                        interviewerName: e.target.value,
+                      }))
+                    }
+                    className="w-full rounded-lg border border-[#E5E5E2] bg-white px-3 py-2.5"
+                  />
+                </label>
+                <label className="text-sm text-[#23211D]">
+                  <span className="block mb-1">Meeting URL</span>
+                  <input
+                    type="url"
+                    value={scheduleForm.meetingUrl}
+                    onChange={(e) =>
+                      setScheduleForm((current) => ({ ...current, meetingUrl: e.target.value }))
+                    }
+                    className="w-full rounded-lg border border-[#E5E5E2] bg-white px-3 py-2.5"
+                    placeholder="https://meet.google.com/..."
+                  />
+                </label>
+                <label className="text-sm text-[#23211D] md:col-span-2">
+                  <span className="block mb-1">Notes</span>
+                  <textarea
+                    value={scheduleForm.notes}
+                    onChange={(e) =>
+                      setScheduleForm((current) => ({ ...current, notes: e.target.value }))
+                    }
+                    className="w-full rounded-lg border border-[#E5E5E2] bg-white px-3 py-2.5 min-h-[96px]"
+                    placeholder="Optional prep or coordination notes"
+                  />
+                </label>
+              </div>
+              <div className="mt-4 flex justify-end">
+                <button
+                  type="button"
+                  disabled={isPending || !scheduleForm.scheduledAt}
+                  onClick={handleScheduleInterview}
+                  className="px-4 py-2 min-h-[44px] rounded-lg bg-[#23211D] text-white text-sm font-medium transition-colors hover:bg-[#111110] disabled:opacity-50"
+                >
+                  Schedule interview
+                </button>
+              </div>
             </div>
           </div>
         </div>

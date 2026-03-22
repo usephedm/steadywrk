@@ -1,7 +1,9 @@
 'use client';
 
+import { markInterviewCompleted } from '@/app/actions/interviews';
 import { Calendar, CheckCircle2, Clock, Edit3, UserCircle, Video } from 'lucide-react';
-import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useState, useTransition } from 'react';
 
 interface InterviewRecord {
   id: string;
@@ -21,23 +23,57 @@ interface InterviewRecord {
 }
 
 export function InterviewsClient({ initialInterviews }: { initialInterviews: InterviewRecord[] }) {
+  const router = useRouter();
   const [interviews] = useState(initialInterviews);
+  const [feedback, setFeedback] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [isPending, startTransition] = useTransition();
+
+  function toggleCompleted(interview: InterviewRecord, completed: boolean) {
+    setFeedback(null);
+    setError(null);
+
+    startTransition(async () => {
+      const result = await markInterviewCompleted(interview.id, completed);
+      if (!result.success) {
+        setError(result.error);
+        return;
+      }
+
+      setFeedback(
+        completed
+          ? `Marked ${interview.applicant?.name ?? 'interview'} as completed.`
+          : `Reopened ${interview.applicant?.name ?? 'interview'}.`,
+      );
+      router.refresh();
+    });
+  }
 
   return (
     <div className="p-6 md:p-10 max-w-6xl mx-auto">
-      <div className="mb-10 flex items-end justify-between">
+      <div className="mb-10 flex items-end justify-between gap-6">
         <div>
           <h1 className="text-3xl font-bold tracking-tight text-[#23211D] mb-2 font-[var(--font-display)]">
             Interview Schedule
           </h1>
           <p className="text-[#6B6B66]">
-            Manage upcoming and past candidate interviews synced from Cal.com.
+            Live interview slots from the database. Schedule new interviews from the hiring board,
+            then manage completion here.
           </p>
         </div>
-        <button className="bg-[#111110] hover:bg-[#23211D] text-white px-5 py-2.5 rounded-lg text-sm font-medium transition-colors">
-          Sync Cal.com
-        </button>
       </div>
+
+      {(feedback || error) && (
+        <div
+          className={`mb-6 rounded-xl border px-4 py-3 text-sm ${
+            error
+              ? 'border-[#A03D4A]/20 bg-[#FDF0F2] text-[#A03D4A]'
+              : 'border-[#4D7A3A]/20 bg-[#EEF7ED] text-[#355C2D]'
+          }`}
+        >
+          {error ?? feedback}
+        </div>
+      )}
 
       <div className="bg-white rounded-2xl border border-[rgba(0,0,0,0.06)] shadow-sm overflow-hidden">
         {interviews.length === 0 ? (
@@ -45,8 +81,8 @@ export function InterviewsClient({ initialInterviews }: { initialInterviews: Int
             <Calendar className="w-12 h-12 text-[#E5E5E2] mx-auto mb-4" />
             <h3 className="text-lg font-bold text-[#23211D]">No Interviews Scheduled</h3>
             <p className="text-[#6B6B66] text-sm mt-2 max-w-sm mx-auto">
-              There are no upcoming interviews in the database. When candidates book via Cal.com,
-              they will appear here.
+              There are no upcoming interviews in the database yet. Create one from the hiring board
+              when a candidate reaches the interview stage.
             </p>
           </div>
         ) : (
@@ -109,6 +145,11 @@ export function InterviewsClient({ initialInterviews }: { initialInterviews: Int
                         {date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })} (
                         {interview.duration}m)
                       </div>
+                      {interview.interviewerName && (
+                        <p className="text-xs text-[#6B6B66] mt-1">
+                          Interviewer: {interview.interviewerName}
+                        </p>
+                      )}
                     </td>
                     <td className="px-6 py-4">
                       <span className="inline-flex px-2.5 py-1 rounded-full text-xs font-medium bg-[#F5F5F3] text-[#23211D]">
@@ -146,12 +187,24 @@ export function InterviewsClient({ initialInterviews }: { initialInterviews: Int
                           </a>
                         )}
                         <button
-                          className="p-2 border border-[#E5E5E2] hover:bg-[#F5F5F3] rounded-lg text-[#6B6B66] transition-colors"
-                          title="Review Notes"
+                          type="button"
+                          disabled={isPending}
+                          onClick={() => toggleCompleted(interview, !interview.completed)}
+                          className="p-2 border border-[#E5E5E2] hover:bg-[#F5F5F3] rounded-lg text-[#6B6B66] transition-colors disabled:opacity-50"
+                          title={interview.completed ? 'Reopen interview' : 'Mark complete'}
                         >
-                          <Edit3 className="w-4 h-4" />
+                          {interview.completed ? (
+                            <Edit3 className="w-4 h-4" />
+                          ) : (
+                            <CheckCircle2 className="w-4 h-4" />
+                          )}
                         </button>
                       </div>
+                      {interview.notes && (
+                        <p className="text-xs text-[#6B6B66] mt-2 max-w-[220px] ml-auto">
+                          {interview.notes}
+                        </p>
+                      )}
                     </td>
                   </tr>
                 );
