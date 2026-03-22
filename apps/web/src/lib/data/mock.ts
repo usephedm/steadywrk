@@ -369,7 +369,7 @@ export const HUB_CARDS = [
   {
     title: 'Get in Touch',
     subtitle: 'Business inquiries',
-    href: '/dashboard/contact',
+    href: '/contact',
     icon: 'Mail',
     colors: [
       [180, 150, 80],
