@@ -40,16 +40,16 @@ export function Footer() {
           <p className="text-[11px] text-white/15">
             &copy; 2026 {COMPANY.legal}. All rights reserved.
           </p>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center gap-4">
             <Link
               href="/privacy"
-              className="text-[11px] text-white/15 hover:text-white/30 transition-colors duration-[180ms]"
+              className="text-[11px] text-white/15 hover:text-white/30 transition-colors duration-[180ms] min-h-[44px] min-w-[44px] inline-flex items-center justify-center"
             >
               Privacy Policy
             </Link>
             <Link
               href="/terms"
-              className="text-[11px] text-white/15 hover:text-white/30 transition-colors duration-[180ms]"
+              className="text-[11px] text-white/15 hover:text-white/30 transition-colors duration-[180ms] min-h-[44px] min-w-[44px] inline-flex items-center justify-center"
             >
               Terms of Service
             </Link>
@@ -57,7 +57,7 @@ export function Footer() {
               href={COMPANY.social.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[11px] text-white/15 hover:text-white/30 transition-colors duration-[180ms]"
+              className="text-[11px] text-white/15 hover:text-white/30 transition-colors duration-[180ms] min-h-[44px] min-w-[44px] inline-flex items-center justify-center"
             >
               LinkedIn
             </a>
@@ -65,7 +65,7 @@ export function Footer() {
               href={COMPANY.social.twitter}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[11px] text-white/15 hover:text-white/30 transition-colors duration-[180ms]"
+              className="text-[11px] text-white/15 hover:text-white/30 transition-colors duration-[180ms] min-h-[44px] min-w-[44px] inline-flex items-center justify-center"
             >
               X
             </a>
@@ -73,7 +73,7 @@ export function Footer() {
               href={COMPANY.social.instagram}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[11px] text-white/15 hover:text-white/30 transition-colors duration-[180ms]"
+              className="text-[11px] text-white/15 hover:text-white/30 transition-colors duration-[180ms] min-h-[44px] min-w-[44px] inline-flex items-center justify-center"
             >
               Instagram
             </a>
