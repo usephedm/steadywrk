@@ -3,6 +3,7 @@ import { ApplicationConfirmation } from '@/lib/email/application-confirmation';
 import { HRNotification } from '@/lib/email/hr-notification';
 import { getClientIP, rateLimit } from '@/lib/rate-limit';
 import { validateApplyPayload } from '@/lib/schemas';
+import { createScorecardToken } from '@/lib/scorecards';
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { applicants } from '../../../../../../packages/db/src/schema';
@@ -118,7 +119,14 @@ export async function POST(request: Request) {
       });
     }
 
-    return NextResponse.json({ success: true, applicantId }, { status: 201 });
+    return NextResponse.json(
+      {
+        success: true,
+        applicantId,
+        scorecardToken: applicantId ? createScorecardToken(applicantId) : null,
+      },
+      { status: 201 },
+    );
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Something went wrong';
     return NextResponse.json({ error: message }, { status: 400 });

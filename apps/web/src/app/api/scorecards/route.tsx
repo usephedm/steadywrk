@@ -1,4 +1,5 @@
 import { db } from '@/lib/db';
+import { verifyScorecardToken } from '@/lib/scorecards';
 import { eq } from 'drizzle-orm';
 import { ImageResponse } from 'next/og';
 import { applicants } from '../../../../../../packages/db/src/schema';
@@ -10,11 +11,18 @@ export const dynamic = 'force-dynamic';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const applicantId = searchParams.get('id');
+  const token = searchParams.get('token');
 
-  if (!applicantId) {
-    return new Response('Missing applicant ID', { status: 400 });
+  if (!token) {
+    return new Response('Missing scorecard token', { status: 400 });
   }
+
+  const verified = verifyScorecardToken(token);
+  if (!verified) {
+    return new Response('Invalid or expired scorecard token', { status: 403 });
+  }
+
+  const { applicantId } = verified;
 
   try {
     if (!db) {
