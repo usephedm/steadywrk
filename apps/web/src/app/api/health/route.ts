@@ -3,9 +3,7 @@ import { NextResponse } from 'next/server';
 export function GET() {
   return NextResponse.json(
     {
-      status: 'healthy',
-      service: 'steadywrk-web',
-      version: '5.0.0',
+      status: 'ok',
       timestamp: new Date().toISOString(),
     },
     {
