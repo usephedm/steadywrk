@@ -8,7 +8,7 @@ import { Calendar, Clock, Search } from 'lucide-react';
 import Link from 'next/link';
 import { useMemo, useState } from 'react';
 
-const getPublishedPosts = (): typeof BLOG_POSTS => {
+const getPublishedPosts = (): (typeof BLOG_POSTS)[number][] => {
   const now = new Date();
   return getPublishedPosts().filter((post) => new Date(post.date) <= now);
 };
