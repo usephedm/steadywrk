@@ -2,19 +2,23 @@
 
 import { AnimatedShinyText } from '@/components/ui/animated-shiny-text';
 import { BlurFade } from '@/components/ui/blur-fade';
-import { Particles } from '@/components/ui/particles';
 import { ShimmerButton } from '@/components/ui/shimmer-button';
 import { WordRotate } from '@/components/ui/word-rotate';
 import { ArrowRight, ChevronRight } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
-/* Only lazy-load the heavy 3D component */
+/* Lazy-load heavy visual components */
 const LogoTotem3D = dynamic(
   () => import('@/components/ui/logo-totem-3d').then((m) => m.LogoTotem3D),
   { ssr: false, loading: () => <div className="w-full h-full" /> },
 );
+
+const Particles = dynamic(() => import('@/components/ui/particles').then((m) => m.Particles), {
+  ssr: false,
+});
 
 /**
  * HeroSection — Performance-optimized
@@ -26,11 +30,23 @@ const LogoTotem3D = dynamic(
  *
  * Changes from original:
  * - Removed parallax/scroll transforms (saved TBT)
- * - Particles hidden on mobile, reduced to 20
- * - LogoTotem3D lazy-loaded (Three.js is heavy)
+ * - Particles hidden on mobile, reduced to 20, and deferred after initial paint
+ * - LogoTotem3D lazy-loaded (Three.js is heavy) and deferred after initial paint
  * - Image quality explicit at 75, priority + fetchPriority="high"
  */
 export function HeroSection() {
+  const [showDecor, setShowDecor] = useState(false);
+
+  useEffect(() => {
+    const idleId = window.setTimeout(() => {
+      setShowDecor(true);
+    }, 1200);
+
+    return () => {
+      window.clearTimeout(idleId);
+    };
+  }, []);
+
   return (
     <section className="relative min-h-[100dvh] flex items-center overflow-hidden bg-[#0A0A0A]">
       {/* Background: brand photography — static, no parallax */}
@@ -50,17 +66,19 @@ export function HeroSection() {
         />
       </div>
 
-      {/* Particles — hidden on mobile for performance */}
-      <div className="absolute inset-0 z-[1] hidden md:block">
-        <Particles
-          className="absolute inset-0"
-          quantity={20}
-          color="#E58A0F"
-          size={0.4}
-          staticity={50}
-          ease={80}
-        />
-      </div>
+      {/* Particles — deferred and hidden on mobile for performance */}
+      {showDecor ? (
+        <div className="absolute inset-0 z-[1] hidden md:block">
+          <Particles
+            className="absolute inset-0"
+            quantity={20}
+            color="#E58A0F"
+            size={0.4}
+            staticity={50}
+            ease={80}
+          />
+        </div>
+      ) : null}
 
       {/* Gradient overlays */}
       <div className="absolute inset-0 z-[3] bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/50 to-[#0A0A0A]/20" />
@@ -127,9 +145,9 @@ export function HeroSection() {
           </BlurFade>
         </div>
 
-        {/* Right: 3D Logo Totem — lazy loaded, hidden on mobile */}
+        {/* Right: 3D Logo Totem — deferred, lazy loaded, hidden on mobile */}
         <div className="hidden lg:block relative h-[500px]">
-          <LogoTotem3D className="w-full h-full" />
+          {showDecor ? <LogoTotem3D className="w-full h-full" /> : null}
         </div>
       </div>
 
