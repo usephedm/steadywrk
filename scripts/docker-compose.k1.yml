@@ -1,0 +1,68 @@
+x-agent-defaults: &agent-defaults
+  image: node:22-slim
+  init: true
+  restart: unless-stopped
+  working_dir: /opt/steadywrk
+  command: ["node", "/opt/steadywrk/scripts/fleet-agent.mjs"]
+  network_mode: host
+
+x-agent-env: &agent-env
+  BIND_ADDRESS: 0.0.0.0
+  HEARTBEAT_INTERVAL_MS: "10000"
+  REDIS_URL: redis://127.0.0.1:6379
+  STATE_DIR: /state
+  AGENT_SIDE: k1
+
+services:
+  hawkeye:
+    <<: *agent-defaults
+    container_name: hawkeye
+    environment:
+      <<: *agent-env
+      AGENT_ID: HAWKEYE
+      AGENT_ROLE: intelligence
+      AGENT_NODE: K1
+      AGENT_PORT: "8001"
+      AGENT_CAPABILITIES: research,monitoring,live-status
+    volumes:
+      - ..:/opt/steadywrk:ro
+      - ../.fleet/k1/hawkeye:/state
+  scribe:
+    <<: *agent-defaults
+    container_name: scribe
+    environment:
+      <<: *agent-env
+      AGENT_ID: SCRIBE
+      AGENT_ROLE: content
+      AGENT_NODE: K1
+      AGENT_PORT: "8002"
+      AGENT_CAPABILITIES: writing,seo,publishing
+    volumes:
+      - ..:/opt/steadywrk:ro
+      - ../.fleet/k1/scribe:/state
+  sentinel:
+    <<: *agent-defaults
+    container_name: sentinel
+    environment:
+      <<: *agent-env
+      AGENT_ID: SENTINEL
+      AGENT_ROLE: security
+      AGENT_NODE: K1
+      AGENT_PORT: "8003"
+      AGENT_CAPABILITIES: compliance,policy,health
+    volumes:
+      - ..:/opt/steadywrk:ro
+      - ../.fleet/k1/sentinel:/state
+  dispatch:
+    <<: *agent-defaults
+    container_name: dispatch
+    environment:
+      <<: *agent-env
+      AGENT_ID: DISPATCH
+      AGENT_ROLE: pipeline
+      AGENT_NODE: K1
+      AGENT_PORT: "8004"
+      AGENT_CAPABILITIES: routing,triage,assignment
+    volumes:
+      - ..:/opt/steadywrk:ro
+      - ../.fleet/k1/dispatch:/state
